@@ -3,7 +3,8 @@
 #include <array>
 #include <vector>
 #include <string>
-#include <GL/glew.h>
+
+#include "opengl.h"
 
 class object
 {

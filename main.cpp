@@ -4,9 +4,8 @@
 #include <math.h>
 
 #include <SDL2/SDL.h>
-//#include <openGl/OpenGL.h>
-#include <GL/glew.h>
-#include <GL/glut.h>
+
+#include "opengl.h"
 
 #include "Images.h"
 #include "obj_loader.h"
