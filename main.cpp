@@ -8,7 +8,7 @@
 #include "opengl.h"
 
 #include "Image.cpp"
-#include "obj_loader.h"
+#include "ObjLoader.h"
 
 #define WINDOWWIDTH  800
 #define WINDOWHEIGTH 450
