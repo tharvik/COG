@@ -8,26 +8,25 @@
 
 #include "Logger.h"
 
-#include <iostream>
-#include <stdlib.h>
+#include <error.h>
 
-void Logger::log(std::string level, std::string msg)
+void Logger::log(int status, std::string msg, std::string file,
+		unsigned short line)
 {
-	std::cerr << level << ": " << msg << std::endl;
+	error_at_line(status, 0, file.c_str(), line, msg.c_str());
 }
 
-void Logger::info(std::string msg)
+void Logger::info(std::string msg, std::string file, unsigned short line)
 {
-	log("INFO", msg);
+	log(0, "INFO " + msg, file, line);
 }
 
-void Logger::warn(std::string msg)
+void Logger::warn(std::string msg, std::string file, unsigned short line)
 {
-	log("WARNING", msg);
+	log(0, "WARN " + msg, file, line);
 }
 
-void Logger::error(std::string msg)
+void Logger::error(std::string msg, std::string file, unsigned short line)
 {
-	log("ERROR", msg);
-	exit(1);
+	log(1, "ERROR " + msg, file, line);
 }

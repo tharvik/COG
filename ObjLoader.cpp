@@ -14,9 +14,10 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 	Object<T> current;
 
 	if(!file)
-		log.error("Unable to open \"" + path + "\"");
+		logger.error("Unable to open \"" + path + "\"",
+				__FILE__, __LINE__);
 
-	log.info("file \"" + path + "\" openned");
+	logger.info("file \"" + path + "\" openned", __FILE__, __LINE__);
 
 	while(file) {
 
@@ -40,8 +41,9 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 
 		} else {
 			if(word[0] != '#' && !word.empty())
-				log.warn("Dropping result on unhandled \"" +
-						word + "\" keyword");
+				logger.warn("Dropping result on unhandled \"" +
+						word + "\" keyword",
+						__FILE__, __LINE__);
 		}
 
 		cleanLine(file);
