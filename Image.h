@@ -35,7 +35,9 @@ private:
 	// Width, height and depth (RGB, RGBA)
 	GLushort w, h, d;
 	
+	
 	void LoadPNM(string src);
+	void PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, bool* modeASCII);
 	
 public:
 	// Constructors

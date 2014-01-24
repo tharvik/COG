@@ -60,65 +60,8 @@ void Image<T>::LoadPNM(string src)
 	else cout << "ERROR: File '" << src << "' cannot be opened." << endl;
 	
 	// get P1, P2, P3, P4, P5 or P6 info
-	for (bool i = false; !i;) {
-		switch (imageFile.get())
-		{
-			case '#':
-				while (imageFile.get() != '\n');
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << endl;
-				break;
-				
-			case '\n':
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << endl;
-				break;
-				
-			case 'P':
-			case 'p':
-				i = true;
-				break;
-				
-			default:
-				cout << "WARNING: File corrupted.";
-				break;
-		}
-	}
-	
-	char formatID = imageFile.get();
-	cout << '-' << numberOfEndl << '-' << endl;
-	
-	cout << "[P" << formatID << "]" << endl; ///////////////////////////////////
-	
-	switch (formatID) {
-		case '2': // ASCII PGM (Gray)
-			cout << "INFO: load ASCII PGM (Gray)." << endl;
-			d = 1;
-			modeASCII = true;
-			break;
-			
-		case '3': // ASCII PPM (RGB)
-			cout << "INFO: load ASCII PPM (RGB)." << endl;
-			d = 3;
-			modeASCII = true;
-			break;
-			
-		case '5': // Binary PGM (Gray)
-			cout << "INFO: load binary PGM (Gray)." << endl;
-			d = 1;
-			break;
-			
-		case '6': // Binary PPM (RGB)
-			cout << "INFO: load binary PPM (RGB)." << endl;
-			d = 3;
-			break;
-			
-		default:
-			cout << "ERROR: File '" << src << "' corrupted: unknown format P"
-			<< formatID << endl;
-			break;
-	}
-	
+	PNMloadMagicNumber(&imageFile, &numberOfEndl, &modeASCII);
+		
 	// get size	
 	for (bool i = false; !i;) {
 		switch (imageFile.get()) {
@@ -232,6 +175,69 @@ void Image<T>::LoadPNM(string src)
 		}
 	}
 }
+
+template <class T>
+void Image<T>::PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, bool* modeASCII)
+{
+	for (bool i = false; !i;) {
+		switch (imgFile->get())
+		{
+			case '#':
+				while (imgFile->get() != '\n');
+				(*numberOfEndl)++;
+				break;
+				
+			case '\n':
+				(*numberOfEndl)++;
+				break;
+				
+			case 'P':
+			case 'p':
+				i = true;
+				break;
+				
+			default:
+				cout << "WARNING: File corrupted.";
+				break;
+		}
+	}
+	
+	char formatID = imgFile->get();	
+	cout << "[P" << formatID << "]" << endl; ///////////////////////////////////
+	
+	switch (formatID) {
+		case '2': // ASCII PGM (Gray)
+			cout << "INFO: load ASCII PGM (Gray)." << endl;
+			d = 1;
+			*modeASCII = true;
+			break;
+			
+		case '3': // ASCII PPM (RGB)
+			cout << "INFO: load ASCII PPM (RGB)." << endl;
+			d = 3;
+			*modeASCII = true;
+			break;
+			
+		case '5': // Binary PGM (Gray)
+			cout << "INFO: load binary PGM (Gray)." << endl;
+			d = 1;
+			break;
+			
+		case '6': // Binary PPM (RGB)
+			cout << "INFO: load binary PPM (RGB)." << endl;
+			d = 3;
+			break;
+			
+		default:
+			cout << "ERROR: File corrupted: unknown format P"
+			<< formatID << endl;
+			break;
+	}
+
+}
+
+template <class T>
+void Image<T>::PNMloadSize
 
 template <class T>
 GLushort Image<T>::getWidth()
