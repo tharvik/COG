@@ -50,145 +50,40 @@ void Image<T>::LoadPNM(string src)
 {
 	GLushort maxIntensity(0), numberOfEndl(0);
 	bool modeASCII(false);
-	
-	char buffer = (0);
-	
+		
 	cout << "INFO: Load PNM." << endl;
 	
 	ifstream imageFile(src);
 	if (imageFile.is_open()) cout << "INFO: File '" << src << "' opened" << endl;
 	else cout << "ERROR: File '" << src << "' cannot be opened." << endl;
 	
-	// get P1, P2, P3, P4, P5 or P6 info
-	PNMloadMagicNumber(&imageFile, &numberOfEndl, &modeASCII);
+	PNMloadMagicNumber(imageFile, numberOfEndl, modeASCII);
 		
-	// get size	
-	for (bool i = false; !i;) {
-		switch (imageFile.get()) {
-			case '#':
-				while (imageFile.get() != '\n');
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << __LINE__ << endl;
-				break;
-				
-			case '\n':
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << __LINE__ << endl;
-				break;
-				
-			default:
-				imageFile.seekg(-1, ios::cur);
-				imageFile >> w;
-				imageFile >> h;
-				i = 1;
-				break;
-		}
-	}
-	cout << w << 'x' << h << endl;//////////////////////////////////////////////
-	
-	// get maxIntensity	
-	for (bool i = false; !i;) {
-		switch (imageFile.get()) {
-			case '#':
-				while (imageFile.get() != '\n');
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << endl;
-				break;
-				
-			case '\n':
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << endl;
-				break;
-				
-			default:
-				imageFile.seekg(-1, ios::cur);
-				imageFile >> maxIntensity;
-				i = 1;
-				numberOfEndl++;
-				cout << '-' << numberOfEndl << '-' << endl;
-				break;
-		}
-	}
-	cout << "maxIntensity: " << maxIntensity << endl;///////////////////////////
-	
-	// get pixels
-	if (modeASCII) {
-		pixels = (GLubyte*) calloc(w * h * d, sizeof(GLubyte));
-		for (bool i = false; !i;) {
-			switch (imageFile.get()) {
-				case '#':
-					while (imageFile.get() != '\n');
-					break;
-					
-				case '\n':
-					break;
-					
-				default:
-					i = true;
-					break;
-			}
-		}		
-		imageFile.seekg(-1, ios::cur);
+	PNMloadSize(imageFile, numberOfEndl);	
 		
-		unsigned short reader = 0;
-		switch (maxIntensity) {
-			case 255:
-				std::cout << d << std::endl;
-				for (GLuint i = 0; i < w * h * d; i++) {
-					imageFile >> reader;
-					pixels[i] = reader;
-					//std::cout << i << std::endl;
-					//std::cout << i << ": " << pixels[i] << std::endl;
-				}
-				break;
-				
-			case 0:
-				cout << "WARNING: File '" << src << "': maxIntensity = 0" << endl;
-				for (GLuint i = 0; i < w * h * d; i++)
-					pixels[i] = 0;
-				break;
-				
-			default:
-				cout << "WARNING: File '" << src << "': maxIntensity ≠ 255" << endl;
-				for (GLuint i = 0; i < w * h * d; i++) {
-					imageFile >> reader;
-					pixels[i] = ((double) reader / (double) maxIntensity) * 255;
-				}
-				break;
-		}
-	}
+	PNMloadMaxIntensity(imageFile, numberOfEndl, maxIntensity);
+	
+	if (modeASCII)
+		PNMloadPixelsASCII(imageFile, maxIntensity);
 	
 	else
-	{
-		pixels = (GLubyte*) calloc(w * h * d, sizeof(GLubyte));
-		imageFile.close();
-		ifstream nouvelleImageFile(src, ios::in|ios::binary);
-		
-		for (unsigned int i = 0; i < numberOfEndl;) {
-			nouvelleImageFile.read(&buffer, 1);
-			if (buffer == '\n') i++;
-			cout << "[" << i << "]" << endl;
-		}
-		
-		for (unsigned int i = 0; i < w * h * d; i++) {
-			nouvelleImageFile.read(reinterpret_cast<char*>(pixels), w * h * d);
-		}
-	}
+		PNMloadPixelsBinary(imageFile, numberOfEndl, maxIntensity, src);
 }
 
 template <class T>
-void Image<T>::PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, bool* modeASCII)
+void Image<T>::PNMloadMagicNumber(ifstream& imgFile, GLushort& numberOfEndl,
+								  bool& modeASCII)
 {
 	for (bool i = false; !i;) {
-		switch (imgFile->get())
+		switch (imgFile.get())
 		{
 			case '#':
-				while (imgFile->get() != '\n');
-				(*numberOfEndl)++;
+				while (imgFile.get() != '\n');
+				numberOfEndl++;
 				break;
 				
 			case '\n':
-				(*numberOfEndl)++;
+				numberOfEndl++;
 				break;
 				
 			case 'P':
@@ -202,20 +97,19 @@ void Image<T>::PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, boo
 		}
 	}
 	
-	char formatID = imgFile->get();	
-	cout << "[P" << formatID << "]" << endl; ///////////////////////////////////
+	char formatID = imgFile.get();	
 	
 	switch (formatID) {
 		case '2': // ASCII PGM (Gray)
 			cout << "INFO: load ASCII PGM (Gray)." << endl;
 			d = 1;
-			*modeASCII = true;
+			modeASCII = true;
 			break;
 			
 		case '3': // ASCII PPM (RGB)
 			cout << "INFO: load ASCII PPM (RGB)." << endl;
 			d = 3;
-			*modeASCII = true;
+			modeASCII = true;
 			break;
 			
 		case '5': // Binary PGM (Gray)
@@ -236,11 +130,129 @@ void Image<T>::PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, boo
 
 }
 
-//template <class T>
-//void Image<T>::PNMloadSize
-//{
-//
-//}
+template <class T>
+void Image<T>::PNMloadSize(ifstream& imgFile, GLushort& numberOfEndl)
+{
+		for (bool i = false; !i;) {
+		switch (imgFile.get()) {
+			case '#':
+				while (imgFile.get() != '\n');
+				numberOfEndl++;
+				cout << '-' << numberOfEndl << '-' << __LINE__ << endl;
+				break;
+				
+			case '\n':
+				numberOfEndl++;
+				cout << '-' << numberOfEndl << '-' << __LINE__ << endl;
+				break;
+				
+			default:
+				imgFile.seekg(-1, ios::cur);
+				imgFile >> w;
+				imgFile >> h;
+				i = 1;
+				break;
+		}
+	}
+
+}
+
+template <class T>
+void Image<T>::PNMloadMaxIntensity(ifstream& imgFile, GLushort& numberOfEndl,
+								   GLushort& maxIntensity)
+{
+	for (bool i = false; !i;) {
+		switch (imgFile.get()) {
+			case '#':
+				while (imgFile.get() != '\n');
+				numberOfEndl++;
+				cout << '-' << numberOfEndl << '-' << endl;
+				break;
+				
+			case '\n':
+				numberOfEndl++;
+				cout << '-' << numberOfEndl << '-' << endl;
+				break;
+				
+			default:
+				imgFile.seekg(-1, ios::cur);
+				imgFile >> maxIntensity;
+				i = 1;
+				numberOfEndl++;
+				cout << '-' << numberOfEndl << '-' << endl;
+				break;
+		}
+	}
+	cout << "maxIntensity: " << maxIntensity << endl;///////////////////////////
+}
+
+template <class T>
+void Image<T>::PNMloadPixelsASCII(ifstream &imgFile, GLushort maxIntensity)
+{
+	pixels = (GLubyte*) calloc(w * h * d, sizeof(GLubyte));
+	for (bool i = false; !i;) {
+		switch (imgFile.get()) {
+			case '#':
+				while (imgFile.get() != '\n');
+				break;
+				
+			case '\n':
+				break;
+				
+			default:
+				i = true;
+				break;
+		}
+	}	
+	
+	imgFile.seekg(-1, ios::cur);
+	
+	unsigned short reader = 0;
+	switch (maxIntensity) {
+		case 255:
+			std::cout << d << std::endl;
+			for (GLuint i = 0; i < w * h * d; i++) {
+				imgFile >> reader;
+				pixels[i] = reader;
+				//std::cout << i << std::endl;
+				//std::cout << i << ": " << pixels[i] << std::endl;
+			}
+			break;
+			
+		case 0:
+			for (GLuint i = 0; i < w * h * d; i++)
+				pixels[i] = 0;
+			break;
+			
+		default:
+			for (GLuint i = 0; i < w * h * d; i++) {
+				imgFile >> reader;
+				pixels[i] = ((double) reader / (double) maxIntensity) * 255;
+			}
+			break;
+	}
+}
+
+template <class T>
+void Image<T>::PNMloadPixelsBinary(ifstream &imgFile, GLushort numberOfEndl,
+	GLushort maxIntensity, string src)
+{
+	char buffer(0);
+	
+	pixels = (GLubyte*) calloc(w * h * d, sizeof(GLubyte));
+	imgFile.close();
+	ifstream BinaryImgFile(src, ios::in|ios::binary);
+	
+	for (unsigned int i = 0; i < numberOfEndl;) {
+		BinaryImgFile.read(&buffer, 1);
+		if (buffer == '\n') i++;
+		cout << "[" << i << "]" << endl;
+	}
+	
+	for (unsigned int i = 0; i < w * h * d; i++) {
+		BinaryImgFile.read(reinterpret_cast<char*>(pixels), w * h * d);
+	}
+}
 
 template <class T>
 GLushort Image<T>::getWidth()

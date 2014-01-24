@@ -37,8 +37,14 @@ private:
 	
 	
 	void LoadPNM(string src);
-	void PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, bool* modeASCII);
-	
+	void PNMloadMagicNumber(ifstream& imgFile, GLushort& numberOfEndl,
+							bool& modeASCII);
+	void PNMloadSize(ifstream& imgFile, GLushort& numberOfEndl);
+	void PNMloadMaxIntensity(ifstream& imgFile, GLushort& numberOfEndl,
+							 GLushort& maxIntensity);
+	void PNMloadPixelsASCII(ifstream& imgFile,  GLushort maxIntensity);
+	void PNMloadPixelsBinary(ifstream &imgFile, GLushort numberOfEndl,
+								   GLushort maxIntensity, string src);
 public:
 	// Constructors
 	Image(GLushort width, GLushort height, GLushort depth,
