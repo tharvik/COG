@@ -5,19 +5,28 @@
 #include <fstream>
 
 #include "Object.h"
+#include "Logger.h"
 
 class ObjLoader
 {
 	public:
+		ObjLoader();
+
 		template<typename T>
-		static std::vector<Object<T>> load(std::string path);
+		std::vector<Object<T>> load(std::string path);
 
 	private:
-		static std::array<float, 3> parseV(std::ifstream& file);
-		static std::array<float, 2> parseVt(std::ifstream& file);
-		static std::array<std::array<unsigned short, 2>, 3>
-			parseF(std::ifstream& file);
+		std::array<float, 3> parseV();
+		std::array<float, 2> parseVt();
+		std::array<std::array<unsigned short, 2>, 3>
+			parseF();
 
-		static std::string getNextWord(std::ifstream& file);
-		static void cleanLine(std::ifstream& file);
+		std::string getNextWord();
+		void cleanLine();
+
+		// current load
+		std::string path;
+		std::ifstream file;
+		Logger logger;
+		unsigned short lineCount;
 };

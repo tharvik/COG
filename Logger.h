@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 EPFL. All rights reserved.
 //
 
+#define FL __FILE__, __LINE__
+
 #ifndef LOGGER_H
 #define LOGGER_H
 

@@ -1,28 +1,25 @@
 #include "ObjLoader.h"
-#include "Logger.h"
 
 #include <vector>
 #include <limits>
 
+ObjLoader::ObjLoader() : lineCount(0) {}
+
 template<typename T>
 std::vector<Object<T>> ObjLoader::load(std::string path)
 {
-	std::ifstream file(path);
+	this->path = path;
+	this->file(path);
 
 	std::vector<Object<T>> objects;
 	Object<T> current;
 
-	Logger logger;
-
 	if(!file)
-		logger.error("Unable to open \"" + path + "\"",
-				__FILE__, __LINE__);
-
-	logger.info("file \"" + path + "\" openned", __FILE__, __LINE__);
+		logger.error("Unable to open \"" + path + "\"", FL);
 
 	while(file) {
 
-		std::string word = getNextWord(file);
+		std::string word = getNextWord();
 
 		if(word == "o") {
 			objects.push_back(current);
@@ -32,30 +29,27 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 			current.set_name(word);
 
 		} else if(word == "v") {
-			current.pushBackV(parseV(file));
+			current.pushBackV(parseV());
 
 		} else if(word == "vt") {
-			current.pushBackVt(parseVt(file));
+			current.pushBackVt(parseVt());
 
 		} else if(word == "f") {
-			current.pushBackF(parseF(file));
+			current.pushBackF(parseF());
 
-		} else {
-			if(word[0] != '#' && !word.empty())
-				logger.warn("Dropping result on unhandled \"" +
-						word + "\" keyword",
-						__FILE__, __LINE__);
 		}
-
-		cleanLine(file);
+		cleanLine();
 	}
+
+	file.close();
+	logger.info("Parsing done for \"" + path + "\"", FL);
 
 	objects.erase(objects.begin());
 	objects.push_back(current);
 	return objects;
 }
 
-std::string ObjLoader::getNextWord(std::ifstream& file)
+std::string ObjLoader::getNextWord()
 {
 	std::string word;
 	getline(file, word, ' ');
@@ -63,7 +57,7 @@ std::string ObjLoader::getNextWord(std::ifstream& file)
 	return word;
 }
 
-std::array<float, 3> ObjLoader::parseV(std::ifstream& file)
+std::array<float, 3> ObjLoader::parseV()
 {
 	std::array<float, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -72,7 +66,7 @@ std::array<float, 3> ObjLoader::parseV(std::ifstream& file)
 	return array;
 }
 
-std::array<float, 2> ObjLoader::parseVt(std::ifstream& file)
+std::array<float, 2> ObjLoader::parseVt()
 {
 	std::array<float, 2> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -81,8 +75,7 @@ std::array<float, 2> ObjLoader::parseVt(std::ifstream& file)
 	return array;
 }
 
-std::array<std::array<unsigned short, 2>, 3> ObjLoader::parseF(
-		std::ifstream& file)
+std::array<std::array<unsigned short, 2>, 3> ObjLoader::parseF()
 {
 	std::array<std::array<unsigned short, 2>, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++) {
@@ -100,7 +93,12 @@ std::array<std::array<unsigned short, 2>, 3> ObjLoader::parseF(
 	return array;
 }
 
-void ObjLoader::cleanLine(std::ifstream& file)
+void ObjLoader::cleanLine()
 {
-	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	lineCount++;
+
+	std::string tmp;
+	getline(file, tmp);
+	if(tmp.size() != 0)
+		logger.warn("Discarding remaining results", path, lineCount);
 }
