@@ -16,6 +16,7 @@
 
 SDL_Window* initGraphic();
 
+// test GitHub
 
 void drawCube();
 void refresh(SDL_Window *window);
