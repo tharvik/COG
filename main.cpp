@@ -9,10 +9,9 @@
 
 #include "Image.cpp"
 #include "ObjLoader.h"
+#include "Object.h"
 
 enum {GRAPHIC_TEST, BODY_TEST};
-
-#define MODE GRAPHIC_TEST
 
 int initLibraries();
 
@@ -35,12 +34,12 @@ int main(int argc, char *argv[])
         
         initWindow(mainWindow);
         
-        vector<Object<GLubyte>  > objects;
+        vector<Object> objects;
         
-        if (MODE == BODY_TEST) {
+        if (argc == 2) {
                 ObjLoader loader;
-                objects = loader.load<GLubyte>("test.obj");
-        } else if (MODE == GRAPHIC_TEST) {
+                objects = loader.load("test.obj");
+        } else {
                 //Img8b image = Img8b([path to a PNM image], PNM);
                 Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
         
@@ -99,9 +98,10 @@ int main(int argc, char *argv[])
 
 		glRotated(angleX, 1, 0, 0);
 		glRotated(angleZ, 0, 0, 1);
-		drawCube();
-                if (MODE == BODY_TEST)
+                if (argc == 2)
                         objects[0].draw();
+		else
+			drawCube();
 		refresh(mainWindow);
 	}
 
