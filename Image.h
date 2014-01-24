@@ -3,8 +3,6 @@
 //  Cplusplus OpenGL
 //
 
-// test github
-
 #ifndef COG_Image_h
 #define COG_Image_h
 
