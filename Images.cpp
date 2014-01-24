@@ -8,6 +8,7 @@
 
 #include "Images.h"
 #include "utilities.h"
+#include <OpenGL/OpenGL.h>
 
 Image::Image()
 {
@@ -54,7 +55,7 @@ void Img8b::loadPNM(string src)
 
 	cout << "INFO: Load PNM." << endl;
 	
-	ifstream imageFile(src);
+	ifstream imageFile(src.c_str());
 	if (imageFile.is_open()) cout << "INFO: File '" << src << "' opened" << endl;
 	else cout << "ERROR: File '" << src << "' cannot be opened." << endl;
 	
