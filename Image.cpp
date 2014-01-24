@@ -33,6 +33,19 @@ Image<T>::Image(GLushort width, GLushort height, GLushort depth,
 }
 
 template <class T>
+Image<T>::Image(string src, imageFormat imgFormat)
+{
+	switch (imgFormat) {
+		case PNM:
+			LoadPNM(src);
+			break;
+			
+		default:
+			break;
+	}
+}
+
+template <class T>
 void Image<T>::LoadPNM(string src)
 {
 	GLushort maxIntensity(0), numberOfEndl(0);

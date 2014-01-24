@@ -7,13 +7,13 @@
 #define COG_Image_h
 
 enum imageFormat {
-	PNM = 1<<0
+	PNM
 };
 
 enum imageGenerationOption {
-	RANDOM		 = 0,
-	UV_GRID		 = 1<<0,
-	CHECKERBOARD = 1<<1
+	RANDOM,
+	UV_GRID,
+	CHECKERBOARD
 };
 
 #include <iostream>
@@ -41,6 +41,7 @@ public:
 	// Constructors
 	Image(GLushort width, GLushort height, GLushort depth,
 		  imageGenerationOption options);
+	Image(string src, imageFormat imgFormat);
 	
 	// Getters
 	GLushort getWidth();
