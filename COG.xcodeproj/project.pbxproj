@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CEB7A391892A41F007D5EB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A381892A41F007D5EB4 /* main.cpp */; };
-		4CEB7A511892A483007D5EB4 /* Images.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A461892A483007D5EB4 /* Images.cpp */; };
+		4C37D1FE1892AC9900DA58F6 /* Images.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A461892A483007D5EB4 /* Images.cpp */; };
+		4C8FF1111892B221002BA41A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1101892B221002BA41A /* OpenGL.framework */; };
+		4C8FF1131892B235002BA41A /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1121892B235002BA41A /* SDL2.framework */; };
+		4C8FF1151892B244002BA41A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1141892B244002BA41A /* GLUT.framework */; };
 		4CEB7A521892A483007D5EB4 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A471892A483007D5EB4 /* logger.cpp */; };
 		4CEB7A531892A483007D5EB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A481892A483007D5EB4 /* main.cpp */; };
 		4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A491892A483007D5EB4 /* obj_loader.cpp */; };
@@ -31,6 +33,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C8FF1101892B221002BA41A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		4C8FF1121892B235002BA41A /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = Library/Frameworks/SDL2.framework; sourceTree = SDKROOT; };
+		4C8FF1141892B244002BA41A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		4CEB7A341892A41F007D5EB4 /* COG */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = COG; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEB7A381892A41F007D5EB4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4CEB7A461892A483007D5EB4 /* Images.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Images.cpp; sourceTree = SOURCE_ROOT; };
@@ -48,6 +53,7 @@
 		4CEB7A581892A6DF007D5EB4 /* PixelsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixelsGenerator.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A591892A6DF007D5EB4 /* PNMloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PNMloader.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A5A1892A6DF007D5EB4 /* PNMloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNMloader.h; sourceTree = SOURCE_ROOT; };
+		4CEB7A651892A84B007D5EB4 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C8FF1151892B244002BA41A /* GLUT.framework in Frameworks */,
+				4C8FF1131892B235002BA41A /* SDL2.framework in Frameworks */,
+				4C8FF1111892B221002BA41A /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +73,9 @@
 		4CEB7A291892A41F007D5EB4 = {
 			isa = PBXGroup;
 			children = (
+				4C8FF1141892B244002BA41A /* GLUT.framework */,
+				4C8FF1121892B235002BA41A /* SDL2.framework */,
+				4C8FF1101892B221002BA41A /* OpenGL.framework */,
 				4CEB7A371892A41F007D5EB4 /* COG */,
 				4CEB7A351892A41F007D5EB4 /* Products */,
 			);
@@ -84,8 +96,9 @@
 				4CEB7A4D1892A483007D5EB4 /* logger.h */,
 				4CEB7A471892A483007D5EB4 /* logger.cpp */,
 				4CEB7A481892A483007D5EB4 /* main.cpp */,
-				4CEB7A4B1892A483007D5EB4 /* utilities.cpp */,
 				4CEB7A501892A483007D5EB4 /* utilities.h */,
+				4CEB7A4B1892A483007D5EB4 /* utilities.cpp */,
+				4CEB7A651892A84B007D5EB4 /* opengl.h */,
 				4CEB7A5E1892A72D007D5EB4 /* Object */,
 				4CEB7A5D1892A717007D5EB4 /* Image */,
 			);
@@ -167,10 +180,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEB7A391892A41F007D5EB4 /* main.cpp in Sources */,
-				4CEB7A511892A483007D5EB4 /* Images.cpp in Sources */,
-				4CEB7A521892A483007D5EB4 /* logger.cpp in Sources */,
+				4C37D1FE1892AC9900DA58F6 /* Images.cpp in Sources */,
 				4CEB7A531892A483007D5EB4 /* main.cpp in Sources */,
+				4CEB7A521892A483007D5EB4 /* logger.cpp in Sources */,
 				4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */,
 				4CEB7A551892A483007D5EB4 /* object.cpp in Sources */,
 				4CEB7A561892A483007D5EB4 /* utilities.cpp in Sources */,
@@ -187,8 +199,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -213,9 +227,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
