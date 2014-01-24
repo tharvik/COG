@@ -27,6 +27,5 @@ class ObjLoader
 		// current load
 		std::string path;
 		std::ifstream file;
-		Logger logger;
 		unsigned short lineCount;
 };

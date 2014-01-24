@@ -15,7 +15,7 @@ std::vector<Object<T>> ObjLoader::load(const std::string& path)
 	Object<T> current;
 
 	if(!file)
-		logger.error("Unable to open \"" + path + "\"", FL);
+		logger::error("Unable to open \"" + path + "\"", FL);
 
 	while(file) {
 
@@ -42,7 +42,7 @@ std::vector<Object<T>> ObjLoader::load(const std::string& path)
 	}
 
 	file.close();
-	logger.info("Parsing done for \"" + path + "\"", FL);
+	logger::info("Parsing done for \"" + path + "\"", FL);
 
 	objects.erase(objects.begin());
 	objects.push_back(current);
@@ -100,5 +100,5 @@ void ObjLoader::cleanLine()
 	std::string tmp;
 	getline(file, tmp);
 	if(tmp.size() != 0)
-		logger.warn("Discarding remaining results", path, lineCount);
+		logger::warn("Discarding remaining results", path, lineCount);
 }

@@ -13,19 +13,12 @@
 
 #include <string>
 
-class Logger
+namespace logger
 {
-	public:
-		void info(std::string msg, std::string file,
-				unsigned short line);
-		void warn(std::string msg, std::string file,
-				unsigned short line);
-		void error(std::string msg, std::string file,
-				unsigned short line);
-
-	private:
-		void log(std::string msg, std::string file,
-				unsigned short line);
+	void info(std::string msg, std::string file, unsigned short line);
+	void warn(std::string msg, std::string file, unsigned short line);
+	void error(std::string msg, std::string file, unsigned short line);
+	void log(std::string msg, std::string file, unsigned short line);
 
 };
 
