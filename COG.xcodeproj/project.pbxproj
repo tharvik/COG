@@ -14,6 +14,8 @@
 		4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A491892A483007D5EB4 /* obj_loader.cpp */; };
 		4CEB7A551892A483007D5EB4 /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A4A1892A483007D5EB4 /* object.cpp */; };
 		4CEB7A561892A483007D5EB4 /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A4B1892A483007D5EB4 /* utilities.cpp */; };
+		4CEB7A5B1892A6DF007D5EB4 /* PixelsGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A571892A6DF007D5EB4 /* PixelsGenerator.cpp */; };
+		4CEB7A5C1892A6DF007D5EB4 /* PNMloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A591892A6DF007D5EB4 /* PNMloader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +44,10 @@
 		4CEB7A4E1892A483007D5EB4 /* obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_loader.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A4F1892A483007D5EB4 /* object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A501892A483007D5EB4 /* utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = SOURCE_ROOT; };
+		4CEB7A571892A6DF007D5EB4 /* PixelsGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PixelsGenerator.cpp; sourceTree = SOURCE_ROOT; };
+		4CEB7A581892A6DF007D5EB4 /* PixelsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixelsGenerator.h; sourceTree = SOURCE_ROOT; };
+		4CEB7A591892A6DF007D5EB4 /* PNMloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PNMloader.cpp; sourceTree = SOURCE_ROOT; };
+		4CEB7A5A1892A6DF007D5EB4 /* PNMloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNMloader.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,19 +81,39 @@
 			isa = PBXGroup;
 			children = (
 				4CEB7A381892A41F007D5EB4 /* main.cpp */,
-				4CEB7A461892A483007D5EB4 /* Images.cpp */,
+				4CEB7A4D1892A483007D5EB4 /* logger.h */,
 				4CEB7A471892A483007D5EB4 /* logger.cpp */,
 				4CEB7A481892A483007D5EB4 /* main.cpp */,
-				4CEB7A491892A483007D5EB4 /* obj_loader.cpp */,
-				4CEB7A4A1892A483007D5EB4 /* object.cpp */,
 				4CEB7A4B1892A483007D5EB4 /* utilities.cpp */,
-				4CEB7A4C1892A483007D5EB4 /* Images.h */,
-				4CEB7A4D1892A483007D5EB4 /* logger.h */,
-				4CEB7A4E1892A483007D5EB4 /* obj_loader.h */,
-				4CEB7A4F1892A483007D5EB4 /* object.h */,
 				4CEB7A501892A483007D5EB4 /* utilities.h */,
+				4CEB7A5E1892A72D007D5EB4 /* Object */,
+				4CEB7A5D1892A717007D5EB4 /* Image */,
 			);
 			path = COG;
+			sourceTree = "<group>";
+		};
+		4CEB7A5D1892A717007D5EB4 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				4CEB7A4C1892A483007D5EB4 /* Images.h */,
+				4CEB7A461892A483007D5EB4 /* Images.cpp */,
+				4CEB7A571892A6DF007D5EB4 /* PixelsGenerator.cpp */,
+				4CEB7A581892A6DF007D5EB4 /* PixelsGenerator.h */,
+				4CEB7A591892A6DF007D5EB4 /* PNMloader.cpp */,
+				4CEB7A5A1892A6DF007D5EB4 /* PNMloader.h */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		4CEB7A5E1892A72D007D5EB4 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				4CEB7A4E1892A483007D5EB4 /* obj_loader.h */,
+				4CEB7A491892A483007D5EB4 /* obj_loader.cpp */,
+				4CEB7A4A1892A483007D5EB4 /* object.cpp */,
+				4CEB7A4F1892A483007D5EB4 /* object.h */,
+			);
+			name = Object;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +174,8 @@
 				4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */,
 				4CEB7A551892A483007D5EB4 /* object.cpp in Sources */,
 				4CEB7A561892A483007D5EB4 /* utilities.cpp in Sources */,
+				4CEB7A5B1892A6DF007D5EB4 /* PixelsGenerator.cpp in Sources */,
+				4CEB7A5C1892A6DF007D5EB4 /* PNMloader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
