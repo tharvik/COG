@@ -41,8 +41,6 @@ Image<T>::Image(string src, imageFormat imgFormat)
 			break;
 
 		case PNG:
-			int onSenFout;
-			pixels = stbi_load(src, &w, &h, &onSenFout, 0);
 			break;
 
 		default:
