@@ -35,6 +35,7 @@ private:
 	// Width, height and depth (RGB, RGBA)
 	GLushort w, h, d;
 	
+	void LoadPNM(string src);
 	
 public:
 	// Constructors
@@ -46,6 +47,7 @@ public:
 	GLushort getHeight();
 	GLenum	 getFormat();
 	T*		 getPixels();
+	
 	
 	// Destructor
 	~Image();

@@ -1,5 +1,4 @@
 #include "ObjLoader.h"
-
 #include "Logger.h"
 
 #include <vector>
