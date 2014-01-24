@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C37D1FE1892AC9900DA58F6 /* Images.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A461892A483007D5EB4 /* Images.cpp */; };
 		4C8FF1111892B221002BA41A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1101892B221002BA41A /* OpenGL.framework */; };
 		4C8FF1131892B235002BA41A /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1121892B235002BA41A /* SDL2.framework */; };
 		4C8FF1151892B244002BA41A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8FF1141892B244002BA41A /* GLUT.framework */; };
+		4C8FF11C1892B315002BA41A /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8FF11A1892B315002BA41A /* Image.cpp */; };
 		4CEB7A521892A483007D5EB4 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A471892A483007D5EB4 /* logger.cpp */; };
 		4CEB7A531892A483007D5EB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A481892A483007D5EB4 /* main.cpp */; };
 		4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB7A491892A483007D5EB4 /* obj_loader.cpp */; };
@@ -36,15 +36,15 @@
 		4C8FF1101892B221002BA41A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		4C8FF1121892B235002BA41A /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = Library/Frameworks/SDL2.framework; sourceTree = SDKROOT; };
 		4C8FF1141892B244002BA41A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		4C8FF11A1892B315002BA41A /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = SOURCE_ROOT; };
+		4C8FF11B1892B315002BA41A /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A341892A41F007D5EB4 /* COG */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = COG; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEB7A381892A41F007D5EB4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4CEB7A461892A483007D5EB4 /* Images.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Images.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A471892A483007D5EB4 /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A481892A483007D5EB4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A491892A483007D5EB4 /* obj_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = obj_loader.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A4A1892A483007D5EB4 /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = SOURCE_ROOT; };
 		4CEB7A4B1892A483007D5EB4 /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = SOURCE_ROOT; };
-		4CEB7A4C1892A483007D5EB4 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A4D1892A483007D5EB4 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A4E1892A483007D5EB4 /* obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_loader.h; sourceTree = SOURCE_ROOT; };
 		4CEB7A4F1892A483007D5EB4 /* object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = SOURCE_ROOT; };
@@ -108,8 +108,8 @@
 		4CEB7A5D1892A717007D5EB4 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				4CEB7A4C1892A483007D5EB4 /* Images.h */,
-				4CEB7A461892A483007D5EB4 /* Images.cpp */,
+				4C8FF11B1892B315002BA41A /* Image.h */,
+				4C8FF11A1892B315002BA41A /* Image.cpp */,
 				4CEB7A571892A6DF007D5EB4 /* PixelsGenerator.cpp */,
 				4CEB7A581892A6DF007D5EB4 /* PixelsGenerator.h */,
 				4CEB7A591892A6DF007D5EB4 /* PNMloader.cpp */,
@@ -180,7 +180,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C37D1FE1892AC9900DA58F6 /* Images.cpp in Sources */,
 				4CEB7A531892A483007D5EB4 /* main.cpp in Sources */,
 				4CEB7A521892A483007D5EB4 /* logger.cpp in Sources */,
 				4CEB7A541892A483007D5EB4 /* obj_loader.cpp in Sources */,
@@ -188,6 +187,7 @@
 				4CEB7A561892A483007D5EB4 /* utilities.cpp in Sources */,
 				4CEB7A5B1892A6DF007D5EB4 /* PixelsGenerator.cpp in Sources */,
 				4CEB7A5C1892A6DF007D5EB4 /* PNMloader.cpp in Sources */,
+				4C8FF11C1892B315002BA41A /* Image.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

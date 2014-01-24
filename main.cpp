@@ -7,7 +7,7 @@
 
 #include "opengl.h"
 
-#include "Images.h"
+#include "Image.cpp"
 #include "obj_loader.h"
 
 #define WINDOWWIDTH  800
@@ -21,10 +21,10 @@ void refresh(SDL_Window *window);
 int main(int argc, char *argv[])
 {
 	//Img8b image = Img8b("/Users/Vianney/Xcode/Cplusplus OpenGL/Cplusplus OpenGL/test_ASCII_Gray.pgm", PNM);
-	Img8b image = Img8b("test_ASCII_Gray.pgm", PNM);
-	obj_loader loader;
+	Image<GLubyte> image = Image<GLubyte>(32, 32, 3, RANDOM);
+	//obj_loader loader;
 	//auto objects = loader.load("test (UVs on).obj");
-	auto objects = loader.load("test (UVs off).obj");
+	//auto objects = loader.load("test (UVs off).obj");
 
 	SDL_Window *window = initGraphic();
 
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
 
 		glRotated(angleX, 1, 0, 0);
 		glRotated(angleZ, 0, 0, 1);
-		//drawCube();
-		objects[0].draw();
+		drawCube();
+		//objects[0].draw();
 		refresh(window);
 	}
 
