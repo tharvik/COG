@@ -9,7 +9,7 @@ template<typename T>
 std::vector<Object<T>> ObjLoader::load(const std::string& path)
 {
 	this->path = path;
-	this->file(path);
+	this->file.open(path);
 
 	std::vector<Object<T>> objects;
 	Object<T> current;
