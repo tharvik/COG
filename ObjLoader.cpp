@@ -1,11 +1,9 @@
 #include "ObjLoader.h"
 
-#include "logger.h"
+#include "Logger.h"
 
 #include <vector>
 #include <limits>
-
-#include <iostream>
 
 template<typename T>
 std::vector<Object<T>> ObjLoader::load(std::string path)
@@ -16,7 +14,9 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 	Object<T> current;
 
 	if(!file)
-		log(ERROR, "Unable to open " + path, __FILE__, __LINE__);
+		log.error("Unable to open \"" + path + "\"");
+
+	log.info("file \"" + path + "\" openned");
 
 	while(file) {
 
@@ -40,9 +40,8 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 
 		} else {
 			if(word[0] != '#' && !word.empty())
-				log(WARNING, "Dropping result on unhandled \"" +
-						word + "\" keyword",
-						__FILE__, __LINE__);
+				log.warn("Dropping result on unhandled \"" +
+						word + "\" keyword");
 		}
 
 		cleanLine(file);

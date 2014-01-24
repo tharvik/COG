@@ -6,7 +6,7 @@ find_package		(GLEW)
 find_package		(GLUT)
 
 add_library		(utilities utilities.cpp)
-add_library		(logger logger.cpp)
+add_library		(logger Logger.cpp)
 add_library		(objloader ObjLoader.cpp)
 add_library		(image Image.cpp)
 add_library		(object Object.cpp)
