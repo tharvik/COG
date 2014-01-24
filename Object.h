@@ -21,6 +21,8 @@ class Object
 		void draw();
 	private:
 		std::string name;
+		Image<T> image;
+		GLuint imageId;
 
 		std::vector<std::array<float, 3>> v;
 		std::vector<std::array<float, 2>> vt;
