@@ -11,12 +11,13 @@ template<class T>
 class Object
 {
 	public:
-		void setName(std::string name);
-		void setImage(Image<T> image);
+		void setName(const std::string& name);
+		void setImage(const Image<T>& image);
 
-		void pushBackV(std::array<float, 3> v);
-		void pushBackVt(std::array<float, 2> vt);
-		void pushBackF(std::array<std::array<unsigned short, 2>, 3> f);
+		void pushBackV(const std::array<float, 3>& v);
+		void pushBackVt(const std::array<float, 2>& vt);
+		void pushBackF(const std::array<
+				std::array<unsigned short, 2>, 3>& f);
 
 		void draw();
 	private:

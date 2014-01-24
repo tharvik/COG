@@ -3,31 +3,31 @@
 #include <iostream>
 
 template<class T>
-void Object<T>::setName(std::string name)
+void Object<T>::setName(const std::string& name)
 {
 	this->name = name;
 }
 
 template<class T>
-void Object<T>::setImage(Image<T> image)
+void Object<T>::setImage(const Image<T>& image)
 {
 	this->image = image;
 }
 
 template<class T>
-void Object<T>::pushBackV(std::array<float, 3> v)
+void Object<T>::pushBackV(const std::array<float, 3>& v)
 {
 	this->v.push_back(v);
 }
 
 template<class T>
-void Object<T>::pushBackVt(std::array<float, 2> vt)
+void Object<T>::pushBackVt(const std::array<float, 2>& vt)
 {
 	this->vt.push_back(vt);
 }
 
 template<class T>
-void Object<T>::pushBackF(std::array<std::array<unsigned short, 2>, 3> f)
+void Object<T>::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
 {
 	this->f.push_back(f);
 }
