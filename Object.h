@@ -15,7 +15,7 @@ class Object
 		void setImage(Image<T> image);
 
 		void pushBackV(std::array<float, 3> v);
-		void pushBackVT(std::array<float, 2> vt);
+		void pushBackVt(std::array<float, 2> vt);
 		void pushBackF(std::array<std::array<unsigned short, 2>, 3> f);
 
 		void draw();

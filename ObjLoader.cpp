@@ -20,7 +20,7 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 
 	while(file) {
 
-		std::string word = get_next_word(file);
+		std::string word = getNextWord(file);
 
 		if(word == "o") {
 			objects.push_back(current);
@@ -30,13 +30,13 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 			current.set_name(word);
 
 		} else if(word == "v") {
-			current.push_back_v(parse_v(file));
+			current.pushBackV(parseV(file));
 
 		} else if(word == "vt") {
-			current.push_back_vt(parse_vt(file));
+			current.pushBackVt(parseVt(file));
 
 		} else if(word == "f") {
-			current.push_back_f(parse_f(file));
+			current.pushBackF(parseF(file));
 
 		} else {
 			if(word[0] != '#' && !word.empty())
@@ -45,7 +45,7 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 						__FILE__, __LINE__);
 		}
 
-		clean_line(file);
+		cleanLine(file);
 	}
 
 	objects.erase(objects.begin());
@@ -53,7 +53,7 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 	return objects;
 }
 
-std::string ObjLoader::get_next_word(std::ifstream& file)
+std::string ObjLoader::getNextWord(std::ifstream& file)
 {
 	std::string word;
 	getline(file, word, ' ');
@@ -61,7 +61,7 @@ std::string ObjLoader::get_next_word(std::ifstream& file)
 	return word;
 }
 
-std::array<float, 3> ObjLoader::parse_v(std::ifstream& file)
+std::array<float, 3> ObjLoader::parseV(std::ifstream& file)
 {
 	std::array<float, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -70,7 +70,7 @@ std::array<float, 3> ObjLoader::parse_v(std::ifstream& file)
 	return array;
 }
 
-std::array<float, 2> ObjLoader::parse_vt(std::ifstream& file)
+std::array<float, 2> ObjLoader::parseVt(std::ifstream& file)
 {
 	std::array<float, 2> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -79,7 +79,7 @@ std::array<float, 2> ObjLoader::parse_vt(std::ifstream& file)
 	return array;
 }
 
-std::array<std::array<unsigned short, 2>, 3> ObjLoader::parse_f(
+std::array<std::array<unsigned short, 2>, 3> ObjLoader::parseF(
 		std::ifstream& file)
 {
 	std::array<std::array<unsigned short, 2>, 3> array;
@@ -98,7 +98,7 @@ std::array<std::array<unsigned short, 2>, 3> ObjLoader::parse_f(
 	return array;
 }
 
-void ObjLoader::clean_line(std::ifstream& file)
+void ObjLoader::cleanLine(std::ifstream& file)
 {
 	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

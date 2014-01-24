@@ -15,7 +15,7 @@ void Object<T>::pushBackV(std::array<float, 3> v)
 }
 
 template<class T>
-void Object<T>::pushBackVT(std::array<float, 2> vt)
+void Object<T>::pushBackVt(std::array<float, 2> vt)
 {
 	this->vt.push_back(vt);
 }
