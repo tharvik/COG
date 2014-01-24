@@ -49,6 +49,7 @@ void Object<T>::draw()
 			GL_UNSIGNED_BYTE,
 			this->image.getPixels()
 		     );
+
 	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);*/
 
@@ -61,7 +62,8 @@ void Object<T>::draw()
 			unsigned short tex = vertex[1] - 1;
 
 			if(tex != (unsigned short) -1)
-				glTexCoord2i(this->vt[tex][0], this->vt[tex][1]);
+				glTexCoord2i(this->vt[tex][0],
+						this->vt[tex][1]);
 
 			glVertex3d(this->v[pos][0],
 					this->v[pos][1],
