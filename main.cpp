@@ -35,9 +35,11 @@ int main(int argc, char *argv[])
         
         initWindow(mainWindow);
         
+        vector<Object<GLubyte>  > objects;
+        
         if (MODE == BODY_TEST) {
                 ObjLoader loader;
-                auto objects = loader.load<GLubyte>("test.obj");
+                objects = loader.load<GLubyte>("test.obj");
         } else if (MODE == GRAPHIC_TEST) {
                 //Img8b image = Img8b([path to a PNM image], PNM);
                 Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
@@ -98,7 +100,8 @@ int main(int argc, char *argv[])
 		glRotated(angleX, 1, 0, 0);
 		glRotated(angleZ, 0, 0, 1);
 		drawCube();
-		//objects[0].draw();
+                if (MODE == BODY_TEST)
+                        objects[0].draw();
 		refresh(mainWindow);
 	}
 
