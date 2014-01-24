@@ -12,7 +12,7 @@
 
 int initLibraries();
 
-SDL_Window* openWindow(SDL_Rect &windowRect);
+SDL_Window *openWindow(SDL_Rect &windowRect);
 void initWindow(SDL_Window *window);
 
 void drawCube();
@@ -37,17 +37,17 @@ int main(int argc, char *argv[])
         
 	GLuint Nom;
         
-	glGenTextures(1 , &Nom);		//Génère un n° de texture
-	glBindTexture(GL_TEXTURE_2D, Nom);	//Sélectionne ce n°
+	glGenTextures(1, &Nom);                 //Génère un n° de texture
+	glBindTexture(GL_TEXTURE_2D, Nom);      //Sélectionne ce n°
 	glTexImage2D (
 			GL_TEXTURE_2D,          //Type : texture 2D
 			0,                      //Mipmap : aucun
 			4,                      //Couleurs : 4
-			image.getWidth(),	//Largeur : 2
-			image.getHeight(),	//Hauteur : 2
+			image.getWidth(),       //Largeur : 2
+			image.getHeight(),      //Hauteur : 2
 			0,                      //Largeur du bord : 0
-			image.getFormat(),	//Format : RGBA
-			GL_UNSIGNED_BYTE,	//Type des couleurs
+			image.getFormat(),      //Format : RGBA
+			GL_UNSIGNED_BYTE,       //Type des couleurs
 			image.getPixels()       //Addresse de l'image
 		     );
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
