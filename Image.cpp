@@ -8,7 +8,6 @@
 #include "PixelsGenerator.h"
 #include "PixelsGenerator.cpp"
 #include "Logger.h"
-#include "stb_image.c"
 
 template <class T>
 Image<T>::Image(GLushort width, GLushort height, GLushort depth,
