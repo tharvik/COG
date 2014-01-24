@@ -1,28 +1,33 @@
-#include "object.h"
+#include "Object.h"
 
 #include <iostream>
 
-void object::set_name(std::string name)
+template<class T>
+void Object<T>::setName(std::string name)
 {
 	this->name = name;
 }
 
-void object::push_back_v(std::array<float, 3> v)
+template<class T>
+void Object<T>::pushBackV(std::array<float, 3> v)
 {
 	this->v.push_back(v);
 }
 
-void object::push_back_vt(std::array<float, 2> vt)
+template<class T>
+void Object<T>::pushBackVT(std::array<float, 2> vt)
 {
 	this->vt.push_back(vt);
 }
 
-void object::push_back_f(std::array<std::array<unsigned short, 2>, 3> f)
+template<class T>
+void Object<T>::pushBackF(std::array<std::array<unsigned short, 2>, 3> f)
 {
 	this->f.push_back(f);
 }
 
-void object::draw()
+template<class T>
+void Object<T>::draw()
 {
 	glBegin(GL_TRIANGLES);
 

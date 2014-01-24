@@ -4,12 +4,13 @@
 #include <array>
 #include <fstream>
 
-#include "object.h"
+#include "Object.h"
 
-class obj_loader
+class ObjLoader
 {
 	public:
-		static std::vector<object> load(std::string path);
+		template<typename T>
+		static std::vector<Object<T>> load(std::string path);
 
 	private:
 		static std::array<float, 3> parse_v(std::ifstream& file);

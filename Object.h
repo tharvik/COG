@@ -5,15 +5,18 @@
 #include <string>
 
 #include "opengl.h"
+#include "Image.h"
 
-class object
+template<class T>
+class Object
 {
 	public:
-		void set_name(std::string name);
-		void push_back_v(std::array<float, 3> v);
-		void push_back_vt(std::array<float, 2> vt);
-		void push_back_f(
-				std::array<std::array<unsigned short, 2>, 3> f);
+		void setName(std::string name);
+		void setImage(Image<T> image);
+
+		void pushBackV(std::array<float, 3> v);
+		void pushBackVT(std::array<float, 2> vt);
+		void pushBackF(std::array<std::array<unsigned short, 2>, 3> f);
 
 		void draw();
 	private:

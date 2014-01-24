@@ -1,4 +1,4 @@
-#include "obj_loader.h"
+#include "ObjLoader.h"
 
 #include "logger.h"
 
@@ -7,12 +7,13 @@
 
 #include <iostream>
 
-std::vector<object> obj_loader::load(std::string path)
+template<typename T>
+std::vector<Object<T>> ObjLoader::load(std::string path)
 {
 	std::ifstream file(path);
 
-	std::vector<object> objects;
-	object current;
+	std::vector<Object<T>> objects;
+	Object<T> current;
 
 	if(!file)
 		log(ERROR, "Unable to open " + path, __FILE__, __LINE__);
@@ -24,7 +25,7 @@ std::vector<object> obj_loader::load(std::string path)
 		if(word == "o") {
 			objects.push_back(current);
 
-			current = object();
+			current = Object<T>();
 			file >> word;
 			current.set_name(word);
 
@@ -52,7 +53,7 @@ std::vector<object> obj_loader::load(std::string path)
 	return objects;
 }
 
-std::string obj_loader::get_next_word(std::ifstream& file)
+std::string ObjLoader::get_next_word(std::ifstream& file)
 {
 	std::string word;
 	getline(file, word, ' ');
@@ -60,7 +61,7 @@ std::string obj_loader::get_next_word(std::ifstream& file)
 	return word;
 }
 
-std::array<float, 3> obj_loader::parse_v(std::ifstream& file)
+std::array<float, 3> ObjLoader::parse_v(std::ifstream& file)
 {
 	std::array<float, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -69,7 +70,7 @@ std::array<float, 3> obj_loader::parse_v(std::ifstream& file)
 	return array;
 }
 
-std::array<float, 2> obj_loader::parse_vt(std::ifstream& file)
+std::array<float, 2> ObjLoader::parse_vt(std::ifstream& file)
 {
 	std::array<float, 2> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -78,7 +79,7 @@ std::array<float, 2> obj_loader::parse_vt(std::ifstream& file)
 	return array;
 }
 
-std::array<std::array<unsigned short, 2>, 3> obj_loader::parse_f(
+std::array<std::array<unsigned short, 2>, 3> ObjLoader::parse_f(
 		std::ifstream& file)
 {
 	std::array<std::array<unsigned short, 2>, 3> array;
@@ -97,7 +98,7 @@ std::array<std::array<unsigned short, 2>, 3> obj_loader::parse_f(
 	return array;
 }
 
-void obj_loader::clean_line(std::ifstream& file)
+void ObjLoader::clean_line(std::ifstream& file)
 {
 	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
