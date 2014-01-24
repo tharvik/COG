@@ -18,11 +18,10 @@ enum imageGenerationOption {
 
 #include <iostream>
 #include <fstream>
-#include <openGl/OpenGL.h>
-#include <GLUT/GLUT.h>
 #include <string>
 #include <stdarg.h>
 
+#include "opengl.h"
 
 using namespace std;
 
