@@ -11,3 +11,6 @@ main
 
 # remove vim files
 .*.sw?
+
+# remove Xcode files
+COG.xcodeproj
