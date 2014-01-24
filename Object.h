@@ -7,12 +7,13 @@
 #include "opengl.h"
 #include "Image.h"
 
-template<class T>
 class Object
 {
 	public:
+		Object();
+
 		void setName(const std::string& name);
-		void setImage(const Image<T>& image);
+		void setImage(const Image<GLubyte>& image);
 
 		void pushBackV(const std::array<float, 3>& v);
 		void pushBackVt(const std::array<float, 2>& vt);
@@ -22,7 +23,7 @@ class Object
 		void draw();
 	private:
 		std::string name;
-		Image<T> image;
+		Image<GLubyte> image;
 		GLuint imageId;
 
 		std::vector<std::array<float, 3>> v;

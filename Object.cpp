@@ -2,38 +2,35 @@
 
 #include <iostream>
 
-template<class T>
-void Object<T>::setName(const std::string& name)
+Object::Object() : image(0, 0, 0, RANDOM)
+{}
+
+void Object::setName(const std::string& name)
 {
 	this->name = name;
 }
 
-template<class T>
-void Object<T>::setImage(const Image<T>& image)
+void Object::setImage(const Image<GLubyte>& image)
 {
 	this->image = image;
 }
 
-template<class T>
-void Object<T>::pushBackV(const std::array<float, 3>& v)
+void Object::pushBackV(const std::array<float, 3>& v)
 {
 	this->v.push_back(v);
 }
 
-template<class T>
-void Object<T>::pushBackVt(const std::array<float, 2>& vt)
+void Object::pushBackVt(const std::array<float, 2>& vt)
 {
 	this->vt.push_back(vt);
 }
 
-template<class T>
-void Object<T>::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
+void Object::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
 {
 	this->f.push_back(f);
 }
 
-template<class T>
-void Object<T>::draw()
+void Object::draw()
 {
 	//this->image.bindTexture();
 

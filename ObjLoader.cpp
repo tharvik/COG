@@ -5,14 +5,13 @@
 
 ObjLoader::ObjLoader() : lineCount(0) {}
 
-template<typename T>
-std::vector<Object<T>> ObjLoader::load(const std::string& path)
+std::vector<Object> ObjLoader::load(const std::string& path)
 {
 	this->path = path;
 	this->file.open(path);
 
-	std::vector<Object<T>> objects;
-	Object<T> current;
+	std::vector<Object> objects;
+	Object current;
 
 	if(!file)
 		logger::error("Unable to open \"" + path + "\"", FL);
@@ -24,9 +23,9 @@ std::vector<Object<T>> ObjLoader::load(const std::string& path)
 		if(word == "o") {
 			objects.push_back(current);
 
-			current = Object<T>();
+			current = Object();
 			file >> word;
-			current.set_name(word);
+			current.setName(word);
 
 		} else if(word == "v") {
 			current.pushBackV(parseV());

@@ -6,14 +6,14 @@
 
 #include "Object.h"
 #include "Logger.h"
+#include "opengl.h"
 
 class ObjLoader
 {
 	public:
 		ObjLoader();
 
-		template<typename T>
-		std::vector<Object<T>> load(const std::string& path);
+		std::vector<Object> load(const std::string& path);
 
 	private:
 		std::array<float, 3> parseV();
