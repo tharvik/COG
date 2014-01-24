@@ -12,6 +12,8 @@ std::vector<Object<T>> ObjLoader::load(std::string path)
 	std::vector<Object<T>> objects;
 	Object<T> current;
 
+	Logger logger;
+
 	if(!file)
 		logger.error("Unable to open \"" + path + "\"",
 				__FILE__, __LINE__);

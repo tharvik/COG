@@ -14,19 +14,17 @@
 class Logger
 {
 	public:
-		static void info(std::string msg, std::string file,
+		void info(std::string msg, std::string file,
 				unsigned short line);
-		static void warn(std::string msg, std::string file,
+		void warn(std::string msg, std::string file,
 				unsigned short line);
-		static void error(std::string msg, std::string file,
+		void error(std::string msg, std::string file,
 				unsigned short line);
 
 	private:
-		static void log(int status, std::string msg, std::string file,
+		void log(std::string msg, std::string file,
 				unsigned short line);
 
 };
-
-Logger logger;
 
 #endif
