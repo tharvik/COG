@@ -8,6 +8,7 @@
 #include "PixelsGenerator.h"
 #include "PixelsGenerator.cpp"
 #include "Logger.h"
+#include "stb_image.c"
 
 template <class T>
 Image<T>::Image(GLushort width, GLushort height, GLushort depth,
@@ -39,7 +40,12 @@ Image<T>::Image(string src, imageFormat imgFormat)
 		case PNM:
 			LoadPNM(src);
 			break;
-			
+
+		case PNG:
+			int onSenFout;
+			pixels = stbi_load(src, &w, &h, &onSenFout, 0);
+			break;
+
 		default:
 			break;
 	}

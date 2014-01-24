@@ -7,7 +7,8 @@
 #define COG_Image_h
 
 enum imageFormat {
-	PNM
+	PNM,
+	PNG
 };
 
 enum imageGenerationOption {
