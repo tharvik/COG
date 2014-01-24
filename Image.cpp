@@ -236,8 +236,11 @@ void Image<T>::PNMloadMagicNumber(ifstream* imgFile, GLushort* numberOfEndl, boo
 
 }
 
-template <class T>
-void Image<T>::PNMloadSize
+//template <class T>
+//void Image<T>::PNMloadSize
+//{
+//
+//}
 
 template <class T>
 GLushort Image<T>::getWidth()
