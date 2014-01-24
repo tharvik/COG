@@ -6,7 +6,7 @@
 ObjLoader::ObjLoader() : lineCount(0) {}
 
 template<typename T>
-std::vector<Object<T>> ObjLoader::load(std::string path)
+std::vector<Object<T>> ObjLoader::load(const std::string& path)
 {
 	this->path = path;
 	this->file(path);

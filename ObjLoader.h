@@ -13,7 +13,7 @@ class ObjLoader
 		ObjLoader();
 
 		template<typename T>
-		std::vector<Object<T>> load(std::string path);
+		std::vector<Object<T>> load(const std::string& path);
 
 	private:
 		std::array<float, 3> parseV();
