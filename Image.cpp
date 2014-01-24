@@ -20,7 +20,7 @@ Image<T>::Image(GLushort width, GLushort height, GLushort depth,
 			break;
 			
 		case UV_GRID:
-			
+			pixels = generateUVgrid<T>(w, h, d);
 			break;
 			
 		case CHECKERBOARD:

@@ -21,7 +21,7 @@ void refresh(SDL_Window *window);
 int main(int argc, char *argv[])
 {
 	//Img8b image = Img8b("/Users/Vianney/Xcode/Cplusplus OpenGL/Cplusplus OpenGL/test_ASCII_Gray.pgm", PNM);
-	Image<GLubyte> image = Image<GLubyte>(32, 32, 3, RANDOM);
+	Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
 	//obj_loader loader;
 	//auto objects = loader.load("test (UVs on).obj");
 	//auto objects = loader.load("test (UVs off).obj");
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
 	GLuint Nom;
 
-	glGenTextures(1, &Nom);		//Génère un n° de texture
+	glGenTextures(1 , &Nom);		//Génère un n° de texture
 	glBindTexture(GL_TEXTURE_2D, Nom);	//Sélectionne ce n°
 	glTexImage2D (
 			GL_TEXTURE_2D,	//Type : texture 2D
