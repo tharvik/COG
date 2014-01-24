@@ -10,9 +10,15 @@
 #include "Image.cpp"
 #include "ObjLoader.h"
 
+enum {GRAPHIC_TEST, BODY_TEST};
+
+#define MODE GRAPHIC_TEST
+
 int initLibraries();
 
-SDL_Window *openWindow(SDL_Rect &windowRect);
+SDL_Window* openWindow(SDL_Rect &windowRect, string &&title);
+SDL_Window* openWindow(SDL_Rect &windowRect, string &title);
+
 void initWindow(SDL_Window *window);
 
 void drawCube();
@@ -25,35 +31,37 @@ int main(int argc, char *argv[])
         SDL_Rect mainWindowRect = {SDL_WINDOWPOS_CENTERED,
                                    SDL_WINDOWPOS_CENTERED,
                                    800, 450};
-        SDL_Window *mainWindow = openWindow(mainWindowRect);
+        SDL_Window *mainWindow = openWindow(mainWindowRect, "Main Window");
+        
         initWindow(mainWindow);
         
-	//Img8b image = Img8b([path to a PNM image], PNM);
-	//obj_loader loader;
-	//auto objects = loader.load("test (UVs on).obj");
-	//auto objects = loader.load("test (UVs off).obj");
+        if (MODE == BODY_TEST) {
+                ObjLoader loader;
+                auto objects = loader.load<GLubyte>("test.obj");
+        } else if (MODE == GRAPHIC_TEST) {
+                //Img8b image = Img8b([path to a PNM image], PNM);
+                Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
         
-        Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
+                GLuint Nom;
         
-	GLuint Nom;
+                glGenTextures(1, &Nom);               //Génère un n° de texture
+                glBindTexture(GL_TEXTURE_2D, Nom);    //Sélectionne ce n°
+                glTexImage2D (
+                              GL_TEXTURE_2D,          //Type : texture 2D
+                              0,                      //Mipmap : aucun
+                              4,                      //Couleurs : 4
+                              image.getWidth(),       //Largeur : 2
+                              image.getHeight(),      //Hauteur : 2
+                              0,                      //Largeur du bord : 0
+                              image.getFormat(),      //Format : RGBA
+                              GL_UNSIGNED_BYTE,       //Type des couleurs
+                              image.getPixels()       //Addresse de l'image
+                              );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
-	glGenTextures(1, &Nom);                 //Génère un n° de texture
-	glBindTexture(GL_TEXTURE_2D, Nom);      //Sélectionne ce n°
-	glTexImage2D (
-			GL_TEXTURE_2D,          //Type : texture 2D
-			0,                      //Mipmap : aucun
-			4,                      //Couleurs : 4
-			image.getWidth(),       //Largeur : 2
-			image.getHeight(),      //Hauteur : 2
-			0,                      //Largeur du bord : 0
-			image.getFormat(),      //Format : RGBA
-			GL_UNSIGNED_BYTE,       //Type des couleurs
-			image.getPixels()       //Addresse de l'image
-		     );
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        
-	drawCube();
+                drawCube();
+        }
 	refresh(mainWindow);
         
 	SDL_ShowWindow(mainWindow);
@@ -122,7 +130,7 @@ int initLibraries()
  * The window is not revealed
  */
 
-SDL_Window* openWindow(SDL_Rect &windowRect)
+SDL_Window* openWindow(SDL_Rect &windowRect, string &&title)
 {
         SDL_Window *window = SDL_CreateWindow(
                                               "OpenGL",
@@ -134,6 +142,30 @@ SDL_Window* openWindow(SDL_Rect &windowRect)
                                                 SDL_WINDOW_HIDDEN |
                                                 SDL_WINDOW_RESIZABLE
                                               );
+        
+        SDL_SetWindowTitle(window, title.c_str());
+        
+        SDL_Surface *icon = SDL_LoadBMP("Resources/game_icon.bmp");
+        SDL_SetWindowIcon(window, icon);
+        
+        SDL_GL_CreateContext(window);
+        
+        return window;
+}
+SDL_Window* openWindow(SDL_Rect &windowRect, string &title)
+{
+        SDL_Window *window = SDL_CreateWindow(
+                                              "OpenGL",
+                                              windowRect.x,
+                                              windowRect.y,
+                                              windowRect.w,
+                                              windowRect.h,
+                                              SDL_WINDOW_OPENGL |
+                                              SDL_WINDOW_HIDDEN |
+                                              SDL_WINDOW_RESIZABLE
+                                              );
+        
+        SDL_SetWindowTitle(window, title.c_str());
         
         SDL_Surface *icon = SDL_LoadBMP("Resources/game_icon.bmp");
         SDL_SetWindowIcon(window, icon);
