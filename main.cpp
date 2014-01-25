@@ -7,6 +7,7 @@
 
 #include "opengl.h"
 
+#include <SDL2_image/SDL_image.h>
 #include "Image.cpp"
 #include "ObjLoader.h"
 #include "Object.h"
@@ -41,7 +42,8 @@ int main(int argc, char *argv[])
                 objects = loader.load("test.obj");
         } else {
                 //Img8b image = Img8b([path to a PNM image], PNM);
-                Image<GLubyte> image = Image<GLubyte>(64, 64, 3, UV_GRID);
+                Image<GLubyte> image = Image<GLubyte>(
+				"/Users/Vianney/Xcode/COG/Test files/test.tif", TIF);
         
                 GLuint Nom;
         
@@ -125,6 +127,8 @@ int initLibraries()
                      << SDL_GetError() << endl;
 		return false;
         }
+		
+		//IMG_Init(IMG_INIT_PNG, IMG_INIT_JPG);
 }
 
 /*

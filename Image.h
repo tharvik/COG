@@ -6,9 +6,14 @@
 #ifndef COG_Image_h
 #define COG_Image_h
 
-enum imageFormat {
+enum imageFileFormat {
+	BMP,
+	GIF,
+	ICO,
+	JPG,
+	PNG,
 	PNM,
-	PNG
+	TIF
 };
 
 enum imageGenerationOption {
@@ -23,6 +28,7 @@ enum imageGenerationOption {
 #include <stdarg.h>
 
 #include "opengl.h"
+#include <SDL2_image/SDL_image.h>
 
 using namespace std;
 
@@ -35,22 +41,16 @@ private:
 
 	// Width, height and depth (RGB, RGBA)
 	GLushort w, h, d;
-	
+
+	GLenum format = GL_RGB;
 	
 	void LoadPNM(string src);
-	void PNMloadMagicNumber(ifstream& imgFile, GLushort& numberOfEndl,
-							bool& modeASCII);
-	void PNMloadSize(ifstream& imgFile, GLushort& numberOfEndl);
-	void PNMloadMaxIntensity(ifstream& imgFile, GLushort& numberOfEndl,
-							 GLushort& maxIntensity);
-	void PNMloadPixelsASCII(ifstream& imgFile,  GLushort maxIntensity);
-	void PNMloadPixelsBinary(ifstream &imgFile, GLushort numberOfEndl,
-								   GLushort maxIntensity, string src);
+	
 public:
 	// Constructors
 	Image(GLushort width, GLushort height, GLushort depth,
 		  imageGenerationOption options);
-	Image(string src, imageFormat imgFormat);
+	Image(string src, enum imageFileFormat imgFormat);
 	
 	// Getters
 	GLushort getWidth();
