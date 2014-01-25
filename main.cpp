@@ -42,8 +42,7 @@ int main(int argc, char *argv[])
                 objects = loader.load("test.obj");
         } else {
                 //Img8b image = Img8b([path to a PNM image], PNM);
-                Image<GLubyte> image = Image<GLubyte>(
-				"/Users/Vianney/Xcode/COG/Test files/test.tif", TIF);
+                Image<GLubyte> img = Image<GLubyte>("/Users/Vianney/Xcode/COG/Test files/test.png", PNG);
         
                 GLuint Nom;
         
@@ -53,12 +52,12 @@ int main(int argc, char *argv[])
                               GL_TEXTURE_2D,          //Type : texture 2D
                               0,                      //Mipmap : aucun
                               4,                      //Couleurs : 4
-                              image.getWidth(),       //Largeur : 2
-                              image.getHeight(),      //Hauteur : 2
+                              img.getWidth(),       //Largeur : 2
+                              img.getHeight(),      //Hauteur : 2
                               0,                      //Largeur du bord : 0
-                              image.getFormat(),      //Format : RGBA
+                              img.getFormat(),      //Format : RGBA
                               GL_UNSIGNED_BYTE,       //Type des couleurs
-                              image.getPixels()       //Addresse de l'image
+                              img.getPixels()       //Addresse de l'image
                               );
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
