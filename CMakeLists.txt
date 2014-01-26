@@ -2,9 +2,12 @@
 cmake_minimum_required	(VERSION 2.6)
 project			(Cplusplus_OpenGL)
 
-#find_package		(SDL2)
-find_package		(GLEW)
-find_package		(GLUT)
+# SDL2
+include			(FindPkgConfig)
+pkg_search_module	(SDL2 REQUIRED sdl2)
+
+find_package		(GLEW REQUIRED)
+find_package		(GLUT REQUIRED)
 
 set	(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
 
