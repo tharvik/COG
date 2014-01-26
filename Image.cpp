@@ -9,6 +9,13 @@
 #include "PixelsGenerator.cpp"
 #include "Logger.h"
 
+#include <SDL2/SDL.h>
+#include <stdio.h>
+#include <string.h>
+#include <SDL2_image/SDL_image.h>
+
+#include "IMG_bmp_loader.cpp"
+
 template <class T>
 Image<T>::Image(GLushort width, GLushort height, GLushort depth,
 				imageGenerationOption options) : w(width), h(height), d(depth)
@@ -40,49 +47,16 @@ Image<T>::Image(string src, enum imageFileFormat fileFormat)
 
 	switch (fileFormat) {			
 		case BMP:
-			rwops = SDL_RWFromFile(src.c_str(), "rb");
-			surface = IMG_LoadBMP_RW(rwops);
-			pixels = (GLubyte*) surface->pixels;
-			w	   = surface->w;
-			h	   = surface->h;
-			d	   = surface->format->BytesPerPixel;
-			if (d == 4) {
-				if (surface->format->Rmask == 0x000000FF)
-					format = GL_RGBA;
-				else
-					format = GL_BGRA;
-			} else if (d == 3) {
-				if (surface->format->Rmask == 0x000000FF)
-					format = GL_RGB;
-				else
-					format = GL_BGR;
-			}
+			loadBMPimage(SDL_RWFromFile(src.c_str(), "rb"));
 			break;
 
 		case GIF:
-			rwops = SDL_RWFromFile(src.c_str(), "rb");
-			surface = IMG_LoadGIF_RW(rwops);
-			pixels = (GLubyte*) surface->pixels;
-			w	   = surface->w;
-			h	   = surface->h;
-			d	   = surface->format->BytesPerPixel;
-			if (d == 4) {
-				if (surface->format->Rmask == 0x000000FF)
-					format = GL_RGBA;
-				else
-					format = GL_BGRA;
-			} else if (d == 3) {
-				if (surface->format->Rmask == 0x000000FF)
-					format = GL_RGB;
-				else
-					format = GL_BGR;
-			}
 			break;
 			
 		case PNG:
 			rwops = SDL_RWFromFile(src.c_str(), "rb");
 			surface = IMG_LoadPNG_RW(rwops);
-			pixels = (GLubyte*) surface->pixels;
+			pixels = (T*) surface->pixels;
 			w	   = surface->w;
 			h	   = surface->h;
 			d	   = surface->format->BytesPerPixel;
@@ -102,7 +76,7 @@ Image<T>::Image(string src, enum imageFileFormat fileFormat)
 		case PNM:
 			rwops = SDL_RWFromFile(src.c_str(), "rb");
 			surface = IMG_LoadPNM_RW(rwops);
-			pixels = (GLubyte*) surface->pixels;
+			pixels = (T*) surface->pixels;
 			w	   = surface->w;
 			h	   = surface->h;
 			d	   = surface->format->BytesPerPixel;

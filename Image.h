@@ -63,20 +63,23 @@ private:
 	GLushort w, h, d;
 
 	GLenum format = GL_RGB;
-		
+
+	void loadBMPimage(SDL_RWops *src);
+	int readRlePixels(SDL_RWops *src, int isRle8); // was static
+	void CorrectAlphaChannel(); // was static
+
 public:
 	// Constructors
 	Image(GLushort width, GLushort height, GLushort depth,
 		  imageGenerationOption options);
 	Image(string src, enum imageFileFormat imgFormat);
-	
+
 	// Getters
 	GLushort getWidth();
 	GLushort getHeight();
 	GLenum	 getFormat();
 	T*		 getPixels();
-	
-	
+
 	// Destructor
 	~Image();
 };
