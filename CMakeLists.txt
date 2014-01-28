@@ -5,6 +5,7 @@ project			(Cplusplus_OpenGL)
 # SDL2
 include			(FindPkgConfig)
 pkg_search_module	(SDL2 REQUIRED sdl2)
+pkg_search_module	(SDL2_image REQUIRED SDL2_image)
 
 find_package		(GLEW REQUIRED)
 find_package		(GLUT REQUIRED)
