@@ -37,11 +37,11 @@ int main(int argc, char *argv[])
 	
 	std::vector<Object> objects;
 	
-	Image<GLubyte> img = Image<GLubyte>("/Users/Vianney/Xcode/COG/Resources/Test files/mountain.png", PNG);
+	Image<GLubyte> img = Image<GLubyte>("Resources/Test files/mountain.png", PNG);
 	
 	if (argc == 2) {
 		ObjLoader loader;
-		objects = loader.load("/Users/Vianney/Xcode/COG/Resources/Test files/mountain.obj");
+		objects = loader.load("Resources/Test files/mountain.obj");
 		objects[0].setImage(img);
 	} else {
 		Image<GLubyte> img = Image<GLubyte>("Resources/test_GrayA.png");
