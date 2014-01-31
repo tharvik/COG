@@ -16,7 +16,7 @@ add_library		(image Image.cpp)
 add_library		(object Object.cpp)
 
 # link
-target_link_libraries	(image utilities)
+target_link_libraries	(image utilities SDL2_image)
 target_link_libraries	(object image)
 target_link_libraries	(objloader logger object)
 
