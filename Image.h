@@ -10,6 +10,9 @@
 #	include <SDL2/SDL_image.h>
 #endif
 
+#ifndef IMAGE_H
+#define IMAGE_H
+
 enum imageFileFormat {
 	BMP,
 	GIF,
@@ -62,3 +65,5 @@ public:
 	// Destructor
 	~Image();
 };
+
+#endif
