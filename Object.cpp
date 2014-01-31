@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Object::Object() : image(64, 64, 3, RANDOM)
+Object::Object() : image("")
 {}
 
 void Object::setName(const std::string& name)

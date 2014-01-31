@@ -9,8 +9,8 @@
 #include "opengl.h"
 
 #include "Image.cpp"
-//#include "ObjLoader.h"
-//#include "Object.h"
+#include "ObjLoader.h"
+#include "Object.h"
 
 enum {GRAPHIC_TEST, BODY_TEST};
 
@@ -35,11 +35,11 @@ int main(int argc, char *argv[])
         
         initWindow(mainWindow);
         
-        //vector<Object> objects;
+	std::vector<Object> objects;
         
         if (argc == 2) {
-                //ObjLoader loader;
-                //objects = loader.load("test.obj");
+                ObjLoader loader;
+                objects = loader.load("fichier_2_objects.obj");
         } else {
                 Image<GLubyte> img = Image<GLubyte>("Resources/test_GrayA.png");
                 
@@ -98,9 +98,9 @@ int main(int argc, char *argv[])
 
 		glRotated(angleX, 1, 0, 0);
 		glRotated(angleZ, 0, 0, 1);
-                //if (argc == 2)
-                        //objects[0].draw();
-		//else
+                if (argc == 2)
+                        objects[0].draw();
+		else
 			drawCube();
 		refresh(mainWindow);
 	}
