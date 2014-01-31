@@ -24,7 +24,6 @@ class Object
 	private:
 		std::string name;
 		Image<GLubyte> image;
-		GLuint imageId;
 
 		std::vector<std::array<float, 3>> v;
 		std::vector<std::array<float, 2>> vt;

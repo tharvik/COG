@@ -1,11 +1,10 @@
 #include "Object.h"
 
 #include <iostream>
+#include "Image.cpp"
 
 Object::Object() : image("")
-{
-	this->imageId = 0;
-}
+{}
 
 void Object::setName(const std::string& name)
 {
@@ -34,27 +33,9 @@ void Object::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
 
 void Object::draw()
 {
-	//this->image.bindTexture();
+	this->image;
+	this->image.bindTexture();
 
-	if(this->imageId == 0) {
-		
-		glGenTextures(1, &this->imageId);
-		glBindTexture(GL_TEXTURE_2D, this->imageId);
-		glTexImage2D (
-					  GL_TEXTURE_2D,
-					  0, 4,
-					  this->image.getWidth(),
-					  this->image.getHeight(),
-					  0,
-					  this->image.getFormat(),
-					  GL_UNSIGNED_BYTE,
-					  this->image.getPixels()
-					  );
-		
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	}
-	
 	glBegin(GL_TRIANGLES);
 
 	for(auto face : f) {
@@ -66,11 +47,7 @@ void Object::draw()
 			if(tex != (unsigned short) -1)
 			{
 				glTexCoord2f(this->vt[tex][0],
-							 -this->vt[tex][1]
-							 );
-//				std::cout << '[' << this->vt[tex][0] << ',' << this->vt[tex][1] << ']'
-//				<< std::endl;
-				
+						-this->vt[tex][1]);
 			}
 
 			glVertex3d(this->v[pos][0],
@@ -78,7 +55,7 @@ void Object::draw()
 					this->v[pos][2]);
 		}
 	}
-	
+
 	glEnd();
 }
 

@@ -3,7 +3,7 @@
 
 template <class T>
 Image<T>::Image(GLushort width, GLushort height, GLushort depth,
-				imageGenerationOption options) : w(width), h(height), d(depth)
+				imageGenerationOption options) : w(width), h(height), d(depth), imageId(0)
 {
 	pixels = (T*) calloc(w * h * d, sizeof(T));
 	
@@ -26,7 +26,7 @@ Image<T>::Image(GLushort width, GLushort height, GLushort depth,
 }
 
 template <class T>
-Image<T>::Image(std::string &src)
+Image<T>::Image(std::string &src) : imageId(0)
 {
 	SDL_RWops *rwops = SDL_RWFromFile(src.c_str(), "rb");
 	SDL_Surface *surface;
@@ -42,7 +42,7 @@ Image<T>::Image(std::string &src)
         }
 }
 template <class T>
-Image<T>::Image(std::string &&src)
+Image<T>::Image(std::string &&src) : imageId(0)
 {
 	SDL_RWops *rwops = SDL_RWFromFile(src.c_str(), "rb");
 	SDL_Surface *surface;
@@ -59,7 +59,7 @@ Image<T>::Image(std::string &&src)
 }
 
 template <class T>
-Image<T>::Image(std::string &src, enum imageFileFormat fileFormat)
+Image<T>::Image(std::string &src, enum imageFileFormat fileFormat) : imageId(0)
 {
 	SDL_RWops *rwops = SDL_RWFromFile(src.c_str(), "rb");
 	SDL_Surface *surface;
@@ -115,6 +115,7 @@ Image<T>::Image(std::string &src, enum imageFileFormat fileFormat)
 }
 template <class T>
 Image<T>::Image(std::string &&src, enum imageFileFormat fileFormat)
+	: imageId(0)
 {
 	SDL_RWops *rwops = SDL_RWFromFile(src.c_str(), "rb");
 	SDL_Surface *surface;
@@ -243,4 +244,31 @@ template <class T>
 Image<T>::~Image()
 {
 	free(pixels);
+}
+
+template <class T>
+void Image<T>::bindTexture()
+{
+	if(this->imageId == 0) {
+
+		glGenTextures(1, &this->imageId);
+		glBindTexture(GL_TEXTURE_2D, this->imageId);
+		glTexImage2D (
+				GL_TEXTURE_2D,
+				0, 4,
+				this->getWidth(),
+				this->getHeight(),
+				0,
+				this->getFormat(),
+				GL_UNSIGNED_BYTE,
+				this->getPixels()
+			     );
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+				GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+				GL_NEAREST);
+	} else {
+		glBindTexture(GL_TEXTURE_2D, this->imageId);
+	}
 }

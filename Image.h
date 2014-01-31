@@ -44,6 +44,9 @@ private:
         GLenum format = GL_RGB;
 	
         void findFormatAndDepth(SDL_Surface *surface);
+
+	// buffer for OpenGL
+	GLuint imageId;
 public:
 	// Constructors
 	Image(GLushort width, GLushort height, GLushort depth,
@@ -62,6 +65,9 @@ public:
         
         bool     isValid();
 	
+	// bind as the current texture
+	void bindTexture();
+
 	// Destructor
 	~Image();
 };
