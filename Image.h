@@ -2,7 +2,13 @@
 #include <string>
 
 #include "opengl.h"
-#include <SDL2_image/SDL_image.h>
+
+
+#ifdef __APPLE__
+#	include <SDL2_image/SDL_image.h>
+#else
+#	include <SDL2/SDL_image.h>
+#endif
 
 enum imageFileFormat {
 	BMP,
