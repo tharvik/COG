@@ -35,7 +35,6 @@ std::vector<Object> ObjLoader::load(const std::string& path)
 
 		} else if (word == "f") {
 			current.pushBackF(parseF());
-
 		}
 
 		if (word[0] == '#')
@@ -102,6 +101,7 @@ void ObjLoader::cleanLine(std::string word, bool logRemain)
 
 	std::string tmp;
 	getline(file, tmp);
+
 	if(tmp.size() != 0 && logRemain)
 		logger::warn("Discarding remaining results: \"" + word + " " +
 				tmp + "\"", path, lineCount);
