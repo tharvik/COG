@@ -7,7 +7,7 @@ ObjLoader::ObjLoader() : lineCount(0) {}
 
 std::vector<Object> ObjLoader::load(const std::string& path)
 {
-	path = path;
+	this->path = path;
 	file.open(path);
 
 	std::vector<Object> objects;
