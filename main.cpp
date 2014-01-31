@@ -32,47 +32,50 @@ int main(int argc, char *argv[])
                                    SDL_WINDOWPOS_CENTERED,
                                    800, 450};
         SDL_Window *mainWindow = openWindow(mainWindowRect, "Main Window");
-        
-        initWindow(mainWindow);
-        
+	
+	initWindow(mainWindow);
+	
 	std::vector<Object> objects;
+	
+	Image<GLubyte> img = Image<GLubyte>("/Users/Vianney/Xcode/COG/Resources/Test files/objectTest.png", PNG);
+	
+	if (argc == 2) {
+		ObjLoader loader;
+		objects = loader.load("/Users/Vianney/Xcode/COG/Resources/Test files/objectTest.obj");
+		objects[0].setImage(img);
+	} else {
+		Image<GLubyte> img = Image<GLubyte>("Resources/test_GrayA.png");
+		
+		GLuint Nom;
         
-        if (argc == 2) {
-                ObjLoader loader;
-                objects = loader.load("fichier_2_objects.obj");
-        } else {
-                Image<GLubyte> img = Image<GLubyte>("Resources/test_GrayA.png");
-                
-                GLuint Nom;
+		glGenTextures(1, &Nom);               //Génère un n° de texture
+		glBindTexture(GL_TEXTURE_2D, Nom);    //Sélectionne ce n°
+		glTexImage2D (
+					  GL_TEXTURE_2D,          //Type : texture 2D
+					  0,                      //Mipmap : aucun
+					  4,                      //Couleurs : 4
+					  img.getWidth(),         //Largeur : 2
+					  img.getHeight(),        //Hauteur : 2
+					  0,                      //Largeur du bord : 0
+					  img.getFormat(),        //Format : RGBA
+					  GL_UNSIGNED_BYTE,       //Type des couleurs
+					  img.getPixels()         //Addresse de l'image
+					  );
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
-                glGenTextures(1, &Nom);               //Génère un n° de texture
-                glBindTexture(GL_TEXTURE_2D, Nom);    //Sélectionne ce n°
-                glTexImage2D (
-                              GL_TEXTURE_2D,          //Type : texture 2D
-                              0,                      //Mipmap : aucun
-                              4,                      //Couleurs : 4
-                              img.getWidth(),         //Largeur : 2
-                              img.getHeight(),        //Hauteur : 2
-                              0,                      //Largeur du bord : 0
-                              img.getFormat(),        //Format : RGBA
-                              GL_UNSIGNED_BYTE,       //Type des couleurs
-                              img.getPixels()         //Addresse de l'image
-                              );
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        
-                drawCube();
-        }
+		drawCube();
+	}
 	refresh(mainWindow);
-        
+	
 	SDL_ShowWindow(mainWindow);
-
+	
 	Uint32 last_time = SDL_GetTicks();
 	Uint32 current_time,ellapsed_time;
 	double angleZ(0), angleX(0);
-
+	
 	SDL_Event event;
-
+	
 	while (true)
 	{
 		while (SDL_PollEvent(&event))
