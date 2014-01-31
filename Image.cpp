@@ -12,7 +12,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <string.h>
-#include <SDL2_image/SDL_image.h>
 
 #include "IMG_bmp_loader.cpp"
 

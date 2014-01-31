@@ -7,7 +7,6 @@
 
 #include "opengl.h"
 
-#include <SDL2_image/SDL_image.h>
 #include "Image.cpp"
 #include "ObjLoader.h"
 #include "Object.h"
