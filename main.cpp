@@ -3,7 +3,6 @@
 #include <string>
 #include <math.h>
 
-
 #include <SDL2/SDL.h>
 
 #include "opengl.h"
@@ -12,12 +11,9 @@
 #include "ObjLoader.h"
 #include "Object.h"
 
-enum {GRAPHIC_TEST, BODY_TEST};
-
 int initLibraries();
 
-SDL_Window* openWindow(SDL_Rect &windowRect, std::string &&title);
-SDL_Window* openWindow(SDL_Rect &windowRect, std::string &title);
+SDL_Window* openWindow(SDL_Rect &windowRect, const std::string &title);
 
 void initWindow(SDL_Window *window);
 
@@ -140,29 +136,7 @@ int initLibraries()
  * Set windows icon
  * The window is not revealed
  */
-SDL_Window* openWindow(SDL_Rect &windowRect, std::string &&title)
-{
-        SDL_Window *window = SDL_CreateWindow(
-                                              "OpenGL",
-                                              windowRect.x,
-                                              windowRect.y,
-                                              windowRect.w,
-                                              windowRect.h,
-                                              SDL_WINDOW_OPENGL |
-                                                SDL_WINDOW_HIDDEN |
-                                                SDL_WINDOW_RESIZABLE
-                                              );
-
-        SDL_SetWindowTitle(window, title.c_str());
-
-        SDL_Surface *icon = SDL_LoadBMP("Resources/game_icon.bmp");
-        SDL_SetWindowIcon(window, icon);
-
-        SDL_GL_CreateContext(window);
-
-        return window;
-}
-SDL_Window* openWindow(SDL_Rect &windowRect, std::string &title)
+SDL_Window* openWindow(SDL_Rect &windowRect, const std::string &title)
 {
         SDL_Window *window = SDL_CreateWindow(
                                               "OpenGL",
