@@ -21,10 +21,11 @@ add_library		(object Object.cpp)
 
 # link
 target_link_libraries	(image utilities)
+target_link_libraries	(image SDL2_image)
 target_link_libraries	(object image)
 target_link_libraries	(objloader logger object)
 
 # main executable
 add_executable		(main main.cpp)
 target_link_libraries	(main utilities logger objloader)
-target_link_libraries	(main GLU glut GLEW GL SDL2)
+target_link_libraries	(main GLU glut GLEW GL SDL2 SDL2_image)
