@@ -22,7 +22,7 @@ class ObjLoader
 			parseF();
 
 		std::string getNextWord();
-		void cleanLine();
+		void cleanLine(std::string word, bool logRemain = true);
 
 		// current load
 		std::string path;

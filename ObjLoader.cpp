@@ -37,7 +37,11 @@ std::vector<Object> ObjLoader::load(const std::string& path)
 			current.pushBackF(parseF());
 
 		}
-		cleanLine();
+
+		if (word[0] == '#')
+			cleanLine(word, false);
+		else
+			cleanLine(word);
 	}
 
 	file.close();
@@ -81,23 +85,24 @@ std::array<std::array<unsigned short, 2>, 3> ObjLoader::parseF()
 
 		file >> array[i][0];
 
-		if(file.get() != '/') {
+		if(file.peek() != '/') {
 			array[i][1] = 0;
-			continue;
+		} else {
+			file.get();
+			file >> array[i][1];
 		}
-
-		file >> array[i][1];
 	}
 
 	return array;
 }
 
-void ObjLoader::cleanLine()
+void ObjLoader::cleanLine(std::string word, bool logRemain)
 {
 	lineCount++;
 
 	std::string tmp;
 	getline(file, tmp);
-	if(tmp.size() != 0)
-		logger::warn("Discarding remaining results", path, lineCount);
+	if(tmp.size() != 0 && logRemain)
+		logger::warn("Discarding remaining results: \"" + word + " " +
+				tmp + "\"", path, lineCount);
 }
