@@ -1,8 +1,3 @@
-//
-//  PixelsGenerator.cpp
-//  COG
-//
-
 #include <iostream>
 #include "PixelsGenerator.h"
 #include <math.h>

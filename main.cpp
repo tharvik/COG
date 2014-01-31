@@ -3,20 +3,22 @@
 #include <string>
 #include <math.h>
 
+
 #include <SDL2/SDL.h>
 
 #include "opengl.h"
 
+#include <SDL2_image/SDL_image.h>
 #include "Image.cpp"
-#include "ObjLoader.h"
-#include "Object.h"
+//#include "ObjLoader.h"
+//#include "Object.h"
 
 enum {GRAPHIC_TEST, BODY_TEST};
 
 int initLibraries();
 
-SDL_Window* openWindow(SDL_Rect &windowRect, string &&title);
-SDL_Window* openWindow(SDL_Rect &windowRect, string &title);
+SDL_Window* openWindow(SDL_Rect &windowRect, std::string &&title);
+SDL_Window* openWindow(SDL_Rect &windowRect, std::string &title);
 
 void initWindow(SDL_Window *window);
 
@@ -34,15 +36,14 @@ int main(int argc, char *argv[])
         
         initWindow(mainWindow);
         
-        vector<Object> objects;
+        //vector<Object> objects;
         
         if (argc == 2) {
-                ObjLoader loader;
-                objects = loader.load("test.obj");
+                //ObjLoader loader;
+                //objects = loader.load("test.obj");
         } else {
-                //Img8b image = Img8b([path to a PNM image], PNM);
-                Image<GLubyte> img = Image<GLubyte>("/Users/Vianney/Xcode/COG/Test files/test.png", PNG);
-        
+                Image<GLubyte> img = Image<GLubyte>("Resources/test_GrayA.png");
+                
                 GLuint Nom;
         
                 glGenTextures(1, &Nom);               //Génère un n° de texture
@@ -51,12 +52,12 @@ int main(int argc, char *argv[])
                               GL_TEXTURE_2D,          //Type : texture 2D
                               0,                      //Mipmap : aucun
                               4,                      //Couleurs : 4
-                              img.getWidth(),       //Largeur : 2
-                              img.getHeight(),      //Hauteur : 2
+                              img.getWidth(),         //Largeur : 2
+                              img.getHeight(),        //Hauteur : 2
                               0,                      //Largeur du bord : 0
-                              img.getFormat(),      //Format : RGBA
+                              img.getFormat(),        //Format : RGBA
                               GL_UNSIGNED_BYTE,       //Type des couleurs
-                              img.getPixels()       //Addresse de l'image
+                              img.getPixels()         //Addresse de l'image
                               );
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -98,9 +99,9 @@ int main(int argc, char *argv[])
 
 		glRotated(angleX, 1, 0, 0);
 		glRotated(angleZ, 0, 0, 1);
-                if (argc == 2)
-                        objects[0].draw();
-		else
+                //if (argc == 2)
+                        //objects[0].draw();
+		//else
 			drawCube();
 		refresh(mainWindow);
 	}
@@ -121,8 +122,8 @@ int initLibraries()
         {
                 return true;
         } else {
-                cerr << "ERROR: SDL initialisation:"
-                     << SDL_GetError() << endl;
+                std::cerr << "ERROR: SDL initialisation:"
+                          << SDL_GetError() << std::endl;
 		return false;
         }
 		
@@ -134,8 +135,7 @@ int initLibraries()
  * Set windows icon
  * The window is not revealed
  */
-
-SDL_Window* openWindow(SDL_Rect &windowRect, string &&title)
+SDL_Window* openWindow(SDL_Rect &windowRect, std::string &&title)
 {
         SDL_Window *window = SDL_CreateWindow(
                                               "OpenGL",
@@ -157,7 +157,7 @@ SDL_Window* openWindow(SDL_Rect &windowRect, string &&title)
         
         return window;
 }
-SDL_Window* openWindow(SDL_Rect &windowRect, string &title)
+SDL_Window* openWindow(SDL_Rect &windowRect, std::string &title)
 {
         SDL_Window *window = SDL_CreateWindow(
                                               "OpenGL",
@@ -185,7 +185,6 @@ SDL_Window* openWindow(SDL_Rect &windowRect, string &title)
  * Place Camera
  * Set the background color
  */
-
 void initWindow(SDL_Window *window)
 {
         int windowWidth, windowHeigth;
@@ -204,7 +203,6 @@ void initWindow(SDL_Window *window)
 /*
  * Draw a simple cube
  */
-
 void drawCube()
 {
 	glBegin(GL_QUADS);

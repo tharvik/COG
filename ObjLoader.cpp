@@ -7,33 +7,33 @@ ObjLoader::ObjLoader() : lineCount(0) {}
 
 std::vector<Object> ObjLoader::load(const std::string& path)
 {
-	this->path = path;
-	this->file.open(path);
+	path = path;
+	file.open(path);
 
 	std::vector<Object> objects;
 	Object current;
 
-	if(!file)
-		logger::error("Unable to open \"" + path + "\"", FL);
+	if (!file)
+		logger::error("Unable to open \"" + path + '\'', FL);
 
 	while(file) {
 
 		std::string word = getNextWord();
 
-		if(word == "o") {
+		if (word == "o") {
 			objects.push_back(current);
 
 			current = Object();
 			file >> word;
 			current.setName(word);
 
-		} else if(word == "v") {
+		} else if (word == "v") {
 			current.pushBackV(parseV());
 
-		} else if(word == "vt") {
+		} else if (word == "vt") {
 			current.pushBackVt(parseVt());
 
-		} else if(word == "f") {
+		} else if (word == "f") {
 			current.pushBackF(parseF());
 
 		}
@@ -41,7 +41,7 @@ std::vector<Object> ObjLoader::load(const std::string& path)
 	}
 
 	file.close();
-	logger::info("Parsing done for \"" + path + "\"", FL);
+	logger::info("Parsing done for \"" + path + '\'', FL);
 
 	objects.erase(objects.begin());
 	objects.push_back(current);

@@ -19,16 +19,16 @@ void logger::log(std::string msg, std::string file,
 
 void logger::info(std::string msg, std::string file, unsigned short line)
 {
-	log("INFO " + msg, file, line);
+	log("INFO: " + msg, file, line);
 }
 
 void logger::warn(std::string msg, std::string file, unsigned short line)
 {
-	log("WARN " + msg, file, line);
+	log("WARNING: " + msg, file, line);
 }
 
 void logger::error(std::string msg, std::string file, unsigned short line)
 {
-	log("ERROR " + msg, file, line);
+	log("ERROR: " + msg, file, line);
 	exit(1);
 }

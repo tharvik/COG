@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Object::Object() : image("/Users/Vianney/Xcode/COG/Test files/test.png", PNG)
+Object::Object() : image(64, 64, 3, RANDOM)
 {}
 
 void Object::setName(const std::string& name)
