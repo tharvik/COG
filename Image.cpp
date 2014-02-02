@@ -70,47 +70,27 @@ Image<T>::Image(std::string &src, enum imageFileFormat fileFormat) : imageId(0)
                 switch (fileFormat) {
                         case BMP:
                                 surface = IMG_LoadBMP_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case GIF:
                                 surface = IMG_LoadGIF_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case PNG:
                                 surface = IMG_LoadPNG_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case PNM:
                                 surface = IMG_LoadPNM_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case JPG:
                                 surface = IMG_LoadJPG_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case TIF:
                                 surface = IMG_LoadTIF_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                 }
+                pixels = (T*) surface->pixels;
+                w = surface->w;
+                h = surface->h;
+                findFormatAndDepth(surface);
         }
 }
 template <class T>
@@ -126,47 +106,27 @@ Image<T>::Image(std::string &&src, enum imageFileFormat fileFormat)
                 switch (fileFormat) {
                         case BMP:
                                 surface = IMG_LoadBMP_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case GIF:
                                 surface = IMG_LoadGIF_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case PNG:
                                 surface = IMG_LoadPNG_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case PNM:
                                 surface = IMG_LoadPNM_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case JPG:
                                 surface = IMG_LoadJPG_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                         case TIF:
                                 surface = IMG_LoadTIF_RW(rwops);
-                                pixels = (T*) surface->pixels;
-                                w = surface->w;
-                                h = surface->h;
-                                findFormatAndDepth(surface);
                                 break;
                 }
+                pixels = (T*) surface->pixels;
+                w = surface->w;
+                h = surface->h;
+                findFormatAndDepth(surface);
         }
 }
 

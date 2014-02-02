@@ -270,6 +270,7 @@ void drawCube()
 
 void refresh(SDL_Window *window)
 {
+        
 	glFlush();
 	SDL_GL_SwapWindow(window);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
