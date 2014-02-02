@@ -10,6 +10,7 @@
 #include "Image.cpp"
 #include "ObjLoader.h"
 #include "Object.h"
+#include "Camera.h"
 
 int initLibraries();
 
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
         SDL_Window *mainWindow = openWindow(mainWindowRect, "Main Window");
 
 	initWindow(mainWindow);
+	Camera mainCamera = Camera(-3, 0, 0, 0, 0);
 
 	std::vector<Object> objects;
 
@@ -69,12 +71,13 @@ int main(int argc, char *argv[])
 
 	SDL_ShowWindow(mainWindow);
 
-	Uint32 last_time = SDL_GetTicks();
+	/*Uint32 last_time = SDL_GetTicks();
 	Uint32 current_time,ellapsed_time;
-	double angleZ(0), angleX(0);
-
+	double angleZ(0), angleX(0);*/
+	
 	SDL_Event event;
-
+	
+	double a = 0, b = 0, c = 0;
 	while (true)
 	{
 		while (SDL_PollEvent(&event))
@@ -82,31 +85,71 @@ int main(int argc, char *argv[])
 			switch(event.type)
 			{
 				case SDL_QUIT:
-                                        exit(EXIT_SUCCESS);
-                                        break;
+					exit(EXIT_SUCCESS);
+					break;
+					
 				case SDL_KEYDOWN:
-                                        if(event.key.keysym.sym == SDLK_q)
-                                                exit(EXIT_SUCCESS);
+					switch(event.key.keysym.sym)
+					{
+						case SDLK_q:
+							exit(EXIT_SUCCESS);
+							break;
+						
+						case SDLK_a:
+							a -= 0.001;
+							// mainCamera.rotateZ(-0.01);
+							break;
+						
+						case SDLK_d:
+							a += 0.001;
+							// mainCamera.rotateZ(0.01);
+							break;
+						
+						case SDLK_w:
+							b -= 0.001;
+							// mainCamera.rotateY(-0.01);
+							break;
+						
+						case SDLK_s:
+							b += 0.001;
+							// mainCamera.rotateY(0.01);
+							break;
+						
+						case SDLK_i:
+							c += 0.005;
+							// mainCamera.forwardBackward(0.05);
+							break;
+						
+						case SDLK_k:
+							c -= 0.005;
+							// mainCamera.forwardBackward(-0.05);
+							break;
+					}
 			}
 		}
-		current_time	= SDL_GetTicks();
-		ellapsed_time	= current_time - last_time;
-		if (ellapsed_time < 10) SDL_Delay(10 - ellapsed_time);
-		last_time		= current_time;
-
-
-		angleZ = 0.04 * ellapsed_time;
-		angleX = sqrt(0.01 * ellapsed_time);
-
-		glRotated(angleX, 1, 0, 0);
-		glRotated(angleZ, 0, 0, 1);
-                if (argc == 2)
-                        objects[0].draw();
-		else
-			drawCube();
-		refresh(mainWindow);
+		/*
+		 current_time	= SDL_GetTicks();
+		 ellapsed_time	= current_time - last_time;
+		 if (ellapsed_time < 10) SDL_Delay(10 - ellapsed_time);
+		 last_time		= current_time;
+		 */
+		mainCamera.rotateZ(a);
+		mainCamera.rotateY(b);
+		mainCamera.forwardBackward(c);
+		
+		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		
+		gluPerspective(60, 800/450, 0.1, 1000);
+		mainCamera.plant();
+		objects[0].draw();
+		
+		glFlush();
+		SDL_GL_SwapWindow(mainWindow);
 	}
-
+	
 	SDL_Quit();
 
 	return 0;
@@ -169,10 +212,10 @@ void initWindow(SDL_Window *window)
         int windowWidth, windowHeigth;
         SDL_GetWindowSize(window, &windowWidth, &windowHeigth);
 
-	gluPerspective(60, (double) windowWidth / windowHeigth, 1, 1000);
-	gluLookAt(3, 2, 2, 0, 0, 0, 0, 0, 1);
+	gluPerspective(60, (double) windowWidth / windowHeigth, 0.1, 1000);
 
-        glEnable(GL_DEPTH_TEST);        //Active le depth test
+
+	glEnable(GL_DEPTH_TEST);        //Active le depth test
 	glEnable(GL_TEXTURE_2D);        //Active le texturing
 
 	glClearColor(0.16, 0.16, 0.16, 1);      //Change la couleur du fond
@@ -229,5 +272,5 @@ void refresh(SDL_Window *window)
 {
 	glFlush();
 	SDL_GL_SwapWindow(window);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) ;
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
