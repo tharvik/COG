@@ -18,7 +18,7 @@ private:
 	GLuint vertexShader, pixelShader, program;
 
 	void createShaders(std::string&  vShaderPath, std::string&  pShaderPath);
-	void loadFileASCII(std::string& filePath, char** str);
+	char* loadFileASCII(std::string& filePath);
 	void compileShaders(std::string& vShaderPath, std::string& pShaderPath);
 	void createProgram(std::string& vShaderPath, std::string& pShaderPath);
 	void linkProgram(std::string& vShaderPath, std::string& pShaderPath);

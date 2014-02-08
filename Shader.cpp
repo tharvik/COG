@@ -45,20 +45,20 @@ void Shader::createShaders(std::string& vShaderPath, std::string& pShaderPath)
 
 
 	// creation of the shaders
-	char** vSrc = (char**) calloc(1, sizeof(char*));
-	loadFileASCII(vShaderPath, vSrc);
-	glShaderSource(this->vertexShader, 1, (const char**) vSrc, NULL);
-	free(*vSrc);
-	free(vSrc);
+	char** src = (char**) malloc(sizeof(char));
+	if (src == NULL)
+		logger::warn("Unable to malloc.", FL);
+	*src = loadFileASCII(vShaderPath);
+	glShaderSource(this->vertexShader, 1, (const char**) src, NULL);	
 	
-	char** pSrc = (char**) calloc(1, sizeof(char*));
-	loadFileASCII(pShaderPath, pSrc);
-	glShaderSource(this->pixelShader, 1, (const char**) pSrc, NULL);
-	free(*pSrc);
-	free(pSrc);
+	*src = loadFileASCII(pShaderPath);
+	glShaderSource(this->pixelShader, 1, (const char**) src, NULL);
+	free(*src);
+	free(src);
+
 }
 
-void Shader::loadFileASCII(std::string& filePath, char** str)
+char* Shader::loadFileASCII(std::string& filePath)
 {
 	int length;
 	std::ifstream file(filePath);
@@ -76,16 +76,18 @@ void Shader::loadFileASCII(std::string& filePath, char** str)
 		logger::warn("The file seens to be empty. " + filePath, FL);
 	
 	// transmit chars from the file to the string
-	*str = (char*)  calloc(length + 1, sizeof(char));
-	file.read(*str, length);
+	char* str = (char*)  malloc((length + 1) * sizeof(char));
 	if (str == NULL)
 		logger::warn("Unable to load string from file " + filePath, FL);
+	file.read(str, length);
 
 	// adding \0 at the of the string
 	str[length] = '\0';
-		
+	
 	// clean up
 	file.close();
+	
+	return str;
 }
 
 void Shader::compileShaders(std::string& vShaderPath, std::string& pShaderPath)
