@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
                 openWindow(WIN_X, WIN_Y, WIN_W, WIN_H, WIN_T);
         
         setUpOpenGL();
-        
+
         Game game;
         
 	return 0;

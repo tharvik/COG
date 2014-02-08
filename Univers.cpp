@@ -26,13 +26,13 @@ size_t Univers::addObject(std::string &&objectPath)
 size_t Univers::addObject(std::string &objectPath, std::string &texturePath)
 {
         objects.push_back(loader.load(objectPath)[0]);
-        objects[objects.size() - 1].setTexture(Texture(texturePath));
+        objects[objects.size() - 1].setTexture(textures.load(texturePath));
         return objects.size() - 1;
 }
 size_t Univers::addObject(std::string &&objectPath, std::string &&texturePath)
 {
         objects.push_back(loader.load(objectPath)[0]);
-        objects[objects.size() - 1].setTexture(Texture(texturePath));
+        objects[objects.size() - 1].setTexture(textures.load(texturePath));
         return objects.size() - 1;
 }
 

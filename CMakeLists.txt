@@ -34,7 +34,7 @@ add_library		(textureManager TextureManager.cpp)
 target_link_libraries	(objloader logger object stdc++)
 target_link_libraries	(object texture shader)
 
-target_link_libraries	(univers camera objloader sphere light)
+target_link_libraries	(univers camera objloader sphere light textureManager)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
