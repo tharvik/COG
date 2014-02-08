@@ -47,6 +47,8 @@ public:
         Texture();
         Texture(GLushort width, GLushort height, GLushort depth,
                 enum imageGenerationOption options);
+        Texture(GLushort width, GLushort height, GLushort depth,
+		unsigned char *buffer, int format);
         
         Texture(const std::string&  path);
         Texture(const std::string&& path);

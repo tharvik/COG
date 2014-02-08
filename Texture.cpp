@@ -34,6 +34,12 @@ Texture::Texture(GLushort w, GLushort h, GLushort d,
         free(pixels);
 }
 
+Texture(GLushort width, GLushort height, GLushort depth, unsigned char *buffer,
+		int format)
+{
+	createTexture(width, height, format, buffer);
+}
+
 Texture::Texture(const std::string& path)
 {
 	SDL_RWops* rwops = SDL_RWFromFile(path.c_str(), "rb");
