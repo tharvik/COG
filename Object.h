@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include <vector>
+#include <set>
 
 #include "opengl.h"
 #include "Texture.h"
@@ -24,10 +25,13 @@ protected:
 	std::vector<std::array<float, 2>> vt;
 	std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
 
+	std::set<Object> objects;
+
 public:
 
 	Object();
 	
+	// TODO remove name? remove every modifier?
 	void setName(const std::string& name);
 	void setTexture(const Texture&  texture);
 	void setTexture(const Texture&& texture);
@@ -35,7 +39,12 @@ public:
 	void pushBackV(const std::array<float, 3>& v);
 	void pushBackVt(const std::array<float, 2>& vt);
 	void pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f);
-	
+
+	bool operator<(const Object &b) const;
+
+	void addObject(Object& object);
+	void delObject(Object& object);
+
 	void draw();
 	
 	~Object();

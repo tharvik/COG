@@ -64,8 +64,26 @@ void Object::draw()
 	}
 
 	glEnd();
+
+	for(Object o : this->objects)
+		o.draw();
 }
 
 Object::~Object()
 {
+}
+
+bool Object::operator<(const Object &b) const
+{
+	this->name < b.name;
+}
+
+void Object::addObject(Object& object)
+{
+	this->objects.insert(object);
+}
+
+void Object::delObject(Object& object)
+{
+	this->objects.erase(object);
 }
