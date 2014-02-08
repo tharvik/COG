@@ -3,7 +3,9 @@
 #include <iostream>
 
 Object::Object() : texture()
-{}
+{
+	this->shader = Shader("Resources/shaders/shadow.vShader", "Resources/shaders/shadow.pShader");
+}
 
 void Object::setName(const std::string& name)
 {
@@ -37,6 +39,7 @@ void Object::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
 void Object::draw()
 {
 	this->texture.bindTexture();
+	this->shader.use();
 
 	glBegin(GL_TRIANGLES);
 

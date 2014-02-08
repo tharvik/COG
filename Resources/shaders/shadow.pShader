@@ -1,0 +1,8 @@
+uniform sampler2D tex;
+uniform vec4 discoColor;
+
+void main(void)
+{
+	gl_FragColor = texture2D(tex,gl_TexCoord[0].st) * vec4(1.0, 0.6, 1.0, 1.0);
+
+}
