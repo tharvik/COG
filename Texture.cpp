@@ -154,20 +154,20 @@ int Texture::findPixelFormat(SDL_Surface *surface)
         case SDL_PIXELFORMAT_RGB888:    // GIF: Gray, Palette, RGB
                                         // PNG: Gray, RGB
                                         // PNM: RGB_ASCII, RGB_Binary
-                                        // JPG: Gray, Palette, RGB_1, RGB_2,   \
-                                                RGB_3, RGB_4, RGB_bad_quality, \
-                                                RGB_fast_integer,              \
-                                                RGB_floating_point
+                                        // JPG: Gray, Palette, RGB_1, RGB_2,
+                                        //      RGB_3, RGB_4, RGB_bad_quality,
+                                        //      RGB_fast_integer,
+                                        //      RGB_floating_point
         case SDL_PIXELFORMAT_ARGB8888:  // GIF: GrayA, PaletteA, RGBA
-                                        // PNG: GrayA, PaletteA,               \
-                                                RGB_no_compression, RGBA_gamma,\
-                                                RGBA_interlacing,              \
-                                                RGBA_no_alpha,                 \
-                                                RGBA_offset_layer, RGBA
-                                        // TIF: Gray, GrayA, RGB,              \
-                                                RGBA_déflation, RGBA_jpeg,     \
-                                                RGBA_LZW, RGBA_no_compression, \
-                                                RGBA_pack_bits
+                                        // PNG: GrayA, PaletteA,
+                                        //      RGB_no_compression, RGBA_gamma,
+                                        //      RGBA_interlacing,
+                                        //      RGBA_no_alpha,
+                                        //      RGBA_offset_layer, RGBA
+                                        // TIF: Gray, GrayA, RGB,
+                                        //      RGBA_déflation, RGBA_jpeg,
+                                        //      RGBA_LZW, RGBA_no_compression,
+                                        //      RGBA_pack_bits
                 return GL_BGRA;
         case SDL_PIXELFORMAT_RGBA8888:  // BMP: RGB_5
                 return GL_ABGR_EXT;
