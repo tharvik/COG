@@ -184,17 +184,33 @@ GLdouble Camera::getDirectionZ()
         return d[2];
 }
 
+#include <array>
+
 void Camera::keyDown(std::map<int, bool> &keysPressed)
 {
         {
-                if (keysPressed['i'])
+                if (keysPressed['i']) {
                         move(1, 0, 0);
+                        keysPressed['I'] = false;
+                }
                 if (keysPressed['j'])
                         move(0, 1, 0);
                 if (keysPressed['k'])
                         move(-1, 0, 0);
                 if (keysPressed['l'])
                         move(0, -1, 0);
+                
+                if (keysPressed['I']) {
+                        move(DIS_B, 0, 0);
+                }
+                if (keysPressed['J']) {
+                        move(0, DIS_B, 0);
+                        keysPressed['j'] = false;
+                }
+                if (keysPressed['K'])
+                        move(-DIS_B, 0, 0);
+                if (keysPressed['L'])
+                        move(0, -DIS_B, 0);
         }
         {
                 if (keysPressed['w'])
@@ -210,6 +226,7 @@ void Camera::keyDown(std::map<int, bool> &keysPressed)
                 if (keysPressed['o']) {
                         goTo(POS_X, POS_Y, POS_Z);
                         lookTo(ORI_X, ORI_Y, ORI_Z);
+                        keysPressed['o'] = false;
                 }
         }
 }

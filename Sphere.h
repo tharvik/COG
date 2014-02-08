@@ -6,8 +6,7 @@
 #include "Object.h"
 #include "utilities.h"
 
-class Sphere : public Object
-{
+class Sphere : public Object {
 private:
         GLdouble p[3];
         GLdouble v[3];
@@ -28,5 +27,4 @@ public:
         
         void physic(double &physicDelta);
         void draw();
-        
 };

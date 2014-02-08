@@ -7,8 +7,6 @@ Simulator::Simulator()
         self = this;
         physicCounter = REPORT_PPS;
         refreshCounter = REPORT_FPS;
-        
-        glutIdleFunc(tick);
 }
 
 Simulator::Simulator(Univers *theUnivers)
@@ -17,8 +15,6 @@ Simulator::Simulator(Univers *theUnivers)
         self = this;
         physicCounter = REPORT_PPS;
         refreshCounter = REPORT_FPS;
-        
-        glutIdleFunc(tick);
 }
 
 void Simulator::printInfo()
@@ -48,6 +44,7 @@ void Simulator::physic()
         }
         
         univers->physic(physicDelta);
+        
         physicCounter ++;
         lastPhysic = actualPhysic;
 }
@@ -68,7 +65,9 @@ void Simulator::refresh()
         }
         
         univers->refresh();
+        
         refreshCounter ++;
+        lastRefresh = actualRefresh;
 }
 
 void Simulator::measureFPS()

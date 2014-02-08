@@ -93,6 +93,9 @@ void Univers::draw()
 void Univers::refresh()
 {
         glLoadIdentity();
+        
+        // Shadows(&univers)
+        
         perspective();
         camera.look();
         draw();

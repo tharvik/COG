@@ -6,6 +6,7 @@
 #include <string>
 
 #include "config.h"
+#include "Game.h"
 #include "Logger.h"
 #include "Simulator.h"
 #include "Univers.h"
@@ -30,3 +31,4 @@ void motionHandler(int width, int height);
 
 void setSimulator(Simulator* theSimulator);
 void setUnivers(Univers* theUnivers);
+//void setGame(Game* theGame);

@@ -3,7 +3,23 @@
 static std::map<int, bool> keysPressed = std::map<int, bool>();
 static Simulator* simulator = nullptr;
 static Univers* univers = nullptr;
+static Game* game = nullptr;
 
+void setSimulator(Simulator* theSimulator)
+{
+        simulator = theSimulator;
+}
+
+void setUnivers(Univers* theUnivers)
+{
+        univers = theUnivers;
+}
+/*
+void setGame(Game* theGame)
+{
+        game = theGame;
+}
+*/
 void keyDown(unsigned char key, int x, int y)
 {
         keysPressed[key] = true;
@@ -93,13 +109,3 @@ void windowClosingHandler()
         exit(0);
 }
 #endif
-
-void setSimulator(Simulator* theSimulator)
-{
-        simulator = theSimulator;
-}
-
-void setUnivers(Univers* theUnivers)
-{
-        univers = theUnivers;
-}
