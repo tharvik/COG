@@ -7,13 +7,13 @@
 
 TextureManager::TextureManager() {}
 
-Texture TextureManager::load(std::string path)
+Texture& TextureManager::load(const std::string path)
 {
 	const auto iter = this->map.find(path);
 
 	if(iter == this->map.end()) {
 
-		int x,y,n;
+		int x, y, n;
 		unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
 
 		if(data == NULL)
@@ -34,6 +34,7 @@ Texture TextureManager::load(std::string path)
 
 		Texture texture(x, y, format, data);
 		this->map[path] = texture;
+
 		return texture;
 
 	} else {

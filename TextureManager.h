@@ -10,7 +10,7 @@ class TextureManager {
 	public:
 		TextureManager();
 
-		Texture load(std::string paht);
+		Texture& load(const std::string path);
 
 	private:
 		std::map<std::string,Texture> map;
