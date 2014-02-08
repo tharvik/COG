@@ -30,6 +30,8 @@ Texture TextureManager::load(std::string path)
 			default: format = GL_RGB;
 		}
 
+		logger::info("Finished loading texture: \"" + path + "\"", FL);
+
 		Texture texture(x, y, format, data);
 		this->map[path] = texture;
 		return texture;
