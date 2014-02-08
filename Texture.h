@@ -40,15 +40,15 @@ private:
         int findPixelFormat(SDL_Surface *surface);
         GLushort findDepth(int  &format);
         GLushort findDepth(int &&format);
-        void createTexture(GLushort &width, GLushort &height, int &&format,
+        void createTexture(GLushort &width, GLushort &height, int format,
                            GLubyte* pixels);
 public:
 	// Constructors
         Texture();
         Texture(GLushort width, GLushort height, GLushort depth,
                 enum imageGenerationOption options);
-        Texture(GLushort width, GLushort height, GLushort depth,
-		unsigned char *buffer, int format);
+        Texture(GLushort width, GLushort height, int format,
+		unsigned char* buffer);
         
         Texture(const std::string&  path);
         Texture(const std::string&& path);

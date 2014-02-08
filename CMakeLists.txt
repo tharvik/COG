@@ -22,12 +22,13 @@ add_library		(simulator Simulator.cpp)
 add_library		(sphere Sphere.cpp)
 
 add_library		(texture Texture.cpp)
+add_library		(shader Shader.cpp)
 add_library		(pixelsGenerator PixelsGenerator.cpp)
 add_library		(textureManager TextureManager.cpp)
 
 # link
 target_link_libraries	(texture SDL2_image logger pixelsGenerator)
-target_link_libraries	(object texture)
+target_link_libraries	(object texture shader)
 target_link_libraries	(camera utilities)
 target_link_libraries	(objloader logger object)
 target_link_libraries	(univers camera objloader sphere)
