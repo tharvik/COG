@@ -29,11 +29,6 @@ void initLibraries(int *argc, char *argv[])
         // GLUT library
         glutInit(argc, argv);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
-		logger::error(std::string("Fail to init glew: ") +
-				((char*) glewGetErrorString(err)), FL);
 }
 
 void openWindow(int &&x, int &&y, int &&width, int &&height, std::string &&title)
@@ -42,6 +37,11 @@ void openWindow(int &&x, int &&y, int &&width, int &&height, std::string &&title
         glutInitWindowPosition(x, y);
         glutCreateWindow(title.c_str());
         glutHideWindow();
+
+	GLenum err = glewInit();
+	if (err != GLEW_OK)
+		logger::error(std::string("Fail to init glew: ") +
+				((char*) glewGetErrorString(err)), FL);
 }
 
 void setUpOpenGL()
