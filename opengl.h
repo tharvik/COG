@@ -7,5 +7,5 @@
 #else
 #	include <GL/glew.h>
 #	include <GL/glut.h>
-#	include "vvector.h"
+#	include "Vvector.h"
 #endif

@@ -34,8 +34,8 @@ Texture::Texture(GLushort w, GLushort h, GLushort d,
         free(pixels);
 }
 
-Texture(GLushort width, GLushort height, GLushort depth, unsigned char *buffer,
-		int format)
+Texture::Texture(GLushort width, GLushort height, int format,
+		unsigned char *buffer)
 {
 	createTexture(width, height, format, buffer);
 }
@@ -324,7 +324,7 @@ GLushort findDepth(int &&format)
         }
 }
 
-void Texture::createTexture(GLushort &w, GLushort &h, int &&format,
+void Texture::createTexture(GLushort &w, GLushort &h, int format,
                             GLubyte* pixels)
 {
         glGenTextures(1, &this->imageId);
