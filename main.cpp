@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
         setSimulator(&simulator);
         setUnivers(&univers);
         
+        glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
         {
                 glutReshapeFunc(windowResizingHandler);
                 glutWindowStatusFunc(windowStatusHandler);
@@ -68,7 +69,6 @@ int initLibraries(int *argc, char *argv[])
         // GLUT library
         glutInit(argc, argv);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-        glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
         
         return true;
 }
