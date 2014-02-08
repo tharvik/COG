@@ -20,6 +20,8 @@ add_library		(camera Camera.cpp)
 add_library		(eventHandler eventHandler.cpp)
 add_library		(simulator Simulator.cpp)
 add_library		(sphere Sphere.cpp)
+add_library		(light Light.cpp)
+add_library		(vector Vvector.cpp)
 
 add_library		(texture Texture.cpp)
 add_library		(shader Shader.cpp)
@@ -27,13 +29,15 @@ add_library		(pixelsGenerator PixelsGenerator.cpp)
 add_library		(textureManager TextureManager.cpp)
 
 # link
-target_link_libraries	(texture SDL2_image logger pixelsGenerator)
-target_link_libraries	(object texture shader)
-target_link_libraries	(camera utilities)
 target_link_libraries	(objloader logger object)
-target_link_libraries	(univers camera objloader sphere)
+target_link_libraries	(object texture shader)
+
+target_link_libraries	(univers camera objloader sphere light)
+target_link_libraries	(camera utilities)
+target_link_libraries	(light vector)
 
 target_link_libraries	(textureManager texture)
+target_link_libraries	(texture SDL2_image logger pixelsGenerator)
 
 # main executable
 add_executable		(main main.cpp)
