@@ -9,7 +9,7 @@ class Vvector {
 
 private:
 
-	std::array<float, 3> scalar = {1, 2, 3};
+	std::array<float, 3> scalar{{1, 2, 3}};
 
 public:
 	
