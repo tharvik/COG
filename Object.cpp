@@ -5,6 +5,8 @@
 Object::Object() : texture()
 {
 	this->shader = Shader("Resources/shaders/shadow.vShader", "Resources/shaders/shadow.pShader");
+	this->UniformShadowMapId = glGetUniformLocation(this->shader.getShaderId(),
+													 "shadowMap");
 }
 
 void Object::setName(const std::string& name)

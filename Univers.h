@@ -12,6 +12,7 @@
 #include "Object.h"
 #include "ObjLoader.h"
 #include "Sphere.h"
+#include "Light.h"																//
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
                                      glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
@@ -23,7 +24,8 @@ private:
         std::vector<Object> objects;
         ObjLoader loader;
         Camera camera;
-        
+        Light mainLight;														//
+		
         Sphere sphere; // Remove ?
         
         // Tick
@@ -31,7 +33,7 @@ private:
 public:
         // Constructors
         Univers();
-	Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
+		Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
                 GLdouble angleTeta, GLdouble anglepsi);
         
         // Modifiers

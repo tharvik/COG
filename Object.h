@@ -18,6 +18,7 @@ protected:
 	std::string name;
 	Texture texture;
 	Shader shader;
+	GLuint UniformShadowMapId, depthTextureId;
 
 	std::vector<std::array<float, 3>> v;
 	std::vector<std::array<float, 2>> vt;

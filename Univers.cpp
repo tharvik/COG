@@ -3,7 +3,9 @@
 
 
 Univers::Univers() : camera()
-{}
+{
+	this->mainLight = Light(5.98, -26.12, 15.39, 0.32, 0.76, -0.57);			//
+}
 
 Univers::Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
                  GLdouble angleTeta, GLdouble anglepsi) : camera(posX, posY,

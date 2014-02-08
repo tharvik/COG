@@ -6,7 +6,6 @@
 #include "Shader.h"
 #include <iostream>
 #include "opengl.h"
-#include <GLUT/GLUT.h>
 
 Shader::Shader()
 {}
