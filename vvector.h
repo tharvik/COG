@@ -1,4 +1,49 @@
+#pragma once
+
+#include <stdio.h>
+#include <iostream>
 #include <math.h>
+#include <array>
+
+class Vvector {
+
+private:
+
+	std::array<float, 3> scalar = {1, 2, 3};
+
+public:
+	
+	// constructors
+	Vvector();
+	Vvector(float x, float y, float z);
+
+	// setters
+	void set(float x, float y, float z);
+	void setNull();
+	void normalize();
+
+	double length() const;
+	void print() const;
+
+	Vvector operator+(Vvector const& a);
+	Vvector operator-(Vvector const& a);
+	Vvector operator^(Vvector const& a);  // vector product
+
+	void	operator+=(Vvector const& a);
+	void	operator-=(Vvector const& a);
+	void	operator^=(Vvector const& a); // vector product
+
+	double operator*(Vvector const& a);   // dot product
+
+	bool	operator==(Vvector const& a);
+	bool	operator!=(Vvector const& a);
+	
+	// getters
+	float x() const;
+	float y() const;
+	float z() const;
+	std::array<float, 3> scalars() const;
+};
 
 #define VEC_ZERO(v)		v[0] = 0; v[1] = 0; v[2] = 0;
 
