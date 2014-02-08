@@ -1,25 +1,21 @@
-#include <iostream>
 #include "PixelsGenerator.h"
-#include <math.h>
 
-template <typename T>
-T* generateRandomPixels(GLushort width, GLushort height, GLubyte depth)
+GLubyte* generateRandomPixels(GLushort width, GLushort height, GLubyte depth)
 {
 	srand((int) time(NULL));
 
-	T* pixels = (T*) calloc(width * height * depth, sizeof(T));
+	GLubyte* pixels = (GLubyte*) calloc(width * height * depth, sizeof(GLubyte));
 	
 	for (GLuint i = 0; i < (GLuint) width * height * depth; i++)
-		pixels[i] = rand() % (T) (ceil(pow(2, 8 * sizeof(T))) - 1);
+		pixels[i] = rand() % (GLubyte) (ceil(pow(2, 8 * sizeof(GLubyte))) - 1);
 
 	return pixels;
 }
 
 
-template <typename T>
-T* generateUVgrid(GLushort width, GLushort height, GLubyte depth)
+GLubyte* generateUVgrid(GLushort width, GLushort height, GLubyte depth)
 {
-	T* pixels = (T*) calloc(width * height * depth, sizeof(T));
+	GLubyte* pixels = (GLubyte*) calloc(width * height * depth, sizeof(GLubyte));
 	
 	GLuint pixelID = 0;
 	
@@ -33,11 +29,11 @@ T* generateUVgrid(GLushort width, GLushort height, GLubyte depth)
 				|| !((y+10)%16+(x+7 )%16) || !((y+10)%16+(x+10)%16))
 				{
 					if ((y/16 + x/16) % 2)
-						pixels[pixelID] = rand() % (T) (ceil(pow(2, 8 * sizeof(T))/3) - 1)
-						+ ceil(pow(2, 8 * sizeof(T))/3*2);
+						pixels[pixelID] = rand() % (GLubyte) (ceil(pow(2, 8 * sizeof(GLubyte))/3) - 1)
+						+ ceil(pow(2, 8 * sizeof(GLubyte))/3*2);
 					
 					else
-						pixels[pixelID] = rand() % (T) (ceil(pow(2, 8 * sizeof(T))/1.5) - 1);
+						pixels[pixelID] = rand() % (GLubyte) (ceil(pow(2, 8 * sizeof(GLubyte))/1.5) - 1);
 				}
 				
 				else pixels[pixelID] = ((y/16 + x/16) % 2) ? 0x42 : 0xaa;

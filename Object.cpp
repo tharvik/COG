@@ -1,9 +1,8 @@
 #include "Object.h"
 
 #include <iostream>
-#include "Image.cpp"
 
-Object::Object() : image("")
+Object::Object() : texture()
 {}
 
 void Object::setName(const std::string& name)
@@ -11,9 +10,13 @@ void Object::setName(const std::string& name)
 	this->name = name;
 }
 
-void Object::setImage(const Image<GLubyte>& image)
+void Object::setTexture(const Texture& texture)
 {
-	this->image = image;
+	this->texture = texture;
+}
+void Object::setTexture(const Texture&& texture)
+{
+	this->texture = texture;
 }
 
 void Object::pushBackV(const std::array<float, 3>& v)
@@ -33,8 +36,7 @@ void Object::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
 
 void Object::draw()
 {
-	this->image;
-	this->image.bindTexture();
+	this->texture.bindTexture();
 
 	glBegin(GL_TRIANGLES);
 
@@ -59,4 +61,6 @@ void Object::draw()
 	glEnd();
 }
 
-
+Object::~Object()
+{
+}

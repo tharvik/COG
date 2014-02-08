@@ -1,61 +1,77 @@
-//
-//  Camera.h
-//  COG
-//
-//  Created by Vianney Rousset on 31.01.14.
-//
+#pragma once
 
-#ifndef COG_Camera_h
-#define COG_Camera_h
-
+#include <iostream>
+#include <map>
 #include <math.h>
+
+#include "config.h"
+#include "Logger.h"
 #include "opengl.h"
+#include "utilities.h"
 
 class Camera {
 private:
-
-	// position vector of the camera
+        
+	// position vector
 	GLdouble p[3];
-	
-	// direction vector of the camera
-	GLdouble v[3];
-	
-	GLdouble upVector[3];
-	
-	// direction angle of the camera {phi, teta}
-	GLdouble angle[3];
-	
-	// calculate
-	void angleToDirection();
-	void DirectionToAngle();
-		
+        
+	// orientation vector
+	GLdouble o[3];
+        
+        // movement vectors
+        GLdouble d[3];
+        GLdouble r[3];
+        
+        // for calculs
+        GLdouble s[3];
+        
 public:
-	
 	// constructor
-	Camera(GLdouble pX = 1, GLdouble pY = 1, GLdouble pZ = 1,
-		   GLdouble phi = 0, GLdouble teta = 0, GLdouble psi = 0);
-
-	// getters
-	GLdouble* getPosition();
-	GLdouble* getLookPoint();
-	GLdouble* getAngle();
-		
+        Camera();
+        Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
+               GLdouble oriX, GLdouble oriY, GLdouble oriZ);
+        
 	// rotations
-	void rotateX(GLdouble alpga);
-	void rotateY(GLdouble alpha);
-	void rotateZ(GLdouble alpha);
+	void rotate(GLdouble alpha, GLdouble beta);
+        
+        void lookTo(GLdouble posX, GLdouble posY, GLdouble posZ);
 	
 	// translations
-	void forwardBackward(GLdouble l);
-	void RightLeft(GLdouble l);
+        void move(GLdouble mov[]);
+	void move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward);
+        
+        void goTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ);
+        
+        // setters
+        void setPositionX(GLdouble posX);
+        void setPositionY(GLdouble posY);
+        void setPositionZ(GLdouble posZ);
+        
+        void setOrientationX(GLdouble posX);
+        void setOrientationY(GLdouble posY);
+        void setOrientationZ(GLdouble posZ);
+        
+	// getters
+        GLdouble getPositionX();
+        GLdouble getPositionY();
+        GLdouble getPositionZ();
+        
+        GLdouble getOrientationX();
+        GLdouble getOrientationY();
+        GLdouble getOrientationZ();
+        
+        GLdouble getDirectionX();
+        GLdouble getDirectionY();
+        GLdouble getDirectionZ();
 	
+        void keyDown(std::map<int, bool> &keysPressed);
+        
+        // calculate next position
+        void physic(double &physicDelta);
+        
 	// send the camera informations to OpenGL
-	void plant();
-	
-	// setters
+        void look();
 	
 	// destructor
-
+        ~Camera();
 };
-
-#endif

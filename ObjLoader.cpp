@@ -1,9 +1,10 @@
 #include "ObjLoader.h"
 
-#include <vector>
 #include <limits>
+#include <vector>
 
-ObjLoader::ObjLoader() : lineCount(0) {}
+ObjLoader::ObjLoader() : lineCount(0)
+{}
 
 std::vector<Object> ObjLoader::load(const std::string& path)
 {

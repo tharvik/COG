@@ -1,17 +1,9 @@
-//
-//  logger.cpp
-//  Cplusplus OpenGL
-//
-//  Created by Vianney Rousset on 19.01.14.
-//  Copyright (c) 2014 EPFL. All rights reserved.
-//
+#pragma once
 
-#define FL __FILE__, __LINE__
-
-#ifndef LOGGER_H
-#define LOGGER_H
-
+#include <iostream>
 #include <string>
+
+#define FL __FILE__,__LINE__
 
 namespace logger
 {
@@ -21,5 +13,3 @@ namespace logger
 	void log(std::string msg, std::string file, unsigned short line);
 
 };
-
-#endif
