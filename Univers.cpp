@@ -17,17 +17,6 @@ size_t Univers::addObject(std::string &objectPath)
 }
 size_t Univers::addObject(std::string &&objectPath)
 {
-	objects.push_back(loader.load(objectPath));
-        return objects.size() - 1;
-}
-
-size_t Univers::addObject(std::string &objectPath, std::string &texturePath)
-{
-	objects.push_back(loader.load(objectPath));
-        return objects.size() - 1;
-}
-size_t Univers::addObject(std::string &&objectPath, std::string &&texturePath)
-{
 	std::string name = "mountain";
 	objects.push_back(loader.load(name));
         return objects.size() - 1;

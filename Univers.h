@@ -39,9 +39,7 @@ public:
         
         // Modifiers
         size_t addObject(std::string &objectPath); // Not tested
-        size_t addObject(std::string &objectPath, std::string &texturePath); // Not tested
         size_t addObject(std::string &&objectPath); // Not tested
-        size_t addObject(std::string &&objectPath, std::string &&texturePath);
         size_t addObject(Object &object); // Not tested
         size_t addObject(Object &object, Texture &texture); // Not tested
         
