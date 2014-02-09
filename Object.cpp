@@ -24,35 +24,6 @@ Object::Object(Mesh mesh, Texture texture, Shader shader)
 	this->meshs.insert(std::make_tuple(mesh, texture, shader));
 }
 
-void Object::setName(const std::string& name)
-{
-	this->name = name;
-}
-
-void Object::setTexture(const Texture& texture)
-{
-	this->texture = texture;
-}
-void Object::setTexture(const Texture&& texture)
-{
-	this->texture = texture;
-}
-
-void Object::pushBackV(const std::array<float, 3>& v)
-{
-	this->v.push_back(v);
-}
-
-void Object::pushBackVt(const std::array<float, 2>& vt)
-{
-	this->vt.push_back(vt);
-}
-
-void Object::pushBackF(const std::array<std::array<unsigned short, 2>, 3>& f)
-{
-	this->f.push_back(f);
-}
-
 void Object::draw()
 {
 	for(auto t : this->meshs) {
