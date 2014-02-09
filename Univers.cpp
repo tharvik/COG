@@ -56,7 +56,7 @@ void Univers::printInfo()
 }
 
 // Tick
-void Univers::keyboard(std::map<int, bool>& keysPressed)
+void Univers::keyboard(std::set<int>& keysPressed)
 {
         camera.keyDown(keysPressed);
 }

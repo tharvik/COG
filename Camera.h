@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <map>
+#include <set>
 #include <math.h>
 
 #include "config.h"
@@ -64,7 +64,7 @@ public:
         GLdouble getDirectionY();
         GLdouble getDirectionZ();
 	
-        void keyDown(std::map<int, bool> &keysPressed);
+        void keyDown(std::set<int> &keysPressed);
         
         // calculate next position
         void physic(double &physicDelta);

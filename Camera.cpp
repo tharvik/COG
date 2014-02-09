@@ -186,47 +186,47 @@ GLdouble Camera::getDirectionZ()
 
 #include <array>
 
-void Camera::keyDown(std::map<int, bool> &keysPressed)
+void Camera::keyDown(std::set<int> &keysPressed)
 {
         {
-                if (keysPressed['i']) {
+                if (keysPressed.count('i')) {
                         move(1, 0, 0);
-                        keysPressed['I'] = false;
+                        keysPressed.erase('I');
                 }
-                if (keysPressed['j'])
+                if (keysPressed.count('j'))
                         move(0, 1, 0);
-                if (keysPressed['k'])
+                if (keysPressed.count('k'))
                         move(-1, 0, 0);
-                if (keysPressed['l'])
+                if (keysPressed.count('l'))
                         move(0, -1, 0);
                 
-                if (keysPressed['I']) {
+                if (keysPressed.count('I')) {
                         move(DIS_B, 0, 0);
                 }
-                if (keysPressed['J']) {
+                if (keysPressed.count('J')) {
                         move(0, DIS_B, 0);
-                        keysPressed['j'] = false;
+                        keysPressed.erase('j');
                 }
-                if (keysPressed['K'])
+                if (keysPressed.count('K'))
                         move(-DIS_B, 0, 0);
-                if (keysPressed['L'])
+                if (keysPressed.count('L'))
                         move(0, -DIS_B, 0);
         }
         {
-                if (keysPressed['w'])
+                if (keysPressed.count('w'))
                         rotate(0, 1);
-                if (keysPressed['a'])
+                if (keysPressed.count('a'))
                         rotate(1, 0);
-                if (keysPressed['s'])
+                if (keysPressed.count('s'))
                         rotate(0, -1);
-                if (keysPressed['d'])
+                if (keysPressed.count('d'))
                         rotate(-1, 0);
         }
         {
-                if (keysPressed['o']) {
+                if (keysPressed.count('o')) {
                         goTo(POS_X, POS_Y, POS_Z);
                         lookTo(ORI_X, ORI_Y, ORI_Z);
-                        keysPressed['o'] = false;
+			keysPressed.erase('o');
                 }
         }
 }

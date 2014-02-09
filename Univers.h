@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <map>
+#include <set>
 #include "opengl.h"
 #include <vector>
 #include <string>
@@ -49,7 +49,7 @@ public:
         void printInfo();
         
         // Tick
-        void keyboard(std::map<int, bool> &keysPressed);
+        void keyboard(std::set<int> &keysPressed);
         void refresh();
         void physic(double& physicDelta);
 };

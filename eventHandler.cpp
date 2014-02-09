@@ -1,6 +1,8 @@
 #include "eventHandler.h"
 
-static std::map<int, bool> keysPressed = std::map<int, bool>();
+#include <set>
+
+static std::set<int> keysPressed;
 static Simulator* simulator = nullptr;
 static Univers* univers = nullptr;
 static Game* game = nullptr;
@@ -22,22 +24,22 @@ void setGame(Game* theGame)
 */
 void keyDown(unsigned char key, int x, int y)
 {
-        keysPressed[key] = true;
+        keysPressed.insert(key);
 }
 
 void specialKeyDown(int key, int x, int y)
 {
-        keysPressed[key + 255] = true;
+        keysPressed.insert(key + 255);
 }
 
 void keyUp(unsigned char key, int x, int y)
 {
-        keysPressed[key] = false;
+        keysPressed.erase(key);
 }
 
 void keyboard(int value)
 {
-        if (keysPressed['f']) {
+        if (keysPressed.count('f')) {
                 if (glutGet(GLUT_WINDOW_HEIGHT) == glutGet(GLUT_SCREEN_HEIGHT)
                     && glutGet(GLUT_WINDOW_WIDTH ) == glutGet(GLUT_SCREEN_WIDTH)) {
                         glutReshapeWindow(WIN_W, WIN_H);
@@ -45,13 +47,13 @@ void keyboard(int value)
                 } else {
                         glutFullScreen();
                 }
-                keysPressed['f'] = false;
+                keysPressed.erase('f');
         }
-        if (keysPressed['p']) {
+        if (keysPressed.count('p')) {
                 simulator->printInfo();
-                keysPressed['p'] = false;
+                keysPressed.erase('p');
         }
-        if (keysPressed[27] ) {
+        if (keysPressed.count(27)) {
                 glutDestroyWindow(1);
                 exit(0);
         }
@@ -59,7 +61,7 @@ void keyboard(int value)
         univers->keyboard(keysPressed);
         
         for (int i = 1; i <= 20; i ++)
-                keysPressed[255 + i] = false; // To improve
+                keysPressed.erase(255 + i);
         
         glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
 }
