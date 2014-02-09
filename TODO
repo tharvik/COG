@@ -1,0 +1,4 @@
+* add mesh class, containing a set of verticle, verticle texture and faces
+* add meshManager, shaderManager
+* update objectManager to use meshManager, shaderManager
+* change object to move pushBack* to constructor
