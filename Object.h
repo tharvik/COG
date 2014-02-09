@@ -20,7 +20,7 @@ protected:
 
 	std::set<Object> objects;
 
-	std::set<std::tuple<Mesh,Texture,Shader>> meshs;
+	std::vector<std::tuple<Mesh,Texture,Shader>> meshs;
 
 public: // TODO add vector<shader>, vector<texture>, vector<mesh>
         // Constructors

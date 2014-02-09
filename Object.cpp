@@ -9,7 +9,7 @@ Object::Object() : texture()
 
 Object::Object(Mesh mesh, Texture texture, Shader shader)
 {
-	this->meshs.insert(std::make_tuple(mesh, texture, shader));
+	this->meshs.push_back(std::make_tuple(mesh, texture, shader));
 }
 
 void Object::draw()
