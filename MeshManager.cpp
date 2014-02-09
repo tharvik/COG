@@ -26,12 +26,8 @@ Mesh& MeshManager::load(const std::string path)
 	if (!file)
 		logger::error("Unable to open \"" + path + '\'', FL);
 
-	while(file) {
-
-		// get next word
-		std::string word;
-		getline(file, word, ' ');
-
+	std::string word = "#";
+	do {
 		if (word == "o") {
 			name = word;
 
@@ -45,11 +41,15 @@ Mesh& MeshManager::load(const std::string path)
 			f.push_back(parseF());
 		}
 
-		if (word[0] == '#')
+		if (word.size() == 0 || word[0] == '#')
 			cleanLine(word, false);
 		else
 			cleanLine(word, true);
-	}
+
+		// get next word
+		getline(file, word, ' ');
+
+	} while(file);
 
 	file.close();
 	logger::info("Parsing done for \"" + path + '\'', FL);
