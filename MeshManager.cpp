@@ -3,8 +3,9 @@
 #include <limits>
 #include <vector>
 
+#include "Logger.h"
 
-Object& MeshManager::load(const std::string path)
+Mesh& MeshManager::load(const std::string path)
 {
 	// test if already existing
 	const auto iter = this->map.find(path);
@@ -53,7 +54,7 @@ Object& MeshManager::load(const std::string path)
 	file.close();
 	logger::info("Parsing done for \"" + path + '\'', FL);
 
-	this->map[path] = Object(name, v, vt, f);
+	this->map[path] = Mesh(name, v, vt, f);
 	return this->map[path];
 }
 

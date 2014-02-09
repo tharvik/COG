@@ -2,13 +2,14 @@
 
 #include <string>
 #include <map>
+#include <fstream>
 
-#include "Object.h"
+#include "Mesh.h"
 
 class MeshManager {
 
 	public:
-		Object& load(const std::string path);
+		Mesh& load(const std::string path);
 
 	private:
 		void parse();
@@ -19,7 +20,7 @@ class MeshManager {
 
 		void cleanLine(const std::string word, const bool log);
 
-		std::map<std::string,Object> map;
+		std::map<std::string,Mesh> map;
 
 		// current loading
 		std::string path;
