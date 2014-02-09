@@ -29,12 +29,14 @@ add_library		(texture Texture.cpp)
 add_library		(shader Shader.cpp)
 add_library		(pixelsGenerator PixelsGenerator.cpp)
 add_library		(textureManager TextureManager.cpp)
+add_library		(objectManager ObjectManager.cpp)
 
 # link
 target_link_libraries	(objloader logger object stdc++)
 target_link_libraries	(object texture shader)
 
 target_link_libraries	(univers camera objloader sphere light textureManager)
+target_link_libraries	(univers objectManager)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
