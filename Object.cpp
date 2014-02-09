@@ -71,7 +71,7 @@ Object::~Object()
 
 bool Object::operator<(const Object &b) const
 {
-	this->name < b.name;
+	return this->name < b.name;
 }
 
 void Object::addObject(Object& object)
