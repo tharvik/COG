@@ -4,10 +4,12 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <tuple>
 
 #include "opengl.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Mesh.h"
 
 class Object
 {
@@ -27,11 +29,14 @@ protected:
 
 	std::set<Object> objects;
 
+	std::set<std::tuple<Mesh,Texture,Shader>> meshs;
+
 public:
 
 	// TODO add vector<shader>, vector<texture>, vector<mesh>
 
 	Object();
+	Object(Mesh mesh, Texture texture, Shader shader);
 	Object( const std::string name,
 		const std::vector<std::array<float, 3>> v,
 		const std::vector<std::array<float, 2>> vt,
