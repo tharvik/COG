@@ -73,6 +73,8 @@ public:
 	// bind as the current texture
 	void bindTexture();
 
+	bool operator<(const Texture &b) const;
+
 	// Destructor
 	~Texture();
 };

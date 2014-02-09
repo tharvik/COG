@@ -373,5 +373,10 @@ void Texture::bindTexture()
         glBindTexture(GL_TEXTURE_2D, this->imageId);
 }
 
+bool Texture::operator<(const Texture &b) const
+{
+	return this->imageId < b.imageId;
+}
+
 Texture::~Texture()
 {}

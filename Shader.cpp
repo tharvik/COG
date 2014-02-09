@@ -206,3 +206,10 @@ GLuint Shader::getpShaderId()
 {
 	return this->pixelShader;
 }
+
+
+bool Shader::operator<(const Shader &b) const
+{
+	return (this->vertexShader + this->pixelShader) <
+		(b.vertexShader + b.pixelShader);
+}

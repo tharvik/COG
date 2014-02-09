@@ -35,6 +35,8 @@ public:
 	GLuint getShaderId();
 	GLuint getvShaderId();
 	GLuint getpShaderId();
+
+	bool operator<(const Shader &b) const;
 };
 
 #endif
