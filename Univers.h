@@ -10,12 +10,10 @@
 #include "config.h"
 #include "Texture.h"
 #include "Object.h"
-#include "ObjLoader.h"
 #include "Sphere.h"
 #include "Light.h"																//
 
-#include "TextureManager.h"
-#include "MeshManager.h"
+#include "ObjectManager.h"
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
                                      glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
@@ -25,14 +23,11 @@ private:
         
         //vector<> cameras;
         std::vector<Object> objects;
-        ObjLoader loader;
+        ObjectManager loader;
         Camera camera;
         Light mainLight;														//
 		
         Sphere sphere; // Remove ?
-
-	TextureManager textures;
-	MeshManager meshManager;
 
         // Tick
         void draw();

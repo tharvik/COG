@@ -12,25 +12,24 @@ Univers::Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
 
 size_t Univers::addObject(std::string &objectPath)
 {
-	objects.push_back(meshManager.load(objectPath));
+	objects.push_back(loader.load(objectPath));
         return objects.size() - 1;
 }
 size_t Univers::addObject(std::string &&objectPath)
 {
-	objects.push_back(meshManager.load(objectPath));
+	objects.push_back(loader.load(objectPath));
         return objects.size() - 1;
 }
 
 size_t Univers::addObject(std::string &objectPath, std::string &texturePath)
 {
-	objects.push_back(meshManager.load(objectPath));
-        objects[objects.size() - 1].setTexture(textures.load(texturePath));
+	objects.push_back(loader.load(objectPath));
         return objects.size() - 1;
 }
 size_t Univers::addObject(std::string &&objectPath, std::string &&texturePath)
 {
-	objects.push_back(meshManager.load(objectPath));
-        objects[objects.size() - 1].setTexture(textures.load(texturePath));
+	std::string name = "mountain";
+	objects.push_back(loader.load(name));
         return objects.size() - 1;
 }
 
