@@ -10,14 +10,13 @@ Univers::Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
                  posZ, anglePhi, angleTeta, anglepsi)
 {}
 
-size_t Univers::addObject(std::string &objectPath)
+size_t Univers::addObject(std::string &name)
 {
-	objects.push_back(loader.load(objectPath));
+	objects.push_back(loader.load(name));
         return objects.size() - 1;
 }
-size_t Univers::addObject(std::string &&objectPath)
+size_t Univers::addObject(std::string &&name)
 {
-	std::string name = "mountain";
 	objects.push_back(loader.load(name));
         return objects.size() - 1;
 }

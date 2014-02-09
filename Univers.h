@@ -38,8 +38,8 @@ public:
                 GLdouble angleTeta, GLdouble anglepsi);
         
         // Modifiers
-        size_t addObject(std::string &objectPath); // Not tested
-        size_t addObject(std::string &&objectPath); // Not tested
+        size_t addObject(std::string &name); // Not tested
+        size_t addObject(std::string &&name); // Not tested
         size_t addObject(Object &object); // Not tested
         size_t addObject(Object &object, Texture &texture); // Not tested
         

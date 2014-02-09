@@ -7,7 +7,7 @@ Game::Game() : univers(), simulator(&univers)
         if (FULLSCREEN)
                 glutFullScreen();
         
-        univers.addObject("Resources/Test files/mountain.obj");
+        univers.addObject("mountain");
         
         setSimulator(&simulator);
         setUnivers(&univers);
