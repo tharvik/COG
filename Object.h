@@ -29,8 +29,15 @@ protected:
 
 public:
 
+	// TODO add vector<shader>, vector<texture>, vector<mesh>
+
 	Object();
-	
+	Object( const std::string name,
+		const std::vector<std::array<float, 3>> v,
+		const std::vector<std::array<float, 2>> vt,
+		const std::vector<std::array<std::array<unsigned short, 2>, 3>>
+			f);
+
 	// TODO remove name? remove every modifier?
 	void setName(const std::string& name);
 	void setTexture(const Texture&  texture);
