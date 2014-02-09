@@ -1,10 +1,10 @@
-#include "ObjectManager.h"
+#include "MeshManager.h"
 
 #include <limits>
 #include <vector>
 
 
-Object& ObjectManager::load(const std::string path)
+Object& MeshManager::load(const std::string path)
 {
 	// test if already existing
 	const auto iter = this->map.find(path);
@@ -58,7 +58,7 @@ Object& ObjectManager::load(const std::string path)
 }
 
 template<unsigned short size>
-std::array<float, size> ObjectManager::parseV()
+std::array<float, size> MeshManager::parseV()
 {
 	std::array<float, size> array;
 	for(unsigned short i = 0; i < array.size(); i++)
@@ -68,7 +68,7 @@ std::array<float, size> ObjectManager::parseV()
 }
 
 std::array<std::array<unsigned short, 2>, 3>
-	ObjectManager::parseF()
+	MeshManager::parseF()
 {
 	std::array<std::array<unsigned short, 2>, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++) {
@@ -86,7 +86,7 @@ std::array<std::array<unsigned short, 2>, 3>
 	return array;
 }
 
-void ObjectManager::cleanLine(const std::string word, const bool log)
+void MeshManager::cleanLine(const std::string word, const bool log)
 {
 	lineCount++;
 

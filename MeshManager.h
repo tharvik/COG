@@ -5,7 +5,7 @@
 
 #include "Object.h"
 
-class ObjectManager {
+class MeshManager {
 
 	public:
 		Object& load(const std::string path);

@@ -15,7 +15,7 @@
 #include "Light.h"																//
 
 #include "TextureManager.h"
-#include "ObjectManager.h"
+#include "MeshManager.h"
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
                                      glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
@@ -32,7 +32,7 @@ private:
         Sphere sphere; // Remove ?
 
 	TextureManager textures;
-	ObjectManager objectManager;
+	MeshManager meshManager;
 
         // Tick
         void draw();

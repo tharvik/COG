@@ -12,24 +12,24 @@ Univers::Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
 
 size_t Univers::addObject(std::string &objectPath)
 {
-	objects.push_back(objectManager.load(objectPath));
+	objects.push_back(meshManager.load(objectPath));
         return objects.size() - 1;
 }
 size_t Univers::addObject(std::string &&objectPath)
 {
-	objects.push_back(objectManager.load(objectPath));
+	objects.push_back(meshManager.load(objectPath));
         return objects.size() - 1;
 }
 
 size_t Univers::addObject(std::string &objectPath, std::string &texturePath)
 {
-	objects.push_back(objectManager.load(objectPath));
+	objects.push_back(meshManager.load(objectPath));
         objects[objects.size() - 1].setTexture(textures.load(texturePath));
         return objects.size() - 1;
 }
 size_t Univers::addObject(std::string &&objectPath, std::string &&texturePath)
 {
-	objects.push_back(objectManager.load(objectPath));
+	objects.push_back(meshManager.load(objectPath));
         objects[objects.size() - 1].setTexture(textures.load(texturePath));
         return objects.size() - 1;
 }
