@@ -5,8 +5,6 @@
 #include "stb_image.c"
 #include "Logger.h"
 
-TextureManager::TextureManager() {}
-
 Texture& TextureManager::load(const std::string path)
 {
 	const auto iter = this->map.find(path);

@@ -8,8 +8,6 @@
 class TextureManager {
 
 	public:
-		TextureManager();
-
 		Texture& load(const std::string path);
 
 	private:
