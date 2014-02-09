@@ -178,31 +178,23 @@ GLdouble Camera::getDirectionZ()
 void Camera::keyDown(std::set<int> &keysPressed)
 {
         {
-                if (keysPressed.count('i')) {
+                if (keysPressed.count('i'))
                         move(1, 0, 0);
-                }
-                if (keysPressed.count('j')) {
+                if (keysPressed.count('j'))
                         move(0, 1, 0);
-                }
-                if (keysPressed.count('k')) {
+                if (keysPressed.count('k'))
                         move(-1, 0, 0);
-                }
-                if (keysPressed.count('l')) {
+                if (keysPressed.count('l'))
                         move(0, -1, 0);
-                }
-                
-                if (keysPressed.count('I')) {
+
+                if (keysPressed.count('I'))
                         move(DIS_B, 0, 0);
-                }
-                if (keysPressed.count('J')) {
+                if (keysPressed.count('J'))
                         move(0, DIS_B, 0);
-                }
-                if (keysPressed.count('K')) {
+                if (keysPressed.count('K'))
                         move(-DIS_B, 0, 0);
-                }
-                if (keysPressed.count('L')) {
+                if (keysPressed.count('L'))
                         move(0, -DIS_B, 0);
-                }
         }
         {
                 if (keysPressed.count('w'))
@@ -212,6 +204,15 @@ void Camera::keyDown(std::set<int> &keysPressed)
                 if (keysPressed.count('s'))
                         rotate(0, -1);
                 if (keysPressed.count('d'))
+                        rotate(-1, 0);
+                
+                if (keysPressed.count('W'))
+                        rotate(0, 1);
+                if (keysPressed.count('A'))
+                        rotate(1, 0);
+                if (keysPressed.count('S'))
+                        rotate(0, -1);
+                if (keysPressed.count('D'))
                         rotate(-1, 0);
         }
         {

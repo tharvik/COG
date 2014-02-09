@@ -70,8 +70,6 @@ void specialKeyDown(int key, int x, int y)
         keysPressed.insert(key + 255);
 }
 
-#include <iostream>
-
 void keyUp(unsigned char key, int x, int y)
 {
         if (key >= 'a' && key <= 'z') {
