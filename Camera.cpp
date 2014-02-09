@@ -180,26 +180,29 @@ void Camera::keyDown(std::set<int> &keysPressed)
         {
                 if (keysPressed.count('i')) {
                         move(1, 0, 0);
-                        keysPressed.erase('I');
                 }
-                if (keysPressed.count('j'))
+                if (keysPressed.count('j')) {
                         move(0, 1, 0);
-                if (keysPressed.count('k'))
+                }
+                if (keysPressed.count('k')) {
                         move(-1, 0, 0);
-                if (keysPressed.count('l'))
+                }
+                if (keysPressed.count('l')) {
                         move(0, -1, 0);
+                }
                 
                 if (keysPressed.count('I')) {
                         move(DIS_B, 0, 0);
                 }
                 if (keysPressed.count('J')) {
                         move(0, DIS_B, 0);
-                        keysPressed.erase('j');
                 }
-                if (keysPressed.count('K'))
+                if (keysPressed.count('K')) {
                         move(-DIS_B, 0, 0);
-                if (keysPressed.count('L'))
+                }
+                if (keysPressed.count('L')) {
                         move(0, -DIS_B, 0);
+                }
         }
         {
                 if (keysPressed.count('w'))

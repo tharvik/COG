@@ -70,9 +70,17 @@ void specialKeyDown(int key, int x, int y)
         keysPressed.insert(key + 255);
 }
 
+#include <iostream>
+
 void keyUp(unsigned char key, int x, int y)
 {
-        keysPressed.erase(key);
+        if (key >= 'a' && key <= 'z') {
+                keysPressed.erase(key);
+                keysPressed.erase(key - ' ');
+        } else if (key >= 'A' && key <= 'Z') {
+                keysPressed.erase(key);
+                keysPressed.erase(key + ' ');
+        }
 }
 
 void keyboard(int value)
