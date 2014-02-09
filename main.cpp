@@ -38,10 +38,12 @@ void openWindow(int &&x, int &&y, int &&width, int &&height, std::string &&title
         glutCreateWindow(title.c_str());
         glutHideWindow();
 
+#ifndef __APPLE__
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
 		logger::error(std::string("Fail to init glew: ") +
 				((char*) glewGetErrorString(err)), FL);
+#endif
 }
 
 void setUpOpenGL()
