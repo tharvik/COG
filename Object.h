@@ -17,15 +17,9 @@ class Object
 protected:
 
 	// add vector parts, which are the other "objects" loaded in a obj file
-
-	std::string name;
 	Texture texture;
 	Shader shader;
 	GLuint UniformShadowMapId, depthTextureId;
-
-	std::vector<std::array<float, 3>> v;
-	std::vector<std::array<float, 2>> vt;
-	std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
 
 	std::set<Object> objects;
 
@@ -37,11 +31,6 @@ public:
 
 	Object();
 	Object(Mesh mesh, Texture texture, Shader shader);
-	Object( const std::string name,
-		const std::vector<std::array<float, 3>> v,
-		const std::vector<std::array<float, 2>> vt,
-		const std::vector<std::array<std::array<unsigned short, 2>, 3>>
-			f);
 
 	bool operator<(const Object &b) const;
 
