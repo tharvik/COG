@@ -1,19 +1,11 @@
-//
-//  Shader.h
-//  COG
-//
+#pragma once
 
-#ifndef COG_Shader_h
-#define COG_Shader_h
-
-#include <iostream>
-#include "opengl.h"
 #include <fstream>
+#include "opengl.h"
 
 #include "Logger.h"
 
 class Shader {
-
 private:
 	GLuint vertexShader, pixelShader, program;
 
@@ -24,19 +16,20 @@ private:
 	void linkProgram(std::string& vShaderPath, std::string& pShaderPath);
 	
 public:
-	// constructors
+	// Constructors
 	Shader();
 	Shader(std::string& vShaderPath, std::string& pShaderPath);
 	Shader(std::string&& vShaderPath, std::string&& pShaderPath);
 
 	void use();
 	
-	// getters
+	// Getters
 	GLuint getShaderId();
 	GLuint getvShaderId();
 	GLuint getpShaderId();
 
 	bool operator<(const Shader &b) const;
+        
+        // Destructor
+        ~Shader();
 };
-
-#endif

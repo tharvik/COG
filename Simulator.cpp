@@ -2,6 +2,7 @@
 
 static Simulator *self;
 
+// Constructors
 Simulator::Simulator()
 {
         self = this;
@@ -75,6 +76,10 @@ void Simulator::measureFPS()
         FPS = (1000 * REPORT_FPS) / (actualRefresh - lastRefreshReport);
         lastRefreshReport = actualRefresh;
 }
+
+// Destructors
+Simulator::~Simulator()
+{}
 
 void tick()
 {

@@ -1,40 +1,38 @@
 #pragma once
 
 #include <iostream>
-#include <set>
 #include "opengl.h"
-#include <vector>
+#include <set>
 #include <string>
+#include <vector>
 
 #include "Camera.h"
 #include "config.h"
-#include "Texture.h"
+#include "Light.h"
 #include "Object.h"
-#include "Sphere.h"
-#include "Light.h"																//
-
 #include "ObjectManager.h"
+#include "Sphere.h"
+#include "Texture.h"
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
                                      glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
 
 class Univers {
 private:
-        
         //vector<> cameras;
         std::vector<Object> objects;
         ObjectManager loader;
         Camera camera;
-        Light mainLight;														//
-		
+        Light mainLight;
+        
         Sphere sphere; // Remove ?
-
+        
         // Tick
         void draw();
 public:
         // Constructors
         Univers();
-		Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
+        Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
                 GLdouble angleTeta, GLdouble anglepsi);
         
         // Modifiers
@@ -48,8 +46,11 @@ public:
         // Informations
         void printInfo();
         
-        // Tick
+        // Ticks handling
         void keyboard(std::set<int> &keysPressed);
         void refresh();
         void physic(double& physicDelta);
+        
+        // Destructor
+        ~Univers();
 };

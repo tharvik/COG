@@ -1,11 +1,16 @@
 #include "eventHandler.h"
 
-#include <set>
-
-static std::set<int> keysPressed;
+static Game* game = nullptr;
 static Simulator* simulator = nullptr;
 static Univers* univers = nullptr;
-static Game* game = nullptr;
+
+static std::set<int> keysPressed;
+
+// Initialisation
+/*void setGame(Game* theGame)
+ {
+ game = theGame;
+ }*/
 
 void setSimulator(Simulator* theSimulator)
 {
@@ -16,12 +21,45 @@ void setUnivers(Univers* theUnivers)
 {
         univers = theUnivers;
 }
-/*
-void setGame(Game* theGame)
+
+// Window and display handling
+void displayHandler()
 {
-        game = theGame;
+        //univers->refresh(SWAP);
 }
-*/
+
+void windowResizingHandler(int width, int height)
+{
+        glViewport(0, 0, (GLsizei) width, (GLsizei) height);
+}
+
+void windowStatusHandler(int state)
+{
+        switch (state) {
+                case GLUT_HIDDEN:
+                        logger::info("The window is hidden", FL);
+                        break;
+                case GLUT_FULLY_RETAINED:
+                        logger::info("The window is fully retained", FL);
+                        break;
+                case GLUT_PARTIALLY_RETAINED:
+                        logger::info("The window is partially retained", FL);
+                        break;
+                case GLUT_FULLY_COVERED:
+                        logger::info("The window is fully covered", FL);
+                        break;
+        }
+}
+
+#ifdef __APPLE__
+void windowClosingHandler()
+{
+        glutDestroyWindow(1);
+        exit(0);
+}
+#endif
+
+// Keyboard handling
 void keyDown(unsigned char key, int x, int y)
 {
         keysPressed.insert(key);
@@ -66,6 +104,7 @@ void keyboard(int value)
         glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
 }
 
+// Mouse handling
 void mouseHandler(int button, int state, int x, int y)
 {
         // click, click...
@@ -75,39 +114,3 @@ void motionHandler(int width, int height)
 {
         // drag...
 }
-
-void displayHandler()
-{
-        //univers->refresh(SWAP);
-}
-
-void windowResizingHandler(int width, int height)
-{
-        glViewport(0, 0, (GLsizei) width, (GLsizei) height);
-}
-
-void windowStatusHandler(int state)
-{
-        switch (state) {
-        case GLUT_HIDDEN:
-                logger::info("The window is hidden", FL);
-                break;
-        case GLUT_FULLY_RETAINED:
-                logger::info("The window is fully retained", FL);
-                break;
-        case GLUT_PARTIALLY_RETAINED:
-                logger::info("The window is partially retained", FL);
-                break;
-        case GLUT_FULLY_COVERED:
-                logger::info("The window is fully covered", FL);
-                break;
-        }
-}
-
-#ifdef __APPLE__
-void windowClosingHandler()
-{
-        glutDestroyWindow(1);
-        exit(0);
-}
-#endif

@@ -1,11 +1,11 @@
-#include <iostream>
 #include "opengl.h"
 
 #include "config.h"
 #include "Game.h"
 
 void initLibraries(int *argc, char *argv[]);
-void openWindow(int &&x, int &&y, int &&width, int &&height, std::string &&title);
+void openWindow(int &&x, int &&y, int &&width, int &&height,
+                std::string &&title);
 void setUpOpenGL();
 
 int main(int argc, char *argv[])
@@ -31,7 +31,8 @@ void initLibraries(int *argc, char *argv[])
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 }
 
-void openWindow(int &&x, int &&y, int &&width, int &&height, std::string &&title)
+void openWindow(int &&x, int &&y, int &&width, int &&height,
+                std::string &&title)
 {
         glutInitWindowSize(width, height);
         glutInitWindowPosition(x, y);

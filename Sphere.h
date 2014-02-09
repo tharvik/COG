@@ -17,6 +17,7 @@ private:
         bool gravity;
         
 public:
+        // Constructor
         Sphere();
         
         void movX(int x);
@@ -27,4 +28,7 @@ public:
         
         void physic(double &physicDelta);
         void draw();
+        
+        // Destructor
+        ~Sphere();
 };

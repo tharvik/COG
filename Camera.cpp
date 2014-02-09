@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-// constructor
+// Constructors
 Camera::Camera()
 {
         p[0] = POS_X; p[1] = POS_Y; p[2] = POS_Z;
@@ -29,7 +29,7 @@ Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
         VEC_COPY(r, o);
 }
 
-// rotations
+// Rotations
 void Camera::rotate(GLdouble alpha, GLdouble beta)
 {
         if (dabs(o[2]) > 0.8 && sgn(beta) == sgn(o[2]))
@@ -90,7 +90,7 @@ void Camera::lookTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ)
         VEC_NORMALIZE(r);
 }
 
-// translations
+// Translations
 void Camera::move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward)
 {
         d[0] += (movForward  * o[0]
@@ -107,17 +107,15 @@ void Camera::goTo(GLdouble posX, GLdouble posY, GLdouble posZ)
         d[2] = posZ - p[2];
 }
 
-// setters
+// Setters
 void Camera::setPositionX(GLdouble posX)
 {
         p[0] = posX;
 }
-
 void Camera::setPositionY(GLdouble posY)
 {
         p[1] = posY;
 }
-
 void Camera::setPositionZ(GLdouble posZ)
 {
         p[2] = posZ;
@@ -127,28 +125,24 @@ void Camera::setOrientationX(GLdouble posX)
 {
         o[0] = posX;
 }
-
 void Camera::setOrientationY(GLdouble posY)
 {
         o[1] = posY;
 }
-
 void Camera::setOrientationZ(GLdouble posZ)
 {
         o[2] = posZ;
 }
 
-// getters
+// Getters
 GLdouble Camera::getPositionX()
 {
         return p[0];
 }
-
 GLdouble Camera::getPositionY()
 {
         return p[1];
 }
-
 GLdouble Camera::getPositionZ()
 {
         return p[2];
@@ -158,12 +152,10 @@ GLdouble Camera::getOrientationX()
 {
         return o[0];
 }
-
 GLdouble Camera::getOrientationY()
 {
         return o[1];
 }
-
 GLdouble Camera::getOrientationZ()
 {
         return o[2];
@@ -173,19 +165,16 @@ GLdouble Camera::getDirectionX()
 {
         return d[0];
 }
-
 GLdouble Camera::getDirectionY()
 {
         return d[1];
 }
-
 GLdouble Camera::getDirectionZ()
 {
         return d[2];
 }
 
-#include <array>
-
+// Keys handling
 void Camera::keyDown(std::set<int> &keysPressed)
 {
         {
@@ -231,6 +220,7 @@ void Camera::keyDown(std::set<int> &keysPressed)
         }
 }
 
+// Calculate next position
 void Camera::physic(double &physicDelta)
 {
         VEC_COPY(s, d);
@@ -244,6 +234,7 @@ void Camera::physic(double &physicDelta)
         VEC_NORMALIZE(o);
 }
 
+// Place itself
 void Camera::look()
 {
         gluLookAt(p[0], p[1], p[2],
@@ -251,7 +242,6 @@ void Camera::look()
                   0, 0, 1);
 }
 
-// destructor
+// Destructor
 Camera::~Camera()
-{
-}
+{}

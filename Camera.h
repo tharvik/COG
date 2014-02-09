@@ -1,48 +1,46 @@
 #pragma once
 
-#include <iostream>
+#include "opengl.h"
 #include <set>
 #include <math.h>
 
 #include "config.h"
 #include "Logger.h"
-#include "opengl.h"
 #include "utilities.h"
 
 class Camera {
 private:
-        
-	// position vector
+	// Position vector
 	GLdouble p[3];
         
-	// orientation vector
+	// Orientation vector
 	GLdouble o[3];
         
-        // movement vectors
+        // Movement vectors
         GLdouble d[3];
         GLdouble r[3];
         
-        // for calculs
+        // For calculs
         GLdouble s[3];
         
 public:
-	// constructor
+	// Constructors
         Camera();
         Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
                GLdouble oriX, GLdouble oriY, GLdouble oriZ);
         
-	// rotations
+	// Rotations
 	void rotate(GLdouble alpha, GLdouble beta);
         
         void lookTo(GLdouble posX, GLdouble posY, GLdouble posZ);
 	
-	// translations
+	// Translations
         void move(GLdouble mov[]);
 	void move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward);
         
         void goTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ);
         
-        // setters
+        // Setters
         void setPositionX(GLdouble posX);
         void setPositionY(GLdouble posY);
         void setPositionZ(GLdouble posZ);
@@ -51,7 +49,7 @@ public:
         void setOrientationY(GLdouble posY);
         void setOrientationZ(GLdouble posZ);
         
-	// getters
+	// Getters
         GLdouble getPositionX();
         GLdouble getPositionY();
         GLdouble getPositionZ();
@@ -63,15 +61,16 @@ public:
         GLdouble getDirectionX();
         GLdouble getDirectionY();
         GLdouble getDirectionZ();
-	
+        
+        // Keys handling
         void keyDown(std::set<int> &keysPressed);
         
-        // calculate next position
+        // Calculate next position
         void physic(double &physicDelta);
         
-	// send the camera informations to OpenGL
+	// Place itself
         void look();
 	
-	// destructor
+	// Destructor
         ~Camera();
 };

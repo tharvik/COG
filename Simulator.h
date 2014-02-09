@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "opengl.h"
 
 #include "config.h"
@@ -8,7 +7,6 @@
 #include "Univers.h"
 
 class Simulator {
-        
 private:
         Univers *univers = nullptr;
         
@@ -32,6 +30,7 @@ private:
         void measurePPS();
         
 public:
+        // Constructors
         Simulator();
         Simulator(Univers *univers);
         
@@ -39,6 +38,9 @@ public:
         
         void refresh();
         void physic();
+        
+        // Destructors
+        ~Simulator();
 };
 
 void tick();

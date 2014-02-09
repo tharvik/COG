@@ -1,12 +1,12 @@
 #pragma once
 
-#include <stdio.h>
+#include <array>
 #include <iostream>
 #include <math.h>
-#include <array>
+#include <stdio.h>
+#include <string.h>
 
 class Vvector {
-
 private:
 
 #ifdef __APPLE__
@@ -16,12 +16,11 @@ private:
 #endif
 
 public:
-	
-	// constructors
+	// Constructors
 	Vvector();
 	Vvector(float x, float y, float z);
 
-	// setters
+	// Setters
 	void set(float x, float y, float z);
 	void setNull();
 	void normalize();
@@ -42,12 +41,17 @@ public:
 	bool	operator==(Vvector const& a);
 	bool	operator!=(Vvector const& a);
 	
-	// getters
+	// Getters
 	float x() const;
 	float y() const;
 	float z() const;
 	std::array<float, 3> scalars() const;
+        
+        // Destructor
+        ~Vvector();
 };
+
+#ifndef __APPLE__
 
 #define VEC_ZERO(v)		v[0] = 0; v[1] = 0; v[2] = 0;
 
@@ -70,3 +74,5 @@ public:
 #define VEC_DIFF(r, v1, v2)	r[0] = v1[0] - v2[0]; \
 				r[1] = v1[1] - v2[1]; \
 				r[2] = v1[2] - v2[2];
+
+#endif

@@ -1,12 +1,10 @@
 #include "Object.h"
 
-#include <iostream>
-
+// Constructors
 Object::Object() : texture()
 {
 	this->shader = Shader("Resources/shaders/shadow.vShader", "Resources/shaders/shadow.pShader");
-	this->UniformShadowMapId = glGetUniformLocation(this->shader.getShaderId(),
-													 "shadowMap");
+	this->UniformShadowMapId = glGetUniformLocation(this->shader.getShaderId(), "shadowMap");
 }
 
 Object::Object(Mesh mesh, Texture texture, Shader shader)
@@ -26,10 +24,6 @@ void Object::draw()
 		o.draw();
 }
 
-Object::~Object()
-{
-}
-
 bool Object::operator<(const Object &b) const
 {
 	return this < &b;
@@ -44,3 +38,7 @@ void Object::delObject(Object& object)
 {
 	this->objects.erase(object);
 }
+
+// Destructor
+Object::~Object()
+{}

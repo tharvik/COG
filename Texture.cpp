@@ -227,24 +227,24 @@ void Texture::load(const std::string&  path, enum imageFileFormat fileFormat)
         } else {
                 SDL_Surface *surface;
                 switch (fileFormat) {
-                case BMP:
-                        surface = IMG_LoadBMP_RW(rwops);
-                        break;
-                case GIF:
-                        surface = IMG_LoadGIF_RW(rwops);
-                        break;
-                case PNG:
-                        surface = IMG_LoadPNG_RW(rwops);
-                        break;
-                case PNM:
-                        surface = IMG_LoadPNM_RW(rwops);
-                        break;
-                case JPG:
-                        surface = IMG_LoadJPG_RW(rwops);
-                        break;
-                case TIF:
-                        surface = IMG_LoadTIF_RW(rwops);
-                        break;
+                        case BMP:
+                                surface = IMG_LoadBMP_RW(rwops);
+                                break;
+                        case GIF:
+                                surface = IMG_LoadGIF_RW(rwops);
+                                break;
+                        case PNG:
+                                surface = IMG_LoadPNG_RW(rwops);
+                                break;
+                        case PNM:
+                                surface = IMG_LoadPNM_RW(rwops);
+                                break;
+                        case JPG:
+                                surface = IMG_LoadJPG_RW(rwops);
+                                break;
+                        case TIF:
+                                surface = IMG_LoadTIF_RW(rwops);
+                                break;
                 }
                 GLubyte* pixels = (GLubyte*) surface->pixels;
                 GLushort w = surface->w;
@@ -378,5 +378,7 @@ bool Texture::operator<(const Texture &b) const
 	return this->imageId < b.imageId;
 }
 
+
+// Destructor
 Texture::~Texture()
 {}

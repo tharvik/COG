@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "opengl.h"
 #include <string>
 
@@ -28,8 +27,7 @@ enum imageGenerationOption {
 	CHECKERBOARD
 };
 
-class Texture
-{
+class Texture {
 private:
         // Is the image valid (missing texture, loading error...)
         bool valid = false;

@@ -11,11 +11,8 @@
 #include "Shader.h"
 #include "Mesh.h"
 
-class Object
-{
-
+class Object {
 protected:
-
 	// add vector parts, which are the other "objects" loaded in a obj file
 	Texture texture;
 	Shader shader;
@@ -25,10 +22,8 @@ protected:
 
 	std::set<std::tuple<Mesh,Texture,Shader>> meshs;
 
-public:
-
-	// TODO add vector<shader>, vector<texture>, vector<mesh>
-
+public: // TODO add vector<shader>, vector<texture>, vector<mesh>
+        // Constructors
 	Object();
 	Object(Mesh mesh, Texture texture, Shader shader);
 
@@ -39,5 +34,6 @@ public:
 
 	void draw();
 	
+        // Destructor
 	~Object();
 };

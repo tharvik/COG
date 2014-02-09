@@ -1,5 +1,6 @@
 #include "Sphere.h"
 
+// Constructor
 Sphere::Sphere() : Object()
 {
         p[0] = 0; p[1] = 0; p[2] = 4;
@@ -71,3 +72,7 @@ void Sphere::draw()
         glTranslated(p[0], p[1], p[2]);
         glutSolidSphere(1, 20, 20);
 }
+
+// Destructor
+Sphere::~Sphere()
+{}

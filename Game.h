@@ -1,10 +1,10 @@
 #pragma once
 
-#include <iostream>
 #include "opengl.h"
 
 #include "config.h"
 #include "eventHandler.h"
+#include "Logger.h"
 #include "Simulator.h"
 #include "Univers.h"
 
@@ -14,10 +14,13 @@ private:
         Simulator simulator;
         
 public:
-        // Constructors
+        // Constructor
         Game();
         
         // Game modes
         void enterMainMenu();
         void enterPauseMenu();
+        
+        // Destructor
+        ~Game();
 };

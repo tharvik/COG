@@ -2,18 +2,24 @@
 
 #include <map>
 
+#include "Logger.h"
+#include "MeshManager.h"
 #include "Object.h"
 #include "TextureManager.h"
-#include "MeshManager.h"
 
 class ObjectManager {
-
-	public:
-		Object& load(const std::string name);
-
-	private:
-		std::map<std::string,Object> map;
-
-		TextureManager textures;
-		MeshManager meshs;
+private:
+        std::map<std::string,Object> map;
+        
+        TextureManager textures;
+        MeshManager meshs;
+        
+public:
+        // Constructor
+        ObjectManager();
+        
+        Object& load(const std::string name);
+        
+        // Destructor
+        ~ObjectManager();
 };

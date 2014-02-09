@@ -1,9 +1,8 @@
 #include "MeshManager.h"
 
-#include <limits>
-#include <vector>
-
-#include "Logger.h"
+// Constructor
+MeshManager::MeshManager()
+{}
 
 Mesh& MeshManager::load(const std::string path)
 {
@@ -98,3 +97,7 @@ void MeshManager::cleanLine(const std::string word, const bool log)
 		logger::warn("Discarding remaining results: \"" + word + " " +
 				tmp + "\"", path, lineCount);
 }
+
+// Destructor
+MeshManager::~MeshManager()
+{}

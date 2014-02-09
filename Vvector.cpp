@@ -1,15 +1,10 @@
-//
-//  Vvector.cpp
-//  COG
-//
-#include <string.h>
-
 #include "Vvector.h"
 
 #define vx scalar[0]
 #define vy scalar[1]
 #define vz scalar[2]
 
+// Constructors
 Vvector::Vvector()
 {
 	setNull();
@@ -126,6 +121,10 @@ std::array<float, 3> Vvector::scalars() const
 {
 	return this->scalar;
 }
+
+// Destructor
+Vvector::~Vvector()
+{}
 
 #undef vx
 #undef vy

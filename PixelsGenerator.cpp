@@ -12,7 +12,6 @@ GLubyte* generateRandomPixels(GLushort width, GLushort height, GLubyte depth)
 	return pixels;
 }
 
-
 GLubyte* generateUVgrid(GLushort width, GLushort height, GLubyte depth)
 {
 	GLubyte* pixels = (GLubyte*) calloc(width * height * depth, sizeof(GLubyte));

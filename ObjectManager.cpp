@@ -1,6 +1,8 @@
 #include "ObjectManager.h"
 
-#include "Logger.h"
+// Constructor
+ObjectManager::ObjectManager()
+{}
 
 Object& ObjectManager::load(const std::string name)
 {
@@ -21,3 +23,7 @@ Object& ObjectManager::load(const std::string name)
 		return iter->second;
 	}
 }
+
+// Destructor
+ObjectManager::~ObjectManager()
+{}

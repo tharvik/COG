@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// Constructor
 Game::Game() : univers(), simulator(&univers)
 {
         glClearColor(BGR_C);
@@ -28,6 +29,7 @@ Game::Game() : univers(), simulator(&univers)
         enterMainMenu();
 }
 
+// Game modes
 void Game::enterMainMenu()
 {
         glutSpecialFunc(specialKeyDown);
@@ -44,5 +46,8 @@ void Game::enterMainMenu()
 
 void Game::enterPauseMenu()
 {
-        
 }
+
+// Destructor
+Game::~Game()
+{}

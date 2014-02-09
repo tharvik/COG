@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
-#include "opengl.h"
-
-Mesh::Mesh() {}
+// Constructors
+Mesh::Mesh()
+{}
 
 Mesh::Mesh(std::string name,
 	std::vector<std::array<float, 3>> v,
@@ -41,3 +41,7 @@ void Mesh::draw()
 
 	glEnd();
 }
+
+// Destructor
+Mesh::~Mesh()
+{}

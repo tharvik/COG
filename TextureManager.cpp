@@ -1,9 +1,8 @@
 #include "TextureManager.h"
 
-#include <string.h>
-
-#include "stb_image.c"
-#include "Logger.h"
+// Constructor
+TextureManager::TextureManager()
+{}
 
 Texture& TextureManager::load(const std::string path)
 {
@@ -33,9 +32,13 @@ Texture& TextureManager::load(const std::string path)
 		this->map[path] = Texture(x, y, format, data);
 		stbi_image_free(data);
 
-		return this->map[path];
+ 		return this->map[path];
 
 	} else {
 		return iter->second;
 	}
 }
+
+// Destructor
+TextureManager::~TextureManager()
+{}
