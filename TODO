@@ -2,3 +2,4 @@
 * add meshManager, shaderManager
 * update objectManager to use meshManager, shaderManager
 * change object to move pushBack* to constructor
+* index faces in object, use buffer
