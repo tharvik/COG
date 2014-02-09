@@ -30,10 +30,8 @@ Texture& TextureManager::load(const std::string path)
 
 		logger::info("Finished loading texture: \"" + path + "\"", FL);
 
-		Texture texture(x, y, format, data);
-		this->map[path] = texture;
-
-		return texture;
+		this->map[path] = Texture(x, y, format, data);
+		return this->map[path];
 
 	} else {
 		return iter->second;
