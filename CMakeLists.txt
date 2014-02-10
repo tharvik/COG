@@ -31,16 +31,17 @@ add_library		(textureManager TextureManager.cpp)
 add_library		(mesh Mesh.cpp)
 add_library		(meshManager MeshManager.cpp)
 add_library		(objectManager ObjectManager.cpp)
+add_library		(stb stb_image.c)
 
 # link
 target_link_libraries	(object texture shader mesh)
 
-target_link_libraries	(univers camera sphere light objectManager)
+target_link_libraries	(univers camera sphere light objectManager object)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
 
-target_link_libraries	(textureManager texture)
+target_link_libraries	(textureManager texture stb)
 target_link_libraries	(texture SDL2_image logger pixelsGenerator)
 target_link_libraries	(shader GL GLU glut GLEW)
 
