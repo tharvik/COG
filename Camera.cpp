@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include <math.h>
+
 // Constructors
 Camera::Camera()
 {
@@ -32,7 +34,7 @@ Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
 // Rotations
 void Camera::rotate(GLdouble alpha, GLdouble beta)
 {
-        if (dabs(o[2]) > 0.8 && sgn(beta) == sgn(o[2]))
+        if (fabs(o[2]) > 0.8 && sgn(beta) == sgn(o[2]))
                 beta = 0;
         else
                 beta *= ANGLE_PER_ROTATION;

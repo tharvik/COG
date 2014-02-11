@@ -1,5 +1,7 @@
 #include "Sphere.h"
 
+#include <math.h>
+
 // Constructor
 Sphere::Sphere() 
 {
@@ -33,27 +35,27 @@ void Sphere::physic(double &physicDelta)
 {
         a[0] = 0; a[1] = 0; a[2] = 0;
         
-        if (gravity && dabs(p[2]) > 0.01) {
-                if (p[2] <= 0 && dabs(v[2]) < 0.008) {
+        if (gravity && fabs(p[2]) > 0.01) {
+                if (p[2] <= 0 && fabs(v[2]) < 0.008) {
                         v[2] = 0;
                 }
                 else if (p[2] <= 0) {// Reaction
-                        a[2] += dabs(p[2]) / m;
+                        a[2] += fabs(p[2]) / m;
                         v[2] /= 1.2;
                 } else {
                         a[2] += -0.02; // Gravity
                 }
         }
         
-        if (dabs(v[0]) > 0.001)
+        if (fabs(v[0]) > 0.001)
                 a[0] += -0.05 * v[0] / m;
         else
                 v[0] = 0;
-        if (dabs(v[1]) > 0.001)
+        if (fabs(v[1]) > 0.001)
                 a[1] += -0.05 * v[1] / m;
         else
                 v[1] = 0;
-        if (dabs(v[2]) > 0.001)
+        if (fabs(v[2]) > 0.001)
                 a[2] += -0.05 * v[2] / m;
         else
                 v[2] = 0;
