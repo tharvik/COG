@@ -8,6 +8,7 @@ Simulator::Simulator()
         self = this;
         physicCounter = REPORT_PPS;
         refreshCounter = REPORT_FPS;
+	lastPhysic = 0;
 }
 
 Simulator::Simulator(Univers *theUnivers)
@@ -16,6 +17,7 @@ Simulator::Simulator(Univers *theUnivers)
         self = this;
         physicCounter = REPORT_PPS;
         refreshCounter = REPORT_FPS;
+	lastPhysic = 0;
 }
 
 void Simulator::printInfo()
@@ -34,7 +36,7 @@ void Simulator::physic()
 {
         actualPhysic = glutGet(GLUT_ELAPSED_TIME);
         physicDelta = (double) MINIMUM_PPS * (actualPhysic - lastPhysic) / 1000;
-        
+
         if (physicDelta > 1) {
                 physicDelta = 1;
                 logger::warn("Lag occured", FL); // To manage
