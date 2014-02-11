@@ -6,7 +6,7 @@
 #include "Object.h"
 #include "utilities.h"
 
-class Sphere : public Object {
+class Sphere {
 private:
 	std::array<GLdouble,3> p;
 	std::array<GLdouble,3> v;

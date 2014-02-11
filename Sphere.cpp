@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
 // Constructor
-Sphere::Sphere() : Object()
+Sphere::Sphere() 
 {
         p[0] = 0; p[1] = 0; p[2] = 4;
         v[0] = 0; v[1] = 0; v[2] = 0;
