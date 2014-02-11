@@ -8,9 +8,9 @@
 
 class Sphere : public Object {
 private:
-        GLdouble p[3];
-        GLdouble v[3];
-        GLdouble a[3];
+	std::array<GLdouble,3> p;
+	std::array<GLdouble,3> v;
+	std::array<GLdouble,3> a;
         
         GLdouble m;
         

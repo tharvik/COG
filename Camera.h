@@ -3,6 +3,7 @@
 #include "opengl.h"
 #include <set>
 #include <math.h>
+#include <array>
 
 #include "config.h"
 #include "Logger.h"
@@ -11,17 +12,17 @@
 class Camera {
 private:
 	// Position vector
-	GLdouble p[3];
+	std::array<GLdouble,3> p;
         
 	// Orientation vector
-	GLdouble o[3];
+	std::array<GLdouble,3> o;
         
         // Movement vectors
-        GLdouble d[3];
-        GLdouble r[3];
+	std::array<GLdouble,3> d;
+	std::array<GLdouble,3> r;
         
         // For calculs
-        GLdouble s[3];
+	std::array<GLdouble,3> s;
         
 public:
 	// Constructors
