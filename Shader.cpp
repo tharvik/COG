@@ -38,15 +38,13 @@ void Shader::createShaders(std::string& vShaderPath, std::string& pShaderPath)
 
 
 	// creation of the shaders
-	char** src = (char**) malloc(sizeof(char));
-	if (src == NULL)
-		logger::warn("Unable to malloc.", FL);
-	*src = loadFileASCII(vShaderPath);
-	glShaderSource(this->vertexShader, 1, (const char**) src, NULL);	
+	char* src;
+	src = loadFileASCII(vShaderPath);
+	glShaderSource(this->vertexShader, 1, (const char**) &src, NULL);	
+	free(src);
 	
-	*src = loadFileASCII(pShaderPath);
-	glShaderSource(this->pixelShader, 1, (const char**) src, NULL);
-	free(*src);
+	src = loadFileASCII(pShaderPath);
+	glShaderSource(this->pixelShader, 1, (const char**) &src, NULL);
 	free(src);
 
 }
