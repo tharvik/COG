@@ -34,7 +34,9 @@ Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
 // Rotations
 void Camera::rotate(GLdouble alpha, GLdouble beta)
 {
-        if (fabs(o[2]) > 0.8 && sgn(beta) == sgn(o[2]))
+        if (fabs(o[2]) > 0.8 &&
+			((signbit(beta) == 0 && signbit(o[2]) == 0) ||
+			 (signbit(beta) != 0 && signbit(o[2]) != 0)))
                 beta = 0;
         else
                 beta *= ANGLE_PER_ROTATION;
