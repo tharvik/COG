@@ -1,10 +1,8 @@
 #include "Object.h"
 
 // Constructors
-Object::Object() : texture()
+Object::Object()
 {
-	this->shader = Shader("Resources/shaders/shadow.vShader", "Resources/shaders/shadow.pShader");
-	this->UniformShadowMapId = glGetUniformLocation(this->shader.getShaderId(), "shadowMap");
 }
 
 Object::Object(Mesh mesh, Texture texture, Shader shader)
