@@ -31,6 +31,7 @@ add_library		(textureManager TextureManager.cpp)
 add_library		(mesh Mesh.cpp)
 add_library		(meshManager MeshManager.cpp)
 add_library		(objectManager ObjectManager.cpp)
+add_library		(shaderManager ShaderManager.cpp)
 add_library		(stb stb_image.c)
 
 # link
@@ -45,8 +46,9 @@ target_link_libraries	(textureManager texture stb)
 target_link_libraries	(texture SDL2_image logger pixelsGenerator)
 target_link_libraries	(shader GL GLU glut GLEW)
 
-target_link_libraries	(objectManager meshManager textureManager)
+target_link_libraries	(objectManager meshManager textureManager shaderManager)
 target_link_libraries	(meshManager stdc++)
+target_link_libraries	(shaderManager shader)
 
 # main executable
 add_executable		(main main.cpp)
