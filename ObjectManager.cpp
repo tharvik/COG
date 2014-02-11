@@ -10,11 +10,11 @@ Object& ObjectManager::load(const std::string name)
 
 	if(iter == this->map.end()) {
 
-		const std::string path = "Resources/Test files/";
+		const std::string path = "Resources/objects/" + name + "/" + name;
 
-		Texture& texture(textures.load(path + name + ".png"));
-		Mesh& mesh(meshs.load(path + name + ".obj"));
-		Shader shader("Resources/shaders/shadow.vShader", "Resources/shaders/shadow.pShader");
+		Texture& texture(textures.load(path + ".png"));
+		Mesh& mesh(meshs.load(path + ".obj"));
+		Shader shader(shaders.load(path + ".vShader", path + ".pShader"));
 
 		this->map[path] = Object(mesh, texture, shader);
 		return this->map[path];

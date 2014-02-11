@@ -2,10 +2,10 @@
 
 #include <map>
 
-#include "Logger.h"
-#include "MeshManager.h"
 #include "Object.h"
+#include "MeshManager.h"
 #include "TextureManager.h"
+#include "ShaderManager.h"
 
 class ObjectManager {
 private:
@@ -13,6 +13,7 @@ private:
         
         TextureManager textures;
         MeshManager meshs;
+        ShaderManager shaders;
         
 public:
         // Constructor
