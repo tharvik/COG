@@ -38,7 +38,6 @@
 
    See end of file for full revision history.
 
-   TODO:
       stbi_info support for BMP,PSD,HDR,PIC
 
 
@@ -1989,7 +1988,6 @@ static int parse_zlib_header(zbuf *a)
    return 1;
 }
 
-// @TODO: should statically initialize these for optimal thread safety
 static uint8 default_length[288], default_distance[32];
 static void init_defaults(void)
 {
