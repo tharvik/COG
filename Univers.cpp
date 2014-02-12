@@ -1,9 +1,18 @@
 #include "Univers.h"
 
+static Univers* local;
+
+static void cleanup()
+{
+	local->~Univers();
+}
+
 // Constructors
 Univers::Univers() : camera()
 {
 	this->mainLight = Light(5.98, -26.12, 15.39, 0.32, 0.76, -0.57);
+	local = this;
+	atexit(cleanup);
 }
 
 Univers::Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
