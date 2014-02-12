@@ -3,6 +3,26 @@
 Shader::Shader()
 {}
 
+Shader::Shader(std::string& vShaderPath, std::string& pShaderPath)
+{
+	createShaders(vShaderPath, pShaderPath);	
+	compileShaders(vShaderPath, pShaderPath);
+	
+	// check
+	if (!glIsShader(this->vertexShader) || !glIsShader(this->pixelShader))
+		logger::error("The shaders haven't been created", FL);
+	
+	createProgram(vShaderPath, pShaderPath);
+	linkProgram(vShaderPath, pShaderPath);
+	
+	// check
+	if (!glIsProgram(this->program))
+		logger::error("The shader program has not been created", FL);
+		
+	
+	logger::info("Shader created.", FL);
+}
+
 Shader::Shader(std::string&& vShaderPath, std::string&& pShaderPath)
 {
 	createShaders(vShaderPath, pShaderPath);	

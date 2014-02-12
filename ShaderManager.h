@@ -14,7 +14,7 @@ public:
         // Constructor
         ShaderManager();
         
-        Shader& load(const std::string pathV, const std::string pathP);
+        Shader& load(std::string&& pathV, std::string&& pathP);
         
         // Destructor
         ~ShaderManager();
