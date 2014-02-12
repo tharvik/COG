@@ -5,14 +5,14 @@ Object::Object()
 {
 }
 
-Object::Object(Mesh mesh, Texture texture, Shader shader)
+Object::Object(Mesh& mesh, Texture& texture, Shader& shader)
 {
 	this->meshs.push_back(std::make_tuple(mesh, texture, shader));
 }
 
 void Object::draw()
 {
-	for(auto t : this->meshs) {
+	for(std::tuple<Mesh,Texture,Shader>& t : this->meshs) {
 		std::get<2>(t).use();
 		std::get<1>(t).bindTexture();
 		std::get<0>(t).draw();

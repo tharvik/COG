@@ -16,7 +16,8 @@ Object& ObjectManager::load(const std::string name)
 		Mesh& mesh(meshs.load(path + ".obj"));
 		Shader shader(shaders.load(path + ".vShader", path + ".pShader"));
 
-		this->map[path] = Object(mesh, texture, shader);
+		Object object = Object(mesh, texture, shader);
+		this->map[path] = object;
 		return this->map[path];
 
 	} else {

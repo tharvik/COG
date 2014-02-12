@@ -25,7 +25,7 @@ protected:
 public: // TODO add vector<shader>, vector<texture>, vector<mesh>
         // Constructors
 	Object();
-	Object(Mesh mesh, Texture texture, Shader shader);
+	Object(Mesh& mesh, Texture& texture, Shader& shader);
 
 	bool operator<(const Object &b) const;
 

@@ -79,7 +79,7 @@ void Univers::physic(double& physicDelta)
 
 void Univers::draw()
 {
-	for (Object object: objects) {
+	for (Object& object: objects) {
                 object.draw();
         }
         sphere.draw();
