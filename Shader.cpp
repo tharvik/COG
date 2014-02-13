@@ -38,7 +38,6 @@ Shader::Shader(std::string&& vShaderPath, std::string&& pShaderPath)
 	// check
 	if (!glIsProgram(this->program))
 		logger::error("The shader program has not been created", FL);
-		
 	
 	logger::info("Shader created.", FL);
 }

@@ -8,7 +8,7 @@ Game::Game() : univers(), simulator(&univers)
         if (FULLSCREEN)
                 glutFullScreen();
         
-        univers.addObject("mountain");
+        univers.addObject("testplane");
         
         setSimulator(&simulator);
         setUnivers(&univers);

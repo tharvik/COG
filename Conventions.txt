@@ -1,0 +1,35 @@
+= Shaders =
+
+	– Extensions –
+
+		Vertex Shader 	: .vsh
+		Fragement Shader	: .fsh
+
+	– Names –
+		
+		Base :
+			"diffX_specY_normZ.fsh"
+			X, Y, Z indicate the needed arguments. They can be replaced by :
+				- N for a number
+				- C for a color
+				- I for a intensity texture
+				- T for a color texture
+
+		More developed shaders :
+			"diffX_specY_normZ_tranU.fsh"
+			More arg can be asked as here where an arg for the transparancy is needed.
+
+=========================================================================
+
+= Object File =
+
+(ASCII)						: Version_of_the_object_file		| 1.0
+(ASCII with spaces, end marked by '\n')	: Name_in_the_game			| Large Fuel Tank
+(ASCII) 						: Type					| tank
+git
+(ASCII with spaces, end marked by '\n')	: Shader_id 't'+tex1_id 't'+tex0_id
+
+23456765677665 566 54 45 8 7 5 567 8 75 4 5 78 76 
+
+2 t5 t2
+9 234 54 345 67 8 

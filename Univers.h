@@ -25,7 +25,7 @@ private:
         Camera camera;
         Light mainLight;
         
-        Sphere sphere; // Remove ?
+        //Sphere sphere; // Remove ?
         
         // Tick
         void draw();
