@@ -44,7 +44,6 @@ size_t Univers::addObject(Object &object, Texture &texture)
 
 size_t Univers::addSphere(Sphere &theSphere)
 {
-        sphere = theSphere;
         return objects.size() - 1;
 }
 
@@ -82,7 +81,6 @@ void Univers::draw()
 	for (Object& object: objects) {
                 object.draw();
         }
-        sphere.draw();
 }
 
 void Univers::refresh()

@@ -26,7 +26,20 @@
 (ASCII)						: Version_of_the_object_file		| 1.0
 (ASCII with spaces, end marked by '\n')	: Name_in_the_game			| Large Fuel Tank
 (ASCII) 						: Type					| tank
-git
+(ASCII the path are numbered from 0)	: Number_of_meshes			| 2
+(ASCII the path are numbered from 0)	: Number_of_textures			| 3
+(ASCII with spaces, end marked by '\n')	: Path_to_tex0				| Large Fuel Tank/diffuse.jpg
+(ASCII with spaces, end marked by '\n')	: Path_to_tex1				| Large Fuel Tank/normal.jpg
+(ASCII with spaces, end marked by '\n')	: Path_to_tex2				| Large Fuel Tank/specular.jpg
+(ASCII the path are numbered from 0)	: Number_of_shaders			| 2
+(ASCII with spaces, end marked by '\n')	: Path_to_sh0				| shaders/difT_norT_specN
+(ASCII with spaces, end marked by '\n')	: Path_to_sh1				| shaders/difN_
+(ASCII, end marked by '\n')			: Number_of_vertexes			| 2'000
+(Binary floats numbered from 0)		: Vertexes_coordinates			| 3.253 -1.686 0.831 -10.403 5.256 …
+(ASCII )
+
+
+
 (ASCII with spaces, end marked by '\n')	: Shader_id 't'+tex1_id 't'+tex0_id
 
 23456765677665 566 54 45 8 7 5 567 8 75 4 5 78 76 
