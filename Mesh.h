@@ -12,6 +12,12 @@ private:
         std::vector<std::array<float, 2>> vt;
         std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
         
+	std::vector<std::array<float,3>> g_Vertices;
+
+	std::vector<unsigned short> indices;
+
+	std::array<GLuint,2> buffers;
+
 public:
         // Constructors
         Mesh();
@@ -19,7 +25,7 @@ public:
              std::vector<std::array<float, 3>> v,
              std::vector<std::array<float, 2>> vt,
              std::vector<std::array<std::array<unsigned short, 2>, 3>>
-             f);
+		     f);
         
         void draw();
         
