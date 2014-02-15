@@ -53,7 +53,13 @@ Mesh& MeshManager::load(const std::string path)
 	file.close();
 	logger::info("Parsing done for \"" + path + '\'', FL);
 
-	this->map[path] = Mesh(name, v, vt, f);
+	// TODO remove indices temporary and directly parse it
+	std::vector<unsigned short> indices;
+	for(auto i : f)
+		for(auto j : i)
+			indices.push_back(j[0] - 1);
+
+	this->map[path] = Mesh(v, indices);
 	return this->map[path];
 }
 

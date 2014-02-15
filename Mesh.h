@@ -7,25 +7,17 @@
 
 class Mesh {
 private:
-        std::string name;
-        std::vector<std::array<float, 3>> v;
-        std::vector<std::array<float, 2>> vt;
-        std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
-        
-	std::vector<std::array<float,3>> g_Vertices;
-
-	std::vector<unsigned short> indices;
-
+	unsigned int sizeIndices; 
 	std::array<GLuint,2> buffers;
 
 public:
         // Constructors
         Mesh();
-        Mesh(std::string name,
-             std::vector<std::array<float, 3>> v,
-             std::vector<std::array<float, 2>> vt,
-             std::vector<std::array<std::array<unsigned short, 2>, 3>>
-		     f);
+
+	// verticle,
+	// indices starting from 0
+        Mesh(std::vector<std::array<float, 3>> v,
+		std::vector<unsigned short> indices);
         
         void draw();
         
