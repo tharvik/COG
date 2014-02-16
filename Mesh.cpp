@@ -4,42 +4,56 @@
 Mesh::Mesh()
 {}
 
-Mesh::Mesh(std::string name,
-	std::vector<std::array<float, 3>> v,
-	std::vector<std::array<float, 2>> vt,
-	std::vector<std::array<std::array<unsigned short, 2>, 3>>
-	f) : name(name), v(v), vt(vt), f(f)
-{}
+Mesh::Mesh(std::vector<std::array<float, 3>> v,
+		std::vector<std::array<float, 2>> vt,
+		std::vector<unsigned short> indices)
+		: sizeIndices(indices.size())
+{
+	std::vector<MeshVertice> pts;
+
+	auto j = vt.begin();
+	for(auto i = v.begin(); i != v.end() && j != vt.end(); i++, j++) {
+		pts.push_back( { *i, *j } );
+	}
+
+	glGenBuffers(3, this->buffers.data());
+
+	// copy vertices
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pts[0]) * pts.size(), pts.data(), GL_STATIC_DRAW);
+
+	// copy indices
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[0]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), indices.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
 
 bool Mesh::operator<(const Mesh &b) const
 {
-	return this->name < b.name;
+	return (this->buffers[0] + this->buffers[1]) < (b.buffers[0] + b.buffers[1]);
 }
 
 void Mesh::draw()
 {
-	glBegin(GL_TRIANGLES);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	for(auto face : f) {
-		for(auto vertex: face) {
+	// setup vertices
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
+	glVertexPointer(3, GL_FLOAT, sizeof(MeshVertice), 0);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(MeshVertice), (char*) NULL + offsetof(MeshVertice,vt));
 
-			unsigned short pos = vertex[0] - 1;
-			unsigned short tex = vertex[1] - 1;
+	// draw elements
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[0]);
+	glDrawElements(GL_TRIANGLES, this->sizeIndices, GL_UNSIGNED_SHORT, 0);
 
-
-			if(tex + 1 != 0)
-			{
-				glTexCoord2f(this->vt[tex][0],
-						-this->vt[tex][1]);
-			}
-
-			glVertex3d(this->v[pos][0],
-					this->v[pos][1],
-					this->v[pos][2]);
-		}
-	}
-
-	glEnd();
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 // Destructor

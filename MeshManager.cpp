@@ -53,7 +53,18 @@ Mesh& MeshManager::load(const std::string path)
 	file.close();
 	logger::info("Parsing done for \"" + path + '\'', FL);
 
-	this->map[path] = Mesh(name, v, vt, f);
+	std::vector<std::array<float, 2>> vt_reorder;
+	vt_reorder.insert(vt_reorder.begin(), v.size(), {{ 0, 0 }} );
+	// TODO remove indices temporary and directly parse it
+	std::vector<unsigned short> indices;
+	for(auto i : f) {
+		for(auto j : i) {
+			indices.push_back(j[0] - 1);
+			vt_reorder[j[0] - 1] = vt[j[1] - 1];
+		}
+	}
+
+	this->map[path] = Mesh(v, vt_reorder, indices);
 	return this->map[path];
 }
 
