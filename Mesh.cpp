@@ -2,14 +2,26 @@
 
 // Constructors
 Mesh::Mesh()
-{}
+{
+	for(auto& a : this->buffers)
+		a = 0;
+}
+
+Mesh::Mesh(Mesh&& m)
+{
+	this->sizeIndices = m.sizeIndices;
+	this->buffers = m.buffers;
+
+	for(auto& a : m.buffers)
+		a = 0;
+}
 
 Mesh::Mesh(std::vector<std::array<float, 3>> v,
 		std::vector<std::array<float, 2>> vt,
 		std::vector<unsigned short> indices)
 		: sizeIndices(indices.size())
 {
-	glGenBuffers(3, this->buffers.data());
+	glGenBuffers(this->buffers.size(), this->buffers.data());
 
 	// copy vertices
 	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
@@ -68,4 +80,6 @@ void Mesh::draw()
 
 // Destructor
 Mesh::~Mesh()
-{}
+{
+	glDeleteBuffers(this->buffers.size(), this->buffers.data());
+}

@@ -72,7 +72,7 @@ Mesh& MeshManager::load(const std::string path)
 		}
 	}
 
-	this->map[path] = Mesh(v, vt_reorder, indices);
+	this->map.insert(std::make_pair(path, std::move(Mesh(v, vt_reorder, indices))));
 	return this->map[path];
 }
 

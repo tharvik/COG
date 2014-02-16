@@ -13,6 +13,7 @@ class Mesh {
 	public:
 		// Constructors
 		Mesh();
+		Mesh(Mesh&& m);
 
 		// v: verticle,
 		// vt: verticle texture,
