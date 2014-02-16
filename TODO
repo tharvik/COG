@@ -1,4 +1,3 @@
-* index faces in object, use buffer
 * clean stb_image.h and stb_image.c
 * add a limit to the FPS
 * make a main menu
