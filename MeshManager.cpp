@@ -54,7 +54,15 @@ Mesh& MeshManager::load(const std::string path)
 	logger::info("Parsing done for \"" + path + '\'', FL);
 
 	std::vector<std::array<float, 2>> vt_reorder;
+	
+#ifdef __APPLE__
+	std::array<float, 2> a = {0, 0};
+	vt_reorder.insert(vt_reorder.begin(), v.size(), a);
+#else
 	vt_reorder.insert(vt_reorder.begin(), v.size(), {{ 0, 0 }} );
+#endif
+
+	
 	// TODO remove indices temporary and directly parse it
 	std::vector<unsigned short> indices;
 	for(auto i : f) {

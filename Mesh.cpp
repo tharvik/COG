@@ -13,7 +13,13 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 
 	auto j = vt.begin();
 	for(auto i = v.begin(); i != v.end() && j != vt.end(); i++, j++) {
+		
+#ifdef __APPLE__
+		MeshVertice a = {*i, *j};
+		pts.push_back(a);
+#else
 		pts.push_back( { *i, *j } );
+#endif
 	}
 
 	glGenBuffers(3, this->buffers.data());
