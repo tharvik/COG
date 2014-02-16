@@ -5,21 +5,26 @@
 #include <string>
 #include <vector>
 
+struct MeshVertice {
+	std::array<float, 3> v;
+	std::array<float, 2> vt;
+};
+
 class Mesh {
 private:
-        std::string name;
-        std::vector<std::array<float, 3>> v;
-        std::vector<std::array<float, 2>> vt;
-        std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
-        
+	unsigned int sizeIndices; 
+	std::array<GLuint,3> buffers;
+
 public:
         // Constructors
         Mesh();
-        Mesh(std::string name,
-             std::vector<std::array<float, 3>> v,
-             std::vector<std::array<float, 2>> vt,
-             std::vector<std::array<std::array<unsigned short, 2>, 3>>
-             f);
+
+	// v: verticle,
+	// vt: verticle texture,
+	// indices starting from 0
+        Mesh(std::vector<std::array<float, 3>> v,
+		std::vector<std::array<float, 2>> vt,
+		std::vector<unsigned short> indices);
         
         void draw();
         
