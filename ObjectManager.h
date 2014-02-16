@@ -9,8 +9,6 @@
 
 class ObjectManager {
 private:
-        std::map<std::string,Object> map;
-        
         TextureManager textures;
         MeshManager meshs;
         ShaderManager shaders;
@@ -19,7 +17,7 @@ public:
         // Constructor
         ObjectManager();
         
-        Object& load(const std::string name);
+        Object load(const std::string name);
         
         // Destructor
         ~ObjectManager();

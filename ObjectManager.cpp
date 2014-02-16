@@ -4,25 +4,17 @@
 ObjectManager::ObjectManager()
 {}
 
-Object& ObjectManager::load(const std::string name)
+Object ObjectManager::load(const std::string name)
 {
-	const auto iter = this->map.find(name);
+	const std::string path = "Resources/objects/" + name + "/" + name;
 
-	if(iter == this->map.end()) {
+	Texture& texture(textures.load(path + ".png"));
+	Mesh& mesh(meshs.load(path + ".obj"));
+	Shader shader(shaders.load(path + ".vShader", path + ".pShader"));
 
-		const std::string path = "Resources/objects/" + name + "/" + name;
+	Object object = Object(mesh, texture, shader);
+	return object;
 
-		Texture& texture(textures.load(path + ".png"));
-		Mesh& mesh(meshs.load(path + ".obj"));
-		Shader shader(shaders.load(path + ".vShader", path + ".pShader"));
-
-		Object object = Object(mesh, texture, shader);
-		this->map[path] = object;
-		return this->map[path];
-
-	} else {
-		return iter->second;
-	}
 }
 
 // Destructor
