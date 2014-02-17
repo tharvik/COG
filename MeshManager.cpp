@@ -1,9 +1,5 @@
 #include "MeshManager.h"
 
-// Constructor
-MeshManager::MeshManager()
-{}
-
 template<typename T>
 static void fillBuffer(GLuint& buffer, std::ifstream& file, unsigned int size,
 		unsigned short dimension)
@@ -170,7 +166,3 @@ void MeshManager::cleanLine(const std::string word, const bool log)
 		logger::warn("Discarding remaining results: \"" + word + " " +
 				tmp + "\"", path, lineCount);
 }
-
-// Destructor
-MeshManager::~MeshManager()
-{}
