@@ -3,6 +3,7 @@
 // Constructors
 Mesh::Mesh()
 {
+	this->sizeIndices = 0;
 	for(auto& a : this->buffers)
 		a = 0;
 }
@@ -47,14 +48,14 @@ Mesh::Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices)
 : sizeIndices(sizeIndices), buffers(buffers)
 {}
 
-bool Mesh::operator<(const Mesh &b) const
+bool Mesh::operator<(const Mesh &m) const
 {
 	unsigned short x = 0, y = 0;
 
 	for(auto i : this->buffers)
 		x += i;
 
-	for(auto i : b.buffers)
+	for(auto i : m.buffers)
 		y += i;
 
 	return x < y;
@@ -82,7 +83,6 @@ void Mesh::draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-// Destructor
 Mesh::~Mesh()
 {
 	glDeleteBuffers((GLsizei) this->buffers.size(), this->buffers.data());
