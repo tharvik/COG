@@ -1,0 +1,3 @@
+[submodule "object-exporter"]
+	path = object-exporter
+	url = https://github.com/VianneyRousset/COG-object-exporter.git
