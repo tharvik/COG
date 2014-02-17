@@ -8,7 +8,7 @@
 class Mesh {
 	private:
 		unsigned int sizeIndices;
-		std::array<GLuint,3> buffers;
+		std::array<GLuint,4> buffers;
 
 	public:
 		// Constructors
@@ -21,6 +21,8 @@ class Mesh {
 		Mesh(std::vector<std::array<float, 3>> v,
 				std::vector<std::array<float, 2>> vt,
 				std::vector<unsigned short> indices);
+
+		Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices);
 
 		void draw();
 

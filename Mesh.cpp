@@ -43,6 +43,10 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+Mesh::Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices)
+: sizeIndices(sizeIndices), buffers(buffers)
+{}
+
 bool Mesh::operator<(const Mesh &b) const
 {
 	unsigned short x = 0, y = 0;
