@@ -4,6 +4,60 @@
 MeshManager::MeshManager()
 {}
 
+template<typename T>
+static void fillBuffer(GLuint& buffer, std::ifstream& file, unsigned int size,
+		unsigned short dimension)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, size * dimension * sizeof(T), NULL,
+			GL_STATIC_DRAW);
+	T* vertices = reinterpret_cast<T*>(
+				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	file.read(reinterpret_cast<char*>(vertices),
+			size * dimension * sizeof(T) / sizeof(char));
+}
+
+Mesh& MeshManager::loadMesh(const std::string path)
+{
+	// test if already existing
+	const auto iter = this->map.find(path);
+	if(iter != this->map.end())
+		return iter->second;
+
+	this->file.open(path, std::ifstream::binary);
+	if (!file)
+		logger::error("Unable to open \"" + path + '\'', FL);
+
+	// setup reading
+	unsigned int size;
+	std::array<GLuint,4> buffers;
+	glGenBuffers(buffers.size(), buffers.data());
+
+	// get size of vertices
+	file.read(reinterpret_cast<char*>(&size),
+			sizeof(unsigned int) / sizeof(char));
+
+	// get vertices
+	fillBuffer<float>(buffers[0], file, size, 3);
+	fillBuffer<float>(buffers[1], file, size, 2);
+	fillBuffer<float>(buffers[2], file, size, 3);
+
+	// get size of faces
+	file.read(reinterpret_cast<char*>(&size),
+			sizeof(unsigned int) / sizeof(char));
+
+	// get faces
+	fillBuffer<unsigned int>(buffers[3], file, size, 3);
+
+	// cleanup
+	file.close();
+	logger::info("Parsing done for \"" + path + '\'', FL);
+
+	this->map.insert(std::make_pair(path, std::move(Mesh(buffers, size))));
+	return this->map[path];
+}
+
+
 Mesh& MeshManager::load(const std::string path)
 {
 	// test if already existing

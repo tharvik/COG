@@ -30,6 +30,9 @@ public:
         // Constructor
         MeshManager();
         
+	// load a .mesh file, still a draft, will remplace .obj
+        Mesh& loadMesh(const std::string path);
+
         Mesh& load(const std::string path);
         
         // Destructor
