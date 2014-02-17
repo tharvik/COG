@@ -13,14 +13,10 @@
 
 class Object {
 protected:
-	// add vector parts, which are the other "objects" loaded in a obj file
-	Texture texture;
-	Shader shader;
-	GLuint UniformShadowMapId, depthTextureId;
-
 	std::set<Object> objects;
 
 	std::vector<std::tuple<Mesh*,Texture*,Shader*>> meshs;
+	unsigned short resolution;
 
 public: // TODO add vector<shader>, vector<texture>, vector<mesh>
         // Constructors
