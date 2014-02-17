@@ -5,12 +5,15 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 
-# remove builded files
+# builded
 *.a
 main
 
-# remove vim files
+# vim buffers
 .*.sw?
 
-# remove Xcode files
+# Xcode project
 COG.xcodeproj
+
+# generated doc
+doc/
