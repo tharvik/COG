@@ -1,16 +1,25 @@
 #include "MeshManager.h"
 
 template<typename T>
-static void fillBuffer(GLuint& buffer, std::ifstream& file, unsigned int size,
+static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file,
 		unsigned short dimension)
 {
+	unsigned int size;
+	file.read(reinterpret_cast<char*>(&size),
+			sizeof(unsigned int) / sizeof(char));
+
+	// get buffer from OpenGL
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, size * dimension * sizeof(T), NULL,
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(T), NULL,
 			GL_STATIC_DRAW);
 	T* vertices = reinterpret_cast<T*>(
 				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+
 	file.read(reinterpret_cast<char*>(vertices),
-			size * dimension * sizeof(T) / sizeof(char));
+			size * sizeof(T) / sizeof(char));
+	glUnmapBuffer(GL_ARRAY_BUFFER);
+
+	return size;
 }
 
 Mesh& MeshManager::loadMesh(const std::string path)
@@ -25,25 +34,14 @@ Mesh& MeshManager::loadMesh(const std::string path)
 		logger::error("Unable to open \"" + path + '\'', FL);
 
 	// setup reading
-	unsigned int size;
 	std::array<GLuint,4> buffers;
 	glGenBuffers(buffers.size(), buffers.data());
 
-	// get size of vertices
-	file.read(reinterpret_cast<char*>(&size),
-			sizeof(unsigned int) / sizeof(char));
-
 	// get vertices
-	fillBuffer<float>(buffers[0], file, size, 3);
-	fillBuffer<float>(buffers[1], file, size, 2);
-	fillBuffer<float>(buffers[2], file, size, 3);
-
-	// get size of faces
-	file.read(reinterpret_cast<char*>(&size),
-			sizeof(unsigned int) / sizeof(char));
-
-	// get faces
-	fillBuffer<unsigned int>(buffers[3], file, size, 3);
+	fillBuffer<float>(buffers[0], file, 3);
+	fillBuffer<float>(buffers[1], file, 2);
+	fillBuffer<float>(buffers[2], file, 3);
+	unsigned int size = fillBuffer<unsigned int>(buffers[3], file, 3);
 
 	// cleanup
 	file.close();
