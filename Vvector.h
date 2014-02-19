@@ -8,12 +8,7 @@
 
 class Vvector {
 private:
-
-#ifdef __APPLE__
-	std::array<float, 3> scalar = {1, 2, 3};
-#else
-	std::array<float, 3> scalar {{1, 2, 3}};
-#endif
+	std::array<float, 3> scalar;
 
 public:
 	// Constructors
