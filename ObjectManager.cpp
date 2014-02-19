@@ -1,6 +1,8 @@
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager() : path("Resources/objects/")
+#include "config.h"
+
+ObjectManager::ObjectManager() : path(LOAD_FROM)
 {}
 
 ObjectManager::ObjectManager(std::string path) :

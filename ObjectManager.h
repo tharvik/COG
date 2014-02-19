@@ -32,7 +32,7 @@ class ObjectManager {
 
 	public:
 		/**
-		 * Construct with the default path which is "Resources/objects/"
+		 * Construct with the default path
 		 */
 		ObjectManager();
 

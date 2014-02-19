@@ -46,6 +46,9 @@
 #define ANGLE_PER_PHYSIC   ANG_R
 #define ANGLE_BOOST_FACTOR 2.00
 
+// ObjectManager
+#define LOAD_FROM "Resources/objects/"
+
 
 /* ################################ PRESETS ################################ */
 
