@@ -20,10 +20,10 @@ class Mesh {
 		/**
 		 * Buffers used by OpenGL
 		 *
-		 * buffers[0] contains the indices\n
-		 * buffers[1] contains the vertices\n
-		 * buffers[2] contains the vertices on the texture\n
-		 * buffers[3] contains the normals\n
+		 * buffers[0] contains the vertices\n
+		 * buffers[1] contains the vertices on the texture\n
+		 * buffers[2] contains the normals\n
+		 * buffers[3] contains the indices\n
 		 */
 		std::array<GLuint,4> buffers;
 
@@ -85,6 +85,8 @@ class Mesh {
 		 */
 		bool operator<(const Mesh &m) const;
 
-		// Destructor
+		/**
+		 * Delete the allocated buffers
+		 */
 		~Mesh();
 };
