@@ -25,17 +25,17 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 	glGenBuffers((GLsizei) this->buffers.size(), this->buffers.data());
 
 	// copy vertices
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v[0]) * v.size(), v.data(),
 			GL_STATIC_DRAW);
 
 	// copy vertices texture
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vt[0]) * vt.size(), vt.data(),
 			GL_STATIC_DRAW);
 
 	// copy indices
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[0]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[3]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 			sizeof(indices[0]) * indices.size(),
 			indices.data(), GL_STATIC_DRAW);
@@ -46,7 +46,10 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 
 Mesh::Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices)
 : sizeIndices(sizeIndices), buffers(buffers)
-{}
+{
+	this->buffers = buffers;
+	this->sizeIndices = sizeIndices;
+}
 
 bool Mesh::operator<(const Mesh &m) const
 {
@@ -67,14 +70,16 @@ void Mesh::draw()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	// setup vertices
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
 	glTexCoordPointer(2, GL_FLOAT, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[2]);
+	glNormalPointer(3, GL_FLOAT, 0);
 
 	// draw elements
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[0]);
-	glDrawElements(GL_TRIANGLES, this->sizeIndices, GL_UNSIGNED_SHORT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[3]);
+	glDrawElements(GL_TRIANGLES, this->sizeIndices, GL_UNSIGNED_INT, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
