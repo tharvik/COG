@@ -9,9 +9,9 @@ Camera::Camera()
         o[0] = ORI_X; o[1] = ORI_Y; o[2] = ORI_Z;
         
         
-        VEC_ZERO(d);
-        VEC_NORMALIZE(o);
-        VEC_COPY(r, o);
+	this->d.setNull();
+	this->o.normalize();
+	this->r = this->o;
 }
 
 Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
@@ -26,9 +26,9 @@ Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
         o[0] = oriX; o[1] = oriY; o[2] = oriZ;
         
                 
-        VEC_ZERO(d);
-        VEC_NORMALIZE(o);
-        VEC_COPY(r, o);
+	this->d.setNull();
+	this->o.normalize();
+	this->r = this->o;
 }
 
 // Rotations
@@ -53,7 +53,7 @@ void Camera::rotate(GLdouble alpha, GLdouble beta)
                         s[0] = r[0];
                         s[1] = r[1];
                         s[2] =    0;
-                        VEC_NORMALIZE(s);
+			this->s.normalize();
                         
                         r[0] = r[0]                        * cos(beta)
                              - r[2] * s[0]                 * sin(beta);
@@ -68,7 +68,7 @@ void Camera::rotate(GLdouble alpha, GLdouble beta)
                 s[0] = r[0];
                 s[1] = r[1];
                 s[2] =    0;
-                VEC_NORMALIZE(s);
+		this->s.normalize();
                 
                 r[0] = r[0]        * cos(alpha) * cos(beta)
                      - r[1]        * sin(alpha) * cos(beta)
@@ -83,7 +83,7 @@ void Camera::rotate(GLdouble alpha, GLdouble beta)
                 r[2] = r[2]                        * cos(beta)
                      + sqrt(r[0]*r[0] + r[1]*r[1]) * sin(beta);
         }
-        VEC_NORMALIZE(r);
+	this->r.normalize();
 }
 
 void Camera::lookTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ)
@@ -91,7 +91,7 @@ void Camera::lookTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ)
         r[0] = oriX;
         r[1] = oriY;
         r[2] = oriZ;
-        VEC_NORMALIZE(r);
+	r.normalize();
 }
 
 // Translations
@@ -231,15 +231,15 @@ void Camera::keyDown(std::set<int> &keysPressed)
 // Calculate next position
 void Camera::physic(double &physicDelta)
 {
-        VEC_COPY(s, d);
-        VEC_SCALE(s, physicDelta * DIS_P, s);
-        VEC_SUM(p, s, p);
-        VEC_DIFF(d, d, s);
+	this->s = d;
+	this->s *= physicDelta * DIS_P;
+	this->p += s;
+	this->d -= this->s;
         
-        VEC_DIFF(s, r, o);
-        VEC_SCALE(s, physicDelta * ANG_P, s);
-        VEC_SUM(o, s, o);
-        VEC_NORMALIZE(o);
+	this->s = this->r - this->o;
+	this->s *= physicDelta * ANG_P;
+	this->o += s;
+	this->o.normalize();
 }
 
 // Place itself

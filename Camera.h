@@ -8,21 +8,22 @@
 #include "config.h"
 #include "Logger.h"
 #include "utilities.h"
+#include "Vvector.h"
 
 class Camera {
 private:
 	// Position vector
-	std::array<GLdouble,3> p;
+	Vvector p;
         
 	// Orientation vector
-	std::array<GLdouble,3> o;
+	Vvector o;
         
         // Movement vectors
-	std::array<GLdouble,3> d;
-	std::array<GLdouble,3> r;
+	Vvector d;
+	Vvector r;
         
         // For calculs
-	std::array<GLdouble,3> s;
+	Vvector s;
         
 public:
 	// Constructors

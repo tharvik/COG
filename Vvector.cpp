@@ -66,6 +66,11 @@ Vvector Vvector::operator^(const Vvector &a)
 				   vx*a.vy - vy*a.vx);
 }
 
+Vvector Vvector::operator*(const float a)
+{
+	return Vvector(vx * a, vy * a, vz * a);
+}
+
 void Vvector::operator+=(const Vvector &a)
 {
 	this->vx += a.vx;
@@ -87,6 +92,13 @@ void Vvector::operator^=(const Vvector &a) // doesn't work?!
 	this->vz = vx*a.vy - vy*a.vx;
 }
 
+void Vvector::operator*=(const float a)
+{
+	this->vx *= a;
+	this->vy *= a;
+	this->vz *= a;
+}
+
 double Vvector::operator*(const Vvector &a)
 {
 	return vx*a.vx + vy*a.vy + vz*a.vz;
@@ -100,6 +112,11 @@ bool Vvector::operator==(const Vvector &a)
 bool Vvector::operator!=(const Vvector &a)
 {
 	return vx != a.vx || vy != a.vy || vz != a.vz;
+}
+
+float& Vvector::operator[](const unsigned short a)
+{
+	return this->scalar[a];
 }
 
 float Vvector::x() const
