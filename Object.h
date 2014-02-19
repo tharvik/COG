@@ -54,7 +54,8 @@ class Object {
 		 * Allow ordering
 		 *
 		 * \param b Other Object to compare to
-		 * \param Return true if this < &b
+		 *
+		 * \return true if this < &b
 		 */
 		bool operator<(const Object &b) const;
 
