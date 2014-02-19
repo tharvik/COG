@@ -34,7 +34,3 @@ void Object::delObject(Object& object)
 {
 	this->objects.erase(object);
 }
-
-// Destructor
-Object::~Object()
-{}

@@ -11,25 +11,69 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+/**
+ * Represent an tuple of Mesh, Texture and Shader
+ */
 class Object {
-protected:
-	std::set<Object> objects;
+	private:
+		/**
+		 * Sub-Object, that this Object has to manage
+		 */
+		std::set<Object> objects;
 
-	std::vector<std::tuple<Mesh*,Texture*,Shader*>> meshs;
-	unsigned short resolution;
+		/**
+		 * We need a new set of Mesh/Texture/Shader at every
+		 * \ref resolution
+		 */
+		std::vector<std::tuple<Mesh*,Texture*,Shader*>> meshs;
 
-public: // TODO add vector<shader>, vector<texture>, vector<mesh>
-        // Constructors
-	Object();
-	Object(Mesh& mesh, Texture& texture, Shader& shader);
+		/**
+		 * Actual resolution of drawing
+		 *
+		 * We want to avoid spending long time drawing far object and
+		 * so, we have to know which tuple we have to draw now
+		 */
+		unsigned short resolution;
 
-	bool operator<(const Object &b) const;
+	public:
+		/**
+		 * Unusable until an object is added
+		 */
+		Object();
 
-	void addObject(Object& object);
-	void delObject(Object& object);
+		/**
+		 * Initialize with the given tuple
+		 *
+		 * \param mesh Mesh to use at resolution 0
+		 * \param texture Texture to use at resolution 0
+		 * \param shader Shader to use at resolution 0
+		 */
+		Object(Mesh& mesh, Texture& texture, Shader& shader);
 
-	void draw();
-	
-        // Destructor
-	~Object();
+		/**
+		 * Allow ordering
+		 *
+		 * \param b Other Object to compare to
+		 * \param Return true if this < &b
+		 */
+		bool operator<(const Object &b) const;
+
+		/**
+		 * Push back an Object to the \ref meshs
+		 *
+		 * \param object Object to add
+		 */
+		void addObject(Object& object);
+
+		/**
+		 * Erase an Object from the \ref meshs
+		 *
+		 * \param object Object to erase
+		 */
+		void delObject(Object& object);
+
+		/**
+		 * Draw at the current \ref resolution and its sub-Object
+		 */
+		void draw();
 };
