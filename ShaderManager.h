@@ -6,16 +6,21 @@
 
 #include "Shader.h"
 
+/**
+ * Load and return Shader
+ */
 class ShaderManager {
-private:
-        std::map<std::string,Shader> map;
-        
-public:
-        // Constructor
-        ShaderManager();
-        
-        Shader& load(std::string&& pathV, std::string&& pathP);
-        
-        // Destructor
-        ~ShaderManager();
+	private:
+		/**
+		 * Map containing the already loaded Shader
+		 */
+		std::map<std::string,Shader> map;
+
+	public:
+		/**
+		 * Return the Shader at the given path
+		 *
+		 * \return The wanted Shader
+		 */
+		Shader& load(std::string&& pathV, std::string&& pathP);
 };

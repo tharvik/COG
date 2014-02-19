@@ -1,8 +1,6 @@
 #include "TextureManager.h"
 
-// Constructor
-TextureManager::TextureManager()
-{}
+#include "stb_image.h"
 
 Texture& TextureManager::load(const std::string path)
 {
@@ -38,7 +36,3 @@ Texture& TextureManager::load(const std::string path)
 		return iter->second;
 	}
 }
-
-// Destructor
-TextureManager::~TextureManager()
-{}
