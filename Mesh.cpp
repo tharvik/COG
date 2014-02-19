@@ -19,7 +19,7 @@ Mesh::Mesh(Mesh&& m)
 
 Mesh::Mesh(std::vector<std::array<float, 3>> v,
 		std::vector<std::array<float, 2>> vt,
-		std::vector<unsigned short> indices)
+		std::vector<unsigned int> indices)
 		: sizeIndices((GLsizei) indices.size())
 {
 	glGenBuffers((GLsizei) this->buffers.size(), this->buffers.data());

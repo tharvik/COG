@@ -73,7 +73,7 @@ Mesh& MeshManager::load(const std::string path)
 	std::string name;
 	std::vector<std::array<float, 3>> v;
 	std::vector<std::array<float, 2>> vt;
-	std::vector<std::array<std::array<unsigned short, 2>, 3>> f;
+	std::vector<std::array<std::array<unsigned int, 2>, 3>> f;
 
 	if (!file)
 		logger::error("Unable to open \"" + path + '\'', FL);
@@ -117,7 +117,7 @@ Mesh& MeshManager::load(const std::string path)
 
 	
 	// TODO remove indices temporary and directly parse it
-	std::vector<unsigned short> indices;
+	std::vector<unsigned int> indices;
 	for(auto i : f) {
 		for(auto j : i) {
 			indices.push_back(j[0] - 1);
@@ -139,10 +139,10 @@ std::array<float, size> MeshManager::parseV()
 	return array;
 }
 
-std::array<std::array<unsigned short, 2>, 3>
+std::array<std::array<unsigned int, 2>, 3>
 	MeshManager::parseF()
 {
-	std::array<std::array<unsigned short, 2>, 3> array;
+	std::array<std::array<unsigned int, 2>, 3> array;
 	for(unsigned short i = 0; i < array.size(); i++) {
 
 		file >> array[i][0];

@@ -33,7 +33,7 @@ class MeshManager {
 		 *
 		 * \return Parsed face
 		 */
-		std::array<std::array<unsigned short, 2>, 3> parseF();
+		std::array<std::array<unsigned int, 2>, 3> parseF();
 
 		/**
 		 * Discard the remaining line

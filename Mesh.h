@@ -57,7 +57,7 @@ class Mesh {
 		 */
 		Mesh(std::vector<std::array<float, 3>> v,
 				std::vector<std::array<float, 2>> vt,
-				std::vector<unsigned short> indices);
+				std::vector<unsigned int> indices);
 
 		/**
 		 * Construct with the given buffers and number of indices
