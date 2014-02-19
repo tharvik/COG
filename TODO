@@ -2,6 +2,12 @@
 * add a limit to the FPS
 * make a main menu
 * beautifulize the resizing
+* fix texture mapping
+* fix remaining leaks
+* remove dependencies on SDL
+
+AntoninRousset
+* fix warning during compilation in Camera, eventHandler, Sphere and Univers
 
 VianneyRousset
 * generate a new mountain without edges
