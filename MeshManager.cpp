@@ -1,8 +1,9 @@
 #include "MeshManager.h"
 
+#include "Logger.h"
+
 template<typename T>
-static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file,
-		unsigned short dimension)
+static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file)
 {
 	unsigned int size;
 	file.read(reinterpret_cast<char*>(&size),
@@ -14,10 +15,14 @@ static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file,
 			GL_STATIC_DRAW);
 	T* vertices = reinterpret_cast<T*>(
 				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	if(vertices == NULL)
+		logger::error("Fail to allocate graphic memory", FL);
 
 	file.read(reinterpret_cast<char*>(vertices),
 			size * sizeof(T) / sizeof(char));
-	glUnmapBuffer(GL_ARRAY_BUFFER);
+
+	if(!glUnmapBuffer(GL_ARRAY_BUFFER))
+		logger::error("Fail to unmap buffer during .mesh loading", FL);
 
 	return size;
 }
@@ -38,10 +43,10 @@ Mesh& MeshManager::loadMesh(const std::string path)
 	glGenBuffers(buffers.size(), buffers.data());
 
 	// get vertices
-	fillBuffer<float>(buffers[0], file, 3);
-	fillBuffer<float>(buffers[1], file, 2);
-	fillBuffer<float>(buffers[2], file, 3);
-	unsigned int size = fillBuffer<unsigned int>(buffers[3], file, 3);
+	fillBuffer<float>(buffers[0], file);
+	fillBuffer<float>(buffers[1], file);
+	fillBuffer<float>(buffers[2], file);
+	unsigned int size = fillBuffer<unsigned int>(buffers[3], file);
 
 	// cleanup
 	file.close();
