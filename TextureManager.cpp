@@ -2,7 +2,7 @@
 
 #include "stb_image.h"
 
-Texture& TextureManager::load(const std::string path)
+Texture& TextureManager::load(const std::string& path)
 {
 	const auto iter = this->map.find(path);
 

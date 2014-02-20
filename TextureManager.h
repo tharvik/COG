@@ -25,5 +25,5 @@ class TextureManager {
 		 *
 		 * \return The wanted Texture
 		 */
-		Texture& load(const std::string path);
+		Texture& load(const std::string& path);
 };

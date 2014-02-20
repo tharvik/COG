@@ -27,7 +27,7 @@ static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file)
 	return size;
 }
 
-Mesh& MeshManager::loadMesh(const std::string path)
+Mesh& MeshManager::loadMesh(const std::string& path)
 {
 	// test if already existing
 	const auto iter = this->map.find(path);
@@ -57,7 +57,7 @@ Mesh& MeshManager::loadMesh(const std::string path)
 }
 
 
-Mesh& MeshManager::load(const std::string path)
+Mesh& MeshManager::load(const std::string& path)
 {
 	// test if already existing
 	const auto iter = this->map.find(path);
@@ -158,7 +158,7 @@ std::array<std::array<unsigned int, 2>, 3>
 	return array;
 }
 
-void MeshManager::cleanLine(const std::string word, const bool log)
+void MeshManager::cleanLine(const std::string& word, const bool log)
 {
 	lineCount++;
 

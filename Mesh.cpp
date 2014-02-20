@@ -46,10 +46,7 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 
 Mesh::Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices)
 : sizeIndices(sizeIndices), buffers(buffers)
-{
-	this->buffers = buffers;
-	this->sizeIndices = sizeIndices;
-}
+{}
 
 bool Mesh::operator<(const Mesh &m) const
 {

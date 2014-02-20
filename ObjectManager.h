@@ -41,7 +41,7 @@ class ObjectManager {
 		 *
 		 * \param path The relative \ref path
 		 */
-		ObjectManager(std::string path);
+		ObjectManager(const std::string& path);
 
 		/**
 		 * Load the Object with the given name
@@ -50,5 +50,5 @@ class ObjectManager {
 		 *
 		 * \return The Object of the given name
 		 */
-		Object load(const std::string name);
+		Object load(const std::string& name);
 };

@@ -5,11 +5,11 @@
 ObjectManager::ObjectManager() : path(LOAD_FROM)
 {}
 
-ObjectManager::ObjectManager(std::string path) :
+ObjectManager::ObjectManager(const std::string& path) :
 	path((path[path.size() - 1] == '/') ? path : path + '/')
 {}
 
-Object ObjectManager::load(const std::string name)
+Object ObjectManager::load(const std::string& name)
 {
 	const std::string path = this->path + name + "/" + name;
 	Texture& texture(textures.load(path + ".png"));

@@ -44,7 +44,7 @@ class MeshManager {
 		 * \param word The parsing word
 		 * \param log True if we have to logger the remaining line
 		 */
-		void cleanLine(const std::string word, const bool log);
+		void cleanLine(const std::string& word, const bool log);
 
 		/**
 		 * Map of already loaded file
@@ -87,7 +87,7 @@ class MeshManager {
 		 *
 		 * \return A reference to the wanted Mesh
 		 */
-		Mesh& loadMesh(const std::string path);
+		Mesh& loadMesh(const std::string& path);
 
 		/**
 		 * Load the file at the given path
@@ -96,5 +96,5 @@ class MeshManager {
 		 *
 		 * \return A reference to the wanted Mesh
 		 */
-		Mesh& load(const std::string path);
+		Mesh& load(const std::string& path);
 };
