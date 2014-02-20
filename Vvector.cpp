@@ -1,5 +1,7 @@
 #include "Vvector.h"
 
+#include <assert.h>
+
 #define vx scalar[0]
 #define vy scalar[1]
 #define vz scalar[2]
@@ -49,24 +51,24 @@ void Vvector::print() const
 			  << ") length: " << this->length() << std::endl;
 }
 
-Vvector Vvector::operator+(const Vvector &a)
+Vvector Vvector::operator+(const Vvector &a) const
 {
 	return Vvector(vx + a.vx, vy + a.vy, vz + a.vz);
 }
 
-Vvector Vvector::operator-(const Vvector &a)
+Vvector Vvector::operator-(const Vvector &a) const
 {
 	return Vvector(vx - a.vx, vy - a.vy, vz - a.vz);
 }
 
-Vvector Vvector::operator^(const Vvector &a)
+Vvector Vvector::operator^(const Vvector &a) const
 {
 	return Vvector(vy*a.vz - vz*a.vy,
 				   vz*a.vx - vx*a.vz,
 				   vx*a.vy - vy*a.vx);
 }
 
-Vvector Vvector::operator*(const float a)
+Vvector Vvector::operator*(const float a) const
 {
 	return Vvector(vx * a, vy * a, vz * a);
 }
@@ -99,23 +101,24 @@ void Vvector::operator*=(const float a)
 	this->vz *= a;
 }
 
-double Vvector::operator*(const Vvector &a)
+double Vvector::operator*(const Vvector &a) const
 {
 	return vx*a.vx + vy*a.vy + vz*a.vz;
 }
 
-bool Vvector::operator==(const Vvector &a)
+bool Vvector::operator==(const Vvector &a) const
 {
 	return vx == a.vx && vy == a.vy && vz == a.vz;
 }
 
-bool Vvector::operator!=(const Vvector &a)
+bool Vvector::operator!=(const Vvector &a) const
 {
 	return vx != a.vx || vy != a.vy || vz != a.vz;
 }
 
 float& Vvector::operator[](const unsigned short a)
 {
+	assert(a >= 0 && a < this->scalar.size());
 	return this->scalar[a];
 }
 
@@ -138,10 +141,6 @@ std::array<float, 3> Vvector::scalars() const
 {
 	return this->scalar;
 }
-
-// Destructor
-Vvector::~Vvector()
-{}
 
 #undef vx
 #undef vy

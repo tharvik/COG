@@ -69,7 +69,7 @@ class Vvector {
 		 *
 		 * \return Resulting Vvector
 		 */
-		Vvector operator+(Vvector const& a);
+		Vvector operator+(Vvector const& a) const;
 
 		/**
 		 * Substract this Vvector with the given one
@@ -78,7 +78,7 @@ class Vvector {
 		 *
 		 * \return Resulting Vvector
 		 */
-		Vvector operator-(Vvector const& a);
+		Vvector operator-(Vvector const& a) const;
 
 		/**
 		 * Cross product this Vvector with the given one
@@ -87,7 +87,7 @@ class Vvector {
 		 *
 		 * \return Resulting Vvector
 		 */
-		Vvector operator^(Vvector const& a);  // vector product
+		Vvector operator^(Vvector const& a) const;
 
 		/**
 		 * Multiply this Vvector by the given factor
@@ -96,7 +96,7 @@ class Vvector {
 		 *
 		 * \return Resulting Vvector
 		 */
-		Vvector operator*(const float a);     // scale
+		Vvector operator*(const float a) const;
 
 		/**
 		 * Add to this Vvector, the given one
@@ -117,28 +117,76 @@ class Vvector {
 		 *
 		 * \param a Vvector to cross product to
 		 */
-		void	operator^=(Vvector const& a); // vector product
+		void	operator^=(Vvector const& a);
 
 		/**
 		 * Update this Vvector by multipling by the given factor
 		 *
 		 * \param a Factor
 		 */
-		void	operator*=(const float a);    // scale
+		void	operator*=(const float a);
 
-		double operator*(Vvector const& a);   // dot product
+		/**
+		 * Dot product this Vvector with the given one
+		 *
+		 * \param a to dot product
+		 *
+		 * \return Result
+		 */
+		double operator*(Vvector const& a) const;
 
-		bool	operator==(Vvector const& a);
-		bool	operator!=(Vvector const& a);
+		/**
+		 * Test if the given Vvector is equal
+		 *
+		 * \param a to test
+		 *
+		 * \return true if it is equal
+		 */
+		bool	operator==(Vvector const& a) const;
 
+		/**
+		 * Test if the given Vvector is different
+		 *
+		 * \param a to test
+		 *
+		 * \return true if it is different
+		 */
+		bool	operator!=(Vvector const& a) const;
+
+		/**
+		 * Return a reference of the value at given indices
+		 *
+		 * \param a Indice in \ref scalar to return
+		 *
+		 * \return Reference of the value at the given indice
+		 */
 		float&	operator[](const unsigned short a);
 
-		// Getters
+		/**
+		 * Return the value of x
+		 *
+		 * \return The value of x
+		 */
 		float x() const;
-		float y() const;
-		float z() const;
-		std::array<float, 3> scalars() const;
 
-		// Destructor
-		~Vvector();
+		/**
+		 * Return the value of y
+		 *
+		 * \return The value of y
+		 */
+		float y() const;
+
+		/**
+		 * Return the value of z
+		 *
+		 * \return The value of z
+		 */
+		float z() const;
+
+		/**
+		 * Return a copy of \ref scalar
+		 *
+		 * \return a copy of \ref scalar
+		 */
+		std::array<float, 3> scalars() const;
 };
