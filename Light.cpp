@@ -6,13 +6,14 @@ Light::Light()
 	p.setNull();
 }
 
-Light::Light(Vvector position, Vvector direction)
+Light::Light(const Vvector& position, const Vvector& direction)
 {
 	p = position;
 	d = direction;
 }
 
-Light::Light(float px, float py, float pz, float dx, float dy, float dz)
+Light::Light(const float px, const float py, const float pz, const float dx,
+		const float dy, const float dz)
 {
 	p.set(px, py, pz);
 	d.set(dx, dy, dz);

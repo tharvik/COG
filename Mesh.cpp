@@ -1,25 +1,21 @@
 #include "Mesh.h"
 
 // Constructors
-Mesh::Mesh()
+Mesh::Mesh() : sizeIndices(0)
 {
-	this->sizeIndices = 0;
 	for(auto& a : this->buffers)
 		a = 0;
 }
 
-Mesh::Mesh(Mesh&& m)
+Mesh::Mesh(Mesh&& m) : sizeIndices(m.sizeIndices), buffers(m.buffers)
 {
-	this->sizeIndices = m.sizeIndices;
-	this->buffers = m.buffers;
-
 	for(auto& a : m.buffers)
 		a = 0;
 }
 
-Mesh::Mesh(std::vector<std::array<float, 3>> v,
-		std::vector<std::array<float, 2>> vt,
-		std::vector<unsigned int> indices)
+Mesh::Mesh(const std::vector<std::array<float, 3>>& v,
+		const std::vector<std::array<float, 2>>& vt,
+		const std::vector<unsigned int>& indices)
 		: sizeIndices((GLsizei) indices.size())
 {
 	glGenBuffers((GLsizei) this->buffers.size(), this->buffers.data());
@@ -44,7 +40,7 @@ Mesh::Mesh(std::vector<std::array<float, 3>> v,
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-Mesh::Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices)
+Mesh::Mesh(const std::array<GLuint,4>& buffers, const unsigned int sizeIndices)
 : sizeIndices(sizeIndices), buffers(buffers)
 {}
 
@@ -61,7 +57,7 @@ bool Mesh::operator<(const Mesh &m) const
 	return x < y;
 }
 
-void Mesh::draw()
+void Mesh::draw() const
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);

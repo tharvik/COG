@@ -28,20 +28,21 @@ private:
         //Sphere sphere; // Remove ?
         
         // Tick
-        void draw();
+        void draw() const;
 public:
         // Constructors
         Univers();
-        Univers(GLdouble posX, GLdouble posY, GLdouble posZ, GLdouble anglePhi,
-                GLdouble angleTeta, GLdouble anglepsi);
+        Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
+			const GLdouble anglePhi, const GLdouble angleTeta,
+			const GLdouble anglepsi);
         
         // Modifiers
-        size_t addObject(std::string &name); // Not tested
-        size_t addObject(std::string &&name); // Not tested
-        size_t addObject(Object &object); // Not tested
-        size_t addObject(Object &object, Texture &texture); // Not tested
+        size_t addObject(const std::string &name); // Not tested
+        size_t addObject(const std::string &&name); // Not tested
+        size_t addObject(const Object &object); // Not tested
+        size_t addObject(const Object &object, const Texture &texture); // Not tested
         
-        size_t addSphere(Sphere &theSphere); // To remove!
+        size_t addSphere(const Sphere &theSphere); // To remove!
         
         // Informations
         void printInfo();

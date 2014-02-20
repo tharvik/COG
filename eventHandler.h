@@ -21,18 +21,18 @@ void setUnivers(Univers* theUnivers);
 
 // Window and display handling
 void displayHandler();
-void windowResizingHandler(int width, int height);
-void windowStatusHandler(int state);
+void windowResizingHandler(const int width, const int height);
+void windowStatusHandler(const int state);
 #ifdef __APPLE__
 void windowClosingHandler();
 #endif
 
 // Keyboard handling
-void keyboard(int value);
-void keyDown(unsigned char key, int x, int y);
-void specialKeyDown(int key, int x, int y);
-void keyUp(unsigned char key, int x, int y);
+void keyboard(const int value);
+void keyDown(const unsigned char key, const int x, const int y);
+void specialKeyDown(const int key, const int x, const int y);
+void keyUp(const unsigned char key, const int x, const int y);
 
 // Mouse handling
-void mouseHandler(int button, int state, int x, int y);
-void motionHandler(int width, int height);
+void mouseHandler(const int button, const int state, const int x, const int y);
+void motionHandler(const int width, const int height);

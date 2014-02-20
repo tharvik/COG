@@ -10,7 +10,7 @@ Object::Object(Mesh& mesh, Texture& texture, Shader& shader) : resolution(0)
 	this->meshs.push_back(tuple);
 }
 
-void Object::draw()
+void Object::draw() const
 {
 	std::get<2>(this->meshs[this->resolution])->use();
 	std::get<1>(this->meshs[this->resolution])->bindTexture();

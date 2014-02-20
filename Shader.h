@@ -9,24 +9,29 @@ class Shader {
 private:
 	GLuint vertexShader, pixelShader, program;
 
-	void createShaders(std::string&  vShaderPath, std::string&  pShaderPath);
-	char* loadFileASCII(std::string& filePath);
-	void compileShaders(std::string& vShaderPath, std::string& pShaderPath);
-	void createProgram(std::string& vShaderPath, std::string& pShaderPath);
-	void linkProgram(std::string& vShaderPath, std::string& pShaderPath);
+	void createShaders(const std::string&  vShaderPath,
+			const std::string&  pShaderPath);
+	char* loadFileASCII(const std::string& filePath);
+	void compileShaders(const std::string& vShaderPath,
+			const std::string& pShaderPath);
+	void createProgram(const std::string& vShaderPath,
+			const std::string& pShaderPath);
+	void linkProgram(const std::string& vShaderPath,
+			const std::string& pShaderPath);
 	
 public:
 	// Constructors
 	Shader();
-	Shader(std::string& vShaderPath, std::string& pShaderPath);
-	Shader(std::string&& vShaderPath, std::string&& pShaderPath);
+	Shader(const std::string& vShaderPath, const std::string& pShaderPath);
+	Shader(const std::string&& vShaderPath,
+			const std::string&& pShaderPath);
 
 	void use();
 	
 	// Getters
-	GLuint getShaderId();
-	GLuint getvShaderId();
-	GLuint getpShaderId();
+	GLuint getShaderId() const;
+	GLuint getvShaderId() const;
+	GLuint getpShaderId() const;
 
 	bool operator<(const Shader &b) const;
         

@@ -15,7 +15,7 @@ class Mesh {
 		/**
 		 * Number of indices to draw
 		 */
-		unsigned int sizeIndices;
+		const unsigned int sizeIndices;
 
 		/**
 		 * Buffers used by OpenGL
@@ -55,9 +55,9 @@ class Mesh {
 		 * \param vt Vertices on the texture
 		 * \param indices Indices to write
 		 */
-		Mesh(std::vector<std::array<float, 3>> v,
-				std::vector<std::array<float, 2>> vt,
-				std::vector<unsigned int> indices);
+		Mesh(const std::vector<std::array<float, 3>>& v,
+				const std::vector<std::array<float, 2>>& vt,
+				const std::vector<unsigned int>& indices);
 
 		/**
 		 * Construct with the given buffers and number of indices
@@ -66,14 +66,15 @@ class Mesh {
 		 *
 		 * \param sizeIndices Number of indices to draw
 		 */
-		Mesh(std::array<GLuint,4> buffers, unsigned int sizeIndices);
+		Mesh(const std::array<GLuint,4>& buffers,
+				const unsigned int sizeIndices);
 
 		/**
 		 * Draw itself
 		 *
 		 * Bettre use it after binding the texture
 		 */
-		void draw();
+		void draw() const;
 
 		/**
 		 * Implement the less operator based on the values of the

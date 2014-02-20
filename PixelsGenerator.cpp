@@ -1,6 +1,7 @@
 #include "PixelsGenerator.h"
 
-GLubyte* generateRandomPixels(GLushort width, GLushort height, GLubyte depth)
+GLubyte* generateRandomPixels(const GLushort width, const GLushort height,
+		const GLubyte depth)
 {
 	srand((int) time(NULL));
 
@@ -12,7 +13,8 @@ GLubyte* generateRandomPixels(GLushort width, GLushort height, GLubyte depth)
 	return pixels;
 }
 
-GLubyte* generateUVgrid(GLushort width, GLushort height, GLubyte depth)
+GLubyte* generateUVgrid(const GLushort width, const GLushort height,
+		const GLubyte depth)
 {
 	GLubyte* pixels = (GLubyte*) calloc(width * height * depth, sizeof(GLubyte));
 	

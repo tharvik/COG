@@ -34,7 +34,7 @@ public:
         Simulator();
         Simulator(Univers *univers);
         
-        void printInfo();
+        void printInfo() const;
         
         void refresh();
         void physic();

@@ -1,3 +1,3 @@
 #pragma once
 
-bool optionsStatut8b(char options, unsigned char p);
+bool optionsStatut8b(const char options, const unsigned char p);

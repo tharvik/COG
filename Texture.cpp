@@ -293,7 +293,7 @@ void Texture::load(const std::string&& path, enum imageFileFormat fileFormat)
         }
 }
 
-GLushort findDepth(int &format)
+GLushort Texture::findDepth(const int format) const
 {
         switch (format) {
         case GL_LUMINANCE:
@@ -308,24 +308,9 @@ GLushort findDepth(int &format)
                 return 3;
         }
 }
-GLushort findDepth(int &&format)
-{
-        switch (format) {
-                case GL_LUMINANCE:
-                        return 1;
-                case GL_RGB:
-                case GL_BGR:
-                        return 3;
-                case GL_BGRA:
-                case GL_ABGR_EXT:
-                        return 4;
-                default:
-                        return 3;
-        }
-}
 
-void Texture::createTexture(GLushort &w, GLushort &h, int format,
-                            GLubyte* pixels)
+void Texture::createTexture(const GLushort w, const GLushort h,
+				const int format, const GLubyte* pixels)
 {
         glGenTextures(1, &this->imageId);
         glBindTexture(GL_TEXTURE_2D, this->imageId);
@@ -334,21 +319,21 @@ void Texture::createTexture(GLushort &w, GLushort &h, int format,
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 }
 
-GLushort Texture::getWidth()
+GLushort Texture::getWidth() const
 {
         int width;
         glGetTexLevelParameteriv(this->imageId, 0, GL_TEXTURE_WIDTH, &width);
 	return (GLushort) width;
 }
 
-GLushort Texture::getHeight()
+GLushort Texture::getHeight() const
 {
         int height;
         glGetTexLevelParameteriv(this->imageId, 0, GL_TEXTURE_HEIGHT, &height);
 	return (GLushort) height;
 }
 
-GLenum Texture::getFormat()
+GLenum Texture::getFormat() const
 {
         int format;
         glGetTexLevelParameteriv(this->imageId, 0, GL_TEXTURE_INTERNAL_FORMAT,
@@ -356,19 +341,19 @@ GLenum Texture::getFormat()
 	return format;
 }
 
-GLubyte* Texture::getPixels()
+GLubyte* Texture::getPixels() const
 {
         GLubyte *pixels = nullptr;
         glGetTexImage(this->imageId, 0, getFormat(), GL_UNSIGNED_BYTE, pixels);
 	return pixels;
 }
 
-bool Texture::isValid()
+bool Texture::isValid() const
 {
         return valid;
 }
 
-void Texture::bindTexture()
+void Texture::bindTexture() const
 {
         glBindTexture(GL_TEXTURE_2D, this->imageId);
 }

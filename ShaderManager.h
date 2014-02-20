@@ -22,5 +22,6 @@ class ShaderManager {
 		 *
 		 * \return The wanted Shader
 		 */
-		Shader& load(std::string&& pathV, std::string&& pathP);
+		Shader& load(const std::string& pathV,
+				const std::string& pathP);
 };

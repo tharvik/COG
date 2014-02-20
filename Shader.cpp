@@ -3,7 +3,7 @@
 Shader::Shader()
 {}
 
-Shader::Shader(std::string& vShaderPath, std::string& pShaderPath)
+Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
 {
 	createShaders(vShaderPath, pShaderPath);	
 	compileShaders(vShaderPath, pShaderPath);
@@ -23,7 +23,7 @@ Shader::Shader(std::string& vShaderPath, std::string& pShaderPath)
 	logger::info("Shader created.", FL);
 }
 
-Shader::Shader(std::string&& vShaderPath, std::string&& pShaderPath)
+Shader::Shader(const std::string&& vShaderPath, const std::string&& pShaderPath)
 {
 	createShaders(vShaderPath, pShaderPath);	
 	compileShaders(vShaderPath, pShaderPath);
@@ -42,7 +42,8 @@ Shader::Shader(std::string&& vShaderPath, std::string&& pShaderPath)
 	logger::info("Shader created.", FL);
 }
 
-void Shader::createShaders(std::string& vShaderPath, std::string& pShaderPath)
+void Shader::createShaders(const std::string& vShaderPath,
+		const std::string& pShaderPath)
 {
 	// creation of the vertex and pixel shaders ID + verifications
 	this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -68,7 +69,7 @@ void Shader::createShaders(std::string& vShaderPath, std::string& pShaderPath)
 
 }
 
-char* Shader::loadFileASCII(std::string& filePath)
+char* Shader::loadFileASCII(const std::string& filePath)
 {
 	int length;
 	std::ifstream file(filePath);
@@ -100,7 +101,8 @@ char* Shader::loadFileASCII(std::string& filePath)
 	return str;
 }
 
-void Shader::compileShaders(std::string& vShaderPath, std::string& pShaderPath)
+void Shader::compileShaders(const std::string& vShaderPath,
+		const std::string& pShaderPath)
 {
 	GLint CompileStatus = true;
 	GLint CompileLogSize;
@@ -151,7 +153,8 @@ void Shader::compileShaders(std::string& vShaderPath, std::string& pShaderPath)
 		free(pCompileLog);
 }
 
-void Shader::createProgram(std::string &vShaderPath, std::string &pShaderPath)
+void Shader::createProgram(const std::string &vShaderPath,
+		const std::string &pShaderPath)
 {
 	// create program Id
 	this->program = glCreateProgram();
@@ -166,7 +169,8 @@ void Shader::createProgram(std::string &vShaderPath, std::string &pShaderPath)
 					  + vShaderPath + " and " + pShaderPath, FL);
 }
 
-void Shader::linkProgram(std::string &vShaderPath, std::string &pShaderPath)
+void Shader::linkProgram(const std::string &vShaderPath,
+		const std::string &pShaderPath)
 {
 	GLint linkingStatus = true;
 	GLint linkingLogSize;
@@ -202,17 +206,17 @@ void Shader::use()
 	glUseProgram(this->program);
 }
 
-GLuint Shader::getShaderId()
+GLuint Shader::getShaderId() const
 {
 	return this->program;
 }
 
-GLuint Shader::getvShaderId()
+GLuint Shader::getvShaderId() const
 {
 	return this->vertexShader;
 }
 
-GLuint Shader::getpShaderId()
+GLuint Shader::getpShaderId() const
 {
 	return this->pixelShader;
 }

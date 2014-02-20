@@ -20,14 +20,14 @@ public:
         // Constructor
         Sphere();
         
-        void movX(int x);
-        void movY(int y);
-        void movZ(int z);
+        void movX(const int x);
+        void movY(const int y);
+        void movZ(const int z);
         
         void enableGravity();
         
-        void physic(double &physicDelta);
-        void draw();
+        void physic(const double &physicDelta);
+        void draw() const;
         
         // Destructor
         ~Sphere();

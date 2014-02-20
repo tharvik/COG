@@ -36,40 +36,44 @@ private:
 	GLuint imageId = 0;
 	
         int findPixelFormat(SDL_Surface *surface);
-        GLushort findDepth(int  &format);
-        GLushort findDepth(int &&format);
-        void createTexture(GLushort &width, GLushort &height, int format,
-                           GLubyte* pixels);
+        GLushort findDepth(const int format) const;
+        void createTexture(const GLushort width, const GLushort height,
+			const int format, const GLubyte* pixels);
 public:
 	// Constructors
         Texture();
-        Texture(GLushort width, GLushort height, GLushort depth,
-                enum imageGenerationOption options);
-        Texture(GLushort width, GLushort height, int format,
+        Texture(const GLushort width, const GLushort height,
+			const GLushort depth,
+			const enum imageGenerationOption options);
+        Texture(const GLushort width, const GLushort height, const int format,
 		unsigned char* buffer);
         
         Texture(const std::string&  path);
         Texture(const std::string&& path);
-	Texture(const std::string&  path, enum imageFileFormat fileFormat); // Not tested
-        Texture(const std::string&& path, enum imageFileFormat fileFormat); // Not tested
+	Texture(const std::string&  path,
+			const enum imageFileFormat fileFormat); // Not tested
+        Texture(const std::string&& path,
+			const enum imageFileFormat fileFormat); // Not tested
 	
         // Loaders
         void load(const std::string&  path); // Not tested
         void load(const std::string&& path); // Not tested
         
-	void load(const std::string&  path, enum imageFileFormat fileFormat); // Not tested
-        void load(const std::string&& path, enum imageFileFormat fileFormat); // Not tested
+	void load(const std::string&  path,
+			const enum imageFileFormat fileFormat); // Not tested
+        void load(const std::string&& path,
+			const enum imageFileFormat fileFormat); // Not tested
         
 	// Getters
-	GLushort getWidth(); // Not tested
-	GLushort getHeight(); // Not tested
-	GLenum	 getFormat(); // Not tested
-	GLubyte* getPixels(); // Not tested
+	GLushort getWidth() const; // Not tested
+	GLushort getHeight() const; // Not tested
+	GLenum	 getFormat() const; // Not tested
+	GLubyte* getPixels() const; // Not tested
         
-        bool     isValid();
+        bool     isValid() const;
 	
 	// bind as the current texture
-	void bindTexture();
+	void bindTexture() const;
 
 	bool operator<(const Texture &b) const;
 

@@ -28,12 +28,12 @@ void displayHandler()
         //univers->refresh(SWAP);
 }
 
-void windowResizingHandler(int width, int height)
+void windowResizingHandler(const int width, const int height)
 {
         glViewport(0, 0, (GLsizei) width, (GLsizei) height);
 }
 
-void windowStatusHandler(int state)
+void windowStatusHandler(const int state)
 {
         switch (state) {
                 case GLUT_HIDDEN:
@@ -60,17 +60,17 @@ void windowClosingHandler()
 #endif
 
 // Keyboard handling
-void keyDown(unsigned char key, int x, int y)
+void keyDown(const unsigned char key, const int x, const int y)
 {
         keysPressed.insert(key);
 }
 
-void specialKeyDown(int key, int x, int y)
+void specialKeyDown(const int key, const int x, const int y)
 {
         keysPressed.insert(key + 255);
 }
 
-void keyUp(unsigned char key, int x, int y)
+void keyUp(const unsigned char key, const int x, const int y)
 {
         if (key >= 'a' && key <= 'z') {
                 keysPressed.erase(key);
@@ -81,7 +81,7 @@ void keyUp(unsigned char key, int x, int y)
         }
 }
 
-void keyboard(int value)
+void keyboard(const int value)
 {
         if (keysPressed.count('f')) {
                 if (glutGet(GLUT_WINDOW_HEIGHT) == glutGet(GLUT_SCREEN_HEIGHT)
@@ -111,12 +111,12 @@ void keyboard(int value)
 }
 
 // Mouse handling
-void mouseHandler(int button, int state, int x, int y)
+void mouseHandler(const int button, const int state, const int x, const int y)
 {
         // click, click...
 }
 
-void motionHandler(int width, int height)
+void motionHandler(const int width, const int height)
 {
         // drag...
 }

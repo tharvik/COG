@@ -13,15 +13,15 @@ Sphere::Sphere()
         gravity = false;
 }
 
-void Sphere::movX(int x)
+void Sphere::movX(const int x)
 {
         v[0] += x * 0.1;
 }
-void Sphere::movY(int y)
+void Sphere::movY(const int y)
 {
         v[1] -= y * 0.1;
 }
-void Sphere::movZ(int z)
+void Sphere::movZ(const int z)
 {
         v[2] += z * 0.1;
 }
@@ -31,7 +31,7 @@ void Sphere::enableGravity()
         gravity = true;
 }
 
-void Sphere::physic(double &physicDelta)
+void Sphere::physic(const double &physicDelta)
 {
         a[0] = 0; a[1] = 0; a[2] = 0;
         
@@ -69,7 +69,7 @@ void Sphere::physic(double &physicDelta)
         p[2] += v[2];
 }
 
-void Sphere::draw()
+void Sphere::draw() const
 {
         glTranslated(p[0], p[1], p[2]);
         glutSolidSphere(1, 20, 20);

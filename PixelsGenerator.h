@@ -4,5 +4,7 @@
 #include <math.h>
 #include "opengl.h"
 
-GLubyte* generateRandomPixels(GLushort width, GLushort height, GLubyte depth);
-GLubyte* generateUVgrid(GLushort width, GLushort height, GLubyte depth);
+GLubyte* generateRandomPixels(const GLushort width, const GLushort height,
+		const GLubyte depth);
+GLubyte* generateUVgrid(const GLushort width, const GLushort height,
+		const GLubyte depth);

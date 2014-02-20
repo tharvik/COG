@@ -1,6 +1,7 @@
 #include "ShaderManager.h"
 
-Shader& ShaderManager::load(std::string&& pathV, std::string&& pathP)
+Shader& ShaderManager::load(const std::string& pathV,
+		const std::string& pathP)
 {
 	const auto iter = this->map.find(pathV + pathP);
 

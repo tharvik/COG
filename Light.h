@@ -21,10 +21,11 @@ private:
 public:
 	// Constructors
 	Light();
-	Light(Vvector position, Vvector direction);
-	Light(float px, float py, float pz, float dx, float dy, float dz);
+	Light(const Vvector& position, const Vvector& direction);
+	Light(const float px, const float py, const float pz, const float dx,
+			const float dy, const float dz);
 
-	Vvector position();
+	Vvector position() const;
         
         // Destructor
         ~Light();

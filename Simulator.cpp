@@ -20,7 +20,7 @@ Simulator::Simulator(Univers *theUnivers)
 	lastPhysic = 0;
 }
 
-void Simulator::printInfo()
+void Simulator::printInfo() const
 {
         std::cout << "FPS:"
                         << FPS

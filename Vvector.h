@@ -29,7 +29,7 @@ class Vvector {
 		 * \param y Value of y
 		 * \param z Value of z
 		 */
-		Vvector(float x, float y, float z);
+		Vvector(const float x, const float y, const float z);
 
 		/**
 		 * Set the values
@@ -38,7 +38,7 @@ class Vvector {
 		 * \param y Value of y
 		 * \param z Value of z
 		 */
-		void set(float x, float y, float z);
+		void set(const float x, const float y, const float z);
 
 		/**
 		 * Set the Vvector to (0,0,0)

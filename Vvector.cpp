@@ -12,14 +12,14 @@ Vvector::Vvector()
 	setNull();
 }
 
-Vvector::Vvector(float x, float y, float z)
+Vvector::Vvector(const float x, const float y, const float z)
 {
 	vx = x;
 	vy = y;
 	vz = z;
 }
 
-void Vvector::set(float x, float y, float z) {
+void Vvector::set(const float x, const float y, const float z) {
 	vx = x;
 	vy = y;
 	vz = z;
