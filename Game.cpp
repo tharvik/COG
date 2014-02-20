@@ -47,7 +47,3 @@ void Game::enterMainMenu()
 void Game::enterPauseMenu()
 {
 }
-
-// Destructor
-Game::~Game()
-{}

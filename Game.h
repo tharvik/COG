@@ -8,19 +8,34 @@
 #include "Simulator.h"
 #include "Univers.h"
 
+/**
+ * Represent the whole Game
+ */
 class Game {
-private:
-        Univers univers;
-        Simulator simulator;
-        
-public:
-        // Constructor
-        Game();
-        
-        // Game modes
-        void enterMainMenu();
-        void enterPauseMenu();
-        
-        // Destructor
-        ~Game();
+	private:
+		/**
+		 * The generated Univers
+		 */
+		Univers univers;
+
+		/**
+		 * The Simulator for the Univers
+		 */
+		Simulator simulator;
+
+	public:
+		/**
+		 * Setup the Univers, the Simulator and some GLUT function
+		 */
+		Game();
+
+		/**
+		 * Enter the main menu
+		 */
+		void enterMainMenu();
+
+		/**
+		 * Enter the pause menu
+		 */
+		void enterPauseMenu();
 };
