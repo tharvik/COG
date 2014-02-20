@@ -7,9 +7,13 @@
 
 namespace logger
 {
-	void info(std::string msg, std::string file, unsigned short line);
-	void warn(std::string msg, std::string file, unsigned short line);
-	void error(std::string msg, std::string file, unsigned short line);
-	void log(std::string msg, std::string file, unsigned short line);
+	void info(const std::string& msg, const std::string& file,
+			const unsigned short line);
+	void warn(const std::string& msg, const std::string& file,
+			const unsigned short line);
+	void error(const std::string& msg, const std::string& file,
+			const unsigned short line);
+	void log(const std::string& msg, const std::string& file,
+			const unsigned short line);
 
 };
