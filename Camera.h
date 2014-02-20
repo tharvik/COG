@@ -12,10 +12,14 @@
 
 class Camera {
 private:
-	// Position vector
+	/**
+	 * Current position
+	 */
 	Vvector p;
         
-	// Orientation vector
+	/**
+	 * Current orientation
+	 */
 	Vvector o;
         
         // Movement vectors
@@ -26,14 +30,39 @@ private:
 	Vvector s;
         
 public:
-	// Constructors
+	/**
+	 * Construct with the default values in config.h
+	 *
+	 * \ref p is initialized with POS_* from config.h\n
+	 * \ref o and \ref r are initstate with ORI_* from config.h and
+	 * normalized\n
+	 * \ref d is set to zero\n
+	 */
         Camera();
+
+	/**
+	 * Construct with the given values
+	 *
+	 * \param posX Position on x
+	 * \param posY Position on y
+	 * \param posZ Position on z
+	 * \param oriX Orientation on x
+	 * \param oriY Orientation on y
+	 * \param oriZ Orientation on z
+	 */
         Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
                GLdouble oriX, GLdouble oriY, GLdouble oriZ);
         
 	// Rotations
 	void rotate(GLdouble alpha, GLdouble beta);
         
+	/**
+	 * Look at the given point
+	 *
+	 * \param posX Position on x
+	 * \param posY Position on y
+	 * \param posZ Position on z
+	 */
         void lookTo(GLdouble posX, GLdouble posY, GLdouble posZ);
 	
 	// Translations
