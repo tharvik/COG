@@ -59,11 +59,11 @@ class Camera {
 		 * \param oriY Orientation on y
 		 * \param oriZ Orientation on z
 		 */
-		Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
-				GLdouble oriX, GLdouble oriY, GLdouble oriZ);
+		Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
+				const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ);
 
 		// Rotations
-		void rotate(GLdouble alpha, GLdouble beta);
+		void rotate(const GLdouble alpha, const GLdouble beta);
 
 		/**
 		 * Look at the given point
@@ -72,7 +72,7 @@ class Camera {
 		 * \param posY Position on y
 		 * \param posZ Position on z
 		 */
-		void lookTo(GLdouble posX, GLdouble posY, GLdouble posZ);
+		void lookTo(const GLdouble posX, const GLdouble posY, const GLdouble posZ);
 
 		/**
 		 * Begin a move of the given values
@@ -81,7 +81,7 @@ class Camera {
 		 * \param movSideward Move sideway of this much
 		 * \param movUpward Move upward of this much
 		 */
-		void move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward);
+		void move(const GLdouble movForward, const GLdouble movSideward, const GLdouble movUpward);
 
 		/**
 		 * Begin a move to the given position
@@ -90,49 +90,49 @@ class Camera {
 		 * \param oriY Y position to go to
 		 * \param oriZ Z position to go to
 		 */
-		void goTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ);
+		void goTo(const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ);
 
 		/**
 		 * Set the x position
 		 *
 		 * \param posX New x value
 		 */
-		void setPositionX(GLdouble posX);
+		void setPositionX(const GLdouble posX);
 
 		/**
 		 * Set the y position
 		 *
 		 * \param posY New y value
 		 */
-		void setPositionY(GLdouble posY);
+		void setPositionY(const GLdouble posY);
 
 		/**
 		 * Set the z position
 		 *
 		 * \param posZ New z value
 		 */
-		void setPositionZ(GLdouble posZ);
+		void setPositionZ(const GLdouble posZ);
 
 		/**
 		 * Set the x orientation
 		 *
 		 * \param posX New x value
 		 */
-		void setOrientationX(GLdouble posX);
+		void setOrientationX(const GLdouble posX);
 
 		/**
 		 * Set the y orientation
 		 *
 		 * \param posY New y value
 		 */
-		void setOrientationY(GLdouble posY);
+		void setOrientationY(const GLdouble posY);
 
 		/**
 		 * Set the z orientation
 		 *
 		 * \param posZ New z value
 		 */
-		void setOrientationZ(GLdouble posZ);
+		void setOrientationZ(const GLdouble posZ);
 
 		/**
 		 * Return the x position
@@ -205,7 +205,7 @@ class Camera {
 		void keyDown(std::set<int> &keysPressed);
 
 		// Calculate next position
-		void physic(double &physicDelta);
+		void physic(const double &physicDelta);
 
 		/**
 		 * Launch gluLookAt with the current state

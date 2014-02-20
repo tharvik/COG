@@ -14,55 +14,57 @@ Camera::Camera()
 	this->r = this->o;
 }
 
-Camera::Camera(GLdouble posX, GLdouble posY, GLdouble posZ,
-               GLdouble oriX, GLdouble oriY, GLdouble oriZ)
+Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
+               const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ)
 {
         if (!oriX && !oriY && !oriZ) {
                 logger::warn("The orientation vector given to the camera was of\
                              length 0", FL);
-                oriX = 1;
-        }
-        p[0] = posX; p[1] = posY; p[2] = posZ;
-        o[0] = oriX; o[1] = oriY; o[2] = oriZ;
+        } else {
+		p[0] = posX; p[1] = posY; p[2] = posZ;
+		o[0] = oriX; o[1] = oriY; o[2] = oriZ;
+	}
         
-                
 	this->d.setNull();
 	this->o.normalize();
 	this->r = this->o;
 }
 
 // Rotations
-void Camera::rotate(GLdouble alpha, GLdouble beta)
+void Camera::rotate(const GLdouble alpha, const GLdouble beta)
 {
+	GLdouble a = alpha;
+	GLdouble b = beta;
+
         if (fabs(o[2]) > 0.8 &&
 			((signbit(beta) == 0 && signbit(o[2]) == 0) ||
 			 (signbit(beta) != 0 && signbit(o[2]) != 0)))
-                beta = 0;
+                b = 0;
         else
-                beta *= ANGLE_PER_ROTATION;
-        alpha *= ANGLE_PER_ROTATION;
+                b *= ANGLE_PER_ROTATION;
+        a *= ANGLE_PER_ROTATION;
         
-        if (alpha == 0 || beta == 0) {
-                if (alpha != 0) {
-                        r[0] = r[0] * cos(alpha)
-                             - r[1] * sin(alpha);
-                        r[1] = r[0] * sin(alpha)
-                             + r[1] * cos(alpha);
-                        r[2] = r[2] * cos(beta);
-                } else if (beta != 0){
+        if (a == 0 || b == 0) {
+                if (a != 0) {
+                        r[0] = r[0] * cos(a)
+                             - r[1] * sin(a);
+                        r[1] = r[0] * sin(a)
+                             + r[1] * cos(a);
+                        r[2] = r[2] * cos(b);
+                } else if (b != 0){
                         s[0] = r[0];
                         s[1] = r[1];
                         s[2] =    0;
 			this->s.normalize();
                         
-                        r[0] = r[0]                        * cos(beta)
-                             - r[2] * s[0]                 * sin(beta);
+                        r[0] = r[0]                        * cos(b)
+                             - r[2] * s[0]                 * sin(b);
                         
-                        r[1] = r[1]                        * cos(beta)
-                             - r[2] * s[1]                 * sin(beta);
+                        r[1] = r[1]                        * cos(b)
+                             - r[2] * s[1]                 * sin(b);
                         
-                        r[2] = r[2]                        * cos(beta)
-                             + sqrt(r[0]*r[0] + r[1]*r[1]) * sin(beta);
+                        r[2] = r[2]                        * cos(b)
+                             + sqrt(r[0]*r[0] + r[1]*r[1]) * sin(b);
                 }
         } else {
                 s[0] = r[0];
@@ -70,23 +72,24 @@ void Camera::rotate(GLdouble alpha, GLdouble beta)
                 s[2] =    0;
 		this->s.normalize();
                 
-                r[0] = r[0]        * cos(alpha) * cos(beta)
-                     - r[1]        * sin(alpha) * cos(beta)
-                     - r[2] * s[0] * cos(alpha) * sin(beta)
-                     + r[2] * s[1] * sin(alpha) * sin(beta);
+                r[0] = r[0]        * cos(a) * cos(b)
+                     - r[1]        * sin(a) * cos(b)
+                     - r[2] * s[0] * cos(a) * sin(b)
+                     + r[2] * s[1] * sin(a) * sin(b);
                 
-                r[1] = r[0]        * sin(alpha) * cos(beta)
-                     + r[1]        * cos(alpha) * cos(beta)
-                     - r[2] * s[0] * sin(alpha) * sin(beta)
-                     - r[2] * s[1] * cos(alpha) * sin(beta);
+                r[1] = r[0]        * sin(a) * cos(b)
+                     + r[1]        * cos(a) * cos(b)
+                     - r[2] * s[0] * sin(a) * sin(b)
+                     - r[2] * s[1] * cos(a) * sin(b);
                 
-                r[2] = r[2]                        * cos(beta)
-                     + sqrt(r[0]*r[0] + r[1]*r[1]) * sin(beta);
+                r[2] = r[2]                        * cos(b)
+                     + sqrt(r[0]*r[0] + r[1]*r[1]) * sin(b);
         }
 	this->r.normalize();
 }
 
-void Camera::lookTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ)
+void Camera::lookTo(const GLdouble oriX, const GLdouble oriY,
+		const GLdouble oriZ)
 {
         r[0] = oriX;
         r[1] = oriY;
@@ -95,7 +98,8 @@ void Camera::lookTo(GLdouble oriX, GLdouble oriY, GLdouble oriZ)
 }
 
 // Translations
-void Camera::move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward)
+void Camera::move(const GLdouble movForward, const GLdouble movSideward,
+		const GLdouble movUpward)
 {
         d[0] += (movForward  * o[0]
               -  movSideward * o[1]) * DIS_M;
@@ -104,7 +108,7 @@ void Camera::move(GLdouble movForward, GLdouble movSideward, GLdouble movUpward)
         d[2] += (movForward  * o[2]) * DIS_M;
 }
 
-void Camera::goTo(GLdouble posX, GLdouble posY, GLdouble posZ)
+void Camera::goTo(const GLdouble posX, const GLdouble posY, const GLdouble posZ)
 {
         d[0] = posX - p[0];
         d[1] = posY - p[1];
@@ -112,28 +116,28 @@ void Camera::goTo(GLdouble posX, GLdouble posY, GLdouble posZ)
 }
 
 // Setters
-void Camera::setPositionX(GLdouble posX)
+void Camera::setPositionX(const GLdouble posX)
 {
         p[0] = posX;
 }
-void Camera::setPositionY(GLdouble posY)
+void Camera::setPositionY(const GLdouble posY)
 {
         p[1] = posY;
 }
-void Camera::setPositionZ(GLdouble posZ)
+void Camera::setPositionZ(const GLdouble posZ)
 {
         p[2] = posZ;
 }
 
-void Camera::setOrientationX(GLdouble posX)
+void Camera::setOrientationX(const GLdouble posX)
 {
         o[0] = posX;
 }
-void Camera::setOrientationY(GLdouble posY)
+void Camera::setOrientationY(const GLdouble posY)
 {
         o[1] = posY;
 }
-void Camera::setOrientationZ(GLdouble posZ)
+void Camera::setOrientationZ(const GLdouble posZ)
 {
         o[2] = posZ;
 }
@@ -229,7 +233,7 @@ void Camera::keyDown(std::set<int> &keysPressed)
 }
 
 // Calculate next position
-void Camera::physic(double &physicDelta)
+void Camera::physic(const double &physicDelta)
 {
 	this->s = d;
 	this->s *= physicDelta * DIS_P;
