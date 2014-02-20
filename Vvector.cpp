@@ -118,7 +118,7 @@ bool Vvector::operator!=(const Vvector &a) const
 
 float& Vvector::operator[](const unsigned short a)
 {
-	assert(a >= 0 && a < this->scalar.size());
+	assert(a < this->scalar.size());
 	return this->scalar[a];
 }
 

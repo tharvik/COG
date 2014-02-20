@@ -8,9 +8,8 @@ static void cleanup()
 }
 
 // Constructors
-Univers::Univers() : camera()
+Univers::Univers() : camera(), mainLight(5.98, -26.12, 15.39, 0.32, 0.76, -0.57)
 {
-	this->mainLight = Light(5.98, -26.12, 15.39, 0.32, 0.76, -0.57);
 	local = this;
 	atexit(cleanup);
 }

@@ -77,6 +77,11 @@ class MeshManager {
 
 	public:
 		/**
+		 * Construct an empty and unusable Mesh
+		 */
+		MeshManager();
+
+		/**
 		 * Load a .mesh file, temporary and draft function to avoid
 		 * breaking existing code
 		 *

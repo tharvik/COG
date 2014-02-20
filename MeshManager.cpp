@@ -2,6 +2,9 @@
 
 #include "Logger.h"
 
+MeshManager::MeshManager() : lineCount(0)
+{}
+
 template<typename T>
 static unsigned int fillBuffer(GLuint& buffer, std::ifstream& file)
 {
