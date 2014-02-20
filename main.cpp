@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
         setUpOpenGL();
 
         Game game;
+	game.enterMainMenu();
         
 	return 0;
 }

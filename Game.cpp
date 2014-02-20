@@ -25,8 +25,6 @@ Game::Game() : univers(), simulator(&univers)
 #endif
                 glutDisplayFunc(displayHandler);
         }
-        
-        enterMainMenu();
 }
 
 // Game modes
