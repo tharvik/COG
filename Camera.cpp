@@ -249,7 +249,3 @@ void Camera::look()
                   p[0] + o[0], p[1] + o[1], p[2] + o[2],
                   0, 0, 1);
 }
-
-// Destructor
-Camera::~Camera()
-{}
