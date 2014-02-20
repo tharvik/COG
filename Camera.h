@@ -59,8 +59,9 @@ class Camera {
 		 * \param oriY Orientation on y
 		 * \param oriZ Orientation on z
 		 */
-		Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
-				const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ);
+		Camera(const GLdouble posX, const GLdouble posY,
+				const GLdouble posZ, const GLdouble oriX,
+				const GLdouble oriY, const GLdouble oriZ);
 
 		// Rotations
 		void rotate(const GLdouble alpha, const GLdouble beta);
@@ -72,7 +73,8 @@ class Camera {
 		 * \param posY Position on y
 		 * \param posZ Position on z
 		 */
-		void lookTo(const GLdouble posX, const GLdouble posY, const GLdouble posZ);
+		void lookTo(const GLdouble posX, const GLdouble posY,
+				const GLdouble posZ);
 
 		/**
 		 * Begin a move of the given values
@@ -81,7 +83,8 @@ class Camera {
 		 * \param movSideward Move sideway of this much
 		 * \param movUpward Move upward of this much
 		 */
-		void move(const GLdouble movForward, const GLdouble movSideward, const GLdouble movUpward);
+		void move(const GLdouble movForward, const GLdouble movSideward,
+				const GLdouble movUpward);
 
 		/**
 		 * Begin a move to the given position
@@ -90,7 +93,8 @@ class Camera {
 		 * \param oriY Y position to go to
 		 * \param oriZ Z position to go to
 		 */
-		void goTo(const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ);
+		void goTo(const GLdouble oriX, const GLdouble oriY,
+				const GLdouble oriZ);
 
 		/**
 		 * Set the x position
