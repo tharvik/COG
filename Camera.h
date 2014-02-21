@@ -35,9 +35,6 @@ class Camera {
 		 */
 		Vvector r;
 
-		// For calculs
-		Vvector s;
-
 	public:
 		/**
 		 * Construct with the default values in config.h
@@ -63,7 +60,12 @@ class Camera {
 				const GLdouble posZ, const GLdouble oriX,
 				const GLdouble oriY, const GLdouble oriZ);
 
-		// Rotations
+		/**
+		 * Rotate from the angle
+		 *
+		 * \param alpha Angle in radian to move on the horizontal plan
+		 * \param beta Angle in radian to move on the vertical plan
+		 */
 		void rotate(const GLdouble alpha, const GLdouble beta);
 
 		/**
@@ -208,7 +210,12 @@ class Camera {
 		 */
 		void keyDown(std::set<int> &keysPressed);
 
-		// Calculate next position
+		/**
+		 * Calculate the next position
+		 *
+		 * \param physicDelta Relative move to compute by step, the smaller, the
+		 * more it will be but the more call it will need
+		 */
 		void physic(const double &physicDelta);
 
 		/**
