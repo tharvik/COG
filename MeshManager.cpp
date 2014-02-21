@@ -119,7 +119,6 @@ Mesh& MeshManager::load(const std::string& path)
 #endif
 
 	
-	// TODO remove indices temporary and directly parse it
 	std::vector<unsigned int> indices;
 	for(auto i : f) {
 		for(auto j : i) {
