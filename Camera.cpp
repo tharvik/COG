@@ -35,6 +35,7 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
 {
 	GLdouble a = alpha;
 	GLdouble b = beta;
+	Vvector s;
 
         if (fabs(o[2]) > 0.8 &&
 			((signbit(beta) == 0 && signbit(o[2]) == 0) ||
@@ -55,7 +56,7 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
                         s[0] = r[0];
                         s[1] = r[1];
                         s[2] =    0;
-			this->s.normalize();
+			s.normalize();
                         
                         r[0] = r[0]                        * cos(b)
                              - r[2] * s[0]                 * sin(b);
@@ -70,7 +71,7 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
                 s[0] = r[0];
                 s[1] = r[1];
                 s[2] =    0;
-		this->s.normalize();
+		s.normalize();
                 
                 r[0] = r[0]        * cos(a) * cos(b)
                      - r[1]        * sin(a) * cos(b)
@@ -235,13 +236,14 @@ void Camera::keyDown(std::set<int> &keysPressed)
 // Calculate next position
 void Camera::physic(const double &physicDelta)
 {
-	this->s = d;
-	this->s *= physicDelta * DIS_P;
+	Vvector s;
+	s = d;
+	s *= physicDelta * DIS_P;
 	this->p += s;
-	this->d -= this->s;
+	this->d -= s;
         
-	this->s = this->r - this->o;
-	this->s *= physicDelta * ANG_P;
+	s = this->r - this->o;
+	s *= physicDelta * ANG_P;
 	this->o += s;
 	this->o.normalize();
 }
