@@ -34,6 +34,8 @@ add_library		(objectManager ObjectManager.cpp)
 add_library		(shaderManager ShaderManager.cpp)
 add_library		(stb stb_image.c)
 
+add_library		(component Component.cpp)
+
 # link
 target_link_libraries	(object texture shader mesh)
 

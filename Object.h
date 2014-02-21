@@ -76,5 +76,5 @@ class Object {
 		/**
 		 * Draw at the current \ref resolution and its sub-Object
 		 */
-		void draw() const;
+		virtual void draw() const;
 };
