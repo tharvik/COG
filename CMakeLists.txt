@@ -2,7 +2,6 @@
 cmake_minimum_required	(VERSION 2.6)
 project			(Cplusplus_OpenGL)
 
-#find_package		(SDL2)
 find_package		(GLEW)
 find_package		(GLUT)
 
@@ -45,7 +44,7 @@ target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
 
 target_link_libraries	(textureManager texture stb)
-target_link_libraries	(texture SDL2_image logger pixelsGenerator)
+target_link_libraries	(texture logger pixelsGenerator)
 target_link_libraries	(shader GL GLU glut GLEW)
 
 target_link_libraries	(objectManager meshManager textureManager shaderManager)
@@ -56,4 +55,4 @@ target_link_libraries	(shaderManager shader)
 add_executable		(main main.cpp)
 target_link_libraries	(main logger univers eventHandler simulator)
 target_link_libraries	(main textureManager game object)
-target_link_libraries	(main GLU glut GLEW GL SDL2)
+target_link_libraries	(main GLU glut GLEW GL)

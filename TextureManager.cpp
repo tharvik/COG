@@ -27,7 +27,8 @@ Texture& TextureManager::load(const std::string& path)
 
 		logger::info("Finished loading texture: \"" + path + "\"", FL);
 
-		this->map[path] = Texture(x, y, format, data);
+		this->map.insert(std::make_pair(path, std::move(
+						Texture(x, y, format, data))));
 		stbi_image_free(data);
 
  		return this->map[path];
