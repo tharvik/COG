@@ -22,23 +22,13 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 
 size_t Univers::addObject(const std::string &name)
 {
-	objects.push_back(loader.load(name));
+	objects.insert(loader.load(name));
         return objects.size() - 1;
 }
 
 size_t Univers::addObject(const Object &object)
 {
-        objects.push_back(object);
-        return objects.size() - 1;
-}
-size_t Univers::addObject(const Object &object, const Texture &texture)
-{
-        objects.push_back(object);
-        return objects.size() - 1;
-}
-
-size_t Univers::addSphere(const Sphere &theSphere)
-{
+        objects.insert(object);
         return objects.size() - 1;
 }
 
@@ -91,7 +81,3 @@ void Univers::refresh()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glutShowWindow();
 }
-
-// Destructor
-Univers::~Univers()
-{}
