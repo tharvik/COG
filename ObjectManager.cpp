@@ -13,7 +13,7 @@ Object ObjectManager::load(const std::string& name)
 {
 	const std::string path = this->path + name + "/" + name;
 	Texture& texture(textures.load(path + ".png"));
-	Mesh& mesh(meshs.load(path + ".obj"));
+	Mesh& mesh(meshs.load(path + ".mesh"));
 	Shader shader(shaders.load(path + ".vShader", path + ".pShader"));
 
 	Object object = Object(mesh, texture, shader);
