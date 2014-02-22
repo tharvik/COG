@@ -83,10 +83,6 @@ void Simulator::measureFPS()
         lastRefreshReport = actualRefresh;
 }
 
-// Destructors
-Simulator::~Simulator()
-{}
-
 void tick()
 {
         self->physic();

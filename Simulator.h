@@ -6,41 +6,109 @@
 #include "Logger.h"
 #include "Univers.h"
 
+/**
+ * Handle launching physic for Univers and calculus of FPS
+ */
 class Simulator {
-private:
-        Univers *univers = nullptr;
-        
-        unsigned int FPS;
-        unsigned int refreshCounter = 0;
-        
-        unsigned int lastPhysicReport;
-        unsigned int lastPhysic;
-        unsigned int actualPhysic;
-        double physicDelta;
-        
-        void measureFPS();
-        
-        unsigned int PPS;
-        unsigned int physicCounter = 0;
-        
-        unsigned int lastRefreshReport;
-        unsigned int lastRefresh;
-        unsigned int actualRefresh;
-        
-        void measurePPS();
-        
-public:
-        // Constructors
-        Simulator();
-        Simulator(Univers *univers);
-        
-        void printInfo() const;
-        
-        void refresh();
-        void physic();
-        
-        // Destructors
-        ~Simulator();
+	private:
+		/**
+		 * Univers it has to handle
+		 */
+		Univers *univers = nullptr;
+
+		/**
+		 * Current computed FPS
+		 */
+		unsigned int FPS;
+
+		/**
+		 * Number of refresh since last FPS computation
+		 */
+		unsigned int refreshCounter;
+
+		/**
+		 * Last \ref actualPhysic we reported
+		 */
+		unsigned int lastPhysicReport;
+
+		/**
+		 * Last physic we computed
+		 */
+		unsigned int lastPhysic;
+
+		/**
+		 * Currently computed physic
+		 */
+		unsigned int actualPhysic;
+
+		/**
+		 * Step of a physic computation, the less, the more accurate it
+		 * will be
+		 */
+		double physicDelta;
+
+		/**
+		 * Update FPS and lastRefreshReport
+		 */
+		void measureFPS();
+
+		/**
+		 * Physic per second, number of physic computed in a second
+		 */
+		unsigned int PPS;
+
+		/**
+		 * Number of physic since last PPS computation
+		 */
+		unsigned int physicCounter;
+
+		/**
+		 * Last \ref actualRefresh we reported
+		 */
+		unsigned int lastRefreshReport;
+
+		/**
+		 * Last refresh we computed
+		 */
+		unsigned int lastRefresh;
+
+		/**
+		 * Current time of refresh
+		 */
+		unsigned int actualRefresh;
+
+		/**
+		 * Update PPS and lastPhysicReport
+		 */
+		void measurePPS();
+
+	public:
+		/**
+		 * Construct an empty and invalid Simulator
+		 */
+		Simulator();
+
+		/**
+		 * Construct with the given Univers
+		 *
+		 * \param univers Univers to simulate
+		 */
+		Simulator(Univers *univers);
+
+		/**
+		 * Print FPS and PPS info to cout
+		 */
+		void printInfo() const;
+
+		/**
+		 * Refresh the simulation and forward to \ref univers
+		 */
+		void refresh();
+
+		/**
+		 * Compute physics and forward to \ref univers
+		 */
+		void physic();
 };
 
 void tick();

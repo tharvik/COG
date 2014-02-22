@@ -27,14 +27,15 @@ class Component : public Object {
 		 *
 		 * \param object Object to pass to Object constructor
 		 * \param position Vvector to draw to (so used in a relative
-		 * context) 
+		 * context)
 		 */
 		Component(const Object& object, const Vvector& position);
 
 		/**
 		 * Draw the component using it's position
 		 *
-		 * \todo Implement the drawing relativly with \ref position
+		 * \todo Implement the drawing relativly with
+		 * \ref Component.position
 		 */
 		void draw() const;
 };
