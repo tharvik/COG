@@ -38,7 +38,6 @@ public:
         
         // Modifiers
         size_t addObject(const std::string &name); // Not tested
-        size_t addObject(const std::string &&name); // Not tested
         size_t addObject(const Object &object); // Not tested
         size_t addObject(const Object &object, const Texture &texture); // Not tested
         

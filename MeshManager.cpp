@@ -43,7 +43,7 @@ Mesh& MeshManager::loadMesh(const std::string& path)
 
 	// setup reading
 	std::array<GLuint,4> buffers;
-	glGenBuffers(buffers.size(), buffers.data());
+	glGenBuffers((unsigned int) buffers.size(), buffers.data());
 
 	// get vertices
 	fillBuffer<float>(buffers[0], file);

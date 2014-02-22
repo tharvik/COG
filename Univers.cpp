@@ -25,11 +25,6 @@ size_t Univers::addObject(const std::string &name)
 	objects.push_back(loader.load(name));
         return objects.size() - 1;
 }
-size_t Univers::addObject(const std::string &&name)
-{
-	objects.push_back(loader.load(name));
-        return objects.size() - 1;
-}
 
 size_t Univers::addObject(const Object &object)
 {
