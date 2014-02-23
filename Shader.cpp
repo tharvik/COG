@@ -1,7 +1,19 @@
 #include "Shader.h"
 
-Shader::Shader()
+#include "Logger.h"
+#include <fstream>
+
+Shader::Shader() : vertexShader(0), pixelShader(0), program(0)
 {}
+
+Shader::Shader(Shader&& shader) :
+	vertexShader(shader.vertexShader), pixelShader(shader.pixelShader),
+	program(shader.program)
+{
+	shader.vertexShader = 0;
+	shader.pixelShader = 0;
+	shader.program = 0;
+}
 
 Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
 {
@@ -19,25 +31,6 @@ Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
 	if (!glIsProgram(this->program))
 		logger::error("The shader program has not been created", FL);
 		
-	
-	logger::info("Shader created.", FL);
-}
-
-Shader::Shader(const std::string&& vShaderPath, const std::string&& pShaderPath)
-{
-	createShaders(vShaderPath, pShaderPath);	
-	compileShaders(vShaderPath, pShaderPath);
-	
-	// check
-	if (!glIsShader(this->vertexShader) || !glIsShader(this->pixelShader))
-		logger::error("The shaders haven't been created", FL);
-	
-	createProgram(vShaderPath, pShaderPath);
-	linkProgram(vShaderPath, pShaderPath);
-	
-	// check
-	if (!glIsProgram(this->program))
-		logger::error("The shader program has not been created", FL);
 	
 	logger::info("Shader created.", FL);
 }
@@ -226,6 +219,3 @@ bool Shader::operator<(const Shader &b) const
 	return (this->vertexShader + this->pixelShader) <
 		(b.vertexShader + b.pixelShader);
 }
-
-Shader::~Shader()
-{}
