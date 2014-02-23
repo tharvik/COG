@@ -6,7 +6,8 @@ Shader& ShaderManager::load(const std::string& pathV,
 	const auto iter = this->map.find(pathV + pathP);
 
 	if(iter == this->map.end()) {
-		this->map[pathV + pathP] = Shader(pathV, pathP);
+		this->map.insert(std::make_pair(pathV + pathP,
+				std::move(Shader(pathV, pathP))));
  		return this->map[pathV + pathP];
 	} else {
 		return iter->second;
