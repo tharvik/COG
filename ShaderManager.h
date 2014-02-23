@@ -20,6 +20,9 @@ class ShaderManager {
 		/**
 		 * Return the Shader at the given path
 		 *
+		 * \param pathV Path to the vertex shader file
+		 * \param pathP Path to the pixel shader file
+		 *
 		 * \return The wanted Shader
 		 */
 		Shader& load(const std::string& pathV,
