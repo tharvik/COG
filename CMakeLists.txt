@@ -25,7 +25,6 @@ add_library		(game Game.cpp)
 
 add_library		(texture Texture.cpp)
 add_library		(shader Shader.cpp)
-add_library		(pixelsGenerator PixelsGenerator.cpp)
 add_library		(textureManager TextureManager.cpp)
 add_library		(mesh Mesh.cpp)
 add_library		(meshManager MeshManager.cpp)
@@ -44,7 +43,7 @@ target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
 
 target_link_libraries	(textureManager texture stb)
-target_link_libraries	(texture logger pixelsGenerator)
+target_link_libraries	(texture logger)
 target_link_libraries	(shader GL GLU glut GLEW)
 
 target_link_libraries	(objectManager meshManager textureManager shaderManager)
