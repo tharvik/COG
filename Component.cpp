@@ -9,5 +9,8 @@ Component::Component(const Object& object, const Vvector& position) :
 
 void Component::draw() const
 {
+	glPushMatrix();
+	glTranslatef(position.x(), position.y(), position.z());
 	Object::draw();
+	glPopMatrix();
 }

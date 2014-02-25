@@ -33,9 +33,6 @@ class Component : public Object {
 
 		/**
 		 * Draw the component using it's position
-		 *
-		 * \todo Implement the drawing relativly with
-		 * \ref Component.position
 		 */
 		void draw() const;
 };
