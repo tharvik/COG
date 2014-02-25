@@ -145,63 +145,63 @@ class Camera {
 		 *
 		 * \return X position
 		 */
-		GLdouble getPositionX();
+		GLdouble getPositionX() const;
 
 		/**
 		 * Return the y position
 		 *
 		 * \return Y position
 		 */
-		GLdouble getPositionY();
+		GLdouble getPositionY() const;
 
 		/**
 		 * Return the z position
 		 *
 		 * \return Z position
 		 */
-		GLdouble getPositionZ();
+		GLdouble getPositionZ() const;
 
 		/**
 		 * Return the x orientation
 		 *
 		 * \return X orientation
 		 */
-		GLdouble getOrientationX();
+		GLdouble getOrientationX() const;
 
 		/**
 		 * Return the y orientation
 		 *
 		 * \return Y orientation
 		 */
-		GLdouble getOrientationY();
+		GLdouble getOrientationY() const;
 
 		/**
 		 * Return the z orientation
 		 *
 		 * \return Z orientation
 		 */
-		GLdouble getOrientationZ();
+		GLdouble getOrientationZ() const;
 
 		/**
 		 * Return the x direction
 		 *
 		 * \return X direction
 		 */
-		GLdouble getDirectionX();
+		GLdouble getDirectionX() const;
 
 		/**
 		 * Return the y direction
 		 *
 		 * \return Y direction
 		 */
-		GLdouble getDirectionY();
+		GLdouble getDirectionY() const;
 
 		/**
 		 * Return the z direction
 		 *
 		 * \return Z direction
 		 */
-		GLdouble getDirectionZ();
+		GLdouble getDirectionZ() const;
 
 		/**
 		 * Handle keydowns from GLUT

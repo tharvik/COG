@@ -144,43 +144,43 @@ void Camera::setOrientationZ(const GLdouble posZ)
 }
 
 // Getters
-GLdouble Camera::getPositionX()
+GLdouble Camera::getPositionX() const
 {
-        return p[0];
+        return p.x();
 }
-GLdouble Camera::getPositionY()
+GLdouble Camera::getPositionY() const
 {
-        return p[1];
+        return p.y();
 }
-GLdouble Camera::getPositionZ()
+GLdouble Camera::getPositionZ() const
 {
-        return p[2];
-}
-
-GLdouble Camera::getOrientationX()
-{
-        return o[0];
-}
-GLdouble Camera::getOrientationY()
-{
-        return o[1];
-}
-GLdouble Camera::getOrientationZ()
-{
-        return o[2];
+        return p.z();
 }
 
-GLdouble Camera::getDirectionX()
+GLdouble Camera::getOrientationX() const
 {
-        return d[0];
+        return o.x();
 }
-GLdouble Camera::getDirectionY()
+GLdouble Camera::getOrientationY() const
 {
-        return d[1];
+        return o.y();
 }
-GLdouble Camera::getDirectionZ()
+GLdouble Camera::getOrientationZ() const
 {
-        return d[2];
+        return o.z();
+}
+
+GLdouble Camera::getDirectionX() const
+{
+        return d.x();
+}
+GLdouble Camera::getDirectionY() const
+{
+        return d.y();
+}
+GLdouble Camera::getDirectionZ() const
+{
+        return d.z();
 }
 
 // Keys handling

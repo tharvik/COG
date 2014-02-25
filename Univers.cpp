@@ -33,7 +33,7 @@ size_t Univers::addObject(const Object &object)
 }
 
 // Informations
-void Univers::printInfo()
+void Univers::printInfo() const
 {
         std::cout << "CAMERA:" << std::endl
         << "\tPOSITION:    ["

@@ -87,7 +87,7 @@ class Univers {
 		/**
 		 * Print some information about the \ref camera
 		 */
-		void printInfo();
+		void printInfo() const;
 
 		/**
 		 * Handle events from GLUT, mainly forwarded to \ref camera

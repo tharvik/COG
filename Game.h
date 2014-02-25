@@ -32,10 +32,10 @@ class Game {
 		/**
 		 * Enter the main menu
 		 */
-		void enterMainMenu();
+		static void enterMainMenu();
 
 		/**
 		 * Enter the pause menu
 		 */
-		void enterPauseMenu();
+		static void enterPauseMenu();
 };
