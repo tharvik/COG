@@ -5,7 +5,7 @@ project			(Cplusplus_OpenGL)
 if(APPLE)
 	set		(libs OpenGL glut)
 else()
-	set		(libs GL GLU GLUT GLEW)
+	set		(libs GL GLU glut GLEW)
 endif()
 
 set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
