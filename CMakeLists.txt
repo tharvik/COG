@@ -2,11 +2,25 @@
 cmake_minimum_required	(VERSION 2.6)
 project			(Cplusplus_OpenGL)
 
-find_package		(GLEW)
-find_package		(GLUT)
+if(APPLE)
+	set		(libs OpenGL glut)
+else()
+	set		(libs GL GLU GLUT GLEW)
+endif()
 
 set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
 set			(CMAKE_CXX_COMPILER "clang")
+
+# check for libraries
+unset(links)
+foreach(lib ${libs})
+	unset(tmp CACHE)
+	find_library	(tmp ${lib})
+	if(NOT tmp)
+		message(FATAL_ERROR "${lib} not found")
+	endif()
+	list(APPEND links ${tmp})
+endforeach()
 
 # local libraries
 add_library		(utilities utilities.cpp)
@@ -44,7 +58,7 @@ target_link_libraries	(game univers simulator eventHandler)
 
 target_link_libraries	(textureManager texture stb)
 target_link_libraries	(texture logger)
-target_link_libraries	(shader GL GLU glut GLEW)
+target_link_libraries	(shader ${links})
 
 target_link_libraries	(objectManager meshManager textureManager shaderManager)
 target_link_libraries	(meshManager stdc++)
@@ -54,4 +68,4 @@ target_link_libraries	(shaderManager shader)
 add_executable		(main main.cpp)
 target_link_libraries	(main logger univers eventHandler simulator)
 target_link_libraries	(main textureManager game object)
-target_link_libraries	(main GLU glut GLEW GL)
+target_link_libraries	(main ${links})
