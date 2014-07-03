@@ -12,9 +12,9 @@ Mesh::Mesh(const std::string& name) : sizeIndices(0)
         
 }
 
-Mesh::Mesh(Mesh&& mesh) : sizeIndices(m.sizeIndices), buffers(m.buffers)
+Mesh::Mesh(Mesh&& mesh) : sizeIndices(mesh.sizeIndices), buffers(mesh.buffers)
 {
-	for(auto& a : m.buffers)
+	for(auto& a : mesh.buffers)
 		a = 0;
 }
 
