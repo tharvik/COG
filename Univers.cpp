@@ -20,15 +20,16 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 	camera(posX, posY, posZ, anglePhi, angleTeta, anglepsi)
 {}
 
-size_t Univers::addObject(const std::string &name)
+const size_t& Univers::addPlanet()
 {
-	objects.insert(loader.load(name));
-        return objects.size() - 1;
+        objects.insert(new Planet());
+        
+        return 0;
 }
 
 size_t Univers::addObject(const Object &object)
 {
-        objects.insert(object);
+        //objects.insert(object);
         return objects.size() - 1;
 }
 
@@ -63,9 +64,8 @@ void Univers::physic(double& physicDelta)
 
 void Univers::draw() const
 {
-	for (auto& object: objects) {
-                object.draw();
-        }
+	for (auto& object: objects)
+                object->draw();
 }
 
 void Univers::refresh()
