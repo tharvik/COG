@@ -14,7 +14,7 @@
 #include <memory.h>
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
-		glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
+        glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
 
 /**
  * The whole Univers

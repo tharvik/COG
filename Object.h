@@ -10,6 +10,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Mesh.h"
+#include "Material.h"
 
 
 class Object {
@@ -20,7 +21,5 @@ protected:
         std::vector<std::tuple<Material, Mesh>> drawOrder;
         
 public:
-        
-        
         virtual void draw() const = 0;
 };
