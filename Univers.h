@@ -10,7 +10,7 @@
 #include "Object.h"
 #include "Planet.h"
 
-#include <memory.h>
+#include <memory>
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
         glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)

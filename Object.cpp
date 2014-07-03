@@ -2,8 +2,8 @@
 
 using namespace std;
 
-map<std::string, Material> Object::materials;
-map<std::string, Mesh>     Object::meshes;
+map<string, Material> Object::materials;
+map<string, Mesh>     Object::meshes;
 
 // Constructors
 Object::Object(const std::string& name) : drawOrder()
@@ -13,23 +13,27 @@ Object::Object(const std::string& name) : drawOrder()
         string materialName = "rusty";
         string meshName     = "salad";
         
-        map<std::string, Material>::iterator material =
+        const map<std::string, Material>::iterator material =
                                                    materials.find(materialName);
-        map<std::string, Mesh>::iterator mesh = meshes.find(meshName);
+        const map<std::string, Mesh>::iterator mesh = meshes.find(meshName);
         
         if (materials.find(materialName) != materials.end()) {
                 if (meshes.find(meshName) != meshes.end()) {
-                        drawOrder.push_back(make_tuple(material, mesh));
+push:                   drawOrder.push_back(make_tuple(material, mesh));
                         
                 } else {
                         // load mesh
                 }
                 
         } else {
-                // load material
+                materials.emplace(materialName, Material(materialName));
         }
         
 }
 
 void Object::draw() const
-{}
+{
+
+        
+
+}

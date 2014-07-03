@@ -17,8 +17,8 @@ private:
         static std::map<std::string, Material> materials;
         static std::map<std::string, Mesh>     meshes;
         
-        std::vector<std::tuple<std::map<std::string, Material>::iterator,
-                               std::map<std::string, Mesh>::iterator>>
+        std::vector<std::tuple<const std::map<std::string, Material>::iterator,
+                               const std::map<std::string, Mesh>::iterator>>
                                                                       drawOrder;
         
 public:
