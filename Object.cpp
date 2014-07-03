@@ -13,27 +13,20 @@ Object::Object(const std::string& name) : drawOrder()
         string materialName = "rusty";
         string meshName     = "salad";
         
-        const map<std::string, Material>::iterator material =
-                                                   materials.find(materialName);
-        const map<std::string, Mesh>::iterator mesh = meshes.find(meshName);
-        
-        if (materials.find(materialName) != materials.end()) {
-                if (meshes.find(meshName) != meshes.end()) {
-push:                   drawOrder.push_back(make_tuple(material, mesh));
-                        
-                } else {
-                        // load mesh
-                }
-                
-        } else {
-                materials.emplace(materialName, Material(materialName));
+        map<string, Material>::iterator material = materials.find(materialName);
+        if (material == materials.end()) {
+                material = get<0>(materials.insert(make_pair(materialName,
+                                                move(Material(materialName)))));
         }
         
+        map<string, Mesh>::iterator mesh = meshes.find(meshName);
+        if (mesh == meshes.end()) {
+                mesh = get<0>(meshes.insert(make_pair(meshName,
+                                                        move(Mesh(meshName)))));
+        }
+        
+        drawOrder.push_back(make_pair(material, mesh));
 }
 
 void Object::draw() const
-{
-
-        
-
-}
+{}

@@ -7,7 +7,12 @@ Mesh::Mesh() : sizeIndices(0)
 		a = 0;
 }
 
-Mesh::Mesh(Mesh&& m) : sizeIndices(m.sizeIndices), buffers(m.buffers)
+Mesh::Mesh(const std::string& name) : sizeIndices(0)
+{
+        
+}
+
+Mesh::Mesh(Mesh&& mesh) : sizeIndices(m.sizeIndices), buffers(m.buffers)
 {
 	for(auto& a : m.buffers)
 		a = 0;

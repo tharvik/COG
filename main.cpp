@@ -19,8 +19,11 @@ int main(int argc, char *argv[])
         
         setUpOpenGL();
 
-        Game game;
-	game.enterMainMenu();
+        Planet aPlanet("chose");
+        Planet bPlanet("truc");
+        
+//      Game game;
+//	game.enterMainMenu();
         
 	return 0;
 }
