@@ -39,33 +39,24 @@ add_library		(game Game.cpp)
 
 add_library		(texture Texture.cpp)
 add_library		(shader Shader.cpp)
-add_library		(textureManager TextureManager.cpp)
 add_library		(mesh Mesh.cpp)
-add_library		(meshManager MeshManager.cpp)
-add_library		(objectManager ObjectManager.cpp)
-add_library		(shaderManager ShaderManager.cpp)
 add_library		(stb stb_image.c)
 
 add_library		(component Component.cpp)
 
 # link
-target_link_libraries	(object texture shader mesh)
+target_link_libraries	(object texture shader mesh stdc++)
 
-target_link_libraries	(univers camera sphere light objectManager object)
+target_link_libraries	(univers camera sphere light object)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
 
-target_link_libraries	(textureManager texture stb)
 target_link_libraries	(texture logger)
 target_link_libraries	(shader ${links})
-
-target_link_libraries	(objectManager meshManager textureManager shaderManager)
-target_link_libraries	(meshManager stdc++)
-target_link_libraries	(shaderManager shader)
 
 # main executable
 add_executable		(main main.cpp)
 target_link_libraries	(main logger univers eventHandler simulator)
-target_link_libraries	(main textureManager game object)
+target_link_libraries	(main game object stdc++)
 target_link_libraries	(main ${links})

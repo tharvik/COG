@@ -10,7 +10,11 @@
 #include "Object.h"
 #include "Planet.h"
 
-#include <memory>
+#ifdef __APPLE__
+#	include <memory.h>
+#else
+#	include <memory>
+#endif
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
         glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
@@ -24,17 +28,17 @@ private:
          * Set of Object the Univers has to draw
          */
         std::set<std::unique_ptr<Object>> objects;
-        
+
         /**
          * Camera of this Univers
          */
         Camera camera;
-        
+
         /**
          * Main Light
          */
         Light mainLight;
-        
+
         /**
          * Draw every Object of \ref objects
          */
@@ -47,7 +51,7 @@ public:
          * \todo Why this position for \ref Univers.mainLight?
          */
         Univers();
-        
+
         /**
          * Construct with the given parameters for \ref camera
          *
@@ -61,27 +65,27 @@ public:
         Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
                 const GLdouble anglePhi, const GLdouble angleTeta,
                 const GLdouble anglepsi);
-        
-        
+
+
         const size_t& addPlanet();
-        
+
         /**
          * Print some information about the \ref camera
          */
         void printInfo() const;
-        
+
         /**
          * Handle events from GLUT, mainly forwarded to \ref camera
          *
          * \param keysPressed Currently pressed keys
          */
         void keyboard(std::set<int> &keysPressed);
-        
+
         /**
          * Reset the perspective, draw the camera and the \ref objects
          */
         void refresh();
-        
+
         /**
          * Handle physic inside the Univers, mainyl forwarded to
          * \ref camera
