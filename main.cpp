@@ -21,6 +21,13 @@ int main(int argc, char *argv[])
 
         Planet aPlanet("chose");
         Planet bPlanet("truc");
+        Planet cPlanet("machin");
+        Planet dPlanet("truc");
+        
+        aPlanet.draw();
+        bPlanet.draw();
+        cPlanet.draw();
+        dPlanet.draw();
         
 //      Game game;
 //	game.enterMainMenu();

@@ -8,4 +8,6 @@ Planet::Planet(const string& name) : Object(name)
 }
 
 void Planet::draw() const
-{}
+{
+        Object::draw();
+}

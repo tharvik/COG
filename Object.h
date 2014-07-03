@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <tuple>
+#include <memory>
 
 #include "opengl.h"
 #include "Texture.h"
@@ -14,12 +15,11 @@
 
 class Object {
 private:
-        static std::map<std::string, Material> materials;
-        static std::map<std::string, Mesh>     meshes;
+        static std::map<std::string, std::shared_ptr<Material>> materials;
+        static std::map<std::string, std::shared_ptr<Mesh>>     meshes;
         
-        std::vector<std::pair<const std::map<std::string, Material>::iterator,
-                              const std::map<std::string, Mesh>::iterator>>
-                                                                      drawOrder;
+        std::vector<std::pair<const std::shared_ptr<Material>,
+                              const std::shared_ptr<Mesh>>> drawOrder;
         
 public:
         Object(const std::string& name);

@@ -1,9 +1,16 @@
 #include "Material.h"
 
-Material::Material(const std::string& name)
+using namespace std;
+
+Material::Material(const std::string& name) : nom(name)
+{
+        cout << "Material created" << endl;
+}
+
+Material::Material(const Material&& material) : nom(move(material.nom))
 {}
 
-Material::Material(const Material&&)
+void Material::print() const
 {
-        
+        cout << nom << endl;
 }
