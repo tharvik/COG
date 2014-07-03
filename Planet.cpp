@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Planet::Planet(const string& name) : Object()
+Planet::Planet(const string& name) : Object("spoon")
 {
         // loadplanet
 }

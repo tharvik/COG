@@ -8,7 +8,6 @@
 #include "config.h"
 #include "Light.h"
 #include "Object.h"
-#include "ObjectManager.h"
 #include "Planet.h"
 
 #include <memory.h>
@@ -25,11 +24,6 @@ private:
          * Set of Object the Univers has to draw
          */
         std::set<std::unique_ptr<Object>> objects;
-        
-        /**
-         * ObjectManager to load Object from
-         */
-        ObjectManager loader;
         
         /**
          * Camera of this Univers
@@ -69,7 +63,7 @@ public:
                 const GLdouble anglepsi);
         
         
-        const size_t& Univers::addPlanet();
+        const size_t& addPlanet();
         
         /**
          * Print some information about the \ref camera

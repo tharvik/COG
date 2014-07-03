@@ -22,15 +22,9 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 
 const size_t& Univers::addPlanet()
 {
-        objects.insert(new Planet());
+        //objects.insert(new Planet());
         
         return 0;
-}
-
-size_t Univers::addObject(const Object &object)
-{
-        //objects.insert(object);
-        return objects.size() - 1;
 }
 
 // Informations

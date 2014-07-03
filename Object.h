@@ -1,9 +1,8 @@
 #pragma once
 
-#include <array>
-#include <string>
+#include <iostream>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include <tuple>
 
 #include "opengl.h"
@@ -15,11 +14,16 @@
 
 class Object {
 private:
-        std::unordered_map<Material, const std::string> materials;
+        static std::map<std::string, Material> materials;
+        static std::map<std::string, Mesh>     meshes;
         
-protected:
-        std::vector<std::tuple<Material, Mesh>> drawOrder;
+        std::vector<std::tuple<std::map<std::string, Material>::iterator,
+                               std::map<std::string, Mesh>::iterator>>
+                                                                      drawOrder;
         
 public:
+        Object(const std::string& name);
+        
         virtual void draw() const = 0;
 };
+
