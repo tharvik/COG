@@ -9,7 +9,6 @@ else()
 endif()
 
 set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
-set			(CMAKE_CXX_COMPILER "clang")
 
 # check for libraries
 unset(links)
