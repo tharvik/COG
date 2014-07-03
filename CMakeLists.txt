@@ -28,15 +28,18 @@ add_library		(logger Logger.cpp)
 add_library		(object Object.cpp)
 
 add_library		(univers Univers.cpp)
+add_library		(planet Planet.cpp)
+add_library		(sphere Sphere.cpp)
+add_library		(light Light.cpp)
+
 add_library		(camera Camera.cpp)
 add_library		(eventHandler eventHandler.cpp)
 add_library		(simulator Simulator.cpp)
-add_library		(sphere Sphere.cpp)
-add_library		(light Light.cpp)
 add_library		(vector Vvector.cpp)
 add_library		(game Game.cpp)
 
 add_library		(texture Texture.cpp)
+add_library		(material Material.cpp)
 add_library		(shader Shader.cpp)
 add_library		(mesh Mesh.cpp)
 add_library		(stb stb_image.c)
@@ -44,9 +47,10 @@ add_library		(stb stb_image.c)
 add_library		(component Component.cpp)
 
 # link
-target_link_libraries	(object texture shader mesh stdc++)
+target_link_libraries	(object texture shader mesh stdc++ material)
 
-target_link_libraries	(univers camera sphere light object)
+target_link_libraries	(planet object)
+target_link_libraries	(univers camera sphere light object planet)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
