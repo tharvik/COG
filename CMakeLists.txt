@@ -50,6 +50,7 @@ add_library		(component Component.cpp)
 target_link_libraries	(object texture shader mesh stdc++ material)
 
 target_link_libraries	(planet object)
+target_link_libraries	(material shader texture)
 target_link_libraries	(univers camera sphere light object planet)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
