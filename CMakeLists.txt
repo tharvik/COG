@@ -8,7 +8,7 @@ else()
 	set		(libs GL GLU glut GLEW)
 endif()
 
-set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
+set		(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -ggdb -g3 -pipe")
 
 # check for libraries
 unset(links)
