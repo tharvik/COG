@@ -17,13 +17,13 @@ class Object {
 private:
         static std::map<std::string, std::shared_ptr<Material>> materials;
         static std::map<std::string, std::shared_ptr<Mesh>>     meshes;
-        
-        std::vector<std::pair<const std::shared_ptr<Material>,
-                              const std::shared_ptr<Mesh>>> drawOrder;
-        
+
+        std::vector<std::pair<std::shared_ptr<Material>,
+                              std::shared_ptr<Mesh>>> drawOrder;
+
 public:
         Object(const std::string& name);
-        
+
         virtual void draw() const = 0;
 };
 

@@ -14,7 +14,7 @@ class Simulator {
 		/**
 		 * Univers it has to handle
 		 */
-		Univers *univers = nullptr;
+		Univers *univers;
 
 		/**
 		 * Current computed FPS
