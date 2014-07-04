@@ -35,6 +35,9 @@ Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
 	logger::info("Shader created.", FL);
 }
 
+Shader::Shader(const std::string& name)
+{}
+
 void Shader::createShaders(const std::string& vShaderPath,
 		const std::string& pShaderPath)
 {

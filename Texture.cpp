@@ -1,5 +1,8 @@
 #include "Texture.h"
 
+using namespace std;
+
+
 Texture::Texture() : imageId(0)
 {}
 
@@ -17,6 +20,9 @@ Texture::Texture(const unsigned short width, const unsigned short height,
                       GL_UNSIGNED_BYTE, buffer);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 }
+
+Texture::Texture(const string& name)
+{}
 
 void Texture::bindTexture() const
 {

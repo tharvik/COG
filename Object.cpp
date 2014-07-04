@@ -5,7 +5,7 @@ using namespace std;
 map<string, shared_ptr<Material>> Object::materials;
 map<string, shared_ptr<Mesh>>     Object::meshes;
 
-// Constructors
+
 Object::Object(const std::string& name) : drawOrder()
 {
         // read file
