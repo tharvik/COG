@@ -67,7 +67,7 @@ public:
                 const GLdouble anglepsi);
 
 
-        const size_t& addPlanet();
+        const size_t addPlanet(const std::string& name);
 
         /**
          * Print some information about the \ref camera

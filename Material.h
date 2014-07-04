@@ -19,7 +19,7 @@ private:
         std::vector<std::shared_ptr<Texture>> textureToDraw;
         
 public:
-        Material(const std::string& name);
+        Material(const std::string& mtlPath, const std::string& ObjectPath);
         Material(const Material&) = delete;
         Material(const Material&&);
         

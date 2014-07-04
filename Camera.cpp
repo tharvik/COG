@@ -19,7 +19,7 @@ Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 {
         if (!oriX && !oriY && !oriZ) {
                 logger::warn("The orientation vector given to the camera was of\
-                             length 0", FL);
+                             length 0", _FL_);
         } else {
 		p[0] = posX; p[1] = posY; p[2] = posZ;
 		o[0] = oriX; o[1] = oriY; o[2] = oriZ;

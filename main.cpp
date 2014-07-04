@@ -18,16 +18,8 @@ int main(int argc, char *argv[])
                 openWindow(WIN_X, WIN_Y, WIN_W, WIN_H, WIN_T);
         
         setUpOpenGL();
-
-        Planet aPlanet("chose");
-        Planet bPlanet("truc");
-        Planet cPlanet("machin");
-        Planet dPlanet("truc");
         
-        aPlanet.draw();
-        bPlanet.draw();
-        cPlanet.draw();
-        dPlanet.draw();
+        Planet planeta("planet");
         
 //      Game game;
 //	game.enterMainMenu();

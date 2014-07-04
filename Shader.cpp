@@ -22,17 +22,17 @@ Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
 	
 	// check
 	if (!glIsShader(this->vertexShader) || !glIsShader(this->pixelShader))
-		logger::error("The shaders haven't been created", FL);
+		logger::error("The shaders haven't been created", _FL_);
 	
 	createProgram(vShaderPath, pShaderPath);
 	linkProgram(vShaderPath, pShaderPath);
 	
 	// check
 	if (!glIsProgram(this->program))
-		logger::error("The shader program has not been created", FL);
+		logger::error("The shader program has not been created", _FL_);
 		
 	
-	logger::info("Shader created.", FL);
+	logger::info("Shader created.", _FL_);
 }
 
 Shader::Shader(const std::string& name)
@@ -45,12 +45,12 @@ void Shader::createShaders(const std::string& vShaderPath,
 	this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	if (!this->vertexShader || !glIsShader(this->vertexShader)) 
 		logger::warn("Opengl was not able to create a vertex shader ID with : "
-					  + vShaderPath, FL);
+					  + vShaderPath, _FL_);
 
 	this->pixelShader  = glCreateShader(GL_FRAGMENT_SHADER);
 	if (!this->pixelShader || !glIsShader(this->pixelShader))
 		logger::warn("Opengl was not able to create a pixel shader ID with : "
-					  + pShaderPath, FL);
+					  + pShaderPath, _FL_);
 
 
 	// creation of the shaders
@@ -71,21 +71,21 @@ char* Shader::loadFileASCII(const std::string& filePath)
 	std::ifstream file(filePath);
 	
 	if (!file)
-		logger::error("Unable to load " + filePath, FL);
+		logger::error("Unable to load " + filePath, _FL_);
 	
 	// get file length
 	file.seekg(0, std::ios::end);
 	length = (int) file.tellg();
 	if (length == -1)
-		logger::error("Unable to load the file size " + filePath, FL);
+		logger::error("Unable to load the file size " + filePath, _FL_);
 	file.seekg(0, std::ios::beg);
 	if (length == 0)
-		logger::warn("The file seens to be empty. " + filePath, FL);
+		logger::warn("The file seens to be empty. " + filePath, _FL_);
 	
 	// transmit chars from the file to the string
 	char* str = (char*)  malloc((length + 1) * sizeof(char));
 	if (str == NULL)
-		logger::warn("Unable to load string from file " + filePath, FL);
+		logger::warn("Unable to load string from file " + filePath, _FL_);
 	file.read(str, length);
 
 	// adding \0 at the of the string
@@ -118,10 +118,10 @@ void Shader::compileShaders(const std::string& vShaderPath,
 		vCompileLog = (char*) calloc(CompileLogSize + 1, sizeof(char));
 		if (vCompileLog == NULL)
 			logger::warn("Unable to allocate the compilation log\
-						 message string for " + vShaderPath, FL);
+						 message string for " + vShaderPath, _FL_);
 		glGetShaderInfoLog(this->vertexShader, CompileLogSize,
 						   &CompileLogSize, vCompileLog);
-		logger::warn(std::string(vShaderPath + ": GLSL ") + vCompileLog, FL);
+		logger::warn(std::string(vShaderPath + ": GLSL ") + vCompileLog, _FL_);
 	}
 	
 	// compile pixel shader
@@ -136,10 +136,10 @@ void Shader::compileShaders(const std::string& vShaderPath,
 		pCompileLog = (char*) calloc(CompileLogSize + 1, sizeof(char));
 		if (pCompileLog == NULL)
 			logger::warn("Unable to allocate the compilation log\
-						 message string for " + pShaderPath, FL);
+						 message string for " + pShaderPath, _FL_);
 		glGetShaderInfoLog(this->pixelShader, CompileLogSize,
 						   &CompileLogSize, pCompileLog);
-		logger::warn(std::string(pShaderPath + ": GLSL ") + pCompileLog, FL);
+		logger::warn(std::string(pShaderPath + ": GLSL ") + pCompileLog, _FL_);
 	}
 	
 	// clean up
@@ -162,7 +162,7 @@ void Shader::createProgram(const std::string &vShaderPath,
 	// check program ID
 	if (!this->program || !glIsProgram(this->program)) 
 		logger::warn("Opengl was not able to create a program shader ID with : "
-					  + vShaderPath + " and " + pShaderPath, FL);
+					  + vShaderPath + " and " + pShaderPath, _FL_);
 }
 
 void Shader::linkProgram(const std::string &vShaderPath,
@@ -186,10 +186,10 @@ void Shader::linkProgram(const std::string &vShaderPath,
 		if (linkingLog == NULL)
 			logger::warn("Unable to allocate the linking log\
 						 message string for the program with " + vShaderPath
-						 + " and " + pShaderPath, FL);
+						 + " and " + pShaderPath, _FL_);
 		glGetProgramInfoLog(this->program, linkingLogSize,
 							&linkingLogSize, linkingLog);
-		logger::error(std::string(vShaderPath + ": GLSL ") + linkingLog, FL);
+		logger::error(std::string(vShaderPath + ": GLSL ") + linkingLog, _FL_);
 	}
 	
 	//clean up

@@ -1,13 +1,15 @@
 #include "Univers.h"
 
+using namespace std;
+
 static Univers* local;
+
 
 static void cleanup()
 {
 	local->~Univers();
 }
 
-// Constructors
 Univers::Univers() : camera(), mainLight(5.98, -26.12, 15.39, 0.32, 0.76, -0.57)
 {
 	local = this;
@@ -20,14 +22,12 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 	camera(posX, posY, posZ, anglePhi, angleTeta, anglepsi)
 {}
 
-const size_t& Univers::addPlanet()
+const size_t Univers::addPlanet(const string& name)
 {
-        //objects.insert(new Planet());
-        
-        return 0;
+        objects.insert(unique_ptr<Object>(new Planet(name)));
+        return objects.size() - 1;
 }
 
-// Informations
 void Univers::printInfo() const
 {
         std::cout << "CAMERA:" << std::endl

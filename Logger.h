@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#define FL __FILE__,__LINE__
+#define _FL_ __FILE__,__LINE__
 
 namespace logger
 {

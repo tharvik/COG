@@ -43,7 +43,7 @@ void Simulator::physic()
 
         if (physicDelta > 1) {
                 physicDelta = 1;
-                logger::warn("Lag occured", FL); // To manage
+                logger::warn("Lag occured", _FL_); // To manage
         }
         if (physicCounter >= REPORT_PPS) {
                 measurePPS();
