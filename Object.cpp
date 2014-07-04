@@ -34,11 +34,11 @@ void Object::addMltToDrawList(const std::string& path, const std::string& name,
                                                          = materials.find(name);
         if (material == materials.end()) {
                 material = get<0>(materials.insert(make_pair(name,
-                        shared_ptr<Material>(new Material(path, objectPath)))));
+                        shared_ptr<Material>(new Material(path, "path2", "3#")))));
         }
         
         drawList.push_back(make_pair(materials[name],
-                                     vector<shared_ptr<Mesh>>({})));
+                                     vector<shared_ptr<Mesh>>()));
 }
 
 Object::Object(const std::string& name) : drawList()
