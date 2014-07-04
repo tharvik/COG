@@ -20,6 +20,20 @@ private:
         std::shared_ptr<Shader> shaderToDraw;
         std::vector<std::shared_ptr<Texture>> textureToDraw;
         
+	// parameters
+	float Ka[3]; // ambient color
+	float Kd[3]; // diffuse color
+	float Ks[3]; // specular color
+	float Ns;    // specular coeficient
+	float d;     // transparency
+	
+	// textures
+	std::shared_ptr<Texture> map_Ka,   // ambient color texture
+				 map_Kd,   // diffuse color texture
+				 map_Ks,   // specular color texture
+				 map_Ns,   // specular intensity texture
+				 map_d,	   // transparency texture
+				 map_bump; // normal map texture
 public:
 	/**
 	 * Constructor
