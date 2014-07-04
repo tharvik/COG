@@ -34,6 +34,12 @@ private:
 				 map_Ns,   // specular intensity texture
 				 map_d,	   // transparency texture
 				 map_bump; // normal map texture
+				 
+	/**
+	 * parse a mtl file and fill the private parameters + textures
+	 * \param filePath path of the mtl file
+	 */
+	 void parseMtl(const std::string& filePath);
 public:
 	/**
 	 * Constructor
@@ -41,7 +47,7 @@ public:
 	 * \param vsPath path to the vertex shader
 	 * \param fsPath path to the fragment shader
 	 */
-        Material(const std::string& mtlPath, const std::string vsPath,
+        Material(const std::string& mtlPath, const std::string& vsPath,
 		 const std::string& fsPath);
 	
 	/**
