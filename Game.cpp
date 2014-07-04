@@ -3,16 +3,16 @@
 // Constructor
 Game::Game() : univers(), simulator(&univers)
 {
-        glClearColor(BGR_C);
-        
+        glClearColor(BACKGROUND_COLOR);
+
         if (FULLSCREEN)
                 glutFullScreen();
-        
+
         univers.addObject("mountain");
-        
+
         setSimulator(&simulator);
         setUnivers(&univers);
-        
+
         {
                 glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
                 glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
@@ -33,12 +33,12 @@ void Game::enterMainMenu()
         glutSpecialFunc(specialKeyDown);
         glutKeyboardFunc(keyDown);
         glutKeyboardUpFunc(keyUp);
-        
+
         glutMouseFunc(mouseHandler);
         glutMotionFunc(motionHandler);
-        
+
         glutIdleFunc(tick);
-        
+
         glutMainLoop();
 }
 

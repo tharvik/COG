@@ -6,6 +6,7 @@ static Univers* univers = nullptr;
 
 static std::set<int> keysPressed;
 
+
 // Initialisation
 /*void setGame(Game* theGame)
  {
@@ -86,8 +87,8 @@ void keyboard(const int value)
         if (keysPressed.count('f')) {
                 if (glutGet(GLUT_WINDOW_HEIGHT) == glutGet(GLUT_SCREEN_HEIGHT)
                     && glutGet(GLUT_WINDOW_WIDTH ) == glutGet(GLUT_SCREEN_WIDTH)) {
-                        glutReshapeWindow(WIN_W, WIN_H);
-                        glutPositionWindow(WIN_X, WIN_Y);
+                        glutReshapeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+                        glutPositionWindow(MIDDLE_SCREEN_X, MIDDLE_SCREEN_Y);
                 } else {
                         glutFullScreen();
                 }
@@ -101,12 +102,12 @@ void keyboard(const int value)
                 glutDestroyWindow(1);
                 exit(0);
         }
-        
+
         univers->keyboard(keysPressed);
-        
+
         for (int i = 1; i <= 20; i ++)
                 keysPressed.erase(255 + i);
-        
+
         glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
 }
 

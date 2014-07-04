@@ -11,17 +11,15 @@ void setUpOpenGL();
 int main(int argc, char *argv[])
 {
         initLibraries(&argc, argv);
-        
-        if (GAME_MODE)
-                glutEnterGameMode();
-        else
-                openWindow(WIN_X, WIN_Y, WIN_W, WIN_H, WIN_T);
-        
+
+	openWindow(MIDDLE_SCREEN_X, MIDDLE_SCREEN_Y,
+			WINDOW_WIDTH, WINDOW_HEIGHT, PACKAGE_NAME);
+
         setUpOpenGL();
 
         Game game;
 	game.enterMainMenu();
-        
+
 	return 0;
 }
 

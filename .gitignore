@@ -17,3 +17,6 @@ COG.xcodeproj
 
 # generated doc
 doc/
+
+# autotools
+autom4te.cache

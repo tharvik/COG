@@ -32,7 +32,7 @@ void Simulator::printInfo() const
                   << "PPS:"
                         << PPS
                         << std::endl;
-        
+
         univers->printInfo();
 }
 
@@ -49,9 +49,9 @@ void Simulator::physic()
                 measurePPS();
                 physicCounter = 0;
         }
-        
+
         univers->physic(physicDelta);
-        
+
         physicCounter ++;
         lastPhysic = actualPhysic;
 }
@@ -65,14 +65,14 @@ void Simulator::measurePPS()
 void Simulator::refresh()
 {
         actualRefresh = glutGet(GLUT_ELAPSED_TIME);
-        
+
         if (refreshCounter >= REPORT_FPS) {
                 measureFPS();
                 refreshCounter = 0;
         }
-        
+
         univers->refresh();
-        
+
         refreshCounter ++;
         lastRefresh = actualRefresh;
 }
