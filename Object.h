@@ -6,6 +6,10 @@
 #include <tuple>
 #include <memory>
 #include <fstream>
+#include <string>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <unistd.h>
 
 #include "opengl.h"
 #include "Texture.h"
