@@ -27,10 +27,9 @@ private:
                                   std::string& extension);
         void addMltToDrawList(const std::string& path, const std::string& name,
                               const std::string& objectPath);
-        
 public:
         Object(const std::string& name);
-        
+
         virtual void draw() const = 0;
 };
 

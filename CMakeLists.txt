@@ -8,7 +8,7 @@ else()
 	set		(libs GL GLU glut GLEW)
 endif()
 
-set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
+set		(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -ggdb -g3 -pipe")
 
 # check for libraries
 unset(links)
@@ -50,6 +50,7 @@ add_library		(component Component.cpp)
 target_link_libraries	(object texture shader mesh stdc++ material)
 
 target_link_libraries	(planet object)
+target_link_libraries	(material shader texture)
 target_link_libraries	(univers camera sphere light object planet)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
