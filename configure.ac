@@ -1,4 +1,4 @@
-AC_PREREQ([2.65])
+AC_PREREQ([2.66])
 AC_INIT([COG], [0.0.0], [https://github.com/tharvik/COG/issues])
 AM_INIT_AUTOMAKE([-Wall foreign])
 AC_CONFIG_SRCDIR([Shader.h])
