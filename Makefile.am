@@ -1,4 +1,5 @@
-AM_CPPFLAGS 	= -std=c++0x
+COG_CXXFLAGS	= -std=c++0x
+stb_image_CXXFLAGS =
 
 bin_PROGRAMS	= COG
 COG_SOURCES	= Camera.cpp Component.cpp Game.cpp Light.cpp Logger.cpp	\

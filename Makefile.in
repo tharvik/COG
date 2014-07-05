@@ -67,15 +67,20 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_COG_OBJECTS = Camera.$(OBJEXT) Component.$(OBJEXT) Game.$(OBJEXT) \
-	Light.$(OBJEXT) Logger.$(OBJEXT) Mesh.$(OBJEXT) \
-	MeshManager.$(OBJEXT) Object.$(OBJEXT) ObjectManager.$(OBJEXT) \
-	Shader.$(OBJEXT) ShaderManager.$(OBJEXT) Simulator.$(OBJEXT) \
-	Sphere.$(OBJEXT) Texture.$(OBJEXT) TextureManager.$(OBJEXT) \
-	Univers.$(OBJEXT) Vvector.$(OBJEXT) eventHandler.$(OBJEXT) \
-	main.$(OBJEXT) utilities.$(OBJEXT) stb_image.$(OBJEXT)
+am_COG_OBJECTS = COG-Camera.$(OBJEXT) COG-Component.$(OBJEXT) \
+	COG-Game.$(OBJEXT) COG-Light.$(OBJEXT) COG-Logger.$(OBJEXT) \
+	COG-Mesh.$(OBJEXT) COG-MeshManager.$(OBJEXT) \
+	COG-Object.$(OBJEXT) COG-ObjectManager.$(OBJEXT) \
+	COG-Shader.$(OBJEXT) COG-ShaderManager.$(OBJEXT) \
+	COG-Simulator.$(OBJEXT) COG-Sphere.$(OBJEXT) \
+	COG-Texture.$(OBJEXT) COG-TextureManager.$(OBJEXT) \
+	COG-Univers.$(OBJEXT) COG-Vvector.$(OBJEXT) \
+	COG-eventHandler.$(OBJEXT) COG-main.$(OBJEXT) \
+	COG-utilities.$(OBJEXT) stb_image.$(OBJEXT)
 COG_OBJECTS = $(am_COG_OBJECTS)
 COG_LDADD = $(LDADD)
+COG_LINK = $(CXXLD) $(COG_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -203,7 +208,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CPPFLAGS = -std=c++0x
+COG_CXXFLAGS = -std=c++0x
+stb_image_CXXFLAGS = 
 COG_SOURCES = Camera.cpp Component.cpp Game.cpp Light.cpp Logger.cpp	\
 		  Mesh.cpp MeshManager.cpp Object.cpp ObjectManager.cpp		\
 		  Shader.cpp ShaderManager.cpp Simulator.cpp Sphere.cpp		\
@@ -306,7 +312,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 COG$(EXEEXT): $(COG_OBJECTS) $(COG_DEPENDENCIES) $(EXTRA_COG_DEPENDENCIES) 
 	@rm -f COG$(EXEEXT)
-	$(CXXLINK) $(COG_OBJECTS) $(COG_LDADD) $(LIBS)
+	$(COG_LINK) $(COG_OBJECTS) $(COG_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -314,27 +320,27 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Camera.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Component.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Game.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Light.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Logger.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Mesh.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MeshManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Object.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ObjectManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Shader.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ShaderManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Simulator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sphere.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Texture.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TextureManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Univers.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Vvector.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Camera.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Component.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Game.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Light.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Logger.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Mesh.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-MeshManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Object.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-ObjectManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Shader.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-ShaderManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Simulator.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Sphere.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Texture.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-TextureManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Univers.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-Vvector.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-eventHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/COG-utilities.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stb_image.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utilities.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -363,6 +369,286 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+COG-Camera.o: Camera.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Camera.o -MD -MP -MF $(DEPDIR)/COG-Camera.Tpo -c -o COG-Camera.o `test -f 'Camera.cpp' || echo '$(srcdir)/'`Camera.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Camera.Tpo $(DEPDIR)/COG-Camera.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Camera.cpp' object='COG-Camera.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Camera.o `test -f 'Camera.cpp' || echo '$(srcdir)/'`Camera.cpp
+
+COG-Camera.obj: Camera.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Camera.obj -MD -MP -MF $(DEPDIR)/COG-Camera.Tpo -c -o COG-Camera.obj `if test -f 'Camera.cpp'; then $(CYGPATH_W) 'Camera.cpp'; else $(CYGPATH_W) '$(srcdir)/Camera.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Camera.Tpo $(DEPDIR)/COG-Camera.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Camera.cpp' object='COG-Camera.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Camera.obj `if test -f 'Camera.cpp'; then $(CYGPATH_W) 'Camera.cpp'; else $(CYGPATH_W) '$(srcdir)/Camera.cpp'; fi`
+
+COG-Component.o: Component.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Component.o -MD -MP -MF $(DEPDIR)/COG-Component.Tpo -c -o COG-Component.o `test -f 'Component.cpp' || echo '$(srcdir)/'`Component.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Component.Tpo $(DEPDIR)/COG-Component.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Component.cpp' object='COG-Component.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Component.o `test -f 'Component.cpp' || echo '$(srcdir)/'`Component.cpp
+
+COG-Component.obj: Component.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Component.obj -MD -MP -MF $(DEPDIR)/COG-Component.Tpo -c -o COG-Component.obj `if test -f 'Component.cpp'; then $(CYGPATH_W) 'Component.cpp'; else $(CYGPATH_W) '$(srcdir)/Component.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Component.Tpo $(DEPDIR)/COG-Component.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Component.cpp' object='COG-Component.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Component.obj `if test -f 'Component.cpp'; then $(CYGPATH_W) 'Component.cpp'; else $(CYGPATH_W) '$(srcdir)/Component.cpp'; fi`
+
+COG-Game.o: Game.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Game.o -MD -MP -MF $(DEPDIR)/COG-Game.Tpo -c -o COG-Game.o `test -f 'Game.cpp' || echo '$(srcdir)/'`Game.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Game.Tpo $(DEPDIR)/COG-Game.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Game.cpp' object='COG-Game.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Game.o `test -f 'Game.cpp' || echo '$(srcdir)/'`Game.cpp
+
+COG-Game.obj: Game.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Game.obj -MD -MP -MF $(DEPDIR)/COG-Game.Tpo -c -o COG-Game.obj `if test -f 'Game.cpp'; then $(CYGPATH_W) 'Game.cpp'; else $(CYGPATH_W) '$(srcdir)/Game.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Game.Tpo $(DEPDIR)/COG-Game.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Game.cpp' object='COG-Game.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Game.obj `if test -f 'Game.cpp'; then $(CYGPATH_W) 'Game.cpp'; else $(CYGPATH_W) '$(srcdir)/Game.cpp'; fi`
+
+COG-Light.o: Light.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Light.o -MD -MP -MF $(DEPDIR)/COG-Light.Tpo -c -o COG-Light.o `test -f 'Light.cpp' || echo '$(srcdir)/'`Light.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Light.Tpo $(DEPDIR)/COG-Light.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Light.cpp' object='COG-Light.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Light.o `test -f 'Light.cpp' || echo '$(srcdir)/'`Light.cpp
+
+COG-Light.obj: Light.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Light.obj -MD -MP -MF $(DEPDIR)/COG-Light.Tpo -c -o COG-Light.obj `if test -f 'Light.cpp'; then $(CYGPATH_W) 'Light.cpp'; else $(CYGPATH_W) '$(srcdir)/Light.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Light.Tpo $(DEPDIR)/COG-Light.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Light.cpp' object='COG-Light.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Light.obj `if test -f 'Light.cpp'; then $(CYGPATH_W) 'Light.cpp'; else $(CYGPATH_W) '$(srcdir)/Light.cpp'; fi`
+
+COG-Logger.o: Logger.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Logger.o -MD -MP -MF $(DEPDIR)/COG-Logger.Tpo -c -o COG-Logger.o `test -f 'Logger.cpp' || echo '$(srcdir)/'`Logger.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Logger.Tpo $(DEPDIR)/COG-Logger.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Logger.cpp' object='COG-Logger.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Logger.o `test -f 'Logger.cpp' || echo '$(srcdir)/'`Logger.cpp
+
+COG-Logger.obj: Logger.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Logger.obj -MD -MP -MF $(DEPDIR)/COG-Logger.Tpo -c -o COG-Logger.obj `if test -f 'Logger.cpp'; then $(CYGPATH_W) 'Logger.cpp'; else $(CYGPATH_W) '$(srcdir)/Logger.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Logger.Tpo $(DEPDIR)/COG-Logger.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Logger.cpp' object='COG-Logger.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Logger.obj `if test -f 'Logger.cpp'; then $(CYGPATH_W) 'Logger.cpp'; else $(CYGPATH_W) '$(srcdir)/Logger.cpp'; fi`
+
+COG-Mesh.o: Mesh.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Mesh.o -MD -MP -MF $(DEPDIR)/COG-Mesh.Tpo -c -o COG-Mesh.o `test -f 'Mesh.cpp' || echo '$(srcdir)/'`Mesh.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Mesh.Tpo $(DEPDIR)/COG-Mesh.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Mesh.cpp' object='COG-Mesh.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Mesh.o `test -f 'Mesh.cpp' || echo '$(srcdir)/'`Mesh.cpp
+
+COG-Mesh.obj: Mesh.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Mesh.obj -MD -MP -MF $(DEPDIR)/COG-Mesh.Tpo -c -o COG-Mesh.obj `if test -f 'Mesh.cpp'; then $(CYGPATH_W) 'Mesh.cpp'; else $(CYGPATH_W) '$(srcdir)/Mesh.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Mesh.Tpo $(DEPDIR)/COG-Mesh.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Mesh.cpp' object='COG-Mesh.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Mesh.obj `if test -f 'Mesh.cpp'; then $(CYGPATH_W) 'Mesh.cpp'; else $(CYGPATH_W) '$(srcdir)/Mesh.cpp'; fi`
+
+COG-MeshManager.o: MeshManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-MeshManager.o -MD -MP -MF $(DEPDIR)/COG-MeshManager.Tpo -c -o COG-MeshManager.o `test -f 'MeshManager.cpp' || echo '$(srcdir)/'`MeshManager.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-MeshManager.Tpo $(DEPDIR)/COG-MeshManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MeshManager.cpp' object='COG-MeshManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-MeshManager.o `test -f 'MeshManager.cpp' || echo '$(srcdir)/'`MeshManager.cpp
+
+COG-MeshManager.obj: MeshManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-MeshManager.obj -MD -MP -MF $(DEPDIR)/COG-MeshManager.Tpo -c -o COG-MeshManager.obj `if test -f 'MeshManager.cpp'; then $(CYGPATH_W) 'MeshManager.cpp'; else $(CYGPATH_W) '$(srcdir)/MeshManager.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-MeshManager.Tpo $(DEPDIR)/COG-MeshManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MeshManager.cpp' object='COG-MeshManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-MeshManager.obj `if test -f 'MeshManager.cpp'; then $(CYGPATH_W) 'MeshManager.cpp'; else $(CYGPATH_W) '$(srcdir)/MeshManager.cpp'; fi`
+
+COG-Object.o: Object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Object.o -MD -MP -MF $(DEPDIR)/COG-Object.Tpo -c -o COG-Object.o `test -f 'Object.cpp' || echo '$(srcdir)/'`Object.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Object.Tpo $(DEPDIR)/COG-Object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Object.cpp' object='COG-Object.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Object.o `test -f 'Object.cpp' || echo '$(srcdir)/'`Object.cpp
+
+COG-Object.obj: Object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Object.obj -MD -MP -MF $(DEPDIR)/COG-Object.Tpo -c -o COG-Object.obj `if test -f 'Object.cpp'; then $(CYGPATH_W) 'Object.cpp'; else $(CYGPATH_W) '$(srcdir)/Object.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Object.Tpo $(DEPDIR)/COG-Object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Object.cpp' object='COG-Object.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Object.obj `if test -f 'Object.cpp'; then $(CYGPATH_W) 'Object.cpp'; else $(CYGPATH_W) '$(srcdir)/Object.cpp'; fi`
+
+COG-ObjectManager.o: ObjectManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-ObjectManager.o -MD -MP -MF $(DEPDIR)/COG-ObjectManager.Tpo -c -o COG-ObjectManager.o `test -f 'ObjectManager.cpp' || echo '$(srcdir)/'`ObjectManager.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-ObjectManager.Tpo $(DEPDIR)/COG-ObjectManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ObjectManager.cpp' object='COG-ObjectManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-ObjectManager.o `test -f 'ObjectManager.cpp' || echo '$(srcdir)/'`ObjectManager.cpp
+
+COG-ObjectManager.obj: ObjectManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-ObjectManager.obj -MD -MP -MF $(DEPDIR)/COG-ObjectManager.Tpo -c -o COG-ObjectManager.obj `if test -f 'ObjectManager.cpp'; then $(CYGPATH_W) 'ObjectManager.cpp'; else $(CYGPATH_W) '$(srcdir)/ObjectManager.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-ObjectManager.Tpo $(DEPDIR)/COG-ObjectManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ObjectManager.cpp' object='COG-ObjectManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-ObjectManager.obj `if test -f 'ObjectManager.cpp'; then $(CYGPATH_W) 'ObjectManager.cpp'; else $(CYGPATH_W) '$(srcdir)/ObjectManager.cpp'; fi`
+
+COG-Shader.o: Shader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Shader.o -MD -MP -MF $(DEPDIR)/COG-Shader.Tpo -c -o COG-Shader.o `test -f 'Shader.cpp' || echo '$(srcdir)/'`Shader.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Shader.Tpo $(DEPDIR)/COG-Shader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Shader.cpp' object='COG-Shader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Shader.o `test -f 'Shader.cpp' || echo '$(srcdir)/'`Shader.cpp
+
+COG-Shader.obj: Shader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Shader.obj -MD -MP -MF $(DEPDIR)/COG-Shader.Tpo -c -o COG-Shader.obj `if test -f 'Shader.cpp'; then $(CYGPATH_W) 'Shader.cpp'; else $(CYGPATH_W) '$(srcdir)/Shader.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Shader.Tpo $(DEPDIR)/COG-Shader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Shader.cpp' object='COG-Shader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Shader.obj `if test -f 'Shader.cpp'; then $(CYGPATH_W) 'Shader.cpp'; else $(CYGPATH_W) '$(srcdir)/Shader.cpp'; fi`
+
+COG-ShaderManager.o: ShaderManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-ShaderManager.o -MD -MP -MF $(DEPDIR)/COG-ShaderManager.Tpo -c -o COG-ShaderManager.o `test -f 'ShaderManager.cpp' || echo '$(srcdir)/'`ShaderManager.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-ShaderManager.Tpo $(DEPDIR)/COG-ShaderManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ShaderManager.cpp' object='COG-ShaderManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-ShaderManager.o `test -f 'ShaderManager.cpp' || echo '$(srcdir)/'`ShaderManager.cpp
+
+COG-ShaderManager.obj: ShaderManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-ShaderManager.obj -MD -MP -MF $(DEPDIR)/COG-ShaderManager.Tpo -c -o COG-ShaderManager.obj `if test -f 'ShaderManager.cpp'; then $(CYGPATH_W) 'ShaderManager.cpp'; else $(CYGPATH_W) '$(srcdir)/ShaderManager.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-ShaderManager.Tpo $(DEPDIR)/COG-ShaderManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ShaderManager.cpp' object='COG-ShaderManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-ShaderManager.obj `if test -f 'ShaderManager.cpp'; then $(CYGPATH_W) 'ShaderManager.cpp'; else $(CYGPATH_W) '$(srcdir)/ShaderManager.cpp'; fi`
+
+COG-Simulator.o: Simulator.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Simulator.o -MD -MP -MF $(DEPDIR)/COG-Simulator.Tpo -c -o COG-Simulator.o `test -f 'Simulator.cpp' || echo '$(srcdir)/'`Simulator.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Simulator.Tpo $(DEPDIR)/COG-Simulator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Simulator.cpp' object='COG-Simulator.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Simulator.o `test -f 'Simulator.cpp' || echo '$(srcdir)/'`Simulator.cpp
+
+COG-Simulator.obj: Simulator.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Simulator.obj -MD -MP -MF $(DEPDIR)/COG-Simulator.Tpo -c -o COG-Simulator.obj `if test -f 'Simulator.cpp'; then $(CYGPATH_W) 'Simulator.cpp'; else $(CYGPATH_W) '$(srcdir)/Simulator.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Simulator.Tpo $(DEPDIR)/COG-Simulator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Simulator.cpp' object='COG-Simulator.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Simulator.obj `if test -f 'Simulator.cpp'; then $(CYGPATH_W) 'Simulator.cpp'; else $(CYGPATH_W) '$(srcdir)/Simulator.cpp'; fi`
+
+COG-Sphere.o: Sphere.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Sphere.o -MD -MP -MF $(DEPDIR)/COG-Sphere.Tpo -c -o COG-Sphere.o `test -f 'Sphere.cpp' || echo '$(srcdir)/'`Sphere.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Sphere.Tpo $(DEPDIR)/COG-Sphere.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Sphere.cpp' object='COG-Sphere.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Sphere.o `test -f 'Sphere.cpp' || echo '$(srcdir)/'`Sphere.cpp
+
+COG-Sphere.obj: Sphere.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Sphere.obj -MD -MP -MF $(DEPDIR)/COG-Sphere.Tpo -c -o COG-Sphere.obj `if test -f 'Sphere.cpp'; then $(CYGPATH_W) 'Sphere.cpp'; else $(CYGPATH_W) '$(srcdir)/Sphere.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Sphere.Tpo $(DEPDIR)/COG-Sphere.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Sphere.cpp' object='COG-Sphere.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Sphere.obj `if test -f 'Sphere.cpp'; then $(CYGPATH_W) 'Sphere.cpp'; else $(CYGPATH_W) '$(srcdir)/Sphere.cpp'; fi`
+
+COG-Texture.o: Texture.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Texture.o -MD -MP -MF $(DEPDIR)/COG-Texture.Tpo -c -o COG-Texture.o `test -f 'Texture.cpp' || echo '$(srcdir)/'`Texture.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Texture.Tpo $(DEPDIR)/COG-Texture.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Texture.cpp' object='COG-Texture.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Texture.o `test -f 'Texture.cpp' || echo '$(srcdir)/'`Texture.cpp
+
+COG-Texture.obj: Texture.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Texture.obj -MD -MP -MF $(DEPDIR)/COG-Texture.Tpo -c -o COG-Texture.obj `if test -f 'Texture.cpp'; then $(CYGPATH_W) 'Texture.cpp'; else $(CYGPATH_W) '$(srcdir)/Texture.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Texture.Tpo $(DEPDIR)/COG-Texture.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Texture.cpp' object='COG-Texture.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Texture.obj `if test -f 'Texture.cpp'; then $(CYGPATH_W) 'Texture.cpp'; else $(CYGPATH_W) '$(srcdir)/Texture.cpp'; fi`
+
+COG-TextureManager.o: TextureManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-TextureManager.o -MD -MP -MF $(DEPDIR)/COG-TextureManager.Tpo -c -o COG-TextureManager.o `test -f 'TextureManager.cpp' || echo '$(srcdir)/'`TextureManager.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-TextureManager.Tpo $(DEPDIR)/COG-TextureManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TextureManager.cpp' object='COG-TextureManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-TextureManager.o `test -f 'TextureManager.cpp' || echo '$(srcdir)/'`TextureManager.cpp
+
+COG-TextureManager.obj: TextureManager.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-TextureManager.obj -MD -MP -MF $(DEPDIR)/COG-TextureManager.Tpo -c -o COG-TextureManager.obj `if test -f 'TextureManager.cpp'; then $(CYGPATH_W) 'TextureManager.cpp'; else $(CYGPATH_W) '$(srcdir)/TextureManager.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-TextureManager.Tpo $(DEPDIR)/COG-TextureManager.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TextureManager.cpp' object='COG-TextureManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-TextureManager.obj `if test -f 'TextureManager.cpp'; then $(CYGPATH_W) 'TextureManager.cpp'; else $(CYGPATH_W) '$(srcdir)/TextureManager.cpp'; fi`
+
+COG-Univers.o: Univers.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Univers.o -MD -MP -MF $(DEPDIR)/COG-Univers.Tpo -c -o COG-Univers.o `test -f 'Univers.cpp' || echo '$(srcdir)/'`Univers.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Univers.Tpo $(DEPDIR)/COG-Univers.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Univers.cpp' object='COG-Univers.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Univers.o `test -f 'Univers.cpp' || echo '$(srcdir)/'`Univers.cpp
+
+COG-Univers.obj: Univers.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Univers.obj -MD -MP -MF $(DEPDIR)/COG-Univers.Tpo -c -o COG-Univers.obj `if test -f 'Univers.cpp'; then $(CYGPATH_W) 'Univers.cpp'; else $(CYGPATH_W) '$(srcdir)/Univers.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Univers.Tpo $(DEPDIR)/COG-Univers.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Univers.cpp' object='COG-Univers.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Univers.obj `if test -f 'Univers.cpp'; then $(CYGPATH_W) 'Univers.cpp'; else $(CYGPATH_W) '$(srcdir)/Univers.cpp'; fi`
+
+COG-Vvector.o: Vvector.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Vvector.o -MD -MP -MF $(DEPDIR)/COG-Vvector.Tpo -c -o COG-Vvector.o `test -f 'Vvector.cpp' || echo '$(srcdir)/'`Vvector.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Vvector.Tpo $(DEPDIR)/COG-Vvector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Vvector.cpp' object='COG-Vvector.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Vvector.o `test -f 'Vvector.cpp' || echo '$(srcdir)/'`Vvector.cpp
+
+COG-Vvector.obj: Vvector.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-Vvector.obj -MD -MP -MF $(DEPDIR)/COG-Vvector.Tpo -c -o COG-Vvector.obj `if test -f 'Vvector.cpp'; then $(CYGPATH_W) 'Vvector.cpp'; else $(CYGPATH_W) '$(srcdir)/Vvector.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-Vvector.Tpo $(DEPDIR)/COG-Vvector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Vvector.cpp' object='COG-Vvector.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-Vvector.obj `if test -f 'Vvector.cpp'; then $(CYGPATH_W) 'Vvector.cpp'; else $(CYGPATH_W) '$(srcdir)/Vvector.cpp'; fi`
+
+COG-eventHandler.o: eventHandler.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-eventHandler.o -MD -MP -MF $(DEPDIR)/COG-eventHandler.Tpo -c -o COG-eventHandler.o `test -f 'eventHandler.cpp' || echo '$(srcdir)/'`eventHandler.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-eventHandler.Tpo $(DEPDIR)/COG-eventHandler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='eventHandler.cpp' object='COG-eventHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-eventHandler.o `test -f 'eventHandler.cpp' || echo '$(srcdir)/'`eventHandler.cpp
+
+COG-eventHandler.obj: eventHandler.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-eventHandler.obj -MD -MP -MF $(DEPDIR)/COG-eventHandler.Tpo -c -o COG-eventHandler.obj `if test -f 'eventHandler.cpp'; then $(CYGPATH_W) 'eventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/eventHandler.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-eventHandler.Tpo $(DEPDIR)/COG-eventHandler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='eventHandler.cpp' object='COG-eventHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-eventHandler.obj `if test -f 'eventHandler.cpp'; then $(CYGPATH_W) 'eventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/eventHandler.cpp'; fi`
+
+COG-main.o: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-main.o -MD -MP -MF $(DEPDIR)/COG-main.Tpo -c -o COG-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-main.Tpo $(DEPDIR)/COG-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='COG-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+
+COG-main.obj: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-main.obj -MD -MP -MF $(DEPDIR)/COG-main.Tpo -c -o COG-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-main.Tpo $(DEPDIR)/COG-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='COG-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+
+COG-utilities.o: utilities.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-utilities.o -MD -MP -MF $(DEPDIR)/COG-utilities.Tpo -c -o COG-utilities.o `test -f 'utilities.cpp' || echo '$(srcdir)/'`utilities.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-utilities.Tpo $(DEPDIR)/COG-utilities.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='utilities.cpp' object='COG-utilities.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-utilities.o `test -f 'utilities.cpp' || echo '$(srcdir)/'`utilities.cpp
+
+COG-utilities.obj: utilities.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -MT COG-utilities.obj -MD -MP -MF $(DEPDIR)/COG-utilities.Tpo -c -o COG-utilities.obj `if test -f 'utilities.cpp'; then $(CYGPATH_W) 'utilities.cpp'; else $(CYGPATH_W) '$(srcdir)/utilities.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/COG-utilities.Tpo $(DEPDIR)/COG-utilities.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='utilities.cpp' object='COG-utilities.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(COG_CXXFLAGS) $(CXXFLAGS) -c -o COG-utilities.obj `if test -f 'utilities.cpp'; then $(CYGPATH_W) 'utilities.cpp'; else $(CYGPATH_W) '$(srcdir)/utilities.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
