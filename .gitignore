@@ -1,14 +1,3 @@
-# CMake
-CMakeCache.txt
-CMakeFiles
-Makefile
-cmake_install.cmake
-install_manifest.txt
-
-# builded
-*.a
-main
-
 # vim buffers
 .*.sw?
 
@@ -20,3 +9,9 @@ doc/
 
 # autotools
 autom4te.cache
+.deps
+stamp-h1
+COG
+Makefile
+config.*
+*.o
