@@ -23,6 +23,10 @@ AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_MAKE_SET
 
+# Check for C++11
+m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
+AX_CXX_COMPILE_STDCXX_11([],[mandatory])
+
 # Checks for libraries.
 AC_SEARCH_LIBS([glBindTexture], [GL])
 AC_SEARCH_LIBS([gluPerspective], [GLU])
