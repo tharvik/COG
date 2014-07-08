@@ -2744,7 +2744,7 @@ am__tar='$${TAR-tar} chof - "$$tardir"' am__untar='$${TAR-tar} xf -'
 
 ac_config_headers="$ac_config_headers config.h"
 
-ac_config_files="$ac_config_files Makefile"
+ac_config_files="$ac_config_files Makefile Resources/Test_files/PNM/Makefile Resources/Test_files/BMP/Makefile Resources/Test_files/JPG/Makefile Resources/Test_files/Makefile Resources/Test_files/PNG/Makefile Resources/Test_files/GIF/Makefile Resources/Test_files/TIF/Makefile Resources/shaders/Makefile Resources/objects/axe/Makefile Resources/objects/Makefile Resources/objects/mountain/Makefile Resources/objects/testplane/Makefile Resources/Makefile"
 
 
 # Checks for programs.
@@ -5871,6 +5871,19 @@ do
   case $ac_config_target in
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "Resources/Test_files/PNM/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/PNM/Makefile" ;;
+    "Resources/Test_files/BMP/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/BMP/Makefile" ;;
+    "Resources/Test_files/JPG/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/JPG/Makefile" ;;
+    "Resources/Test_files/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/Makefile" ;;
+    "Resources/Test_files/PNG/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/PNG/Makefile" ;;
+    "Resources/Test_files/GIF/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/GIF/Makefile" ;;
+    "Resources/Test_files/TIF/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Test_files/TIF/Makefile" ;;
+    "Resources/shaders/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/shaders/Makefile" ;;
+    "Resources/objects/axe/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/objects/axe/Makefile" ;;
+    "Resources/objects/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/objects/Makefile" ;;
+    "Resources/objects/mountain/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/objects/mountain/Makefile" ;;
+    "Resources/objects/testplane/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/objects/testplane/Makefile" ;;
+    "Resources/Makefile") CONFIG_FILES="$CONFIG_FILES Resources/Makefile" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
