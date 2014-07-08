@@ -4215,7 +4215,7 @@ else
     virtual void f() {}
     };
     struct Child : public Base {
-    virtual void f() override {}
+    virtual void f() {}
     };
 
     typedef check<check<bool>> right_angle_brackets;
@@ -4267,7 +4267,7 @@ else
     virtual void f() {}
     };
     struct Child : public Base {
-    virtual void f() override {}
+    virtual void f() {}
     };
 
     typedef check<check<bool>> right_angle_brackets;
@@ -4325,7 +4325,7 @@ else
     virtual void f() {}
     };
     struct Child : public Base {
-    virtual void f() override {}
+    virtual void f() {}
     };
 
     typedef check<check<bool>> right_angle_brackets;
