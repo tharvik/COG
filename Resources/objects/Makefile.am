@@ -1,1 +1,0 @@
-SUBDIRS		= axe mountain testplane

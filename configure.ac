@@ -3,20 +3,10 @@ AC_INIT([COG], [0.0.0], [https://github.com/tharvik/COG/issues])
 AM_INIT_AUTOMAKE([-Wall foreign])
 AC_CONFIG_SRCDIR([Shader.h])
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([Makefile
-		 Resources/Test_files/PNM/Makefile
-		 Resources/Test_files/BMP/Makefile
-		 Resources/Test_files/JPG/Makefile
-		 Resources/Test_files/Makefile
-		 Resources/Test_files/PNG/Makefile
-		 Resources/Test_files/GIF/Makefile
-		 Resources/Test_files/TIF/Makefile
-		 Resources/shaders/Makefile
-		 Resources/objects/axe/Makefile
-		 Resources/objects/Makefile
-		 Resources/objects/mountain/Makefile
-		 Resources/objects/testplane/Makefile
-		 Resources/Makefile])
+AC_CONFIG_FILES([Makefile])
+
+# To show some warnings
+AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_CXX
