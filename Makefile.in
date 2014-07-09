@@ -206,7 +206,7 @@ am__untar = @am__untar@
 bindir = @bindir@
 build_alias = @build_alias@
 builddir = @builddir@
-datadir = $(datarootdir)/@PACKAGE@
+datadir = $(datarootdir)/@PACKAGE_NAME@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
@@ -843,7 +843,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-nobase_dist_dataDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-local \
+	uninstall-nobase_dist_dataDATA
 
 .MAKE: all install-am install-strip
 
@@ -862,8 +863,11 @@ uninstall-am: uninstall-binPROGRAMS uninstall-nobase_dist_dataDATA
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-binPROGRAMS \
-	uninstall-nobase_dist_dataDATA
+	uninstall-local uninstall-nobase_dist_dataDATA
 
+
+uninstall-local:
+	rm -rf $(datadir)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
