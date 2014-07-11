@@ -18,10 +18,14 @@ m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
 AX_CXX_COMPILE_STDCXX_11([],[mandatory])
 
 # Checks for libraries.
-AC_SEARCH_LIBS([glBindTexture], [GL])
-AC_SEARCH_LIBS([gluPerspective], [GLU])
-AC_SEARCH_LIBS([glutGet], [glut])
-AC_SEARCH_LIBS([glewInit], [GLEW])
+AC_SEARCH_LIBS([glBindTexture], [GL],
+	       [], [AC_MSG_ERROR([Unable to find an OpenGL implementation])])
+AC_SEARCH_LIBS([gluPerspective], [GLU],
+	       [], [AC_MSG_ERROR([Unable to find an OpenGL utility (GLU) implementation])])
+AC_SEARCH_LIBS([glutGet], [glut],
+	       [], [AC_MSG_ERROR([Unable to find an OpenGL utility toolkit (GLUT) implementation])])
+AC_SEARCH_LIBS([glewInit], [GLEW],
+	       [], [AC_MSG_ERROR([Unable to find an OpenGL extention wrangler (GLEW) implementation])])
 
 # Checks for header files.
 AC_CHECK_HEADERS([memory.h stdlib.h string.h])

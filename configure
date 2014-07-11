@@ -4541,6 +4541,8 @@ ac_res=$ac_cv_search_glBindTexture
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "Unable to find an OpenGL implementation" "$LINENO" 5
 fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gluPerspective" >&5
@@ -4597,6 +4599,8 @@ ac_res=$ac_cv_search_gluPerspective
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "Unable to find an OpenGL utility (GLU) implementation" "$LINENO" 5
 fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glutGet" >&5
@@ -4653,6 +4657,8 @@ ac_res=$ac_cv_search_glutGet
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "Unable to find an OpenGL utility toolkit (GLUT) implementation" "$LINENO" 5
 fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glewInit" >&5
@@ -4709,6 +4715,8 @@ ac_res=$ac_cv_search_glewInit
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "Unable to find an OpenGL extention wrangler (GLEW) implementation" "$LINENO" 5
 fi
 
 
