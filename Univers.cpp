@@ -71,9 +71,9 @@ void Univers::draw() const
 void Univers::refresh()
 {
         glLoadIdentity();
-
+        
         // Shadows(&univers)
-
+        
         perspective();
         camera.look();
         draw();

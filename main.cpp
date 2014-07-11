@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 {
         initLibraries(&argc, argv);
 
+	glutEnterGameMode();
 	openWindow(MIDDLE_SCREEN_X, MIDDLE_SCREEN_Y,
 			WINDOW_WIDTH, WINDOW_HEIGHT, PACKAGE_NAME);
 
