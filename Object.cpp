@@ -36,6 +36,8 @@ void Object::addMltToDrawList(const std::string& path, const std::string& name,
 
 Object::Object(const std::string& name) : drawList()
 {
+	Material(name + ".mtl", name + ".vs", name + ".fs");
+
         const string Objectpath = "Resources/" + name;
         DIR *directory;
         directory = opendir(Objectpath.c_str());

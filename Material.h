@@ -5,41 +5,51 @@
 #include <memory>
 #include <tuple>
 #include <vector>
+#include <array>
 
 #include "Shader.h"
 #include "Texture.h"
 
 
 class Material {
+enum
+{
+	Ka = 0,
+	Kd = 3,
+	Ks = 6,
+	Ns = 9,
+	d  = 10, 
+};
+
 private:
 	// shared shaders and textures
 	static std::map<std::string, std::shared_ptr<Shader>>  shaders;
         static std::map<std::string, std::shared_ptr<Texture>> textures;
         
-	// used shader and textures
+	// used shaders and textures
         std::shared_ptr<Shader> shaderToDraw;
         std::vector<std::shared_ptr<Texture>> textureToDraw;
         
-	// parameters
-	float Ka[3]; // ambient color
-	float Kd[3]; // diffuse color
-	float Ks[3]; // specular color
-	float Ns;    // specular coeficient
-	float d;     // transparency
+	// material parameters
+	// Ka[3] (ambient color), Kd[3] (diffuse color), Ks[3] specular color,
+	// Ns (specular coeficient), d (transparency)
+	std::array<float, 11> parameters;
 	
 	// textures
 	std::shared_ptr<Texture> map_Ka,   // ambient color texture
-				 map_Kd,   // diffuse color texture
-				 map_Ks,   // specular color texture
-				 map_Ns,   // specular intensity texture
-				 map_d,	   // transparency texture
-				 map_bump; // normal map texture
+							 map_Kd,   // diffuse color texture
+							 map_Ks,   // specular color texture
+							 map_Ns,   // specular intensity texture
+							 map_d,	   // transparency texture
+							 map_bump; // normal map texture
 				 
 	/**
-	 * parse a mtl file and fill the private parameters + textures
-	 * \param filePath path of the mtl file
+	 * read the material binary file and fill the private
+	 * parameters + textures
+	 * \param filePath path of the material binary file
 	 */
-	 void parseMtl(const std::string& filePath);
+	 void readMaterialFile(const std::string& filePath);
+	 	 
 public:
 	/**
 	 * Constructor
