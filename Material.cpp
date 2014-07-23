@@ -13,6 +13,15 @@ Material::Material(const string& mbfPath, const string& vsPath,
 {
 	readMaterialFile(mbfPath);
 	print();
+	
+	// check if the shader already exist
+	std::map<string, shared_ptr<Shader>>::iterator it;
+	it = shaders.find(vsPath + " " + fsPath);
+	
+	if (it == shaders.end()) {
+		shared_ptr<Shader> shaderPtr(new Shader(vsPath, fsPath));
+		shaders[vsPath + " " + fsPath] = shaderPtr;
+	}
 }
 
 Material::Material(const Material&& material)
