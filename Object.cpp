@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "config.h"
 
 using namespace std;
 
@@ -36,38 +37,52 @@ void Object::addMltToDrawList(const std::string& path, const std::string& name,
 
 Object::Object(const std::string& name) : drawList()
 {
-	Material(name + ".mtl", name + ".vs", name + ".fs");
+	// Pathes
+        const string localDir  = "Resources/objects/" + name + "/";
+	const string globalDir = "Resources/";
+	
+	string material, vs, fs;
+	
+	// open object file
+	ifstream file(localDir + name + ".object");
+	if (!file.good())
+	{
+		logger::error("Unable to open object file " + name, _FL_);
+	}
+	
+	// read object file (+ execution)
+	bool local = false, inGroup;
+	string word, extension;
 
-        const string Objectpath = "Resources/" + name;
-        DIR *directory;
-        directory = opendir(Objectpath.c_str());
-        
-        class dirent *ent;
-        class stat sta;
-        
-        while ((ent = readdir(directory)) != NULL) {
-                string fileName = ent->d_name;
-                string filePath = Objectpath + '/' + fileName;
-                string fileExtension;
-                
-                if (stat(filePath.c_str(), &sta) == -1) {
-                        logger::warn("Invalid file in " + fileName + " object",
-                                     _FL_);
-                        continue;
-                }
-                
-                if ((fileName.front() == '.') or (sta.st_mode & S_IFDIR) != 0)
-                        continue;
-                
-                char tmp[1024];
-                memset(tmp, '\0', 1024 * sizeof(char));
-                if (readlink(filePath.c_str(), tmp, 1024) != -1) {
-                        filePath = string(tmp);
-                        findNameAndExtension(filePath, fileName, fileExtension);
-                        if (fileExtension == "mtl")
-                               addMltToDrawList(filePath, fileName, Objectpath);
-                }
-        }
+	while (file >> word)
+	{
+		if (word == "#") {
+			local = true;
+		} else if (word == "[") { // begin group
+			inGroup = true;
+		} else if (word == "]"){ // end group, mesh+mtl+shaders creation
+			
+			Material mat = Material(material, vs, fs);
+			
+			material = "", vs = "", fs = "";
+			inGroup = false;
+		} else {
+			extension = word.substr(word.find_last_of(".")+1);
+			if (extension == "mesh") {		// mesh
+				local = false;
+			} else if (extension == "mbf") {	// material
+				material = local ? localDir + word
+				: globalDir + "materials/" + word;
+				local = false;
+			} else if (extension == "vs") {		// vertex shader
+				local = false;				
+			} else if (extension == "fs") {		// frag. shader
+				local = false;
+			} else {
+				cout << "Unknown format" << endl;
+			}
+		}
+	}
 }
 
 void Object::draw() const

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         
         setUpOpenGL();
         
-        Planet planeta("planet");
+        Planet test("test");
         
 //      Game game;
 //	game.enterMainMenu();

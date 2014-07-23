@@ -53,11 +53,11 @@ private:
 public:
 	/**
 	 * Constructor
-	 * \param mtlPath path to the .mtl file
+	 * \param mbfPath path to the material binary file
 	 * \param vsPath path to the vertex shader
 	 * \param fsPath path to the fragment shader
 	 */
-        Material(const std::string& mtlPath, const std::string& vsPath,
+        Material(const std::string& mbfPath, const std::string& vsPath,
 		 const std::string& fsPath);
 	
 	/**
@@ -71,7 +71,7 @@ public:
         Material(const Material&&);
         
 	/**
-	 * print the informations of the shader
+	 * print the informations of the material
 	 */
         void print() const;
 };

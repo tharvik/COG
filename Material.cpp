@@ -8,10 +8,11 @@ map<string, shared_ptr<Shader>>  Material::shaders;
 map<string, shared_ptr<Texture>> Material::textures;
 
 
-Material::Material(const string& mtlPath, const string& vsPath,
+Material::Material(const string& mbfPath, const string& vsPath,
 		   const string& fsPath)
 {
-	readMaterialFile(mtlPath);
+	readMaterialFile(mbfPath);
+	print();
 }
 
 Material::Material(const Material&& material)
@@ -41,13 +42,15 @@ void Material::print() const
 
 void Material::readMaterialFile(const string &filePath)
 {
+
+
 	// open file
 	ifstream file;
 	file.open(filePath, std::ifstream::binary);
-	if (file != ios_base::goodbit)
+	if (!file.good())
 	{
-		logger::warn("Unable to open material binary file." \
-			     "The file may be empty or doesn't exist.", _FL_);
+		logger::warn("Unable to open material binary file ." + filePath
+			     + "The file may be empty or doesn't exist.", _FL_);
 		return;
 	}
 	
@@ -55,4 +58,7 @@ void Material::readMaterialFile(const string &filePath)
 	// read 
 	file.read((char*) parameters.data(),
 		  parameters.max_size() * sizeof(float));
+		 
+	// end
+	file.close();
 }
