@@ -61,7 +61,6 @@ Object::Object(const std::string& name) : drawList()
 		} else if (word == "[") { // begin group
 			inGroup = true;
 		} else if (word == "]"){ // end group, mesh+mtl+shaders creation
-			
 			Material mat = Material(material, vs, fs);
 			
 			material = "", vs = "", fs = "";
@@ -75,8 +74,12 @@ Object::Object(const std::string& name) : drawList()
 				: globalDir + "materials/" + word;
 				local = false;
 			} else if (extension == "vs") {		// vertex shader
+				vs = local ? localDir + word
+				: globalDir + "shaders/" + word;
 				local = false;				
 			} else if (extension == "fs") {		// frag. shader
+				fs = local ? localDir + word
+				: globalDir + "shaders/" + word;
 				local = false;
 			} else {
 				cout << "Unknown format" << endl;

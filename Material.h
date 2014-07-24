@@ -12,15 +12,6 @@
 
 
 class Material {
-enum
-{
-	Ka = 0,
-	Kd = 3,
-	Ks = 6,
-	Ns = 9,
-	d  = 10, 
-};
-
 private:
 	// shared shaders and textures
 	static std::map<std::string, std::shared_ptr<Shader>>  shaders;
@@ -44,7 +35,7 @@ private:
 							 map_bump; // normal map texture
 				 
 	/**
-	 * read the material binary file and fill the private
+	 * Read the material binary file and fill the private
 	 * parameters + textures
 	 * \param filePath path of the material binary file
 	 */
@@ -60,6 +51,7 @@ public:
         Material(const std::string& mbfPath, const std::string& vsPath,
 		 const std::string& fsPath);
 	
+	
 	/**
 	 * Unable copy
 	 */
@@ -70,6 +62,11 @@ public:
 	 */
         Material(const Material&&);
         
+	/**
+	 * Send material shader, parameters (uniforms) and textures to OpenGL
+	 */
+	void use() const;
+	
 	/**
 	 * print the informations of the material
 	 */

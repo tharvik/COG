@@ -18,10 +18,19 @@ Material::Material(const string& mbfPath, const string& vsPath,
 	std::map<string, shared_ptr<Shader>>::iterator it;
 	it = shaders.find(vsPath + " " + fsPath);
 	
-	if (it == shaders.end()) {
+	if (it == shaders.end()) { // if doesn't exist create shader
 		shared_ptr<Shader> shaderPtr(new Shader(vsPath, fsPath));
 		shaders[vsPath + " " + fsPath] = shaderPtr;
+		logger::info("creating new shader " + vsPath + " " + fsPath, 
+			     _FL_);
 	}
+	
+	
+	// set the material shader
+	this->shaderToDraw = shaders[vsPath + " " + fsPath];
+	
+	// set uniform values to the shader
+	this->shaderToDraw->setUniformValue(this->parameters);
 }
 
 Material::Material(const Material&& material)
@@ -29,24 +38,33 @@ Material::Material(const Material&& material)
 
 }
 
+void Material::use() const
+{
+	this->shaderToDraw->use();
+//	this->
+	
+	//!! still need to use textures
+}
+
 void Material::print() const
 {
-	printf("\tKa = (%.3f %.3f %.3f)\n" \
-	       "\tKd = (%.3f %.3f %.3f)\n" \
-	       "\tKs = (%.3f %.3f %.3f)\n" \
-	       "\tNs = %.3f\n" \
-	       "\t d = %.3f\n",
-	       this->parameters[Material::Ka+0],
-	       this->parameters[Material::Ka+1],
-	       this->parameters[Material::Ka+2],
-	       this->parameters[Material::Kd+0],
-	       this->parameters[Material::Kd+1],
-	       this->parameters[Material::Kd+2],
-	       this->parameters[Material::Ks+0],
-	       this->parameters[Material::Ks+1],
-	       this->parameters[Material::Ks+2],
-	       this->parameters[Material::Ns],
-	       this->parameters[Material::d]);
+	cout << "\tKa = ("
+	     << this->parameters[Shader::Ka+0]
+	     << this->parameters[Shader::Ka+1]
+	     << this->parameters[Shader::Ka+2]
+	     << ")" << endl
+	     << "\tKd = ("
+	     << this->parameters[Shader::Kd+0]
+	     << this->parameters[Shader::Kd+1]
+	     << this->parameters[Shader::Kd+2]
+	     << ")" << endl
+	     << "\tKs = ("
+	     << this->parameters[Shader::Ks+0]
+	     << this->parameters[Shader::Ks+1]
+	     << this->parameters[Shader::Ks+2]
+	     << ")" << endl
+	     << "\tNs = " << this->parameters[Shader::Ns+0] << endl
+	     << "\td = "  << this->parameters[Shader::d+0]  << endl;
 }
 
 void Material::readMaterialFile(const string &filePath)
