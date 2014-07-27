@@ -69,30 +69,30 @@ private:
 	char* loadFileASCII(const std::string& filePath);
         
 public:
-
-typedef enum
-{
-	Ka = 0,
-	Kd = 3,
-	Ks = 6,
-	Ns = 9,
-	d  = 10, 
-} uniforms;
-
+	
+	typedef enum
+	{
+		Ka = 0,
+		Kd = 3,
+		Ks = 6,
+		Ns = 9,
+		d  = 10, 
+	} uniforms;
+	
         /**
          * Default constructor, valid but useless state
          */
         Shader();
         
         /**
-         * Move constructor, leave the given shader in a valid but
-         * useless state
-         *
-         * \param shader Shader to move from
+         * Copy constructor
+         */
+        Shader(const Shader& shader);
+	
+        /**
+         * Move constructor
          */
         Shader(Shader&& shader);
-        
-        Shader(const Shader&) = delete;
         
         /**
          * Construct a Shader with the given path to the vs and fs
@@ -102,17 +102,15 @@ typedef enum
          */
         Shader(const std::string& vsPath,
                const std::string& fsPath);
-        
-        Shader(const std::string& name);
-        
+                
         /**
          * Use the shader's program
          */
-        void use();
+        void use() const;
         
         
         /**
-         * Give a way to sort Shader, less operator
+         * Give a way to sort Shaders, less operator
          *
          * \param b Shader to compare to
          *
@@ -121,13 +119,28 @@ typedef enum
         bool operator<(const Shader &b) const;
 	
 	/**
-         * set the specified unfiform variable value
+         * set the specified basic uniform variable float value
          *
          * \param uniform the uniform variable to set
          * \param value the value
          */
 	void setUniformValue(Shader::uniforms uniform, float value);
+	
+	/**
+         * set the specified basic uniform variable vec3 value
+         *
+         * \param uniform the uniform variable to set
+         * \param v1 the value of vec3.x
+         * \param v2 the value of vec3.y
+         * \param v3 the value of vec3.z
+         */
 	void setUniformValue(Shader::uniforms uniform,
 			     float v1, float v2, float v3);
+			     
+	/**
+         * set all basic uniform variables values
+         *
+         * \param values the values in this order (Ka, Kd, Ks, Ns, d)
+         */
 	void setUniformValue(std::array<float, 11> values);
 };

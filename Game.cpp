@@ -8,11 +8,24 @@ Game::Game() : univers(), simulator(&univers)
         if (FULLSCREEN)
                 glutFullScreen();
         
-        //univers.addObject("mountain");
         
         setSimulator(&simulator);
         setUnivers(&univers);
         
+	
+	this->univers.addPlanet("test");
+	
+	
+	Planet test("test");
+	Planet asd("test");
+	Planet asadf("test");
+	//	Planet asdr("test");
+
+	
+	
+	
+	
+	
         {
                 glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
                 glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
@@ -39,7 +52,6 @@ void Game::enterMainMenu()
         
         glutIdleFunc(tick);
         
-        univers.addPlanet("truc");
         
         glutMainLoop();
 }

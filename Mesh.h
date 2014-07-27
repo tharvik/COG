@@ -15,7 +15,7 @@ private:
         /**
          * Number of indices to draw
          */
-        const unsigned int sizeIndices;
+	unsigned int sizeIndices;
         
         /**
          * Buffers used by OpenGL
@@ -26,7 +26,7 @@ private:
          * buffers[3] contains the indices\n
          */
         std::array<GLuint,4> buffers;
-        
+        	
 public:
         /**
          * Default constructor
@@ -45,7 +45,14 @@ public:
          */
         Mesh(Mesh&& mesh);
         
-        Mesh(const std::string& name);
+	/**
+         * Constructor
+         *
+         * load a .mesh file
+         *
+         * \param filePath path to the .mesh file
+         */
+        Mesh(const std::string& filePath);
         
         /**
          * Construct with the given vertices, vertices on the texture

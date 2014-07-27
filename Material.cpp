@@ -1,47 +1,36 @@
 #include "Material.h"
-#include "Logger.h"
+
 #include <fstream>
+
+#include "Logger.h"
+
 
 using namespace std;
 
-map<string, shared_ptr<Shader>>  Material::shaders;
 map<string, shared_ptr<Texture>> Material::textures;
 
 
 Material::Material(const string& mbfPath, const string& vsPath,
-		   const string& fsPath)
+		   const string& fsPath) : shader(vsPath, fsPath)
 {
+
 	readMaterialFile(mbfPath);
 	print();
-	
-	// check if the shader already exist
-	std::map<string, shared_ptr<Shader>>::iterator it;
-	it = shaders.find(vsPath + " " + fsPath);
-	
-	if (it == shaders.end()) { // if doesn't exist create shader
-		shared_ptr<Shader> shaderPtr(new Shader(vsPath, fsPath));
-		shaders[vsPath + " " + fsPath] = shaderPtr;
-		logger::info("creating new shader " + vsPath + " " + fsPath, 
-			     _FL_);
-	}
-	
-	
-	// set the material shader
-	this->shaderToDraw = shaders[vsPath + " " + fsPath];
-	
+		
+		
 	// set uniform values to the shader
-	this->shaderToDraw->setUniformValue(this->parameters);
+	this->shader.setUniformValue(this->parameters);
 }
 
-Material::Material(const Material&& material)
+Material::Material(const Material&& material) : shader(move(material.shader)),
+textureToDraw(move(material.textureToDraw)),
+parameters(move(material.parameters))
 {
-
 }
 
 void Material::use() const
 {
-	this->shaderToDraw->use();
-//	this->
+	this->shader.use();
 	
 	//!! still need to use textures
 }
@@ -84,7 +73,7 @@ void Material::readMaterialFile(const string &filePath)
 	
 	// read 
 	file.read((char*) parameters.data(),
-		  parameters.max_size() * sizeof(float));
+		  (long) (parameters.max_size() * sizeof(float)));
 		 
 	// end
 	file.close();

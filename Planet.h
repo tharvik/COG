@@ -10,5 +10,5 @@ private:
 public:
         Planet(const std::string& name);
         
-        virtual void draw() const;
+	void draw() const;
 };

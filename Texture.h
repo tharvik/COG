@@ -41,7 +41,7 @@ public:
          * \param buffer Buffer containing the image
          */
         Texture(const unsigned short width, const unsigned short height,
-                const int format, unsigned char* buffer);
+                const GLenum format, unsigned char* buffer);
         
         Texture(const std::string& name);
         

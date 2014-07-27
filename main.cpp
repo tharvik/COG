@@ -18,13 +18,11 @@ int main(int argc, char *argv[])
                 openWindow(WIN_X, WIN_Y, WIN_W, WIN_H, WIN_T);
         
         setUpOpenGL();
+                
+	Game game;
+	game.enterMainMenu();
         
-        Planet test("test");
-        
-//      Game game;
-//	game.enterMainMenu();
-        
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 void initLibraries(int *argc, char *argv[])

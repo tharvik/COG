@@ -1,96 +1,128 @@
 #include "Object.h"
+
+#include <fstream>
+
+#include "opengl.h"
 #include "config.h"
+#include "Logger.h"
 
 using namespace std;
 
-map<string, shared_ptr<Material>> Object::materials;
 map<string, shared_ptr<Mesh>> Object::meshes;
+map<string, shared_ptr<Material>> Object::materials;
 
-
-void Object::findNameAndExtension(const std::string& path, std::string& name,
-                                  std::string& extension)
+Object::Object(const std::string& name)
 {
-        name = path.substr(path.rfind('/') + 1, path.size());
-        const size_t pointPosition = name.rfind('.');
-        cout << name << " :" << pointPosition << endl;
-        if (pointPosition != 0) {
-                extension = name.substr(pointPosition + 1, path.size());
-                name = name.substr(0, pointPosition);
-        } else {
-                extension = "";
-        }
+	string localDir = "Resources/objects/" + name + "/";
+	loadObjectFile(localDir, localDir + name + ".object");
+	
+	logger::info("Object '" + name + "' created", _FL_);
+
 }
 
-void Object::addMltToDrawList(const std::string& path, const std::string& name,
-                              const std::string& objectPath)
+Object::~Object()
 {
-        map<string, shared_ptr<Material>>::iterator material
-                                                         = materials.find(name);
-        if (material == materials.end()) {
-                material = get<0>(materials.insert(make_pair(name,
-                        shared_ptr<Material>(new Material(path, "path2", "3#")))));
-        }
-        
-        drawList.push_back(make_pair(materials[name],
-                                     vector<shared_ptr<Mesh>>()));
 }
 
-Object::Object(const std::string& name) : drawList()
+void Object::loadObjectFile(const string& localDir, const string& filePath)
 {
+	string word, ext;
+	ifstream file(filePath);
+	array<string, 4> pathes = {{"", "", "", ""}};
+	bool local;
+
 	// Pathes
-        const string localDir  = "Resources/objects/" + name + "/";
 	const string globalDir = "Resources/";
 	
-	string material, vs, fs;
-	
-	// open object file
-	ifstream file(localDir + name + ".object");
+	// open file
 	if (!file.good())
-	{
-		logger::error("Unable to open object file " + name, _FL_);
-	}
+		logger::error("Unable to load object file " + filePath, _FL_);
 	
-	// read object file (+ execution)
-	bool local = false, inGroup;
-	string word, extension;
-
-	while (file >> word)
-	{
-		if (word == "#") {
+	while (file >> word) {
+		if (word == "#")
 			local = true;
-		} else if (word == "[") { // begin group
-			inGroup = true;
-		} else if (word == "]"){ // end group, mesh+mtl+shaders creation
-			Material mat = Material(material, vs, fs);
-			
-			material = "", vs = "", fs = "";
-			inGroup = false;
+		
+		else if (word == "]") {
+			addPair(pathes);
+			for (unsigned char i = 0; i < 4; i++)
+				pathes[i] = "";
+			local = false;
 		} else {
-			extension = word.substr(word.find_last_of(".")+1);
-			if (extension == "mesh") {		// mesh
-				local = false;
-			} else if (extension == "mbf") {	// material
-				material = local ? localDir + word
+			ext = word.substr(word.find_last_of(".")+1);
+			
+			if (ext == "mesh")		// mesh
+				pathes[0] = local ? localDir + word
+				: globalDir + "meshes/" + word;
+			
+			else if (ext == "mbf")		// material
+				pathes[1] = local ? localDir + word
 				: globalDir + "materials/" + word;
-				local = false;
-			} else if (extension == "vs") {		// vertex shader
-				vs = local ? localDir + word
+			
+			else if (ext == "vs")		// vs
+				pathes[2] = local ? localDir + word
 				: globalDir + "shaders/" + word;
-				local = false;				
-			} else if (extension == "fs") {		// frag. shader
-				fs = local ? localDir + word
+			
+			else if (ext == "fs")		// fs
+				pathes[3] = local ? localDir + word
 				: globalDir + "shaders/" + word;
-				local = false;
-			} else {
-				cout << "Unknown format" << endl;
-			}
+			
+			else if (ext != "[")
+				logger::warn("Unknown format '" + ext + "' in"
+					     ".object file", _FL_);
+			
+			local = false;
 		}
 	}
+	file.close();
 }
+
+void Object::addPair(const string& meshFilePath,
+		     const string& mbfFilePath,
+		     const string& vsFilePath,
+		     const string& fsFilePath)
+{
+	addPair(array<string, 4>({{meshFilePath, mbfFilePath,
+				  vsFilePath, fsFilePath}}));
+}
+
+void Object::addPair(const array<std::string, 4>& pathes)
+{
+	shared_ptr<Mesh> mesh;
+	shared_ptr<Material> mtl;
+
+/* mesh */
+	
+	// check if mesh already exists
+	map<string, shared_ptr<Mesh>>::iterator it1;
+	it1 = meshes.find(pathes[0]);
+	
+	// if doesn't exist create mesh
+	if (it1 == meshes.end()) {
+		mesh = shared_ptr<Mesh>((new Mesh(pathes[0])));
+		meshes[pathes[0]] = mesh;
+	}
+	
+/* material + shader */
+	// check if material already exists
+	map<string, shared_ptr<Material>>::iterator it2;
+	it2 = materials.find(pathes[1] + " " + pathes[2] + " " + pathes[3]);
+	
+	// if doesn't exist create material
+	if (it2 == materials.end()) {
+		mtl = shared_ptr<Material>((new Material(pathes[1], pathes[2], pathes[3])));
+		materials[pathes[1] + " " + pathes[2] + " " + pathes[3]] = mtl;
+	}	
+	
+	// add pair
+	pair<shared_ptr<Material>, shared_ptr<Mesh>> pair(mtl, mesh);
+	drawList.push_back(pair);
+}
+
 
 void Object::draw() const
 {
-        for (const auto& material : drawList) {
-                material.first->print();
+        for (const auto& pair : drawList) {
+                pair.first->use();
+		pair.second->draw();
         }
 }
