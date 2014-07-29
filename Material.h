@@ -23,7 +23,7 @@
 //	- map_Ks: Texture specular color				      //
 //	-  map_d: Texture transparency					      //
 //									      //
-// The material parameters are stored in a .mbf file.			      //
+// The material parameters are stored in a .mbf (material binary file) file.  //
 //									      //
 // All material textures  are stored in a static map   called "container" and //
 // shared between the materials to avoid duplications.
@@ -40,7 +40,7 @@ private:
         
 	// OpenGL program + textures
 	Shader shader;
-        std::vector<std::shared_ptr<Texture>> textureToDraw;
+        std::vector<std::shared_ptr<Texture>> texturesToDraw;
         
 	// material parameters
 	// Ka[3] (ambient color), Kd[3] (diffuse color), Ks[3] specular color,
@@ -50,6 +50,7 @@ private:
 	/**
 	 * Read the material binary file and fill the private
 	 * parameters + textures
+	 *
 	 * \param filePath path of the material binary file
 	 */
 	 void readMaterialFile(const std::string& filePath);
@@ -57,6 +58,7 @@ private:
 public:
 	/**
 	 * constructor
+	 *
 	 * \param mbfPath path to the material binary file
 	 * \param vsPath path to the vertex shader
 	 * \param fsPath path to the fragment shader

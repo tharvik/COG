@@ -6,6 +6,7 @@
 
 #include "Mesh.h"
 #include "Material.h"
+#include "Vvector.h"
 
 //--------------------------------- Objects ----------------------------------//
 //									      //
@@ -23,6 +24,10 @@
 
 class Object {
 private:
+	
+	// position
+	Vvector p;
+
 	// containers
         static std::map<std::string, std::shared_ptr<Mesh>> meshes;
 	static std::map<std::string, std::shared_ptr<Material>> materials;
@@ -35,20 +40,19 @@ private:
 	/**
          * execute a .object file (add paires)
          *
-         * \param localDir path to the local directory
+         * \param localDir path to the object local directory
          * \param filePath path to the object file
          */
 	void loadObjectFile(const std::string& localDir,
 			    const std::string& filePath);
 
 	/**
-         * adding a new pair (material + mesh) int the drawList
+         * adding a new pair (material + mesh) into the drawList
          *
          * \param meshFilePath path to the .mesh file
          * \param mbfFilePath path to the .mbf file
          * \param vsFilePath path to the .vs (vertex shader) file
          * \param fsFilePath path to the .fs (fragment shader) file
-	 * path and the .fs file path in an array
          */
 	void addPair(const std::string& meshFilePath,
 		     const std::string& mbfFilePath,
@@ -66,8 +70,18 @@ private:
 public:
 	/**
          * constructor
+	 *
+	 * \param name the name of the object folder
          */
         Object(const std::string& name);
+	
+	/**
+         * constructor
+	 *
+	 * \param name the name of the object folder
+	 * \param pos the position of the object
+         */
+        Object(const std::string& name, const Vvector& pos);
 	
 	/**
          * destructor

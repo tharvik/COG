@@ -9,24 +9,19 @@ using namespace std;
 
 map<string, shared_ptr<Texture>> Material::textures;
 
-
 Material::Material(const string& mbfPath, const string& vsPath,
 		   const string& fsPath) : shader(vsPath, fsPath)
 {
-
 	readMaterialFile(mbfPath);
-	print();
-		
 		
 	// set uniform values to the shader
 	this->shader.setUniformValue(this->parameters);
 }
 
 Material::Material(const Material&& material) : shader(move(material.shader)),
-textureToDraw(move(material.textureToDraw)),
+texturesToDraw(move(material.texturesToDraw)),
 parameters(move(material.parameters))
-{
-}
+{}
 
 void Material::use() const
 {
@@ -58,8 +53,6 @@ void Material::print() const
 
 void Material::readMaterialFile(const string &filePath)
 {
-
-
 	// open file
 	ifstream file;
 	file.open(filePath, std::ifstream::binary);

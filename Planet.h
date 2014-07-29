@@ -9,6 +9,8 @@ private:
         
 public:
         Planet(const std::string& name);
+	
+        Planet(const std::string& name, Vvector pos);
         
 	void draw() const;
 };

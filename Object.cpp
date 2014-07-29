@@ -11,17 +11,38 @@ using namespace std;
 map<string, shared_ptr<Mesh>> Object::meshes;
 map<string, shared_ptr<Material>> Object::materials;
 
-Object::Object(const std::string& name)
+Object::Object(const std::string& name) : p(0, 0, 0)
 {
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
 	
 	logger::info("Object '" + name + "' created", _FL_);
+}
 
+Object::Object(const std::string& name, const Vvector& pos) : p(pos)
+{
+	string localDir = "Resources/objects/" + name + "/";
+	loadObjectFile(localDir, localDir + name + ".object");
+	
+	logger::info("Object '" + name + "' created", _FL_);
 }
 
 Object::~Object()
+{}
+
+void Object::draw() const
 {
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslatef(p.x(), p.y(), p.z());
+
+	// use material and draw mesh
+        for (const auto& pair : drawList) {
+                pair.first->use();
+		pair.second->draw();
+        }
+	
+	glPopMatrix();
 }
 
 void Object::loadObjectFile(const string& localDir, const string& filePath)
@@ -100,29 +121,25 @@ void Object::addPair(const array<std::string, 4>& pathes)
 	if (it1 == meshes.end()) {
 		mesh = shared_ptr<Mesh>((new Mesh(pathes[0])));
 		meshes[pathes[0]] = mesh;
-	}
+	} else
+		mesh = meshes[pathes[0]];
 	
 /* material + shader */
+
 	// check if material already exists
 	map<string, shared_ptr<Material>>::iterator it2;
 	it2 = materials.find(pathes[1] + " " + pathes[2] + " " + pathes[3]);
 	
 	// if doesn't exist create material
 	if (it2 == materials.end()) {
-		mtl = shared_ptr<Material>((new Material(pathes[1], pathes[2], pathes[3])));
+		mtl = shared_ptr<Material>((new Material(pathes[1],
+							 pathes[2],
+							 pathes[3])));
 		materials[pathes[1] + " " + pathes[2] + " " + pathes[3]] = mtl;
-	}	
+	} else
+		mtl = materials[pathes[1] + " " + pathes[2] + " " + pathes[3]];
 	
 	// add pair
 	pair<shared_ptr<Material>, shared_ptr<Mesh>> pair(mtl, mesh);
 	drawList.push_back(pair);
-}
-
-
-void Object::draw() const
-{
-        for (const auto& pair : drawList) {
-                pair.first->use();
-		pair.second->draw();
-        }
 }

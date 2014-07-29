@@ -28,6 +28,12 @@ const size_t Univers::addPlanet(const string& name)
         return objects.size() - 1;
 }
 
+const size_t Univers::addPlanet(const string& name, const Vvector pos)
+{
+        objects.insert(unique_ptr<Object>(new Planet(name, pos)));
+        return objects.size() - 1;
+}
+
 void Univers::printInfo() const
 {
         std::cout << "CAMERA:" << std::endl
@@ -57,7 +63,7 @@ void Univers::physic(double& physicDelta)
 }
 
 void Univers::draw() const
-{
+{	
 	for (auto& object: objects)
                 object->draw();
 }
@@ -71,6 +77,7 @@ void Univers::refresh()
         perspective();
         camera.look();
         draw();
+	glFinish();
         glutSwapBuffers();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glutShowWindow();

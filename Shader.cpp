@@ -27,6 +27,7 @@ program(shader.program)
 
 Shader::Shader(const string& vsPath, const string& fsPath)
 {
+
 	createShaders(vsPath,  fsPath);	
 	compileShaders(vsPath, fsPath);
 	

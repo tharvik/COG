@@ -12,14 +12,19 @@ Game::Game() : univers(), simulator(&univers)
         setSimulator(&simulator);
         setUnivers(&univers);
         
+	Vvector pos(0, 0, 0);
+	Vvector addx(5, 0, 0);
+	Vvector addy(0, 5, 0);
 	
-	this->univers.addPlanet("test");
+	for (int i = 0; i < 4; i++) {
+	for (int j = 0; j < 4; j++) {
+		this->univers.addPlanet("Torus", pos);
+		pos += addx;
+	}
+		pos = Vvector(0, pos.y() + addy.y(), pos.z());
+	}
 	
 	
-	Planet test("test");
-	Planet asd("test");
-	Planet asadf("test");
-	//	Planet asdr("test");
 
 	
 	

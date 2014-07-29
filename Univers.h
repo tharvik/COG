@@ -68,6 +68,7 @@ public:
 
 
         const size_t addPlanet(const std::string& name);
+        const size_t addPlanet(const std::string& name, Vvector pos);
 
         /**
          * Print some information about the \ref camera
