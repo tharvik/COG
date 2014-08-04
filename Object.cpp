@@ -39,7 +39,8 @@ void Object::draw() const
 	// use material and draw mesh
         for (const auto& pair : drawList) {
                 pair.first->use();
-		pair.second->draw();
+		for (const auto& mesh : pair.second)
+			mesh->draw();
         }
 	
 	glPopMatrix();
@@ -49,9 +50,12 @@ void Object::loadObjectFile(const string& localDir, const string& filePath)
 {
 	string word, ext;
 	ifstream file(filePath);
-	array<string, 4> pathes = {{"", "", "", ""}};
 	bool local;
-
+	
+	// pathes
+	vector<string>meshesFilePath;
+	string mbfFilePath, vsFilePath, fsFilePath;
+	
 	// Pathes
 	const string globalDir = "Resources/";
 	
@@ -64,27 +68,33 @@ void Object::loadObjectFile(const string& localDir, const string& filePath)
 			local = true;
 		
 		else if (word == "]") {
-			addPair(pathes);
-			for (unsigned char i = 0; i < 4; i++)
-				pathes[i] = "";
+			addPair(meshesFilePath,
+				mbfFilePath,
+				vsFilePath,
+				fsFilePath);
+				
+				// reset pathes
+				meshesFilePath.clear();
+				mbfFilePath.clear();
+				vsFilePath.clear();
+				fsFilePath.clear();
 			local = false;
 		} else {
 			ext = word.substr(word.find_last_of(".")+1);
 			
 			if (ext == "mesh")		// mesh
-				pathes[0] = local ? localDir + word
-				: globalDir + "meshes/" + word;
-			
-			else if (ext == "mbf")		// material
-				pathes[1] = local ? localDir + word
+				meshesFilePath.push_back(local ? localDir + word
+				: globalDir + "meshes/" + word);
+			else if (ext == "mbf")	// material
+				mbfFilePath = local ? localDir + word
 				: globalDir + "materials/" + word;
 			
 			else if (ext == "vs")		// vs
-				pathes[2] = local ? localDir + word
+				vsFilePath = local ? localDir + word
 				: globalDir + "shaders/" + word;
 			
 			else if (ext == "fs")		// fs
-				pathes[3] = local ? localDir + word
+				fsFilePath = local ? localDir + word
 				: globalDir + "shaders/" + word;
 			
 			else if (ext != "[")
@@ -97,49 +107,45 @@ void Object::loadObjectFile(const string& localDir, const string& filePath)
 	file.close();
 }
 
-void Object::addPair(const string& meshFilePath,
+void Object::addPair(const std::vector<std::string>& meshesFilePath,
 		     const string& mbfFilePath,
 		     const string& vsFilePath,
 		     const string& fsFilePath)
 {
-	addPair(array<string, 4>({{meshFilePath, mbfFilePath,
-				  vsFilePath, fsFilePath}}));
-}
-
-void Object::addPair(const array<std::string, 4>& pathes)
-{
-	shared_ptr<Mesh> mesh;
+	vector<shared_ptr<Mesh>> pairMeshes;
 	shared_ptr<Material> mtl;
 
-/* mesh */
-	
-	// check if mesh already exists
-	map<string, shared_ptr<Mesh>>::iterator it1;
-	it1 = meshes.find(pathes[0]);
-	
-	// if doesn't exist create mesh
-	if (it1 == meshes.end()) {
-		mesh = shared_ptr<Mesh>((new Mesh(pathes[0])));
-		meshes[pathes[0]] = mesh;
-	} else
-		mesh = meshes[pathes[0]];
-	
+/* meshes */
+        for (const auto& meshFilePath : meshesFilePath) {
+		// check if mesh already exists
+		map<string, shared_ptr<Mesh>>::iterator it1;
+		it1 = meshes.find(meshFilePath);
+		
+		// if doesn't exist create mesh
+		if (it1 == meshes.end()) {
+			pairMeshes.push_back(
+				shared_ptr<Mesh>((new Mesh(meshFilePath))));
+			meshes[meshFilePath] = pairMeshes.back();
+		} else
+			pairMeshes.push_back(meshes[meshFilePath]);
+	}
 /* material + shader */
 
 	// check if material already exists
 	map<string, shared_ptr<Material>>::iterator it2;
-	it2 = materials.find(pathes[1] + " " + pathes[2] + " " + pathes[3]);
+	it2 = materials.find(mbfFilePath + " " + vsFilePath + " " + fsFilePath);
 	
 	// if doesn't exist create material
 	if (it2 == materials.end()) {
-		mtl = shared_ptr<Material>((new Material(pathes[1],
-							 pathes[2],
-							 pathes[3])));
-		materials[pathes[1] + " " + pathes[2] + " " + pathes[3]] = mtl;
+		mtl = shared_ptr<Material>((new Material(mbfFilePath,
+							 vsFilePath,
+							 fsFilePath)));
+		materials[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath] = mtl;
 	} else
-		mtl = materials[pathes[1] + " " + pathes[2] + " " + pathes[3]];
+		mtl = materials[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath];
 	
 	// add pair
-	pair<shared_ptr<Material>, shared_ptr<Mesh>> pair(mtl, mesh);
-	drawList.push_back(pair);
+	pair<shared_ptr<Material>, vector<shared_ptr<Mesh>>>
+		pair(mtl, pairMeshes);
+	drawList.push_back(pair);git
 }

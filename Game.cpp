@@ -57,7 +57,6 @@ void Game::enterMainMenu()
         
         glutIdleFunc(tick);
         
-        
         glutMainLoop();
 }
 

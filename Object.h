@@ -11,9 +11,10 @@
 //--------------------------------- Objects ----------------------------------//
 //									      //
 // An object is any body shown in the OpenGl space. Each object are made of   //
-// pairs (material + mesh).						      //
+// pairs (material + mesh[]).						      //
 //									      //
-// A pairs is a part of the objects with the a mesh and a material,	      //
+// A pairs is a part of the objects with the same material. It can containes  //
+// many meshes.
 //									      //
 // The mehses and the materials are stored in 2 seperate static map called    //
 // "containers" and shared between the objects to avoid the duplication of    //
@@ -35,7 +36,7 @@ private:
         
 	// pairs (material + mesh)
         std::vector<std::pair<std::shared_ptr<Material>,
-			      std::shared_ptr<Mesh>>> drawList;
+			      std::vector<std::shared_ptr<Mesh>>>> drawList;
         
 	/**
          * execute a .object file (add paires)
@@ -54,18 +55,10 @@ private:
          * \param vsFilePath path to the .vs (vertex shader) file
          * \param fsFilePath path to the .fs (fragment shader) file
          */
-	void addPair(const std::string& meshFilePath,
+	void addPair(const std::vector<std::string>& meshesFilePath,
 		     const std::string& mbfFilePath,
 		     const std::string& vsFilePath,
 		     const std::string& fsFilePath);
-		     
-	/**
-         * adding a new pair (material + mesh) int the drawList
-         *
-         * \param pathes an array with respectively the path to the .mesh file,
-	 * the .mbf file, the .vs file and the .fs file
-         */
-	void addPair(const std::array<std::string, 4>& pathes);
 
 public:
 	/**

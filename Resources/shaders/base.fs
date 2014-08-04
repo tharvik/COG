@@ -1,5 +1,5 @@
 // fragment, light and camera position
-varying vec4 fragPos, camPos; 
+varying vec4 fragPos, lightPos; 
 
 // normal on the fragment, fragment to light, fragment to camera
 varying vec3 N, L, C;
@@ -12,7 +12,6 @@ uniform float Ns, d;
 
 void main(void)
 {
-	vec3 lightPos = vec3(10.0, 10.0, 10.0);
 	vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
 	vec3 camPos = vec3(gl_ModelViewMatrixInverse[3]);
@@ -24,4 +23,5 @@ void main(void)
 	vec3 specular  = Ks * pow(dot(N, normalize(normalize(C) + normalize(L))), Ns);
 
 	gl_FragColor = vec4(diffusion + specular, 1);
+//	gl_FragColor = vec4(lightPos);
 }
