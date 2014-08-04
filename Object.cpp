@@ -147,5 +147,5 @@ void Object::addPair(const std::vector<std::string>& meshesFilePath,
 	// add pair
 	pair<shared_ptr<Material>, vector<shared_ptr<Mesh>>>
 		pair(mtl, pairMeshes);
-	drawList.push_back(pair);git
+	drawList.push_back(pair);
 }
