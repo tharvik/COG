@@ -1,5 +1,7 @@
 #include "Univers.h"
 
+using namespace std;
+
 static Univers* local;
 
 static void cleanup()
@@ -7,8 +9,8 @@ static void cleanup()
 	local->~Univers();
 }
 
-// Constructors
-Univers::Univers() : camera(), mainLight(5.98, -26.12, 15.39, 0.32, 0.76, -0.57)
+Univers::Univers() : camera(), mainLight(5.98f, -26.12f, 15.39f,
+					 0.32f, 0.76f, -0.57f)
 {
 	local = this;
 	atexit(cleanup);
@@ -20,19 +22,18 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 	camera(posX, posY, posZ, anglePhi, angleTeta, anglepsi)
 {}
 
-size_t Univers::addObject(const std::string &name)
+const size_t Univers::addPlanet(const string& name)
 {
-	objects.insert(loader.load(name));
+        objects.insert(unique_ptr<Object>(new Planet(name)));
         return objects.size() - 1;
 }
 
-size_t Univers::addObject(const Object &object)
+const size_t Univers::addPlanet(const string& name, const Vvector pos)
 {
-        objects.insert(object);
+        objects.insert(unique_ptr<Object>(new Planet(name, pos)));
         return objects.size() - 1;
 }
 
-// Informations
 void Univers::printInfo() const
 {
         std::cout << "CAMERA:" << std::endl
@@ -62,21 +63,24 @@ void Univers::physic(double& physicDelta)
 }
 
 void Univers::draw() const
-{
-	for (auto& object: objects) {
-                object.draw();
-        }
+{	
+	for (auto& object: objects)
+                object->draw();
 }
 
-void Univers::refresh()
+void Univers::refresh(universRefreshFlags flags)
 {
+	if (flags & LEVEL)
+		for (auto& object: objects)
+			object->calculateLevel(this->camera.getPosition());
+
         glLoadIdentity();
         
         // Shadows(&univers)
-        
         perspective();
         camera.look();
         draw();
+	glFinish();
         glutSwapBuffers();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glutShowWindow();

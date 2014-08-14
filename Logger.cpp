@@ -3,6 +3,7 @@
 void logger::info(const std::string& msg, const std::string& file,
 		const unsigned short line)
 {
+
 	log("INFO: " + msg, file, line);
 }
 
@@ -22,5 +23,6 @@ void logger::error(const std::string& msg, const std::string& file,
 void logger::log(const std::string& msg, const std::string& file,
 		const unsigned short line)
 {
-	std::cerr << file << ":" << line << ": " << msg << std::endl;
+	std::string shortFile = file.substr(file.find_last_of("/")+1);
+	std::cerr << shortFile << ":" << line << ": " << msg << std::endl;
 }

@@ -1,89 +1,197 @@
 #include "Mesh.h"
+#include "Logger.h"
+
+using namespace std;
 
 // Constructors
-Mesh::Mesh() : sizeIndices(0)
+Mesh::Mesh()
 {
-	for(auto& a : this->buffers)
-		a = 0;
+	// set radius, sizesIndices and buffers references to 0
+	this->radius = 0;
+
+	for (uint8_t i = 0; i < this->buffers.size(); i++)
+	{
+		sizeIndices[i] = 0;
+		for(auto& buffer : this->buffers[i])
+			buffer = 0;
+	}
 }
 
-Mesh::Mesh(Mesh&& m) : sizeIndices(m.sizeIndices), buffers(m.buffers)
+Mesh::Mesh(Mesh&& m) : radius(m.radius), sizeIndices(move(m.sizeIndices)),
+buffers(move(m.buffers))
 {
-	for(auto& a : m.buffers)
-		a = 0;
+	for(uint8_t i = 0; i < m.buffers.size(); i++)
+	{
+		sizeIndices[i] = 0;
+		for(auto& a : m.buffers[i])
+			a = 0;
+	}
 }
 
-Mesh::Mesh(const std::vector<std::array<float, 3>>& v,
-		const std::vector<std::array<float, 2>>& vt,
-		const std::vector<unsigned int>& indices)
-		: sizeIndices((GLsizei) indices.size())
+Mesh::Mesh(const string& filePath)
 {
-	glGenBuffers((GLsizei) this->buffers.size(), this->buffers.data());
+	// open file
+	ifstream file;
+	file.open(filePath, ifstream::binary);
+	if (!file.good())
+		logger::error("Unable to open mesh file '" + filePath + "'",
+			      _FL_);
 
-	// copy vertices
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(v[0]) * v.size(), v.data(),
-			GL_STATIC_DRAW);
+	// load radius
+	file.read(reinterpret_cast<char*>(&this->radius),
+		  (sizeof(this->radius) / sizeof(char)));
+	
+	// load number of levels
+	uint8_t nLevels;
+	file.read(reinterpret_cast<char*>(&nLevels),
+		  sizeof(nLevels) / sizeof(char));
 
-	// copy vertices texture
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vt[0]) * vt.size(), vt.data(),
-			GL_STATIC_DRAW);
+	uint8_t i;
+	for (i = 0; i < this->buffers.size(); i++)
+	{
+		if (i < nLevels) {
+			// create buffers
+			glGenBuffers(4, this->buffers[i].data());
+			
+			// get vertices
+			fillBuffer<float>(this->buffers[i][0], file);
+			fillBuffer<float>(this->buffers[i][1], file);
+			fillBuffer<float>(this->buffers[i][2], file);
+			this->sizeIndices[i] = fillBuffer<unsigned int>(
+						     this->buffers[i][3], file);
+		} else {
+			this->buffers[i][0] = this->buffers[nLevels - 1][0];
+			this->buffers[i][1] = this->buffers[nLevels - 1][1];
+			this->buffers[i][2] = this->buffers[nLevels - 1][2];
+			this->buffers[i][3] = this->buffers[nLevels - 1][3];
+		}
+	}
+	
+	// cleanup
+	file.close();
+	
+	// unbinding
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	logger::info("Mesh loaded from '" + filePath + "'", _FL_);
+}
 
-	// copy indices
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[3]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-			sizeof(indices[0]) * indices.size(),
-			indices.data(), GL_STATIC_DRAW);
+Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
+	   const array<vector<array<float, 2>>, 5>& vt,
+	   const array<vector<unsigned int>, 5>& indices,
+	   const float rad)
+{
+	// load radius
+	this->radius = rad;
 
+	// load size indices
+	for (uint8_t i = 0; i < this->buffers.size(); i++)
+		this->sizeIndices[i] = (unsigned int) indices[i].size();
+
+	// create and fill buffers
+	for (uint8_t i = 0; i < this->buffers.size(); i++)
+	{
+		// create buffers
+		glGenBuffers((GLint) this->buffers[i].size(),
+			     buffers[i].data());
+		
+		// copy vertices
+		glBindBuffer(GL_ARRAY_BUFFER, this->buffers[i][0]);
+		glBufferData(GL_ARRAY_BUFFER,
+			     (long) (sizeof(v[i][0]) * v[i].size()),
+			     v[i].data(), GL_STATIC_DRAW);
+		
+		// copy vertices texture
+		glBindBuffer(GL_ARRAY_BUFFER, this->buffers[i][1]);
+		glBufferData(GL_ARRAY_BUFFER,
+			     (long) (sizeof(vt[i][0]) * vt[i].size()),
+			     vt[i].data(), GL_STATIC_DRAW);
+		
+		// copy indices
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[i][3]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+			     (long) (sizeof(indices[i][0]) * indices[i].size()),
+			     indices[i].data(), GL_STATIC_DRAW);
+	}
+	
+	// unbinding
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-
-Mesh::Mesh(const std::array<GLuint,4>& buffers, const unsigned int sizeIndices)
-: sizeIndices(sizeIndices), buffers(buffers)
-{}
 
 bool Mesh::operator<(const Mesh &m) const
 {
-	unsigned short x = 0, y = 0;
+	unsigned short a = 0, b = 0;
 
-	for(auto i : this->buffers)
-		x += i;
+	for(auto i : this->buffers[0])
+		a += i;
 
-	for(auto i : m.buffers)
-		y += i;
+	for(auto i : m.buffers[0])
+		b += i;
 
-	return x < y;
+	return a < b;
 }
 
-void Mesh::draw() const
+float Mesh::getRadius()
 {
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
+	return this->radius;
+}
 
+void Mesh::draw(const uint8_t level) const
+{
 	// setup vertices
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][1]);
 	glTexCoordPointer(2, GL_FLOAT, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[2]);
+	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][2]);
 	glNormalPointer(GL_FLOAT, 0, 0);
 
 	// draw elements
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[3]);
-	glDrawElements(GL_TRIANGLES, this->sizeIndices, GL_UNSIGNED_INT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[level][3]);
+	
+	glDrawElements(GL_TRIANGLES,
+		       (int) this->sizeIndices[level],
+		       GL_UNSIGNED_INT, 0);
 
+	// unbinding
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
 }
 
 Mesh::~Mesh()
 {
-	glDeleteBuffers((GLsizei) this->buffers.size(), this->buffers.data());
+	for (auto& level : this->buffers)
+		glDeleteBuffers((GLsizei) level.size(), level.data());
+}
+
+template<typename T>
+unsigned int Mesh::fillBuffer(GLuint buffer, ifstream& file)
+{
+	// read block size
+	unsigned int size;
+	file.read(reinterpret_cast<char*>(&size),
+			sizeof(unsigned int) / sizeof(char));
+
+	// get openGL buffer pointer
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) (size * sizeof(T)), NULL,
+		     GL_STATIC_DRAW);
+	T* vertices = reinterpret_cast<T*>(
+				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	// check
+	if(vertices == NULL)
+		logger::error("Failed to allocate graphic memory", _FL_);
+
+	// fill buffer
+	file.read(reinterpret_cast<char*>(vertices),
+			(GLsizeiptr) (size * sizeof(T) / sizeof(char)));
+
+	// unmap openGL buffer pointer
+	if(!glUnmapBuffer(GL_ARRAY_BUFFER))
+		logger::error("Failed to unmap buffer during .mesh loading",
+			      _FL_);
+
+	return size;
 }

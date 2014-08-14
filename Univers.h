@@ -8,104 +8,97 @@
 #include "config.h"
 #include "Light.h"
 #include "Object.h"
-#include "ObjectManager.h"
+#include "Planet.h"
+
+#ifdef __APPLE__
+#	include <memory.h>
+#else
+#	include <memory>
+#endif
 
 #define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
-		glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
+        glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
 
 /**
  * The whole Univers
  */
 class Univers {
-	private:
+private:
+        /**
+         * Set of Object the Univers has to draw
+         */
+        std::set<std::unique_ptr<Object>> objects;
 
-		/**
-		 * Set of Object the Univers has to draw
-		 */
-		std::set<Object> objects;
+        /**
+         * Camera of this Univers
+         */
+        Camera camera;
 
-		/**
-		 * ObjectManager to load Object from
-		 */
-		ObjectManager loader;
+        /**
+         * Main Light
+         */
+        Light mainLight;
 
-		/**
-		 * Camera of this Univers
-		 */
-		Camera camera;
+        /**
+         * Draw every Object of \ref objects
+         */
+        void draw() const;
+public:
 
-		/**
-		 * Main Light
-		 */
-		Light mainLight;
+	typedef enum
+	{
+		NONE  = 0,	/**< no flags **/
+		LEVEL = 1	/**< recalculate object mesh levels **/
+	} universRefreshFlags;
 
-		/**
-		 * Draw every Object of \ref objects
-		 */
-		void draw() const;
-	public:
-		/**
-		 * Construct with default Camera and the \ref mainLight as a
-		 * carefully chosen position
-		 *
-		 * \todo Why this position for \ref Univers.mainLight?
-		 */
-		Univers();
+        /**
+         * Construct with default Camera and the \ref mainLight as a
+         * carefully chosen position
+         *
+         * \todo Why this position for \ref Univers.mainLight?
+         */
+        Univers();
 
-		/**
-		 * Construct with the given parameters for \ref camera
-		 *
-		 * \param posX Position on x
-		 * \param posY Position on y
-		 * \param posZ Position on z
-		 * \param anglePhi Orientation on x
-		 * \param angleTeta Orientation on y
-		 * \param anglepsi Orientation on z
-		 */
-		Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
-				const GLdouble anglePhi, const GLdouble angleTeta,
-				const GLdouble anglepsi);
+        /**
+         * Construct with the given parameters for \ref camera
+         *
+         * \param posX Position on x
+         * \param posY Position on y
+         * \param posZ Position on z
+         * \param anglePhi Orientation on x
+         * \param angleTeta Orientation on y
+         * \param anglepsi Orientation on z
+         */
+        Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
+                const GLdouble anglePhi, const GLdouble angleTeta,
+                const GLdouble anglepsi);
 
-		/**
-		 * Add the named Object, passed to the \ref loader
-		 *
-		 * \param name Name of the Object
-		 *
-		 * \return size_t Old size of the set
-		 */
-		size_t addObject(const std::string &name); // Not tested
 
-		/**
-		 * Add directly an Object rather than using the \ref loader
-		 *
-		 * \param object Object to add
-		 *
-		 * \return size_t Old size of the set
-		 */
-		size_t addObject(const Object &object); // Not tested
+        const size_t addPlanet(const std::string& name);
+        const size_t addPlanet(const std::string& name, Vvector pos);
 
-		/**
-		 * Print some information about the \ref camera
-		 */
-		void printInfo() const;
+        /**
+         * Print some information about the \ref camera
+         */
+        void printInfo() const;
 
-		/**
-		 * Handle events from GLUT, mainly forwarded to \ref camera
-		 *
-		 * \param keysPressed Currently pressed keys
-		 */
-		void keyboard(std::set<int> &keysPressed);
+        /**
+         * Handle events from GLUT, mainly forwarded to \ref camera
+         *
+         * \param keysPressed Currently pressed keys
+         */
+        void keyboard(std::set<int> &keysPressed);
 
-		/**
-		 * Reset the perspective, draw the camera and the \ref objects
-		 */
-		void refresh();
+        /**
+         * Reset the perspective, draw the camera and the \ref objects
+         */
+        void refresh(universRefreshFlags flags);
 
-		/**
-		 * Handle physic inside the Univers, mainyl forwarded to
-		 * \ref camera
-		 *
-		 * \param physicDelta Delta of physic to compute
-		 */
-		void physic(double& physicDelta);
+        /**
+         * Handle physic inside the Univers, mainyl forwarded to
+         * \ref camera
+         *
+         * \param physicDelta Delta of physic to compute
+         */
+        void physic(double& physicDelta);
 };

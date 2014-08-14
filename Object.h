@@ -1,80 +1,103 @@
 #pragma once
 
-#include <array>
-#include <string>
 #include <vector>
-#include <set>
-#include <tuple>
+#include <map>
+#include <string>
 
-#include "opengl.h"
-#include "Texture.h"
-#include "Shader.h"
 #include "Mesh.h"
+#include "Material.h"
+#include "Vvector.h"
 
-/**
- * Represent an tuple of Mesh, Texture and Shader
- */
+//--------------------------------- Objects ----------------------------------//
+//									      //
+// An object is any body shown in the OpenGl space. Each object are made of   //
+// pairs (material + mesh[]).						      //
+//									      //
+// A pairs is a part of the objects with the same material. It can containes  //
+// many meshes.								      //
+//									      //
+// The mehses and the materials are stored in 2 seperate static map called    //
+// "containers" and shared between the objects to avoid the duplication of    //
+// those elements.							      //
+//									      //
+// When an objects is drawn, each pair is send to OpenGl.		      //
+//									      //
+//----------------------------------------------------------------------------//
+
 class Object {
-	private:
-		/**
-		 * Sub-Object, that this Object has to manage
-		 */
-		std::set<Object> objects;
+private:
+	
+	// position
+	Vvector p;
+	
+	// mesh resolution
+	uint8_t level;
+	
+	// radius
+	float radius = 0;
 
-		/**
-		 * We need a new set of Mesh/Texture/Shader at every
-		 * \ref resolution
-		 */
-		std::vector<std::tuple<Mesh*,Texture*,Shader*>> meshs;
+	// containers
+        static std::map<std::string, std::shared_ptr<Mesh>> meshes;
+	static std::map<std::string, std::shared_ptr<Material>> materials;
 
-		/**
-		 * Actual resolution of drawing
-		 *
-		 * We want to avoid spending long time drawing far object and
-		 * so, we have to know which tuple we have to draw now
-		 */
-		unsigned short resolution;
+        
+	// pairs (material + mesh)
+        std::vector<std::pair<std::shared_ptr<Material>,
+			      std::vector<std::shared_ptr<Mesh>>>> drawList;
+        
+	/**
+         * execute a .object file (add paires)
+         *
+         * \param localDir path to the object local directory
+         * \param filePath path to the object file
+         */
+	void loadObjectFile(const std::string& localDir,
+			    const std::string& filePath);
 
-	public:
-		/**
-		 * Unusable until an object is added
-		 */
-		Object();
+	/**
+         * adding a new pair (material + mesh) into the drawList
+         *
+         * \param meshFilePath path to the .mesh file
+         * \param mbfFilePath path to the .mbf file
+         * \param vsFilePath path to the .vs (vertex shader) file
+         * \param fsFilePath path to the .fs (fragment shader) file
+         */
+	void addPair(const std::vector<std::string>& meshesFilePath,
+		     const std::string& mbfFilePath,
+		     const std::string& vsFilePath,
+		     const std::string& fsFilePath);
 
-		/**
-		 * Initialize with the given tuple
-		 *
-		 * \param mesh Mesh to use at resolution 0
-		 * \param texture Texture to use at resolution 0
-		 * \param shader Shader to use at resolution 0
-		 */
-		Object(Mesh& mesh, Texture& texture, Shader& shader);
+public:
+	/**
+         * constructor
+	 *
+	 * \param name the name of the object folder
+         */
+        Object(const std::string& name);
+	
+	/**
+         * constructor
+	 *
+	 * \param name the name of the object folder
+	 * \param pos the position of the object
+         */
+        Object(const std::string& name, const Vvector& pos);
+	
+	/**
+         * destructor
+         */
+	~Object();
 
-		/**
-		 * Allow ordering
-		 *
-		 * \param b Other Object to compare to
-		 *
-		 * \return true if this < &b
-		 */
-		bool operator<(const Object &b) const;
+	/**
+         * compute the mesh level needed to draw the mesh
+	 *
+	 * \param camPos position of the camera in the word
+         */
+        void calculateLevel(const Vvector& camPos);
 
-		/**
-		 * Push back an Object to the \ref meshs
-		 *
-		 * \param object Object to add
-		 */
-		void addObject(Object& object);
-
-		/**
-		 * Erase an Object from the \ref meshs
-		 *
-		 * \param object Object to erase
-		 */
-		void delObject(Object& object);
-
-		/**
-		 * Draw at the current \ref resolution and its sub-Object
-		 */
-		virtual void draw() const;
+	/**
+         * draw the drawList (material + mesh)
+         */
+	void draw() const;
 };
+

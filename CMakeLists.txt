@@ -8,8 +8,7 @@ else()
 	set		(libs GL GLU glut GLEW)
 endif()
 
-set		(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -ggdb -g3 -pipe")
-set			(CMAKE_CXX_COMPILER "clang")
+set		(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -ggdb -g3 -pipe")
 
 # check for libraries
 unset(links)
@@ -29,43 +28,39 @@ add_library		(logger Logger.cpp)
 add_library		(object Object.cpp)
 
 add_library		(univers Univers.cpp)
+add_library		(planet Planet.cpp)
+add_library		(sphere Sphere.cpp)
+add_library		(light Light.cpp)
+
 add_library		(camera Camera.cpp)
 add_library		(eventHandler eventHandler.cpp)
 add_library		(simulator Simulator.cpp)
-add_library		(sphere Sphere.cpp)
-add_library		(light Light.cpp)
 add_library		(vector Vvector.cpp)
 add_library		(game Game.cpp)
 
 add_library		(texture Texture.cpp)
+add_library		(material Material.cpp)
 add_library		(shader Shader.cpp)
-add_library		(textureManager TextureManager.cpp)
 add_library		(mesh Mesh.cpp)
-add_library		(meshManager MeshManager.cpp)
-add_library		(objectManager ObjectManager.cpp)
-add_library		(shaderManager ShaderManager.cpp)
 add_library		(stb stb_image.c)
 
 add_library		(component Component.cpp)
 
 # link
-target_link_libraries	(object texture shader mesh)
+target_link_libraries	(object texture shader mesh stdc++ material)
 
-target_link_libraries	(univers camera sphere light objectManager object)
+target_link_libraries	(planet object)
+target_link_libraries	(material shader texture)
+target_link_libraries	(univers camera sphere light object planet)
 target_link_libraries	(camera utilities m)
 target_link_libraries	(light vector)
 target_link_libraries	(game univers simulator eventHandler)
 
-target_link_libraries	(textureManager texture stb)
 target_link_libraries	(texture logger)
 target_link_libraries	(shader ${links})
-
-target_link_libraries	(objectManager meshManager textureManager shaderManager)
-target_link_libraries	(meshManager stdc++)
-target_link_libraries	(shaderManager shader)
 
 # main executable
 add_executable		(main main.cpp)
 target_link_libraries	(main logger univers eventHandler simulator)
-target_link_libraries	(main textureManager game object)
+target_link_libraries	(main game object stdc++)
 target_link_libraries	(main ${links})

@@ -1,5 +1,8 @@
 #include "Texture.h"
 
+using namespace std;
+
+
 Texture::Texture() : imageId(0)
 {}
 
@@ -9,7 +12,7 @@ Texture::Texture(Texture&& texture) : imageId(texture.imageId)
 }
 
 Texture::Texture(const unsigned short width, const unsigned short height,
-		const int format, unsigned char *buffer)
+		const GLenum format, unsigned char *buffer)
 {
         glGenTextures(1, &this->imageId);
         glBindTexture(GL_TEXTURE_2D, this->imageId);

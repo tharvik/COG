@@ -2,100 +2,126 @@
 
 #include "Logger.h"
 #include <fstream>
+#include <string>
 
-Shader::Shader() : vertexShader(0), pixelShader(0), program(0)
+using namespace std;
+
+Shader::Shader() : vertexShader(0), fragmentShader(0), program(0)
 {}
 
-Shader::Shader(Shader&& shader) :
-	vertexShader(shader.vertexShader), pixelShader(shader.pixelShader),
-	program(shader.program)
+Shader::Shader(const Shader& shader) :
+vertexShader(shader.vertexShader),
+fragmentShader(shader.fragmentShader),
+program(shader.program)
 {
-	shader.vertexShader = 0;
-	shader.pixelShader = 0;
-	shader.program = 0;
+	cout << "### copy ###" << endl;
 }
 
-Shader::Shader(const std::string& vShaderPath, const std::string& pShaderPath)
+Shader::Shader(Shader&& shader) :
+vertexShader(shader.vertexShader),
+fragmentShader(shader.fragmentShader),
+program(shader.program)
 {
-	createShaders(vShaderPath, pShaderPath);	
-	compileShaders(vShaderPath, pShaderPath);
+	cout << "### move ###" << endl;
+}
+
+Shader::Shader(const string& vsPath, const string& fsPath)
+{
+
+	createShaders(vsPath,  fsPath);	
+	compileShaders(vsPath, fsPath);
 	
 	// check
-	if (!glIsShader(this->vertexShader) || !glIsShader(this->pixelShader))
-		logger::error("The shaders haven't been created", FL);
+	if (!glIsShader(this->vertexShader))
+	{
+		logger::error("The shader '" + vsPath
+			      + "' haven't been created", _FL_);
+		return;
+	}
+	if (!glIsShader(this->fragmentShader))
+	{
+		logger::error("The shader '" + fsPath
+			      + "' haven't been created", _FL_);
+		return;
+	}
+
 	
-	createProgram(vShaderPath, pShaderPath);
-	linkProgram(vShaderPath, pShaderPath);
+	createProgram(vsPath, fsPath);
+	linkProgram(vsPath,   fsPath);
 	
 	// check
 	if (!glIsProgram(this->program))
-		logger::error("The shader program has not been created", FL);
-		
+	{
+		logger::error("The OpenGL program ['" + vsPath + "' + '"
+			      + fsPath + "'] has not been created", _FL_);
+		return;
+	}
 	
-	logger::info("Shader created.", FL);
+	
+	logger::info("OpenGL program created ['" + vsPath + "' + '" + fsPath
+		     + "']", _FL_);
+	
+	getBasicUniformsLocation();
 }
 
-void Shader::createShaders(const std::string& vShaderPath,
-		const std::string& pShaderPath)
+void Shader::createShaders(const string& vsPath, const string& fsPath)
 {
-	// creation of the vertex and pixel shaders ID + verifications
+	// creation of the vertex and fragment shaders ID + verifications
 	this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	if (!this->vertexShader || !glIsShader(this->vertexShader)) 
-		logger::warn("Opengl was not able to create a vertex shader ID with : "
-					  + vShaderPath, FL);
+		logger::warn("Opengl was not able to create a vertex "
+			     "shader ID with '" + vsPath + "'", _FL_);
 
-	this->pixelShader  = glCreateShader(GL_FRAGMENT_SHADER);
-	if (!this->pixelShader || !glIsShader(this->pixelShader))
-		logger::warn("Opengl was not able to create a pixel shader ID with : "
-					  + pShaderPath, FL);
+	this->fragmentShader  = glCreateShader(GL_FRAGMENT_SHADER);
+	if (!this->fragmentShader || !glIsShader(this->fragmentShader))
+		logger::warn("Opengl was not able to create a fragment "
+			     "shader ID with '" + fsPath + "'", _FL_);
 
 
-	// creation of the shaders
+	// load files
 	char* src;
-	src = loadFileASCII(vShaderPath);
+	src = loadFileASCII(vsPath);
 	glShaderSource(this->vertexShader, 1, (const char**) &src, NULL);	
 	free(src);
 	
-	src = loadFileASCII(pShaderPath);
-	glShaderSource(this->pixelShader, 1, (const char**) &src, NULL);
+	src = loadFileASCII(fsPath);
+	glShaderSource(this->fragmentShader, 1, (const char**) &src, NULL);
 	free(src);
 
 }
 
-char* Shader::loadFileASCII(const std::string& filePath)
+char* Shader::loadFileASCII(const string& filePath)
 {
-	int length;
-	std::ifstream file(filePath);
+	unsigned long length;
+	ifstream file(filePath, ios::ate);
 	
-	if (!file)
-		logger::error("Unable to load " + filePath, FL);
+	if (!file.good())
+		logger::error("Unable to open shader file '" + filePath + "'."
+			      "The file may be empty or simply does not exist",
+			      _FL_);
 	
 	// get file length
-	file.seekg(0, std::ios::end);
-	length = (int) file.tellg();
-	if (length == -1)
-		logger::error("Unable to load the file size " + filePath, FL);
-	file.seekg(0, std::ios::beg);
-	if (length == 0)
-		logger::warn("The file seens to be empty. " + filePath, FL);
+	length = (unsigned long) file.tellg();
+	
+	file.seekg(0, ios::beg);
 	
 	// transmit chars from the file to the string
 	char* str = (char*)  malloc((length + 1) * sizeof(char));
 	if (str == NULL)
-		logger::warn("Unable to load string from file " + filePath, FL);
-	file.read(str, length);
+		logger::warn("Unable to load string from file " + filePath,
+			     _FL_);
+	file.read(str, (long) length);
 
 	// adding \0 at the of the string
 	str[length] = '\0';
 	
 	// clean up
 	file.close();
-	
+		
 	return str;
 }
 
-void Shader::compileShaders(const std::string& vShaderPath,
-		const std::string& pShaderPath)
+void Shader::compileShaders(const string& vsPath, const string& fsPath)
 {
 	GLint CompileStatus = true;
 	GLint CompileLogSize;
@@ -112,31 +138,33 @@ void Shader::compileShaders(const std::string& vShaderPath,
 		glGetShaderiv(this->vertexShader,
 					  GL_INFO_LOG_LENGTH,
 					  &CompileLogSize);
-		vCompileLog = (char*) calloc(CompileLogSize + 1, sizeof(char));
+		vCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
+					     sizeof(char));
 		if (vCompileLog == NULL)
 			logger::warn("Unable to allocate the compilation log\
-						 message string for " + vShaderPath, FL);
+				     message string for " + vsPath, _FL_);
 		glGetShaderInfoLog(this->vertexShader, CompileLogSize,
-						   &CompileLogSize, vCompileLog);
-		logger::warn(std::string(vShaderPath + ": GLSL ") + vCompileLog, FL);
+				   &CompileLogSize, vCompileLog);
+		logger::warn(string(vsPath + ": GLSL ") + vCompileLog, _FL_);
 	}
 	
-	// compile pixel shader
-	glCompileShader(this->pixelShader);
+	// compile fragment shader
+	glCompileShader(this->fragmentShader);
 
 	// compilation check
-	glGetShaderiv(this->pixelShader, GL_COMPILE_STATUS, &CompileStatus);
+	glGetShaderiv(this->fragmentShader, GL_COMPILE_STATUS, &CompileStatus);
 	if (CompileStatus != true) {
-		glGetShaderiv(this->pixelShader,
+		glGetShaderiv(this->fragmentShader,
 					  GL_INFO_LOG_LENGTH,
 					  &CompileLogSize);
-		pCompileLog = (char*) calloc(CompileLogSize + 1, sizeof(char));
+		pCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
+					     sizeof(char));
 		if (pCompileLog == NULL)
 			logger::warn("Unable to allocate the compilation log\
-						 message string for " + pShaderPath, FL);
-		glGetShaderInfoLog(this->pixelShader, CompileLogSize,
-						   &CompileLogSize, pCompileLog);
-		logger::warn(std::string(pShaderPath + ": GLSL ") + pCompileLog, FL);
+				     message string for " + fsPath, _FL_);
+		glGetShaderInfoLog(this->fragmentShader, CompileLogSize,
+				   &CompileLogSize, pCompileLog);
+		logger::warn(string(fsPath + ": GLSL ") + pCompileLog, _FL_);
 	}
 	
 	// clean up
@@ -146,24 +174,23 @@ void Shader::compileShaders(const std::string& vShaderPath,
 		free(pCompileLog);
 }
 
-void Shader::createProgram(const std::string &vShaderPath,
-		const std::string &pShaderPath)
+void Shader::createProgram(const string &vsPath, const string &fsPath)
 {
 	// create program Id
 	this->program = glCreateProgram();
 	
 	// attach the shaders to the program
 	glAttachShader(this->program, this->vertexShader);
-	glAttachShader(this->program, this->pixelShader);
+	glAttachShader(this->program, this->fragmentShader);
 	
 	// check program ID
 	if (!this->program || !glIsProgram(this->program)) 
-		logger::warn("Opengl was not able to create a program shader ID with : "
-					  + vShaderPath + " and " + pShaderPath, FL);
+		logger::warn("Opengl was not able to create a program "
+			     "shader ID with : "
+			     + vsPath + " and " + fsPath, _FL_);
 }
 
-void Shader::linkProgram(const std::string &vShaderPath,
-		const std::string &pShaderPath)
+void Shader::linkProgram(const string &vsPath, const string &fsPath)
 {
 	GLint linkingStatus = true;
 	GLint linkingLogSize;
@@ -179,14 +206,15 @@ void Shader::linkProgram(const std::string &vShaderPath,
 		glGetProgramiv(this->program,
 					  GL_INFO_LOG_LENGTH,
 					  &linkingLogSize);
-		linkingLog = (char*) calloc(linkingLogSize + 1, sizeof(char));
+		linkingLog = (char*) calloc((size_t) linkingLogSize + 1,
+					    sizeof(char));
 		if (linkingLog == NULL)
 			logger::warn("Unable to allocate the linking log\
-						 message string for the program with " + vShaderPath
-						 + " and " + pShaderPath, FL);
+				     message string for the program with "
+				     + vsPath + " and " + fsPath, _FL_);
 		glGetProgramInfoLog(this->program, linkingLogSize,
-							&linkingLogSize, linkingLog);
-		logger::error(std::string(vShaderPath + ": GLSL ") + linkingLog, FL);
+				    &linkingLogSize, linkingLog);
+		logger::error(string(vsPath + ": GLSL ") + linkingLog, _FL_);
 	}
 	
 	//clean up
@@ -194,28 +222,44 @@ void Shader::linkProgram(const std::string &vShaderPath,
 		free(linkingLog);
 }
 
-void Shader::use()
+void Shader::getBasicUniformsLocation()
+{
+	array<string, 5> names = {{"Ka", "Kd", "Ks", "Ns", "d"}};
+
+	for (unsigned char i = 0; i < 5; i++) {
+		parameters[i] = glGetUniformLocation(this->program,
+							 names[i].c_str());
+	}
+}
+
+void Shader::use() const
 {
 	glUseProgram(this->program);
 }
 
-GLuint Shader::getShaderId() const
-{
-	return this->program;
-}
-
-GLuint Shader::getvShaderId() const
-{
-	return this->vertexShader;
-}
-
-GLuint Shader::getpShaderId() const
-{
-	return this->pixelShader;
-}
-
 bool Shader::operator<(const Shader &b) const
 {
-	return (this->vertexShader + this->pixelShader) <
-		(b.vertexShader + b.pixelShader);
+	return ((this->vertexShader << sizeof(GLint) / 2) + this->fragmentShader) <
+	((b.vertexShader << sizeof(GLint) / 2) + b.fragmentShader);
+}
+
+void Shader::setUniformValue(Shader::uniforms uniform, float value)
+{
+	glUniform1f(this->parameters[uniform-6], value);
+}
+
+void Shader::setUniformValue(Shader::uniforms uniform,
+		     float v1, float v2, float v3)
+{
+	glUniform3f(this->parameters[uniform/3], v1, v2, v3);
+}
+
+void Shader::setUniformValue(std::array<float, 11> values)
+{
+	glUseProgram(this->program);
+	glUniform3f(this->parameters[0], values[0], values[1], values[2]);
+	glUniform3f(this->parameters[1], values[3], values[4], values[5]);
+	glUniform3f(this->parameters[2], values[6], values[7], values[8]);
+	glUniform1f(this->parameters[3], values[9]);
+	glUniform1f(this->parameters[4], values[10]);
 }

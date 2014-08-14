@@ -14,7 +14,7 @@ class Simulator {
 		/**
 		 * Univers it has to handle
 		 */
-		Univers *univers = nullptr;
+		Univers *univers;
 
 		/**
 		 * Current computed FPS
@@ -25,6 +25,11 @@ class Simulator {
 		 * Number of refresh since last FPS computation
 		 */
 		unsigned int refreshCounter;
+		
+		/**
+		 * Number of ticks
+		 */
+		unsigned long long tickCounter = 0;
 
 		/**
 		 * Last \ref actualPhysic we reported

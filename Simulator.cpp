@@ -43,7 +43,7 @@ void Simulator::physic()
 
         if (physicDelta > 1) {
                 physicDelta = 1;
-                logger::warn("Lag occured", FL); // To manage
+                logger::warn("Lag occured", _FL_); // To manage
         }
         if (physicCounter >= REPORT_PPS) {
                 measurePPS();
@@ -70,10 +70,14 @@ void Simulator::refresh()
                 measureFPS();
                 refreshCounter = 0;
         }
+	
+	if (!(tickCounter % 10))
+		univers->refresh(Univers::LEVEL);
+	else
+		univers->refresh(Univers::NONE);
         
-        univers->refresh();
-        
-        refreshCounter ++;
+        refreshCounter++;
+	tickCounter++;
         lastRefresh = actualRefresh;
 }
 

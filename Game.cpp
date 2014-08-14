@@ -1,6 +1,6 @@
 #include "Game.h"
 
-// Constructor
+
 Game::Game() : univers(), simulator(&univers)
 {
         glClearColor(BGR_C);
@@ -8,11 +8,23 @@ Game::Game() : univers(), simulator(&univers)
         if (FULLSCREEN)
                 glutFullScreen();
         
-        univers.addObject("mountain");
         
         setSimulator(&simulator);
         setUnivers(&univers);
         
+	Vvector pos(0, 0, 0);
+	Vvector addx(10, 0, 0);
+	Vvector addy(0, 10, 0);
+	
+	for (int i = 0; i < 48; i++) {
+	for (int j = 0; j < 48; j++) {
+		this->univers.addPlanet("Torus", pos);
+		pos += addx;
+	}
+		pos = Vvector(0, pos.y() + addy.y(), pos.z());
+	}
+	
+	
         {
                 glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
                 glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
@@ -27,7 +39,7 @@ Game::Game() : univers(), simulator(&univers)
         }
 }
 
-// Game modes
+
 void Game::enterMainMenu()
 {
         glutSpecialFunc(specialKeyDown);
@@ -43,5 +55,4 @@ void Game::enterMainMenu()
 }
 
 void Game::enterPauseMenu()
-{
-}
+{}

@@ -23,7 +23,7 @@
 
 #define REPORT_FPS  50
 
-#define BACKGROUND_COLOR 0.16, 0.16, 0.16, 1
+#define BACKGROUND_COLOR 0.16f, 0.16f, 0.16f, 1.0f
 
 // Keyboard
 #define LAYOUT            QWERTZ
@@ -40,14 +40,14 @@
 
 #define DISTANCE_PER_MOVE     0.30
 #define DISTANCE_PER_PHYSIC   DIS_M
-#define DISTANCE_BOOST_FACTOR 4.00
+#define DISTANCE_BOOST_FACTOR 10.00
 
 #define ANGLE_PER_ROTATION 0.1
 #define ANGLE_PER_PHYSIC   ANG_R
 #define ANGLE_BOOST_FACTOR 2.00
 
-// ObjectManager
-#define LOAD_FROM "Resources/objects/"
+// MESH levels
+#define MESH_LEVEL_DISTANCES 5.0, 50.0, 100.0, 200.0, 500.0
 
 
 /* ################################ PRESETS ################################ */
