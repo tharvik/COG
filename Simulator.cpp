@@ -70,10 +70,14 @@ void Simulator::refresh()
                 measureFPS();
                 refreshCounter = 0;
         }
+	
+	if (!(tickCounter % 10))
+		univers->refresh(Univers::LEVEL);
+	else
+		univers->refresh(Univers::NONE);
         
-        univers->refresh();
-        
-        refreshCounter ++;
+        refreshCounter++;
+	tickCounter++;
         lastRefresh = actualRefresh;
 }
 

@@ -30,6 +30,19 @@ Object::Object(const std::string& name, const Vvector& pos) : p(pos)
 Object::~Object()
 {}
 
+void Object::calculateLevel(const Vvector& camPos)
+{
+	double l = (camPos - this->p).length() - this->radius;
+	uint8_t i = 0;
+	array<float, 5> distances = {{MESH_LEVEL_DISTANCES}};
+	
+	while (i < 4 && l > distances[i])
+		i++;
+		
+	this->level = i;
+}
+
+
 void Object::draw() const
 {
 	glMatrixMode(GL_MODELVIEW);
@@ -40,7 +53,7 @@ void Object::draw() const
         for (const auto& pair : drawList) {
                 pair.first->use();
 		for (const auto& mesh : pair.second)
-			mesh->draw();
+			mesh->draw(this->level);
         }
 	
 	glPopMatrix();
@@ -128,7 +141,13 @@ void Object::addPair(const std::vector<std::string>& meshesFilePath,
 			meshes[meshFilePath] = pairMeshes.back();
 		} else
 			pairMeshes.push_back(meshes[meshFilePath]);
+	
+		// calculate new radius
+		float meshRadius = meshes[meshFilePath]->getRadius();
+		if (meshRadius > this->radius)
+			this->radius = meshRadius;
 	}
+		
 /* material + shader */
 
 	// check if material already exists

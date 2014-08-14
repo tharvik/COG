@@ -44,6 +44,13 @@ private:
          */
         void draw() const;
 public:
+
+	typedef enum
+	{
+		NONE  = 0,	/**< no flags **/
+		LEVEL = 1	/**< recalculate object mesh levels **/
+	} universRefreshFlags;
+
         /**
          * Construct with default Camera and the \ref mainLight as a
          * carefully chosen position
@@ -85,7 +92,7 @@ public:
         /**
          * Reset the perspective, draw the camera and the \ref objects
          */
-        void refresh();
+        void refresh(universRefreshFlags flags);
 
         /**
          * Handle physic inside the Univers, mainyl forwarded to

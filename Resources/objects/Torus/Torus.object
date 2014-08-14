@@ -1,1 +1,1 @@
-[ # left.mesh # left.mbf base.vs base.fs ] [ # right.mesh # right.mbf base.vs base.fs ] [ # up.mesh # up.mbf base.vs base.fs ] [ # down.mesh # down.mbf base.vs base.fs ] 
+[ # up.mesh # up.mbf base.vs base.fs ] 

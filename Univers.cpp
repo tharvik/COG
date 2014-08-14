@@ -4,13 +4,13 @@ using namespace std;
 
 static Univers* local;
 
-
 static void cleanup()
 {
 	local->~Univers();
 }
 
-Univers::Univers() : camera(), mainLight(5.98, -26.12, 15.39, 0.32, 0.76, -0.57)
+Univers::Univers() : camera(), mainLight(5.98f, -26.12f, 15.39f,
+					 0.32f, 0.76f, -0.57f)
 {
 	local = this;
 	atexit(cleanup);
@@ -68,12 +68,15 @@ void Univers::draw() const
                 object->draw();
 }
 
-void Univers::refresh()
+void Univers::refresh(universRefreshFlags flags)
 {
+	if (flags & LEVEL)
+		for (auto& object: objects)
+			object->calculateLevel(this->camera.getPosition());
+
         glLoadIdentity();
         
         // Shadows(&univers)
-        
         perspective();
         camera.look();
         draw();

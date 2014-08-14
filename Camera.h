@@ -141,6 +141,13 @@ class Camera {
 		void setOrientationZ(const GLdouble posZ);
 
 		/**
+		 * get the camera position
+		 *
+		 * \return position
+		 */
+		const Vvector& getPosition() const;
+
+		/**
 		 * Return the x position
 		 *
 		 * \return X position

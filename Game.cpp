@@ -13,22 +13,16 @@ Game::Game() : univers(), simulator(&univers)
         setUnivers(&univers);
         
 	Vvector pos(0, 0, 0);
-	Vvector addx(5, 0, 0);
-	Vvector addy(0, 5, 0);
+	Vvector addx(10, 0, 0);
+	Vvector addy(0, 10, 0);
 	
-	for (int i = 0; i < 4; i++) {
-	for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < 48; i++) {
+	for (int j = 0; j < 48; j++) {
 		this->univers.addPlanet("Torus", pos);
 		pos += addx;
 	}
 		pos = Vvector(0, pos.y() + addy.y(), pos.z());
 	}
-	
-	
-
-	
-	
-	
 	
 	
         {
@@ -61,5 +55,4 @@ void Game::enterMainMenu()
 }
 
 void Game::enterPauseMenu()
-{
-}
+{}

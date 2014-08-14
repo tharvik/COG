@@ -14,13 +14,14 @@
 // pairs (material + mesh[]).						      //
 //									      //
 // A pairs is a part of the objects with the same material. It can containes  //
-// many meshes.
+// many meshes.								      //
 //									      //
 // The mehses and the materials are stored in 2 seperate static map called    //
 // "containers" and shared between the objects to avoid the duplication of    //
 // those elements.							      //
 //									      //
 // When an objects is drawn, each pair is send to OpenGl.		      //
+//									      //
 //----------------------------------------------------------------------------//
 
 class Object {
@@ -28,6 +29,12 @@ private:
 	
 	// position
 	Vvector p;
+	
+	// mesh resolution
+	uint8_t level;
+	
+	// radius
+	float radius = 0;
 
 	// containers
         static std::map<std::string, std::shared_ptr<Mesh>> meshes;
@@ -80,6 +87,13 @@ public:
          * destructor
          */
 	~Object();
+
+	/**
+         * compute the mesh level needed to draw the mesh
+	 *
+	 * \param camPos position of the camera in the word
+         */
+        void calculateLevel(const Vvector& camPos);
 
 	/**
          * draw the drawList (material + mesh)
