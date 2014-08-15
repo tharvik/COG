@@ -21,8 +21,8 @@ Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
                const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ)
 {
         if (!oriX && !oriY && !oriZ) {
-                logger::warn("The orientation vector given to the camera was of\
-                             length 0", _FL_);
+                logger_warn("The orientation vector given to the camera was of\
+                             length 0");
         } else {
 		p[0] = (float) posX; p[1] = (float) posY; p[2] = (float) posZ;
 		o[0] = (float) oriX; o[1] = (float) oriY; o[2] = (float) oriZ;

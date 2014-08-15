@@ -43,8 +43,8 @@ void openWindow(int &&x, int &&y, int &&width, int &&height,
 #ifndef __APPLE__
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
-		logger::error(std::string("Fail to init glew: ") +
-				((char*) glewGetErrorString(err)), _FL_);
+		logger_error(std::string("Fail to init glew: ") +
+				((char*) glewGetErrorString(err)));
 #endif
 }
 

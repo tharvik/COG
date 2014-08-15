@@ -1,7 +1,7 @@
 bin_PROGRAMS	= COG
-COG_SOURCES	= Camera.cpp Component.cpp Game.cpp Light.cpp Logger.cpp	\
-		  Material.cpp Mesh.cpp Object.cpp Planet.cpp Shader.cpp	\
-		  Simulator.cpp Sphere.cpp Texture.cpp Univers.cpp Vvector.cpp	\
+COG_SOURCES	= Camera.cpp Component.cpp Game.cpp Light.cpp Material.cpp	\
+		  Mesh.cpp Object.cpp Planet.cpp Shader.cpp Simulator.cpp	\
+		  Sphere.cpp Texture.cpp Univers.cpp Vvector.cpp		\
 		  eventHandler.cpp main.cpp utilities.cpp stb_image.c		\
 		  								\
 		  Camera.h Component.h Game.h Light.h Logger.h Material.h	\

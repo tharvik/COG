@@ -34,8 +34,7 @@ Mesh::Mesh(const string& filePath)
 	ifstream file;
 	file.open(filePath, ifstream::binary);
 	if (!file.good())
-		logger::error("Unable to open mesh file '" + filePath + "'",
-			      _FL_);
+		logger_error("Unable to open mesh file '" + filePath + "'");
 
 	// load radius
 	file.read(reinterpret_cast<char*>(&this->radius),
@@ -74,7 +73,7 @@ Mesh::Mesh(const string& filePath)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
-	logger::info("Mesh loaded from '" + filePath + "'", _FL_);
+	logger_info("Mesh loaded from '" + filePath + "'");
 }
 
 Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
@@ -182,7 +181,7 @@ unsigned int Mesh::fillBuffer(GLuint buffer, ifstream& file)
 				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 	// check
 	if(vertices == NULL)
-		logger::error("Failed to allocate graphic memory", _FL_);
+		logger_error("Failed to allocate graphic memory");
 
 	// fill buffer
 	file.read(reinterpret_cast<char*>(vertices),
@@ -190,8 +189,7 @@ unsigned int Mesh::fillBuffer(GLuint buffer, ifstream& file)
 
 	// unmap openGL buffer pointer
 	if(!glUnmapBuffer(GL_ARRAY_BUFFER))
-		logger::error("Failed to unmap buffer during .mesh loading",
-			      _FL_);
+		logger_error("Failed to unmap buffer during .mesh loading");
 
 	return size;
 }

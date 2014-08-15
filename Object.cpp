@@ -16,7 +16,7 @@ Object::Object(const std::string& name) : p(0, 0, 0), radius(0)
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
 	
-	logger::info("Object '" + name + "' created", _FL_);
+	logger_info("Object '" + name + "' created");
 }
 
 Object::Object(const std::string& name, const Vvector& pos) : p(pos), radius(0)
@@ -24,7 +24,7 @@ Object::Object(const std::string& name, const Vvector& pos) : p(pos), radius(0)
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
 	
-	logger::info("Object '" + name + "' created", _FL_);
+	logger_info("Object '" + name + "' created");
 }
 
 Object::~Object()
@@ -74,7 +74,7 @@ void Object::loadObjectFile(const string& localDir, const string& filePath)
 	
 	// open file
 	if (!file.good())
-		logger::error("Unable to load object file " + filePath, _FL_);
+		logger_error("Unable to load object file " + filePath);
 	
 	while (file >> word) {
 		if (word == "#")
@@ -111,8 +111,8 @@ void Object::loadObjectFile(const string& localDir, const string& filePath)
 				: globalDir + "shaders/" + word;
 			
 			else if (ext != "[")
-				logger::warn("Unknown format '" + ext + "' in"
-					     ".object file", _FL_);
+				logger_warn("Unknown format '" + ext + "' in"
+					     ".object file");
 			
 			local = false;
 		}

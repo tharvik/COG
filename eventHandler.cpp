@@ -38,16 +38,16 @@ void windowStatusHandler(const int state)
 {
         switch (state) {
                 case GLUT_HIDDEN:
-                        logger::info("The window is hidden", _FL_);
+                        logger_info("The window is hidden");
                         break;
                 case GLUT_FULLY_RETAINED:
-                        logger::info("The window is fully retained", _FL_);
+                        logger_info("The window is fully retained");
                         break;
                 case GLUT_PARTIALLY_RETAINED:
-                        logger::info("The window is partially retained", _FL_);
+                        logger_info("The window is partially retained");
                         break;
                 case GLUT_FULLY_COVERED:
-                        logger::info("The window is fully covered", _FL_);
+                        logger_info("The window is fully covered");
                         break;
         }
 }

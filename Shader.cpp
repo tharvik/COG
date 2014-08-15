@@ -34,14 +34,14 @@ Shader::Shader(const string& vsPath, const string& fsPath)
 	// check
 	if (!glIsShader(this->vertexShader))
 	{
-		logger::error("The shader '" + vsPath
-			      + "' haven't been created", _FL_);
+		logger_error("The shader '" + vsPath
+			      + "' haven't been created");
 		return;
 	}
 	if (!glIsShader(this->fragmentShader))
 	{
-		logger::error("The shader '" + fsPath
-			      + "' haven't been created", _FL_);
+		logger_error("The shader '" + fsPath
+			      + "' haven't been created");
 		return;
 	}
 
@@ -52,14 +52,14 @@ Shader::Shader(const string& vsPath, const string& fsPath)
 	// check
 	if (!glIsProgram(this->program))
 	{
-		logger::error("The OpenGL program ['" + vsPath + "' + '"
-			      + fsPath + "'] has not been created", _FL_);
+		logger_error("The OpenGL program ['" + vsPath + "' + '"
+			      + fsPath + "'] has not been created");
 		return;
 	}
 	
 	
-	logger::info("OpenGL program created ['" + vsPath + "' + '" + fsPath
-		     + "']", _FL_);
+	logger_info("OpenGL program created ['" + vsPath + "' + '" + fsPath
+		     + "']");
 	
 	getBasicUniformsLocation();
 }
@@ -69,13 +69,13 @@ void Shader::createShaders(const string& vsPath, const string& fsPath)
 	// creation of the vertex and fragment shaders ID + verifications
 	this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	if (!this->vertexShader || !glIsShader(this->vertexShader)) 
-		logger::warn("Opengl was not able to create a vertex "
-			     "shader ID with '" + vsPath + "'", _FL_);
+		logger_warn("Opengl was not able to create a vertex "
+			     "shader ID with '" + vsPath + "'");
 
 	this->fragmentShader  = glCreateShader(GL_FRAGMENT_SHADER);
 	if (!this->fragmentShader || !glIsShader(this->fragmentShader))
-		logger::warn("Opengl was not able to create a fragment "
-			     "shader ID with '" + fsPath + "'", _FL_);
+		logger_warn("Opengl was not able to create a fragment "
+			     "shader ID with '" + fsPath + "'");
 
 
 	// load files
@@ -96,9 +96,8 @@ char* Shader::loadFileASCII(const string& filePath)
 	ifstream file(filePath, ios::ate);
 	
 	if (!file.good())
-		logger::error("Unable to open shader file '" + filePath + "'."
-			      "The file may be empty or simply does not exist",
-			      _FL_);
+		logger_error("Unable to open shader file '" + filePath + "'."
+			      "The file may be empty or simply does not exist");
 	
 	// get file length
 	length = (unsigned long) file.tellg();
@@ -108,8 +107,7 @@ char* Shader::loadFileASCII(const string& filePath)
 	// transmit chars from the file to the string
 	char* str = (char*)  malloc((length + 1) * sizeof(char));
 	if (str == NULL)
-		logger::warn("Unable to load string from file " + filePath,
-			     _FL_);
+		logger_warn("Unable to load string from file " + filePath);
 	file.read(str, (long) length);
 
 	// adding \0 at the of the string
@@ -141,11 +139,11 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 		vCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
 					     sizeof(char));
 		if (vCompileLog == NULL)
-			logger::warn("Unable to allocate the compilation log\
-				     message string for " + vsPath, _FL_);
+			logger_warn("Unable to allocate the compilation log\
+				     message string for " + vsPath);
 		glGetShaderInfoLog(this->vertexShader, CompileLogSize,
 				   &CompileLogSize, vCompileLog);
-		logger::warn(string(vsPath + ": GLSL ") + vCompileLog, _FL_);
+		logger_warn(string(vsPath + ": GLSL ") + vCompileLog);
 	}
 	
 	// compile fragment shader
@@ -160,11 +158,11 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 		pCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
 					     sizeof(char));
 		if (pCompileLog == NULL)
-			logger::warn("Unable to allocate the compilation log\
-				     message string for " + fsPath, _FL_);
+			logger_warn("Unable to allocate the compilation log\
+				     message string for " + fsPath);
 		glGetShaderInfoLog(this->fragmentShader, CompileLogSize,
 				   &CompileLogSize, pCompileLog);
-		logger::warn(string(fsPath + ": GLSL ") + pCompileLog, _FL_);
+		logger_warn(string(fsPath + ": GLSL ") + pCompileLog);
 	}
 	
 	// clean up
@@ -185,9 +183,9 @@ void Shader::createProgram(const string &vsPath, const string &fsPath)
 	
 	// check program ID
 	if (!this->program || !glIsProgram(this->program)) 
-		logger::warn("Opengl was not able to create a program "
+		logger_warn("Opengl was not able to create a program "
 			     "shader ID with : "
-			     + vsPath + " and " + fsPath, _FL_);
+			     + vsPath + " and " + fsPath);
 }
 
 void Shader::linkProgram(const string &vsPath, const string &fsPath)
@@ -209,12 +207,12 @@ void Shader::linkProgram(const string &vsPath, const string &fsPath)
 		linkingLog = (char*) calloc((size_t) linkingLogSize + 1,
 					    sizeof(char));
 		if (linkingLog == NULL)
-			logger::warn("Unable to allocate the linking log\
+			logger_warn("Unable to allocate the linking log\
 				     message string for the program with "
-				     + vsPath + " and " + fsPath, _FL_);
+				     + vsPath + " and " + fsPath);
 		glGetProgramInfoLog(this->program, linkingLogSize,
 				    &linkingLogSize, linkingLog);
-		logger::error(string(vsPath + ": GLSL ") + linkingLog, _FL_);
+		logger_error(string(vsPath + ": GLSL ") + linkingLog);
 	}
 	
 	//clean up

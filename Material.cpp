@@ -58,8 +58,8 @@ void Material::readMaterialFile(const string &filePath)
 	file.open(filePath, std::ifstream::binary);
 	if (!file.good())
 	{
-		logger::warn("Unable to open material binary file ." + filePath
-			     + "The file may be empty or doesn't exist.", _FL_);
+		logger_warn("Unable to open material binary file ." + filePath
+			     + "The file may be empty or doesn't exist.");
 		return;
 	}
 	
