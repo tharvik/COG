@@ -1,5 +1,7 @@
 language: cpp
 
+cache: apt
+
 compiler:
  - gcc
  - clang
@@ -8,5 +10,5 @@ install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq libglew-dev freeglut3-dev
 
-script: cmake . && make -j
+script: ./configure && make -j
 

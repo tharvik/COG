@@ -5,10 +5,13 @@
 // Constructors
 Camera::Camera()
 {
-        p[0] = POS_X; p[1] = POS_Y; p[2] = POS_Z;
-        o[0] = ORI_X; o[1] = ORI_Y; o[2] = ORI_Z;
-        
-        
+        p[0] = INITIAL_POSITION_X;
+	p[1] = INITIAL_POSITION_Y;
+	p[2] = INITIAL_POSITION_Z;
+        o[0] = INITIAL_ORIENTATION_X;
+	o[1] = INITIAL_ORIENTATION_Y;
+	o[2] = INITIAL_ORIENTATION_Z;
+
 	this->d.setNull();
 	this->o.normalize();
 	this->r = this->o;
@@ -24,7 +27,7 @@ Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 		p[0] = (float) posX; p[1] = (float) posY; p[2] = (float) posZ;
 		o[0] = (float) oriX; o[1] = (float) oriY; o[2] = (float) oriZ;
 	}
-        
+
 	this->d.setNull();
 	this->o.normalize();
 	this->r = this->o;
@@ -44,7 +47,7 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
         else
                 b *= ANGLE_PER_ROTATION;
         a *= ANGLE_PER_ROTATION;
-        
+
         if (a == 0 || b == 0) {
                 if (a != 0) {
                         r[0] = (float) (r[0] * cos(a)
@@ -103,10 +106,10 @@ void Camera::move(const GLdouble movForward, const GLdouble movSideward,
 		const GLdouble movUpward)
 {
         d[0] += (movForward  * o[0]
-              -  movSideward * o[1]) * DIS_M;
+              -  movSideward * o[1]) * DISTANCE_PER_MOVE;
         d[1] += (movForward  * o[1]
-              +  movSideward * o[0]) * DIS_M;
-        d[2] += (movForward  * o[2]) * DIS_M;
+              +  movSideward * o[0]) * DISTANCE_PER_MOVE;
+        d[2] += (movForward  * o[2]) * DISTANCE_PER_MOVE;
 }
 
 void Camera::goTo(const GLdouble posX, const GLdouble posY, const GLdouble posZ)
@@ -202,13 +205,13 @@ void Camera::keyDown(std::set<int> &keysPressed)
                         move(0, -1, 0);
 
                 if (keysPressed.count('I'))
-                        move(DIS_B, 0, 0);
+                        move(DISTANCE_PER_MOVE, 0, 0);
                 if (keysPressed.count('J'))
-                        move(0, DIS_B, 0);
+                        move(0, DISTANCE_PER_MOVE, 0);
                 if (keysPressed.count('K'))
-                        move(-DIS_B, 0, 0);
+                        move(-DISTANCE_PER_MOVE, 0, 0);
                 if (keysPressed.count('L'))
-                        move(0, -DIS_B, 0);
+                        move(0, -DISTANCE_PER_MOVE, 0);
         }
         {
                 if (keysPressed.count('w'))
@@ -219,7 +222,7 @@ void Camera::keyDown(std::set<int> &keysPressed)
                         rotate(0, -1);
                 if (keysPressed.count('d'))
                         rotate(-1, 0);
-                
+
                 if (keysPressed.count('W'))
                         rotate(0, 1);
                 if (keysPressed.count('A'))
@@ -231,8 +234,10 @@ void Camera::keyDown(std::set<int> &keysPressed)
         }
         {
                 if (keysPressed.count('o')) {
-                        goTo(POS_X, POS_Y, POS_Z);
-                        lookTo(ORI_X, ORI_Y, ORI_Z);
+                        goTo(INITIAL_POSITION_X, INITIAL_POSITION_Y,
+					INITIAL_POSITION_Z);
+                        lookTo(INITIAL_ORIENTATION_X, INITIAL_ORIENTATION_Y,
+					INITIAL_ORIENTATION_Z);
 			keysPressed.erase('o');
                 }
         }
@@ -243,12 +248,12 @@ void Camera::physic(const double &physicDelta)
 {
 	Vvector s;
 	s = d;
-	s *= (float) (physicDelta * DIS_P);
+	s *= (float) (physicDelta * DISTANCE_PER_PHYSIC);
 	this->p += s;
 	this->d -= s;
-        
+
 	s = this->r - this->o;
-	s *= (float) (physicDelta * ANG_P);
+	s *= (float) (physicDelta * ANGLE_PER_PHYSIC);
 	this->o += s;
 	this->o.normalize();
 }

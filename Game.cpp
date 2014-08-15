@@ -3,8 +3,8 @@
 
 Game::Game() : univers(), simulator(&univers)
 {
-        glClearColor(BGR_C);
-        
+        glClearColor(BACKGROUND_COLOR);
+
         if (FULLSCREEN)
                 glutFullScreen();
         
@@ -45,12 +45,12 @@ void Game::enterMainMenu()
         glutSpecialFunc(specialKeyDown);
         glutKeyboardFunc(keyDown);
         glutKeyboardUpFunc(keyUp);
-        
+
         glutMouseFunc(mouseHandler);
         glutMotionFunc(motionHandler);
-        
+
         glutIdleFunc(tick);
-        
+
         glutMainLoop();
 }
 
