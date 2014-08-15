@@ -5,7 +5,7 @@ static Simulator *self;
 // Constructors
 Simulator::Simulator() :
 	FPS(0), lastPhysicReport(0), actualPhysic(0), physicDelta(0), PPS(0),
-	lastRefreshReport(0), lastRefresh(0), actualRefresh(0)
+	lastRefreshReport(0), lastRefresh(0), actualRefresh(0), tickCounter(0)
 {
         self = this;
         physicCounter = REPORT_PPS;
@@ -15,7 +15,7 @@ Simulator::Simulator() :
 
 Simulator::Simulator(Univers *theUnivers) :
 	FPS(0), lastPhysicReport(0), actualPhysic(0), physicDelta(0), PPS(0),
-	lastRefreshReport(0), lastRefresh(0), actualRefresh(0)
+	lastRefreshReport(0), lastRefresh(0), actualRefresh(0), tickCounter(0)
 {
         univers = theUnivers;
         self = this;

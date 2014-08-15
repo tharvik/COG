@@ -45,7 +45,7 @@ void openWindow(int &&x, int &&y, int &&width, int &&height,
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
 		logger::error(std::string("Fail to init glew: ") +
-				((char*) glewGetErrorString(err)), FL);
+				((char*) glewGetErrorString(err)), _FL_);
 #endif
 }
 

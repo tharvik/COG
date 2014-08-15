@@ -29,7 +29,7 @@ class Simulator {
 		/**
 		 * Number of ticks
 		 */
-		unsigned long long tickCounter = 0;
+		unsigned long long tickCounter;
 
 		/**
 		 * Last \ref actualPhysic we reported

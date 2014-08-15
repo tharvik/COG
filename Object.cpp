@@ -11,7 +11,7 @@ using namespace std;
 map<string, shared_ptr<Mesh>> Object::meshes;
 map<string, shared_ptr<Material>> Object::materials;
 
-Object::Object(const std::string& name) : p(0, 0, 0)
+Object::Object(const std::string& name) : p(0, 0, 0), radius(0)
 {
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
@@ -19,7 +19,7 @@ Object::Object(const std::string& name) : p(0, 0, 0)
 	logger::info("Object '" + name + "' created", _FL_);
 }
 
-Object::Object(const std::string& name, const Vvector& pos) : p(pos)
+Object::Object(const std::string& name, const Vvector& pos) : p(pos), radius(0)
 {
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");

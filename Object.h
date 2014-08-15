@@ -34,7 +34,7 @@ private:
 	uint8_t level;
 	
 	// radius
-	float radius = 0;
+	float radius;
 
 	// containers
         static std::map<std::string, std::shared_ptr<Mesh>> meshes;

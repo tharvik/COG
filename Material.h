@@ -7,6 +7,8 @@
 #include "Shader.h"
 #include "Texture.h"
 
+#include <memory>
+
 //-------------------------------- Materials ---------------------------------//
 //									      //
 // A material  referes to  the apparence  of an OpenGL face.   It specifies a //
