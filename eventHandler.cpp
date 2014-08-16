@@ -31,7 +31,7 @@ void displayHandler()
 
 void windowResizingHandler(const int width, const int height)
 {
-        glViewport(0, 0, (GLsizei) width, (GLsizei) height);
+        glViewport(0, 0, GLsizei(width), GLsizei(height));
 }
 
 void windowStatusHandler(const int state)
@@ -49,6 +49,8 @@ void windowStatusHandler(const int state)
                 case GLUT_FULLY_COVERED:
                         logger_info("The window is fully covered");
                         break;
+		default:
+                        logger_warn("The window is in an unknow state");
         }
 }
 

@@ -11,7 +11,7 @@ using namespace std;
 map<string, shared_ptr<Mesh>> Object::meshes;
 map<string, shared_ptr<Material>> Object::materials;
 
-Object::Object(const std::string& name) : p(0, 0, 0), radius(0)
+Object::Object(const std::string& name) : drawList(), p(0, 0, 0), radius(0), level(0)
 {
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
@@ -19,7 +19,7 @@ Object::Object(const std::string& name) : p(0, 0, 0), radius(0)
 	logger_info("Object '" + name + "' created");
 }
 
-Object::Object(const std::string& name, const Vvector& pos) : p(pos), radius(0)
+Object::Object(const std::string& name, const Vvector& pos) : drawList(), p(pos), radius(0), level(0)
 {
 	string localDir = "Resources/objects/" + name + "/";
 	loadObjectFile(localDir, localDir + name + ".object");
@@ -32,7 +32,7 @@ Object::~Object()
 
 void Object::calculateLevel(const Vvector& camPos)
 {
-	double l = (camPos - this->p).length() - this->radius;
+	float l = (camPos - this->p).length() - this->radius;
 	uint8_t i = 0;
 	array<float, 5> distances = {{MESH_LEVEL_DISTANCES}};
 	

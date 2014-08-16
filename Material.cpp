@@ -10,7 +10,8 @@ using namespace std;
 map<string, shared_ptr<Texture>> Material::textures;
 
 Material::Material(const string& mbfPath, const string& vsPath,
-		   const string& fsPath) : shader(vsPath, fsPath)
+		   const string& fsPath) :
+	shader(vsPath, fsPath), texturesToDraw(), parameters()
 {
 	readMaterialFile(mbfPath);
 		
@@ -65,8 +66,8 @@ void Material::readMaterialFile(const string &filePath)
 	
 	
 	// read 
-	file.read((char*) parameters.data(),
-		  (long) (parameters.max_size() * sizeof(float)));
+	file.read(reinterpret_cast<char*>(parameters.data()),
+		  long(parameters.max_size() * sizeof(float)));
 		 
 	// end
 	file.close();

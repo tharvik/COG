@@ -53,8 +53,8 @@ void setUpOpenGL()
         glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
         glMatrixMode(GL_MODELVIEW);
-        gluPerspective(FOV, (GLdouble) glutGet(GLUT_WINDOW_WIDTH) /
-                       glutGet(GLUT_WINDOW_HEIGHT), NEAREST, FAREST);
+        gluPerspective(FOV, GLdouble(glutGet(GLUT_WINDOW_WIDTH) /
+                       glutGet(GLUT_WINDOW_HEIGHT)), NEAREST, FAREST);
 	
 	// for VBO indexing	       
 	glEnableClientState(GL_VERTEX_ARRAY);

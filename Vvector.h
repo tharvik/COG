@@ -55,7 +55,7 @@ class Vvector {
 		 *
 		 * \return Norm
 		 */
-		double length() const;
+		float length() const;
 
 		/**
 		 * Print the values

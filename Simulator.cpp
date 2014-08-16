@@ -4,24 +4,21 @@ static Simulator *self;
 
 // Constructors
 Simulator::Simulator() :
-	FPS(0), lastPhysicReport(0), actualPhysic(0), physicDelta(0), PPS(0),
-	lastRefreshReport(0), lastRefresh(0), actualRefresh(0), tickCounter(0)
+	univers(nullptr), FPS(0), refreshCounter(REPORT_FPS), tickCounter(0),
+	lastPhysicReport(0), lastPhysic(0), actualPhysic(0), physicDelta(0),
+	PPS(0), physicCounter(REPORT_PPS), lastRefreshReport(0), lastRefresh(0),
+	actualRefresh(0)
 {
         self = this;
-        physicCounter = REPORT_PPS;
-        refreshCounter = REPORT_FPS;
-	lastPhysic = 0;
 }
 
 Simulator::Simulator(Univers *theUnivers) :
-	FPS(0), lastPhysicReport(0), actualPhysic(0), physicDelta(0), PPS(0),
-	lastRefreshReport(0), lastRefresh(0), actualRefresh(0), tickCounter(0)
+	univers(theUnivers), FPS(0), refreshCounter(REPORT_FPS), tickCounter(0),
+	lastPhysicReport(0), lastPhysic(0), actualPhysic(0), physicDelta(0),
+	PPS(0), physicCounter(REPORT_PPS), lastRefreshReport(0), lastRefresh(0),
+	actualRefresh(0)
 {
-        univers = theUnivers;
         self = this;
-        physicCounter = REPORT_PPS;
-        refreshCounter = REPORT_FPS;
-	lastPhysic = 0;
 }
 
 void Simulator::printInfo() const
@@ -39,7 +36,7 @@ void Simulator::printInfo() const
 void Simulator::physic()
 {
         actualPhysic = glutGet(GLUT_ELAPSED_TIME);
-        physicDelta = (double) MINIMUM_PPS * (actualPhysic - lastPhysic) / 1000;
+        physicDelta = double(MINIMUM_PPS * (actualPhysic - lastPhysic) / 1000.0);
 
         if (physicDelta > 1) {
                 physicDelta = 1;

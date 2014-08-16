@@ -6,23 +6,26 @@
 #define vy scalar[1]
 #define vz scalar[2]
 
+#define DELTA 0.000001F
+
 // Constructors
-Vvector::Vvector()
+Vvector::Vvector() : scalar()
 {
 	setNull();
 }
 
-Vvector::Vvector(const float x, const float y, const float z)
+Vvector::Vvector(const float _x, const float _y, const float _z) : scalar()
 {
-	vx = x;
-	vy = y;
-	vz = z;
+	vx = _x;
+	vy = _y;
+	vz = _z;
 }
 
-void Vvector::set(const float x, const float y, const float z) {
-	vx = x;
-	vy = y;
-	vz = z;
+void Vvector::set(const float _x, const float _y, const float _z)
+{
+	vx = _x;
+	vy = _y;
+	vz = _z;
 }
 
 void Vvector::setNull()
@@ -32,17 +35,17 @@ void Vvector::setNull()
 	vz = 0;
 }
 
-double Vvector::length() const
+float Vvector::length() const
 {
-	return sqrt(vx*vx + vy*vy + vz*vz);
+	return float(sqrt(vx*vx + vy*vy + vz*vz));
 }
 
 void Vvector::normalize()
 {
-	double length = this->length();
-	vx /= length;
-	vy /= length;
-	vz /= length;
+	float len = this->length();
+	vx /= len;
+	vy /= len;
+	vz /= len;
 }
 
 void Vvector::print() const
@@ -108,12 +111,14 @@ double Vvector::operator*(const Vvector &a) const
 
 bool Vvector::operator==(const Vvector &a) const
 {
-	return vx == a.vx && vy == a.vy && vz == a.vz;
+	return  fabsf(vx - a.vx) < DELTA &&
+		fabsf(vy - a.vy) < DELTA &&
+		fabsf(vz - a.vz) < DELTA;
 }
 
 bool Vvector::operator!=(const Vvector &a) const
 {
-	return vx != a.vx || vy != a.vy || vz != a.vz;
+	return !(*this == a);
 }
 
 float& Vvector::operator[](const unsigned short a)
@@ -145,3 +150,5 @@ std::array<float, 3> Vvector::scalars() const
 #undef vx
 #undef vy
 #undef vz
+
+#undef DELTA

@@ -4,11 +4,11 @@
 using namespace std;
 
 // Constructors
-Mesh::Mesh()
-{
-	// set radius, sizesIndices and buffers references to 0
-	this->radius = 0;
 
+
+Mesh::Mesh() :
+	radius(0), sizeIndices(), buffers()
+{
 	for (uint8_t i = 0; i < this->buffers.size(); i++)
 	{
 		sizeIndices[i] = 0;
@@ -28,7 +28,8 @@ buffers(move(m.buffers))
 	}
 }
 
-Mesh::Mesh(const string& filePath)
+Mesh::Mesh(const string& filePath) :
+	radius(0), sizeIndices(), buffers()
 {
 	// open file
 	ifstream file;
@@ -79,11 +80,9 @@ Mesh::Mesh(const string& filePath)
 Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
 	   const array<vector<array<float, 2>>, 5>& vt,
 	   const array<vector<unsigned int>, 5>& indices,
-	   const float rad)
+	   const float rad) :
+	radius(rad), sizeIndices(), buffers()
 {
-	// load radius
-	this->radius = rad;
-
 	// load size indices
 	for (uint8_t i = 0; i < this->buffers.size(); i++)
 		this->sizeIndices[i] = (unsigned int) indices[i].size();
@@ -92,25 +91,25 @@ Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
 	for (uint8_t i = 0; i < this->buffers.size(); i++)
 	{
 		// create buffers
-		glGenBuffers((GLint) this->buffers[i].size(),
+		glGenBuffers(GLint(this->buffers[i].size()),
 			     buffers[i].data());
 		
 		// copy vertices
 		glBindBuffer(GL_ARRAY_BUFFER, this->buffers[i][0]);
 		glBufferData(GL_ARRAY_BUFFER,
-			     (long) (sizeof(v[i][0]) * v[i].size()),
+			     long(sizeof(v[i][0]) * v[i].size()),
 			     v[i].data(), GL_STATIC_DRAW);
 		
 		// copy vertices texture
 		glBindBuffer(GL_ARRAY_BUFFER, this->buffers[i][1]);
 		glBufferData(GL_ARRAY_BUFFER,
-			     (long) (sizeof(vt[i][0]) * vt[i].size()),
+			     long(sizeof(vt[i][0]) * vt[i].size()),
 			     vt[i].data(), GL_STATIC_DRAW);
 		
 		// copy indices
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[i][3]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-			     (long) (sizeof(indices[i][0]) * indices[i].size()),
+			     long(sizeof(indices[i][0]) * indices[i].size()),
 			     indices[i].data(), GL_STATIC_DRAW);
 	}
 	
@@ -121,7 +120,7 @@ Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
 
 bool Mesh::operator<(const Mesh &m) const
 {
-	unsigned short a = 0, b = 0;
+	unsigned int a = 0, b = 0;
 
 	for(auto i : this->buffers[0])
 		a += i;
@@ -141,18 +140,18 @@ void Mesh::draw(const uint8_t level) const
 {
 	// setup vertices
 	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][0]);
-	glVertexPointer(3, GL_FLOAT, 0, 0);
+	glVertexPointer(3, GL_FLOAT, 0, nullptr);
 	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][1]);
-	glTexCoordPointer(2, GL_FLOAT, 0, 0);
+	glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
 	glBindBuffer(GL_ARRAY_BUFFER, this->buffers[level][2]);
-	glNormalPointer(GL_FLOAT, 0, 0);
+	glNormalPointer(GL_FLOAT, 0, nullptr);
 
 	// draw elements
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffers[level][3]);
 	
 	glDrawElements(GL_TRIANGLES,
-		       (int) this->sizeIndices[level],
-		       GL_UNSIGNED_INT, 0);
+		       int(this->sizeIndices[level]),
+		       GL_UNSIGNED_INT, nullptr);
 
 	// unbinding
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -162,7 +161,7 @@ void Mesh::draw(const uint8_t level) const
 Mesh::~Mesh()
 {
 	for (auto& level : this->buffers)
-		glDeleteBuffers((GLsizei) level.size(), level.data());
+		glDeleteBuffers(GLsizei(level.size()), level.data());
 }
 
 template<typename T>
@@ -175,17 +174,17 @@ unsigned int Mesh::fillBuffer(GLuint buffer, ifstream& file)
 
 	// get openGL buffer pointer
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) (size * sizeof(T)), NULL,
+	glBufferData(GL_ARRAY_BUFFER, GLsizeiptr(size * sizeof(T)), nullptr,
 		     GL_STATIC_DRAW);
 	T* vertices = reinterpret_cast<T*>(
 				glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 	// check
-	if(vertices == NULL)
+	if(vertices == nullptr)
 		logger_error("Failed to allocate graphic memory");
 
 	// fill buffer
 	file.read(reinterpret_cast<char*>(vertices),
-			(GLsizeiptr) (size * sizeof(T) / sizeof(char)));
+			GLsizeiptr(size * sizeof(T) / sizeof(char)));
 
 	// unmap openGL buffer pointer
 	if(!glUnmapBuffer(GL_ARRAY_BUFFER))

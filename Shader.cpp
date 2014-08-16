@@ -6,13 +6,13 @@
 
 using namespace std;
 
-Shader::Shader() : vertexShader(0), fragmentShader(0), program(0)
+Shader::Shader() : vertexShader(0), fragmentShader(0), program(0), parameters()
 {}
 
 Shader::Shader(const Shader& shader) :
 vertexShader(shader.vertexShader),
 fragmentShader(shader.fragmentShader),
-program(shader.program)
+program(shader.program), parameters()
 {
 	cout << "### copy ###" << endl;
 }
@@ -20,12 +20,13 @@ program(shader.program)
 Shader::Shader(Shader&& shader) :
 vertexShader(shader.vertexShader),
 fragmentShader(shader.fragmentShader),
-program(shader.program)
+program(shader.program), parameters()
 {
 	cout << "### move ###" << endl;
 }
 
-Shader::Shader(const string& vsPath, const string& fsPath)
+Shader::Shader(const string& vsPath, const string& fsPath) :
+	vertexShader(0), fragmentShader(0), program(0), parameters()
 {
 
 	createShaders(vsPath,  fsPath);	
@@ -79,13 +80,12 @@ void Shader::createShaders(const string& vsPath, const string& fsPath)
 
 
 	// load files
-	char* src;
-	src = loadFileASCII(vsPath);
-	glShaderSource(this->vertexShader, 1, (const char**) &src, NULL);	
+	char* src = loadFileASCII(vsPath);
+	glShaderSource(this->vertexShader, 1, const_cast<const GLchar**>(&src), nullptr);
 	free(src);
 	
 	src = loadFileASCII(fsPath);
-	glShaderSource(this->fragmentShader, 1, (const char**) &src, NULL);
+	glShaderSource(this->fragmentShader, 1, const_cast<const GLchar**>(&src), nullptr);
 	free(src);
 
 }
@@ -105,8 +105,8 @@ char* Shader::loadFileASCII(const string& filePath)
 	file.seekg(0, ios::beg);
 	
 	// transmit chars from the file to the string
-	char* str = (char*)  malloc((length + 1) * sizeof(char));
-	if (str == NULL)
+	char* str = reinterpret_cast<char*>(malloc((length + 1) * sizeof(char)));
+	if (str == nullptr)
 		logger_warn("Unable to load string from file " + filePath);
 	file.read(str, (long) length);
 
@@ -123,8 +123,8 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 {
 	GLint CompileStatus = true;
 	GLint CompileLogSize;
-	char* vCompileLog = NULL;
-	char* pCompileLog = NULL;
+	char* vCompileLog = nullptr;
+	char* pCompileLog = nullptr;
 	
 	// compile vertex shader
 	glCompileShader(this->vertexShader);
@@ -136,9 +136,9 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 		glGetShaderiv(this->vertexShader,
 					  GL_INFO_LOG_LENGTH,
 					  &CompileLogSize);
-		vCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
-					     sizeof(char));
-		if (vCompileLog == NULL)
+		vCompileLog = reinterpret_cast<char*>(calloc(size_t(CompileLogSize + 1),
+					     sizeof(char)));
+		if (vCompileLog == nullptr)
 			logger_warn("Unable to allocate the compilation log\
 				     message string for " + vsPath);
 		glGetShaderInfoLog(this->vertexShader, CompileLogSize,
@@ -155,9 +155,9 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 		glGetShaderiv(this->fragmentShader,
 					  GL_INFO_LOG_LENGTH,
 					  &CompileLogSize);
-		pCompileLog = (char*) calloc((size_t) CompileLogSize + 1,
-					     sizeof(char));
-		if (pCompileLog == NULL)
+		pCompileLog = reinterpret_cast<char*>(calloc(size_t(CompileLogSize + 1),
+					     sizeof(char)));
+		if (pCompileLog == nullptr)
 			logger_warn("Unable to allocate the compilation log\
 				     message string for " + fsPath);
 		glGetShaderInfoLog(this->fragmentShader, CompileLogSize,
@@ -166,9 +166,9 @@ void Shader::compileShaders(const string& vsPath, const string& fsPath)
 	}
 	
 	// clean up
-	if(vCompileLog != NULL)
+	if(vCompileLog != nullptr)
 		free(vCompileLog);
-	if(pCompileLog != NULL)
+	if(pCompileLog != nullptr)
 		free(pCompileLog);
 }
 
@@ -192,7 +192,7 @@ void Shader::linkProgram(const string &vsPath, const string &fsPath)
 {
 	GLint linkingStatus = true;
 	GLint linkingLogSize;
-	char* linkingLog = NULL;
+	char* linkingLog = nullptr;
 
 
 	// link program
@@ -204,9 +204,9 @@ void Shader::linkProgram(const string &vsPath, const string &fsPath)
 		glGetProgramiv(this->program,
 					  GL_INFO_LOG_LENGTH,
 					  &linkingLogSize);
-		linkingLog = (char*) calloc((size_t) linkingLogSize + 1,
-					    sizeof(char));
-		if (linkingLog == NULL)
+		linkingLog = reinterpret_cast<char*>(calloc(size_t(linkingLogSize + 1),
+					    sizeof(char)));
+		if (linkingLog == nullptr)
 			logger_warn("Unable to allocate the linking log\
 				     message string for the program with "
 				     + vsPath + " and " + fsPath);
@@ -216,7 +216,7 @@ void Shader::linkProgram(const string &vsPath, const string &fsPath)
 	}
 	
 	//clean up
-	if (linkingLog != NULL)
+	if (linkingLog != nullptr)
 		free(linkingLog);
 }
 

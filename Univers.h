@@ -16,8 +16,8 @@
 #	include <memory>
 #endif
 
-#define perspective() gluPerspective(FOV,(GLdouble)glutGet(GLUT_WINDOW_WIDTH)/\
-        glutGet(GLUT_WINDOW_HEIGHT),NEAREST,FAREST)
+#define perspective() gluPerspective(FOV,GLdouble(glutGet(GLUT_WINDOW_WIDTH)/\
+        glutGet(GLUT_WINDOW_HEIGHT)),NEAREST,FAREST)
 
 /**
  * The whole Univers
@@ -74,8 +74,8 @@ public:
                 const GLdouble anglepsi);
 
 
-        const size_t addPlanet(const std::string& name);
-        const size_t addPlanet(const std::string& name, Vvector pos);
+        size_t addPlanet(const std::string& name);
+        size_t addPlanet(const std::string& name, Vvector pos);
 
         /**
          * Print some information about the \ref camera

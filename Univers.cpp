@@ -9,8 +9,8 @@ static void cleanup()
 	local->~Univers();
 }
 
-Univers::Univers() : camera(), mainLight(5.98f, -26.12f, 15.39f,
-					 0.32f, 0.76f, -0.57f)
+Univers::Univers() : objects(), camera(), mainLight(5.98f, -26.12f, 15.39f,
+				 0.32f, 0.76f, -0.57f)
 {
 	local = this;
 	atexit(cleanup);
@@ -19,16 +19,17 @@ Univers::Univers() : camera(), mainLight(5.98f, -26.12f, 15.39f,
 Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 			const GLdouble anglePhi, const GLdouble angleTeta,
 			const GLdouble anglepsi) :
-	camera(posX, posY, posZ, anglePhi, angleTeta, anglepsi)
+	objects(), camera(posX, posY, posZ, anglePhi, angleTeta, anglepsi),
+	mainLight(5.98f, -26.12f, 15.39f, 0.32f, 0.76f, -0.57f)
 {}
 
-const size_t Univers::addPlanet(const string& name)
+size_t Univers::addPlanet(const string& name)
 {
         objects.insert(unique_ptr<Object>(new Planet(name)));
         return objects.size() - 1;
 }
 
-const size_t Univers::addPlanet(const string& name, const Vvector pos)
+size_t Univers::addPlanet(const string& name, const Vvector pos)
 {
         objects.insert(unique_ptr<Object>(new Planet(name, pos)));
         return objects.size() - 1;

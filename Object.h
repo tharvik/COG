@@ -26,24 +26,22 @@
 
 class Object {
 private:
-	
-	// position
-	Vvector p;
-	
-	// mesh resolution
-	uint8_t level;
-	
-	// radius
-	float radius;
-
 	// containers
         static std::map<std::string, std::shared_ptr<Mesh>> meshes;
 	static std::map<std::string, std::shared_ptr<Material>> materials;
 
-        
 	// pairs (material + mesh)
         std::vector<std::pair<std::shared_ptr<Material>,
 			      std::vector<std::shared_ptr<Mesh>>>> drawList;
+	
+	// position
+	Vvector p;
+	
+	// radius
+	float radius;
+	
+	// mesh resolution
+	uint8_t level;
         
 	/**
          * execute a .object file (add paires)
@@ -82,11 +80,11 @@ public:
 	 * \param pos the position of the object
          */
         Object(const std::string& name, const Vvector& pos);
-	
+
 	/**
-         * destructor
-         */
-	~Object();
+	* destructor
+	*/
+	virtual ~Object();
 
 	/**
          * compute the mesh level needed to draw the mesh

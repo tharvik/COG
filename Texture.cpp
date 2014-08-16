@@ -12,7 +12,7 @@ Texture::Texture(Texture&& texture) : imageId(texture.imageId)
 }
 
 Texture::Texture(const unsigned short width, const unsigned short height,
-		const GLenum format, unsigned char *buffer)
+		const GLenum format, unsigned char *buffer) : imageId(0)
 {
         glGenTextures(1, &this->imageId);
         glBindTexture(GL_TEXTURE_2D, this->imageId);
