@@ -60,7 +60,6 @@ m4_define([_AX_CXX_COMPILE_STDCXX_11_testbody], [[
     check_type&& cr = static_cast<check_type&&>(c);
 
     auto d = a;
-    auto l = [](){};
 ]])
 
 AC_DEFUN([AX_CXX_COMPILE_STDCXX_11], [dnl

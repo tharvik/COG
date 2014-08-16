@@ -4328,7 +4328,6 @@ else
     check_type&& cr = static_cast<check_type&&>(c);
 
     auto d = a;
-    auto l = [](){};
 
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"; then :
@@ -4380,7 +4379,6 @@ else
     check_type&& cr = static_cast<check_type&&>(c);
 
     auto d = a;
-    auto l = [](){};
 
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"; then :
@@ -4438,7 +4436,6 @@ else
     check_type&& cr = static_cast<check_type&&>(c);
 
     auto d = a;
-    auto l = [](){};
 
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"; then :
@@ -4486,6 +4483,11 @@ $as_echo "#define HAVE_CXX11 1" >>confdefs.h
 
 
 # Checks for libraries.
+# Workaround for Apple
+if test "$(uname -s)" = "Darwin"
+then
+	LDFLAGS="-framework OpenGL -framework GLUT ${LDFLAGS}"
+else
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glBindTexture" >&5
 $as_echo_n "checking for library containing glBindTexture... " >&6; }
@@ -4545,7 +4547,7 @@ else
   as_fn_error $? "Unable to find an OpenGL implementation" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gluPerspective" >&5
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gluPerspective" >&5
 $as_echo_n "checking for library containing gluPerspective... " >&6; }
 if ${ac_cv_search_gluPerspective+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4603,7 +4605,7 @@ else
   as_fn_error $? "Unable to find an OpenGL utility (GLU) implementation" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glutGet" >&5
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glutGet" >&5
 $as_echo_n "checking for library containing glutGet... " >&6; }
 if ${ac_cv_search_glutGet+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4661,7 +4663,7 @@ else
   as_fn_error $? "Unable to find an OpenGL utility toolkit (GLUT) implementation" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glewInit" >&5
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing glewInit" >&5
 $as_echo_n "checking for library containing glewInit... " >&6; }
 if ${ac_cv_search_glewInit+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4719,6 +4721,7 @@ else
   as_fn_error $? "Unable to find an OpenGL extention wrangler (GLEW) implementation" "$LINENO" 5
 fi
 
+fi
 
 # Checks for header files.
 ac_ext=c
