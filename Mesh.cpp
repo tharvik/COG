@@ -28,7 +28,7 @@ buffers(move(m.buffers))
 	}
 }
 
-Mesh::Mesh(const string& filePath) :
+Mesh::Mesh(const std::string& filePath) :
 	radius(0), sizeIndices(), buffers()
 {
 	// open file
@@ -77,9 +77,9 @@ Mesh::Mesh(const string& filePath) :
 	logger_info("Mesh loaded from '" + filePath + "'");
 }
 
-Mesh::Mesh(const array<vector<array<float, 3>>, 5>& v,
-	   const array<vector<array<float, 2>>, 5>& vt,
-	   const array<vector<unsigned int>, 5>& indices,
+Mesh::Mesh(const std::array<std::vector<std::array<float, 3>>, 5>& v,
+	   const std::array<std::vector<std::array<float, 2>>, 5>& vt,
+	   const std::array<std::vector<unsigned int>, 5>& indices,
 	   const float rad) :
 	radius(rad), sizeIndices(), buffers()
 {
@@ -165,7 +165,7 @@ Mesh::~Mesh()
 }
 
 template<typename T>
-unsigned int Mesh::fillBuffer(GLuint buffer, ifstream& file)
+unsigned int Mesh::fillBuffer(GLuint buffer, std::ifstream& file)
 {
 	// read block size
 	unsigned int size;

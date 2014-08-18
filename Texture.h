@@ -20,6 +20,9 @@ public:
          */
         Texture();
         
+	/**
+	 * Remove the copy constructor
+	 */
         Texture(const Texture&) = delete;
         
         /**
@@ -42,8 +45,6 @@ public:
          */
         Texture(const unsigned short width, const unsigned short height,
                 const GLenum format, unsigned char* buffer);
-        
-        Texture(const std::string& name);
         
         /**
          * Bind the Texture to use it with OpenGL

@@ -8,39 +8,58 @@
 #include "Material.h"
 #include "Vvector.h"
 
-//--------------------------------- Objects ----------------------------------//
-//									      //
-// An object is any body shown in the OpenGl space. Each object are made of   //
-// pairs (material + mesh[]).						      //
-//									      //
-// A pairs is a part of the objects with the same material. It can containes  //
-// many meshes.								      //
-//									      //
-// The mehses and the materials are stored in 2 seperate static map called    //
-// "containers" and shared between the objects to avoid the duplication of    //
-// those elements.							      //
-//									      //
-// When an objects is drawn, each pair is send to OpenGl.		      //
-//									      //
-//----------------------------------------------------------------------------//
+/**
+ *
+ * An object is any body shown in the OpenGl space. Each object are made of
+ * pairs (material + mesh[]).
+ *
+ * A pairs is a part of the objects with the same material. It can containes
+ * many meshes.
+ *
+ * The mehses and the materials are stored in 2 seperate static map called
+ * "containers" and shared between the objects to avoid the duplication of
+ * those elements.
+ *
+ * When an objects is drawn, each pair is send to OpenGl.
+ *
+ */
 
 class Object {
 private:
-	// containers
+	/**
+	 * Map of path to loaded Mesh
+	 */
         static std::map<std::string, std::shared_ptr<Mesh>> meshes;
+
+	/**
+	 * Map of path to loaded Material
+	 */
 	static std::map<std::string, std::shared_ptr<Material>> materials;
 
 	// pairs (material + mesh)
+	/**
+	 * Vector of pair of Material and vector of Mesh, used in drawing
+	 *
+	 * The use of the vector is vs a set is the level, which need to be
+	 * recorded
+	 * The pair is because one Material can be applied to many Mesh
+	 */
         std::vector<std::pair<std::shared_ptr<Material>,
 			      std::vector<std::shared_ptr<Mesh>>>> drawList;
 	
-	// position
+	/**
+	 * The position, currently relative to the center of Univers
+	 *
+	 * \todo Should be moved to subclasses instead of using here
+	 */
 	Vvector p;
 	
 	// radius
 	float radius;
 	
-	// mesh resolution
+	/**
+	 * Current level of resolution
+	 */
 	uint8_t level;
         
 	/**
@@ -55,10 +74,10 @@ private:
 	/**
          * adding a new pair (material + mesh) into the drawList
          *
-         * \param meshFilePath path to the .mesh file
-         * \param mbfFilePath path to the .mbf file
-         * \param vsFilePath path to the .vs (vertex shader) file
-         * \param fsFilePath path to the .fs (fragment shader) file
+         * \param meshesFilePath	path to the .mesh file
+         * \param mbfFilePath		path to the .mbf file
+         * \param vsFilePath		path to the .vs (vertex shader) file
+         * \param fsFilePath		path to the .fs (fragment shader) file
          */
 	void addPair(const std::vector<std::string>& meshesFilePath,
 		     const std::string& mbfFilePath,

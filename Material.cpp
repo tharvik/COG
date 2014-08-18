@@ -9,8 +9,8 @@ using namespace std;
 
 map<string, shared_ptr<Texture>> Material::textures;
 
-Material::Material(const string& mbfPath, const string& vsPath,
-		   const string& fsPath) :
+Material::Material(const std::string& mbfPath, const std::string& vsPath,
+		   const std::string& fsPath) :
 	shader(vsPath, fsPath), texturesToDraw(), parameters()
 {
 	readMaterialFile(mbfPath);

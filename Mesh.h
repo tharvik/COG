@@ -9,31 +9,29 @@
 #include "config.h"
 #include "Vvector.h"
 
-//----------------------------------- Mesh -----------------------------------//
-//									      //
-// A mesh referes to a set of faces, UV vertices and normals to draw.  A mesh //
-// uses  the power  of the openGL VBO indexing.  It means that  all vertices, //
-// UV vertices and normals  are stored in openGL buffers and an index "links" //
-// them to makes faces.							      //
-//									      //
-// A mesh have a multi-resolution system.  A mesh far from a camera will have //
-// a lower quality  than a mesh  near the camera  (less faces will be drawn). //
-// The resolution is called "level":
-//	- level 1 : best quality
-//	- level 2 : good quality
-//	- level 3 : medium quality
-//	- level 4 : bad quality
-//	- level 5 : worst quality
-//									      //
-// To assure this multi-resolution system,  the notion of mesh radius have to //
-// be instored. It's precisly the distance between the center of the mesh and //
-// the farest point. It assures the same treatment to a sphere and a cuboid.  //
-//									      //
-// The distances for the mesh levels  can be setted by changing in the config //
-// file the values of MESH_LEVEL_DISTANCES.				      //
-//									      //
-//----------------------------------------------------------------------------//
-
+/**
+ * A mesh referes to a set of faces, UV vertices and normals to draw.  A mesh
+ * uses  the power  of the openGL VBO indexing.  It means that  all vertices,
+ * UV vertices and normals  are stored in openGL buffers and an index "links"
+ * them to makes faces.
+ *
+ * A mesh have a multi-resolution system.  A mesh far from a camera will have
+ * a lower quality  than a mesh  near the camera  (less faces will be drawn).
+ * The resolution is called "level":
+ *	- level 1 : best quality
+ *	- level 2 : good quality
+ *	- level 3 : medium quality
+ *	- level 4 : bad quality
+ *	- level 5 : worst quality
+ *
+ * To assure this multi-resolution system,  the notion of mesh radius have to
+ * be instored. It's precisly the distance between the center of the mesh and
+ * the farest point. It assures the same treatment to a sphere and a cuboid.
+ *
+ * The distances for the mesh levels  can be setted by changing in the config
+ * file the values of MESH_LEVEL_DISTANCES.
+ *
+ */
 class Mesh {
 private:
 
@@ -75,6 +73,9 @@ public:
          */
         Mesh();
         
+	/**
+	 * Deleted copy constructor
+	 */
         Mesh(const Mesh&) = delete;
         
         /**

@@ -9,32 +9,29 @@
 
 #include <memory>
 
-//-------------------------------- Materials ---------------------------------//
-//									      //
-// A material  referes to  the apparence  of an OpenGL face.   It specifies a //
-// OpenGl program (vertex shader + fragment shader) and his parameters.       //
-//									      //
-// The basic parameters are:						      //
-//	-     Ka: vec3 ambient color					      //
-//	-     Kd: vec3 diffuse color					      //
-//	-     Ks: vec3 specular color					      //
-//	-     Ns: float specular coeficient color			      //
-//	-      d: float transparency					      //
-//	- map_ka: Texture ambient color					      //
-//	- map_Kd: Texture diffuse color					      //
-//	- map_Ks: Texture specular color				      //
-//	-  map_d: Texture transparency					      //
-//									      //
-// The material parameters are stored in a .mbf (material binary file) file.  //
-//									      //
-// All material textures  are stored in a static map   called "container" and //
-// shared between the materials to avoid duplications.
-//									      //
-// When an material is created,  a specific OpenGl program is compile and set //
-// with its basic parameters.
-//----------------------------------------------------------------------------//
-
-
+/**
+ * A material  referes to  the apparence  of an OpenGL face.   It specifies a
+ * OpenGl program (vertex shader + fragment shader) and his parameters.
+ *
+ * The basic parameters are:
+ *	-     Ka: vec3 ambient color
+ *	-     Kd: vec3 diffuse color
+ *	-     Ks: vec3 specular color
+ *	-     Ns: float specular coeficient color
+ *	-      d: float transparency
+ *	- map_ka: Texture ambient color
+ *	- map_Kd: Texture diffuse color
+ *	- map_Ks: Texture specular color
+ *	-  map_d: Texture transparency
+ *
+ * The material parameters are stored in a .mbf (material binary file) file.
+ *
+ * All material textures  are stored in a static map   called "container" and
+ * shared between the materials to avoid duplications.
+ *
+ * When an material is created,  a specific OpenGl program is compile and set
+ * with its basic parameters.
+ */
 class Material {
 private:
 	// containers

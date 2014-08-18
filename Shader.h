@@ -6,8 +6,20 @@
 
 class Shader {
 private:
-        // OpenGl references to vertex shader, fragment shader and program 
-        GLuint vertexShader, fragmentShader, program;
+	/**
+	 * OpenGL reference to the vertex shader
+	 */
+        GLuint vertexShader;
+
+	/**
+	 * OpenGL reference to the fragment shader
+	 */
+	GLuint fragmentShader;
+
+	/**
+	 * OpenGL reference to the program
+	 */
+	GLuint program;
         
 	// Basic uniform locations
 	std::array<GLint, 5> parameters;
@@ -55,9 +67,6 @@ private:
 	
         /**
          * get the basic uniforms location (Ka, Kd, Ks, Ns, d)
-         *
-         * \param vsPath Path to the vertex shader
-         * \param fsPath Path to the fragment shader
          */
 	void getBasicUniformsLocation();
 		
@@ -65,6 +74,8 @@ private:
          * get the txt file content
          *
          * \param filePath Path to the file
+	 *
+	 * \return A malloced string with the content of the file
          */
 	char* loadFileASCII(const std::string& filePath);
         
@@ -86,11 +97,18 @@ public:
         
         /**
          * Copy constructor
+	 *
+	 * \param shader	Shader to copy from
          */
         Shader(const Shader& shader);
 	
         /**
          * Move constructor
+	 *
+	 * \param shader	Shader to move from, which should be left in
+	 * an useless but valid state
+	 *
+	 * \todo Actually, doing nothing more than the copy constructor
          */
         Shader(Shader&& shader);
         

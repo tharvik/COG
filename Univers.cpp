@@ -23,13 +23,13 @@ Univers::Univers(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
 	mainLight(5.98f, -26.12f, 15.39f, 0.32f, 0.76f, -0.57f)
 {}
 
-size_t Univers::addPlanet(const string& name)
+size_t Univers::addPlanet(const std::string& name)
 {
         objects.insert(unique_ptr<Object>(new Planet(name)));
         return objects.size() - 1;
 }
 
-size_t Univers::addPlanet(const string& name, const Vvector pos)
+size_t Univers::addPlanet(const std::string& name, const Vvector pos)
 {
         objects.insert(unique_ptr<Object>(new Planet(name, pos)));
         return objects.size() - 1;

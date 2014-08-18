@@ -45,6 +45,10 @@ private:
         void draw() const;
 public:
 
+	/**
+	 * Enum used with the refresh function, to know what is needed to be
+	 * recomputed
+	 */
 	typedef enum
 	{
 		NONE  = 0,	/**< no flags **/
@@ -74,7 +78,24 @@ public:
                 const GLdouble anglepsi);
 
 
+	/**
+	 * Add a new planet, with the given name, to the \ref objects
+	 *
+	 * \param name	The name of the planet to create
+	 *
+	 * \return The previous size of \ref objects
+	 */
         size_t addPlanet(const std::string& name);
+
+	/**
+	 * Add a new planet, with the given name and position, to the
+	 * \ref objects
+	 *
+	 * \param name	The name of the planet to create
+	 * \param pos	The position of the planet to create
+	 *
+	 * \return The previous size of \ref objects
+	 */
         size_t addPlanet(const std::string& name, Vvector pos);
 
         /**
@@ -91,6 +112,8 @@ public:
 
         /**
          * Reset the perspective, draw the camera and the \ref objects
+	 *
+	 * \param flags	The type of refresh to do
          */
         void refresh(universRefreshFlags flags);
 
