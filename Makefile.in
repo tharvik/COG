@@ -96,12 +96,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(datadir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_COG_OBJECTS = Camera.$(OBJEXT) Component.$(OBJEXT) Game.$(OBJEXT) \
-	Light.$(OBJEXT) Material.$(OBJEXT) Mesh.$(OBJEXT) \
-	Object.$(OBJEXT) Planet.$(OBJEXT) Shader.$(OBJEXT) \
-	Simulator.$(OBJEXT) Sphere.$(OBJEXT) Texture.$(OBJEXT) \
-	Univers.$(OBJEXT) Vvector.$(OBJEXT) eventHandler.$(OBJEXT) \
-	main.$(OBJEXT) utilities.$(OBJEXT) stb_image.$(OBJEXT)
+am_COG_OBJECTS = Camera.$(OBJEXT) Game.$(OBJEXT) Light.$(OBJEXT) \
+	Material.$(OBJEXT) Mesh.$(OBJEXT) Object.$(OBJEXT) \
+	Planet.$(OBJEXT) Shader.$(OBJEXT) Simulator.$(OBJEXT) \
+	Texture.$(OBJEXT) Univers.$(OBJEXT) Vvector.$(OBJEXT) \
+	eventHandler.$(OBJEXT) main.$(OBJEXT) utilities.$(OBJEXT) \
+	stb_image.$(OBJEXT)
 COG_OBJECTS = $(am_COG_OBJECTS)
 COG_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -312,15 +312,14 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-COG_SOURCES = Camera.cpp Component.cpp Game.cpp Light.cpp Material.cpp	\
-		  Mesh.cpp Object.cpp Planet.cpp Shader.cpp Simulator.cpp	\
-		  Sphere.cpp Texture.cpp Univers.cpp Vvector.cpp		\
-		  eventHandler.cpp main.cpp utilities.cpp stb_image.c		\
+COG_SOURCES = Camera.cpp Game.cpp Light.cpp Material.cpp Mesh.cpp		\
+		  Object.cpp Planet.cpp Shader.cpp Simulator.cpp Texture.cpp	\
+		  Univers.cpp Vvector.cpp eventHandler.cpp main.cpp		\
+		  utilities.cpp stb_image.c					\
 		  								\
-		  Camera.h Component.h Game.h Light.h Logger.h Material.h	\
-		  Mesh.h Object.h Planet.h Shader.h Simulator.h Sphere.h	\
-		  Texture.h Univers.h Vvector.h config.h eventHandler.h		\
-		  opengl.h stb_image.h utilities.h
+		  Camera.h Game.h Light.h Logger.h Material.h Mesh.h Object.h	\
+		  Planet.h Shader.h Simulator.h Texture.h Univers.h Vvector.h	\
+		  config.h eventHandler.h opengl.h stb_image.h utilities.h
 
 nobase_dist_data_DATA = Resources/fichier_2_objects.obj			\
 			Resources/test/objectTest.png			\
@@ -529,7 +528,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Camera.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Component.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Game.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Light.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Material.Po@am__quote@
@@ -538,7 +536,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Planet.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Shader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Simulator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Sphere.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Texture.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Univers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Vvector.Po@am__quote@

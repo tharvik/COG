@@ -1,13 +1,12 @@
 bin_PROGRAMS	= COG
-COG_SOURCES	= Camera.cpp Component.cpp Game.cpp Light.cpp Material.cpp	\
-		  Mesh.cpp Object.cpp Planet.cpp Shader.cpp Simulator.cpp	\
-		  Sphere.cpp Texture.cpp Univers.cpp Vvector.cpp		\
-		  eventHandler.cpp main.cpp utilities.cpp stb_image.c		\
+COG_SOURCES	= Camera.cpp Game.cpp Light.cpp Material.cpp Mesh.cpp		\
+		  Object.cpp Planet.cpp Shader.cpp Simulator.cpp Texture.cpp	\
+		  Univers.cpp Vvector.cpp eventHandler.cpp main.cpp		\
+		  utilities.cpp stb_image.c					\
 		  								\
-		  Camera.h Component.h Game.h Light.h Logger.h Material.h	\
-		  Mesh.h Object.h Planet.h Shader.h Simulator.h Sphere.h	\
-		  Texture.h Univers.h Vvector.h config.h eventHandler.h		\
-		  opengl.h stb_image.h utilities.h
+		  Camera.h Game.h Light.h Logger.h Material.h Mesh.h Object.h	\
+		  Planet.h Shader.h Simulator.h Texture.h Univers.h Vvector.h	\
+		  config.h eventHandler.h opengl.h stb_image.h utilities.h
 
 datadir		= $(datarootdir)/@PACKAGE_NAME@
 nobase_dist_data_DATA =	Resources/fichier_2_objects.obj			\
