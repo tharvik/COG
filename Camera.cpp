@@ -4,11 +4,19 @@
 #include <math.h>
 
 // Constructors
-Camera::Camera() :
-	Camera(INITIAL_POSITION_X, INITIAL_POSITION_Y, INITIAL_POSITION_Z,
-			INITIAL_ORIENTATION_X, INITIAL_ORIENTATION_Y,
-			INITIAL_ORIENTATION_Z)
-{}
+Camera::Camera()
+{
+        p[0] = INITIAL_POSITION_X;
+	p[1] = INITIAL_POSITION_Y;
+	p[2] = INITIAL_POSITION_Z;
+        o[0] = INITIAL_ORIENTATION_X;
+	o[1] = INITIAL_ORIENTATION_Y;
+	o[2] = INITIAL_ORIENTATION_Z;
+
+	this->d.setNull();
+	this->o.normalize();
+	this->r = this->o;
+}
 
 Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
                const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ)
