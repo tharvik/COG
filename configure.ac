@@ -80,5 +80,7 @@ AC_DEFINE([LOAD_FROM], ["Resources/objects/"], [Path to load objects from])
 
 AC_DEFINE([MESH_LEVEL_DISTANCES], [5.0, 50.0, 100.0, 200.0, 500.0], [Distance for each level of detail of mesh])
 
+AC_DEFINE([LOGGER_LEVEL], [0], [Minimum level of message to show in logs; TODO: have to be move to runtime variable])
+
 # Output
 AC_OUTPUT

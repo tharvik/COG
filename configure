@@ -5502,6 +5502,10 @@ $as_echo "#define LOAD_FROM \"Resources/objects/\"" >>confdefs.h
 $as_echo "#define MESH_LEVEL_DISTANCES 5.0, 50.0, 100.0, 200.0, 500.0" >>confdefs.h
 
 
+
+$as_echo "#define LOGGER_LEVEL 0" >>confdefs.h
+
+
 # Output
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure

@@ -104,6 +104,10 @@
 /* Path to load objects from */
 #undef LOAD_FROM
 
+/* Minimum level of message to show in logs; TODO: have to be move to runtime
+   variable */
+#undef LOGGER_LEVEL
+
 /* Distance for each level of detail of mesh */
 #undef MESH_LEVEL_DISTANCES
 
