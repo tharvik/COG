@@ -4,19 +4,11 @@
 #include <math.h>
 
 // Constructors
-Camera::Camera()
-{
-        p[0] = INITIAL_POSITION_X;
-	p[1] = INITIAL_POSITION_Y;
-	p[2] = INITIAL_POSITION_Z;
-        o[0] = INITIAL_ORIENTATION_X;
-	o[1] = INITIAL_ORIENTATION_Y;
-	o[2] = INITIAL_ORIENTATION_Z;
-
-	this->d.setNull();
-	this->o.normalize();
-	this->r = this->o;
-}
+Camera::Camera() :
+	Camera(INITIAL_POSITION_X, INITIAL_POSITION_Y, INITIAL_POSITION_Z,
+			INITIAL_ORIENTATION_X, INITIAL_ORIENTATION_Y,
+			INITIAL_ORIENTATION_Z)
+{}
 
 Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
                const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ)
@@ -50,7 +42,7 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
         a *= ANGLE_PER_ROTATION;
 
         if (fabs(a) < DELTA || fabs(b) < DELTA) {
-                if (fabs(a) >= 0) {
+                if (fabs(a) >= DELTA) {
                         r[0] = (float) (r[0] * cos(a)
                              - r[1] * sin(a));
                         r[1] = (float) (r[0] * sin(a)
