@@ -73,7 +73,7 @@ void Simulator::refresh()
 		logger_warn("Unable to get elapsed time");
 		return;
 	} else {
-		actualPhysic = (unsigned int) get;
+		actualRefresh = (unsigned int) get;
 	}
         
         if (refreshCounter >= REPORT_FPS) {
