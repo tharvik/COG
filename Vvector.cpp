@@ -1,12 +1,11 @@
 #include "Vvector.h"
+#include "config.h"
 
 #include <assert.h>
 
 #define vx scalar[0]
 #define vy scalar[1]
 #define vz scalar[2]
-
-#define DELTA 0.000001F
 
 // Constructors
 Vvector::Vvector() : scalar()

@@ -5,8 +5,9 @@ Game::Game() : univers(), simulator(&univers)
 {
         glClearColor(BACKGROUND_COLOR);
 
-        if (FULLSCREEN)
+#ifdef FULLSCREEN
                 glutFullScreen();
+#endif
         
         
         setSimulator(&simulator);

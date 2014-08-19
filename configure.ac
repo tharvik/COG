@@ -61,26 +61,28 @@ AC_DEFINE([MINIMUM_PPS], [25], [Minimum threshold where a lag occure])
 AC_DEFINE([REPORT_PPS], [50], [TODO])
 AC_DEFINE([REPORT_FPS], [50], [TODO])
 
-AC_DEFINE([BACKGROUND_COLOR], [0.16, 0.16, 0.16, 1], [Color of the background])
+AC_DEFINE([BACKGROUND_COLOR], [0.16F, 0.16F, 0.16F, 1], [Color of the background])
 AC_DEFINE([KEY_REPEAT_PERIOD], [40], [Time between every check of keys])
 
-AC_DEFINE([INITIAL_POSITION_X], [1.2], [Initial position of the camera, x value])
-AC_DEFINE([INITIAL_POSITION_Y], [1.2], [Initial position of the camera, y value])
-AC_DEFINE([INITIAL_POSITION_Z], [1.2], [Initial position of the camera, z value])
+AC_DEFINE([INITIAL_POSITION_X], [1.2F], [Initial position of the camera, x value])
+AC_DEFINE([INITIAL_POSITION_Y], [1.2F], [Initial position of the camera, y value])
+AC_DEFINE([INITIAL_POSITION_Z], [1.2F], [Initial position of the camera, z value])
 AC_DEFINE([INITIAL_ORIENTATION_X], [-1], [Initial rotation of the camera, x value])
 AC_DEFINE([INITIAL_ORIENTATION_Y], [-1], [Initial rotation of the camera, y value])
 AC_DEFINE([INITIAL_ORIENTATION_Z], [-1], [Initial rotation of the camera, z value])
 
-AC_DEFINE([ANGLE_PER_ROTATION], [0.1], [Step of rotation for one strike of a rotation key])
+AC_DEFINE([ANGLE_PER_ROTATION], [0.1F], [Step of rotation for one strike of a rotation key])
 AC_DEFINE([ANGLE_PER_PHYSIC], [ANGLE_PER_ROTATION], [TODO])
-AC_DEFINE([DISTANCE_PER_MOVE], [0.30], [Step of movement for one strike of a move key])
+AC_DEFINE([DISTANCE_PER_MOVE], [0.30F], [Step of movement for one strike of a move key])
 AC_DEFINE([DISTANCE_PER_PHYSIC], [DISTANCE_PER_MOVE], [TODO])
 
 AC_DEFINE([LOAD_FROM], ["Resources/objects/"], [Path to load objects from])
 
-AC_DEFINE([MESH_LEVEL_DISTANCES], [5.0, 50.0, 100.0, 200.0, 500.0], [Distance for each level of detail of mesh])
+AC_DEFINE([MESH_LEVEL_DISTANCES], [5.0F, 50.0F, 100.0F, 200.0F, 500.0f], [Distance for each level of detail of mesh])
 
 AC_DEFINE([LOGGER_LEVEL], [0], [Minimum level of message to show in logs; TODO: have to be move to runtime variable])
+
+AC_DEFINE([DELTA], [0.000001F], [Smallest value to differentiate two floats])
 
 # Output
 AC_OUTPUT

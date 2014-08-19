@@ -9,6 +9,9 @@
 /* Color of the background */
 #undef BACKGROUND_COLOR
 
+/* Smallest value to differentiate two floats */
+#undef DELTA
+
 /* Step of movement for one strike of a move key */
 #undef DISTANCE_PER_MOVE
 

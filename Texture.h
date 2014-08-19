@@ -26,7 +26,7 @@ public:
         Texture(const Texture&) = delete;
         
         /**
-         * Move constructor, leave \param texture in a useless but valid
+         * Move constructor, leave texture in a useless but valid
          * state
          *
          * \param texture Texture to move from

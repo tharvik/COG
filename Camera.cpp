@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "config.h"
 
 #include <math.h>
 
@@ -20,7 +21,7 @@ Camera::Camera()
 Camera::Camera(const GLdouble posX, const GLdouble posY, const GLdouble posZ,
                const GLdouble oriX, const GLdouble oriY, const GLdouble oriZ)
 {
-        if (!oriX && !oriY && !oriZ) {
+        if (fabs(oriX) < DELTA && fabs(oriY) < DELTA && fabs(oriZ) < DELTA) {
                 logger_warn("The orientation vector given to the camera was of\
                              length 0");
         } else {
@@ -48,14 +49,14 @@ void Camera::rotate(const GLdouble alpha, const GLdouble beta)
                 b *= ANGLE_PER_ROTATION;
         a *= ANGLE_PER_ROTATION;
 
-        if (a == 0 || b == 0) {
-                if (a != 0) {
+        if (fabs(a) < DELTA || fabs(b) < DELTA) {
+                if (fabs(a) >= 0) {
                         r[0] = (float) (r[0] * cos(a)
                              - r[1] * sin(a));
                         r[1] = (float) (r[0] * sin(a)
                              + r[1] * cos(a));
                         r[2] = (float) (r[2] * cos(b));
-                } else if (b != 0){
+                } else if (fabs(b) >= DELTA){
                         s[0] = r[0];
                         s[1] = r[1];
                         s[2] =    0;

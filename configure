@@ -5456,20 +5456,20 @@ $as_echo "#define REPORT_FPS 50" >>confdefs.h
 
 
 
-$as_echo "#define BACKGROUND_COLOR 0.16, 0.16, 0.16, 1" >>confdefs.h
+$as_echo "#define BACKGROUND_COLOR 0.16F, 0.16F, 0.16F, 1" >>confdefs.h
 
 
 $as_echo "#define KEY_REPEAT_PERIOD 40" >>confdefs.h
 
 
 
-$as_echo "#define INITIAL_POSITION_X 1.2" >>confdefs.h
+$as_echo "#define INITIAL_POSITION_X 1.2F" >>confdefs.h
 
 
-$as_echo "#define INITIAL_POSITION_Y 1.2" >>confdefs.h
+$as_echo "#define INITIAL_POSITION_Y 1.2F" >>confdefs.h
 
 
-$as_echo "#define INITIAL_POSITION_Z 1.2" >>confdefs.h
+$as_echo "#define INITIAL_POSITION_Z 1.2F" >>confdefs.h
 
 
 $as_echo "#define INITIAL_ORIENTATION_X -1" >>confdefs.h
@@ -5482,13 +5482,13 @@ $as_echo "#define INITIAL_ORIENTATION_Z -1" >>confdefs.h
 
 
 
-$as_echo "#define ANGLE_PER_ROTATION 0.1" >>confdefs.h
+$as_echo "#define ANGLE_PER_ROTATION 0.1F" >>confdefs.h
 
 
 $as_echo "#define ANGLE_PER_PHYSIC ANGLE_PER_ROTATION" >>confdefs.h
 
 
-$as_echo "#define DISTANCE_PER_MOVE 0.30" >>confdefs.h
+$as_echo "#define DISTANCE_PER_MOVE 0.30F" >>confdefs.h
 
 
 $as_echo "#define DISTANCE_PER_PHYSIC DISTANCE_PER_MOVE" >>confdefs.h
@@ -5499,11 +5499,15 @@ $as_echo "#define LOAD_FROM \"Resources/objects/\"" >>confdefs.h
 
 
 
-$as_echo "#define MESH_LEVEL_DISTANCES 5.0, 50.0, 100.0, 200.0, 500.0" >>confdefs.h
+$as_echo "#define MESH_LEVEL_DISTANCES 5.0F, 50.0F, 100.0F, 200.0F, 500.0f" >>confdefs.h
 
 
 
 $as_echo "#define LOGGER_LEVEL 0" >>confdefs.h
+
+
+
+$as_echo "#define DELTA 0.000001F" >>confdefs.h
 
 
 # Output

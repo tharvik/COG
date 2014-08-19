@@ -47,12 +47,6 @@ class Simulator {
 		unsigned int actualPhysic;
 
 		/**
-		 * Step of a physic computation, the less, the more accurate it
-		 * will be
-		 */
-		double physicDelta;
-
-		/**
 		 * Update FPS and lastRefreshReport
 		 */
 		void measureFPS();
@@ -81,6 +75,12 @@ class Simulator {
 		 * Current time of refresh
 		 */
 		unsigned int actualRefresh;
+
+		/**
+		 * Step of a physic computation, the less, the more accurate it
+		 * will be
+		 */
+		double physicDelta;
 
 		/**
 		 * Update PPS and lastPhysicReport
