@@ -64,6 +64,7 @@ Mesh::Mesh(const string& filePath) :
 			this->buffers[i][1] = this->buffers[nLevels - 1][1];
 			this->buffers[i][2] = this->buffers[nLevels - 1][2];
 			this->buffers[i][3] = this->buffers[nLevels - 1][3];
+			this->sizeIndices[i] = this->sizeIndices[nLevels - 1];
 		}
 	}
 	

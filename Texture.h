@@ -4,64 +4,74 @@
 
 #include <iostream>
 
-/**
- * Represent a texture, give faces of a Mesh some image
- */
+//--------------------------------- Texture ----------------------------------//
+//									      //
+// 
+//									      //
+//----------------------------------------------------------------------------//
+
 class Texture {
 private:
         /**
-         * Buffer used by OpenGL to keep the Texture
+         * openGL buffer keeping the Texture
          */
         GLuint imageId;
         
 public:
         /**
-         * Construct an useless Texture but still valid
+         * default constructor
          */
         Texture();
-        
-        Texture(const Texture&) = delete;
-        
-        /**
-         * Move constructor, leave \param texture in a useless but valid
-         * state
+                
+	/**
+	 * construct from an image file
+	 *
+	 * \param path path to the image file
+	 */
+	 Texture(const std::string& path);
+	
+	/**
+         * construct with every needed info
          *
-         * \param texture Texture to move from
-         */
-        Texture(Texture&& texture);
-        
-        /**
-         * Construct with every needed info
+         * it will copy the given buffer into GRAM
          *
-         * It will copy the given buffer into GRAM
-         *
-         * \param width Width of the image
-         * \param height Height of the image
-         * \param format Pixel format of the image
-         * \param buffer Buffer containing the image
+         * \param width width of the image
+         * \param height height of the image
+         * \param format pixel format of the image
+         * \param buffer buffer containing the image
          */
         Texture(const unsigned short width, const unsigned short height,
                 const GLenum format, unsigned char* buffer);
-        
-        Texture(const std::string& name);
-        
+	
+	/**
+	 * delete copy constructor
+	 */
+        Texture(const Texture&) = delete;
+	
         /**
-         * Bind the Texture to use it with OpenGL
+         * move constructor
+         *
+         * \param texture texture to move from
+         */
+        Texture(Texture&& texture);
+                        
+        /**
+         * bind the Texture to use it with OpenGL
          */
         void bindTexture() const;
         
         /**
-         * Give a sorting capability
+         * give a sorting capability
          *
-         * \param b Texture to compare to
+         * \param b texture to compare to
          *
-         * \return True if the local \ref imageId is less than the one
+         * \return true if the local \ref imageId is less than the one
          * of b
          */
         bool operator<(const Texture &b) const;
         
         /**
-         * Destruct the Texture, delete his buffer
+         * destruct the Texture, delete his buffer
          */
         ~Texture();
 };

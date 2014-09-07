@@ -13,30 +13,21 @@ Game::Game() : univers(), simulator(&univers)
         setUnivers(&univers);
         
 	Vvector pos(0, 0, 0);
-	Vvector addx(10, 0, 0);
-	Vvector addy(0, 10, 0);
 	
-	for (int i = 0; i < 48; i++) {
-	for (int j = 0; j < 48; j++) {
-		this->univers.addPlanet("Torus", pos);
-		pos += addx;
-	}
-		pos = Vvector(0, pos.y() + addy.y(), pos.z());
-	}
+	this->univers.addPlanet("axe", pos);
+	pos += Vvector(-5, -5, 0);
+	this->univers.addPlanet("House", pos);
 	
 	
-        {
-                glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
-                glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
-        }
-        {
-                glutReshapeFunc(windowResizingHandler);
-                glutWindowStatusFunc(windowStatusHandler);
+	glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
+	glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
+	
+	glutReshapeFunc(windowResizingHandler);
+	glutWindowStatusFunc(windowStatusHandler);
 #ifdef __APPLE__
-                glutWMCloseFunc(windowClosingHandler);
+	glutWMCloseFunc(windowClosingHandler);
 #endif
-                glutDisplayFunc(displayHandler);
-        }
+	glutDisplayFunc(displayHandler);
 }
 
 

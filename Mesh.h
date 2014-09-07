@@ -50,10 +50,10 @@ private:
         /**
          * buffers used by OpenGL
          *
-         * buffers[x][0] contains the vertices of the level x
-         * buffers[x][1] contains the UV vertices of the level x
-         * buffers[x][2] contains the normals of the level x
-         * buffers[x][3] contains the indices of the level x
+         * buffers[x][0] vertices of the level x
+         * buffers[x][1] UV vertices of the level x
+         * buffers[x][2] normals of the level x
+         * buffers[x][3] indices of the level x
          */
         std::array<std::array<GLuint,4>,5> buffers;
 	

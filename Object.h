@@ -27,8 +27,8 @@
 class Object {
 private:
 	// containers
-        static std::map<std::string, std::shared_ptr<Mesh>> meshes;
-	static std::map<std::string, std::shared_ptr<Material>> materials;
+        static std::map<std::string, std::shared_ptr<Mesh>> meshesCont;
+	static std::map<std::string, std::shared_ptr<Material>> materialsCont;
 
 	// pairs (material + mesh)
         std::vector<std::pair<std::shared_ptr<Material>,

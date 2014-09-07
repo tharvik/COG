@@ -8,8 +8,8 @@
 
 using namespace std;
 
-map<string, shared_ptr<Mesh>> Object::meshes;
-map<string, shared_ptr<Material>> Object::materials;
+map<string, shared_ptr<Mesh>> Object::meshesCont;
+map<string, shared_ptr<Material>> Object::materialsCont;
 
 Object::Object(const std::string& name) : drawList(), p(0, 0, 0), radius(0), level(0)
 {
@@ -132,18 +132,18 @@ void Object::addPair(const std::vector<std::string>& meshesFilePath,
         for (const auto& meshFilePath : meshesFilePath) {
 		// check if mesh already exists
 		map<string, shared_ptr<Mesh>>::iterator it1;
-		it1 = meshes.find(meshFilePath);
+		it1 = meshesCont.find(meshFilePath);
 		
 		// if doesn't exist create mesh
-		if (it1 == meshes.end()) {
+		if (it1 == meshesCont.end()) {
 			pairMeshes.push_back(
 				shared_ptr<Mesh>((new Mesh(meshFilePath))));
-			meshes[meshFilePath] = pairMeshes.back();
+			meshesCont[meshFilePath] = pairMeshes.back();
 		} else
-			pairMeshes.push_back(meshes[meshFilePath]);
+			pairMeshes.push_back(meshesCont[meshFilePath]);
 	
 		// calculate new radius
-		float meshRadius = meshes[meshFilePath]->getRadius();
+		float meshRadius = meshesCont[meshFilePath]->getRadius();
 		if (meshRadius > this->radius)
 			this->radius = meshRadius;
 	}
@@ -152,16 +152,16 @@ void Object::addPair(const std::vector<std::string>& meshesFilePath,
 
 	// check if material already exists
 	map<string, shared_ptr<Material>>::iterator it2;
-	it2 = materials.find(mbfFilePath + " " + vsFilePath + " " + fsFilePath);
+	it2 = materialsCont.find(mbfFilePath + " " + vsFilePath + " " + fsFilePath);
 	
 	// if doesn't exist create material
-	if (it2 == materials.end()) {
+	if (it2 == materialsCont.end()) {
 		mtl = shared_ptr<Material>((new Material(mbfFilePath,
 							 vsFilePath,
 							 fsFilePath)));
-		materials[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath] = mtl;
+		materialsCont[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath] = mtl;
 	} else
-		mtl = materials[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath];
+		mtl = materialsCont[mbfFilePath +" "+ vsFilePath +" "+ fsFilePath];
 	
 	// add pair
 	pair<shared_ptr<Material>, vector<shared_ptr<Mesh>>>

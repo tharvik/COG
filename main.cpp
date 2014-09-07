@@ -51,7 +51,6 @@ void setUpOpenGL()
 {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
         glMatrixMode(GL_MODELVIEW);
         gluPerspective(FOV, GLdouble(glutGet(GLUT_WINDOW_WIDTH) /
                        glutGet(GLUT_WINDOW_HEIGHT)), NEAREST, FAREST);
