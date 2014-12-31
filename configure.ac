@@ -31,6 +31,15 @@ else
 		       [], [AC_MSG_ERROR([Unable to find an OpenGL utility toolkit (GLUT) implementation])])
 	AC_SEARCH_LIBS([glewInit], [GLEW],
 		       [], [AC_MSG_ERROR([Unable to find an OpenGL extention wrangler (GLEW) implementation])])
+
+	AC_SEARCH_LIBS([btBulletMathProbe], [LinearMath],
+		       [], [AC_MSG_ERROR([Unable to find bullet LinearMath])])
+	AC_SEARCH_LIBS([plNewCylinderShape], [BulletDynamics],
+		       [], [AC_MSG_ERROR([Unable to find bullet BulletDynamics])])
+	AC_SEARCH_LIBS([gNumDeepPenetrationChecks], [BulletCollision],
+		       [], [AC_MSG_ERROR([Unable to find bullet BulletCollision])])
+	#AC_SEARCH_LIBS([_ITM_registerTMCloneTable], [BulletSoftBody],
+	#	       [], [AC_MSG_ERROR([Unable to find bullet BulletSoftBody])])
 fi
 
 # Checks for header files.

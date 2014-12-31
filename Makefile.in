@@ -82,7 +82,7 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in depcomp $(nobase_dist_data_DATA) INSTALL \
-	TODO config.guess config.sub install-sh missing
+	TODO install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_cxx_compile_stdcxx_11.m4 \
 	$(top_srcdir)/configure.ac
@@ -98,10 +98,11 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(datadir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_COG_OBJECTS = Camera.$(OBJEXT) Game.$(OBJEXT) Light.$(OBJEXT) \
 	Material.$(OBJEXT) Mesh.$(OBJEXT) Object.$(OBJEXT) \
-	Planet.$(OBJEXT) Shader.$(OBJEXT) Simulator.$(OBJEXT) \
-	Texture.$(OBJEXT) Univers.$(OBJEXT) Vvector.$(OBJEXT) \
-	eventHandler.$(OBJEXT) main.$(OBJEXT) utilities.$(OBJEXT) \
-	stb_image.$(OBJEXT)
+	Planet.$(OBJEXT) Shader.$(OBJEXT) Renderer.$(OBJEXT) \
+	Texture.$(OBJEXT) Universe.$(OBJEXT) eventHandler.$(OBJEXT) \
+	main.$(OBJEXT) utilities.$(OBJEXT) stb_image.$(OBJEXT) \
+	Event.$(OBJEXT) KeyboardEvent.$(OBJEXT) MouseEvent.$(OBJEXT) \
+	GUI.$(OBJEXT) Point.$(OBJEXT) RefreshEvent.$(OBJEXT)
 COG_OBJECTS = $(am_COG_OBJECTS)
 COG_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -313,113 +314,20 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 COG_SOURCES = Camera.cpp Game.cpp Light.cpp Material.cpp Mesh.cpp		\
-		  Object.cpp Planet.cpp Shader.cpp Simulator.cpp Texture.cpp	\
-		  Univers.cpp Vvector.cpp eventHandler.cpp main.cpp		\
-		  utilities.cpp stb_image.c					\
+		  Object.cpp Planet.cpp Shader.cpp Renderer.cpp Texture.cpp	\
+		  Universe.cpp eventHandler.cpp main.cpp			\
+		  utilities.cpp stb_image.c Event.cpp KeyboardEvent.cpp		\
+		  MouseEvent.cpp GUI.cpp Point.cpp RefreshEvent.cpp		\
 		  								\
 		  Camera.h Game.h Light.h Logger.h Material.h Mesh.h Object.h	\
-		  Planet.h Shader.h Simulator.h Texture.h Univers.h Vvector.h	\
-		  config.h eventHandler.h opengl.h stb_image.h utilities.h
+		  Planet.h Shader.h Renderer.h Texture.h Universe.h 		\
+		  config.h eventHandler.h opengl.h stb_image.h utilities.h	\
+		  Event.h KeyboardEvent.h MouseEvent.h GUI.h Point.h		\
+		  RefreshEvent.h rapidxml/rapidxml.hpp				\
+		  rapidxml/rapidxml_iterators.hpp rapidxml/rapidxml_print.hpp
 
-nobase_dist_data_DATA = Resources/fichier_2_objects.obj			\
-			Resources/test/objectTest.png			\
-			Resources/test/cube.obj				\
-			Resources/test/PNM/test_RGB_ASCII.ppm		\
-			Resources/test/PNM/test_RGB_Binary.ppm		\
-			Resources/test/PNM/test_Gray_ASCII.pgm		\
-			Resources/test/PNM/test_BW_ASCII.pbm		\
-			Resources/test/PNM/test_ASCII.ppm		\
-			Resources/test/PNM/test_Gray_Binary.pgm		\
-			Resources/test/PNM/test_BW_Binary.pbm		\
-			Resources/test/Mountain3_AO.png			\
-			Resources/test/Mountain3.obj			\
-			Resources/test/Mountain3_5.obj			\
-			Resources/test/Mountain3.png			\
-			Resources/test/objectTest.mtl			\
-			Resources/test/Mountain3.mtl			\
-			Resources/test/BMP/test_Web.bmp			\
-			Resources/test/BMP/test_BW.bmp			\
-			Resources/test/BMP/test_Palette.bmp		\
-			Resources/test/BMP/test_ARGB.bmp		\
-			Resources/test/BMP/test_RGB_6.bmp		\
-			Resources/test/BMP/test_RGB_3.bmp		\
-			Resources/test/BMP/test_Gray.bmp		\
-			Resources/test/BMP/test_RGB_0.bmp		\
-			Resources/test/BMP/test_XRGB.bmp		\
-			Resources/test/BMP/test_RGB_2.bmp		\
-			Resources/test/BMP/test_RGB_5.bmp		\
-			Resources/test/BMP/test_RGB_4.bmp		\
-			Resources/test/BMP/test_RGB_1.bmp		\
-			Resources/test/Mountain3c.obj			\
-			Resources/test/Mountain3c.mtl			\
-			Resources/test/Mountain3d.obj			\
-			Resources/test/cube.mtl				\
-			Resources/test/objectTest.obj			\
-			Resources/test/mountain2.obj			\
-			Resources/test/cube.png				\
-			Resources/test/JPG/test_RGB_2.jpg		\
-			Resources/test/JPG/test_RGB_fast_integer.jpg	\
-			Resources/test/JPG/test_RGB_floating_point.jpg	\
-			Resources/test/JPG/test_RGB_3.jpg		\
-			Resources/test/JPG/test_RGB_1.jpg		\
-			Resources/test/JPG/test_RGB_bad_quality.jpg	\
-			Resources/test/JPG/test_RGB_4.jpg		\
-			Resources/test/JPG/test_Gray.jpg		\
-			Resources/test/JPG/test_Palette.jpg		\
-			Resources/test/Mountain3b.mtl			\
-			Resources/test/PNG/test_PaletteA.png		\
-			Resources/test/PNG/test_GrayA.png		\
-			Resources/test/PNG/test_RGB.png			\
-			Resources/test/PNG/test_Gray.png		\
-			Resources/test/PNG/test_RGB_no_compression.png	\
-			Resources/test/PNG/test_RGBA.png		\
-			Resources/test/PNG/test_RGBA_offset_layer.png	\
-			Resources/test/PNG/test_Palette.png		\
-			Resources/test/PNG/test_RGBA_interlacing.png	\
-			Resources/test/PNG/test_RGBA_no_alpha.png	\
-			Resources/test/PNG/test_RGBA_gamma.png		\
-			Resources/test/Mountain3b.obj			\
-			Resources/test/Mountain3d.mtl			\
-			Resources/test/GIF/test_RGB.gif			\
-			Resources/test/GIF/test_PaletteA.gif		\
-			Resources/test/GIF/test_Gray.gif		\
-			Resources/test/GIF/test_RGBA.gif		\
-			Resources/test/GIF/test_Palette.gif		\
-			Resources/test/GIF/test_GrayA.gif		\
-			Resources/test/mountain2.mtl			\
-			Resources/test/plane.jpg			\
-			Resources/test/Valid_images_format.txt		\
-			Resources/test/TIF/test_Gray.tif		\
-			Resources/test/TIF/test_RGBA_déflation.tif	\
-			Resources/test/TIF/test_RGBA_LZW.tif		\
-			Resources/test/TIF/test_RGB.tif			\
-			Resources/test/TIF/test_GrayA.tif		\
-			Resources/test/TIF/test_Palette.tif		\
-			Resources/test/TIF/test_RGBA_pack_bits.tif	\
-			Resources/test/TIF/test_RGBA_jpeg.tif		\
-			Resources/test/TIF/test_RGBA_no_compression.tif	\
-			Resources/test/plane.obj			\
-			Resources/shaders/base.fs			\
-			Resources/shaders/base.vs			\
-			Resources/objects/Torus/up.mesh			\
-			Resources/objects/Torus/up.mbf			\
-			Resources/objects/Torus/Torus.object		\
-			Resources/objects/axe/axe.pShader		\
-			Resources/objects/axe/axe.vShader		\
-			Resources/objects/axe/axe.mesh			\
-			Resources/objects/axe/axe.png			\
-			Resources/objects/Suzanne/suzanne.mesh		\
-			Resources/objects/Suzanne/Suzanne.object	\
-			Resources/objects/Suzanne/suzanne		\
-			Resources/objects/mountain/mountain.mesh	\
-			Resources/textures/cheveu.png			\
-			Resources/materials/ground.mtl			\
-			Resources/game_icon.bmp				\
-			Resources/planet/terre.fs			\
-			Resources/planet/verre.mtl			\
-			Resources/planet/terre.vs			\
-			Resources/planet/verre.fs
-
+AM_CXXFLAGS = -I /usr/include/bullet
+nobase_dist_data_DATA = Resources/objects/house/AO.jpg
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -528,17 +436,22 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Camera.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Event.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/GUI.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Game.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/KeyboardEvent.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Light.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Material.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Mesh.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MouseEvent.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Object.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Planet.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Point.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/RefreshEvent.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Renderer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Shader.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Simulator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Texture.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Univers.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Vvector.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Universe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stb_image.Po@am__quote@

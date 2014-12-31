@@ -1,59 +1,58 @@
 #include "Game.h"
 
+#include <LinearMath/btVector3.h>
 
-Game::Game() : univers(), simulator(&univers)
+Universe Game::universe;
+Renderer Game::renderer;
+
+using namespace std;
+
+void Game::configureGLUT() // Deprecated
 {
-        glClearColor(BACKGROUND_COLOR);
-
-#ifdef FULLSCREEN
-                glutFullScreen();
-#endif
-        
-        
-        setSimulator(&simulator);
-        setUnivers(&univers);
-        
-	Vvector pos(0, 0, 0);
-	Vvector addx(10, 0, 0);
-	Vvector addy(0, 10, 0);
-	
-	for (int i = 0; i < 48; i++) {
-	for (int j = 0; j < 48; j++) {
-		this->univers.addPlanet("Torus", pos);
-		pos += addx;
-	}
-		pos = Vvector(0, pos.y() + addy.y(), pos.z());
-	}
-	
-	
-        {
-                glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
-                glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
-        }
-        {
-                glutReshapeFunc(windowResizingHandler);
-                glutWindowStatusFunc(windowStatusHandler);
+        glutIgnoreKeyRepeat(GLUT_KEY_REPEAT_DEFAULT);
+        glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
+        glutReshapeFunc(windowResizingHandler);
+        glutWindowStatusFunc(windowStatusHandler);
 #ifdef __APPLE__
-                glutWMCloseFunc(windowClosingHandler);
+        glutWMCloseFunc(windowClosingHandler);
 #endif
-                glutDisplayFunc(displayHandler);
-        }
-}
-
-
-void Game::enterMainMenu()
-{
+        glutDisplayFunc(displayHandler);
+        
         glutSpecialFunc(specialKeyDown);
         glutKeyboardFunc(keyDown);
         glutKeyboardUpFunc(keyUp);
-
+        
         glutMouseFunc(mouseHandler);
         glutMotionFunc(motionHandler);
-
+        
         glutIdleFunc(tick);
+        
+        setGame(this);
+}
 
+Game::Game()
+{
+        glClearColor(BACKGROUND_COLOR);
+        
+        configureGLUT();
         glutMainLoop();
 }
 
-void Game::enterPauseMenu()
-{}
+void Game::event(const unique_ptr<Event>& event)
+{
+        if (event->getType() == Event::REFRESH) {
+                if (((const unique_ptr<RefreshEvent>&) event)->getRefreshType()
+                                                          & RefreshEvent::IMAGE)
+                        renderer.render();
+//                if (((const unique_ptr<RefreshEvent>&) event)->getRefreshType()
+//                                                          & RefreshEvent::LEVEL)
+//                        universe.calculateLevel(cameras[0]); // TODO ask Vianney
+                
+                if (((const unique_ptr<RefreshEvent>&) event)->getRefreshType()
+                                                        & RefreshEvent::PHYSICS)
+                        universe.physics(0.1); // TODO ask Antonin
+        }
+        
+        universe.event(event);
+//        interface.event(event);
+}

@@ -6,18 +6,20 @@
 #include <string>
 
 #include "config.h"
-#include "Game.h"
 #include "Logger.h"
-#include "Simulator.h"
-#include "Univers.h"
+#include "Universe.h"
+#include "Game.h"
+
+#include "KeyboardEvent.h"
+#include "MouseEvent.h"
+#include "RefreshEvent.h"
 
 #define repeatKey if (keysPressed[key])\
                         glutTimerFunc(KEY_REPEAT_PERIOD, keyboardHandler, key);
 
-// Initialisation
-void setSimulator(Simulator* theSimulator);
-void setUnivers(Univers* theUnivers);
-//void setGame(Game* theGame);
+class Game;
+
+void setGame(Game* _game);
 
 // Window and display handling
 void displayHandler();
@@ -36,3 +38,5 @@ void keyUp(const unsigned char key, const int x, const int y);
 // Mouse handling
 void mouseHandler(const int button, const int state, const int x, const int y);
 void motionHandler(const int width, const int height);
+
+void tick();

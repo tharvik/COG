@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object>
+	<info>
+		<name>House</name>
+	</info>
+	<rendering>
+		<material global="false" path="material.xml">
+			<mesh global="false" path="house.mesh"/>
+		</material>
+	</rendering>
+</object>

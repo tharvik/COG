@@ -4721,6 +4721,183 @@ else
   as_fn_error $? "Unable to find an OpenGL extention wrangler (GLEW) implementation" "$LINENO" 5
 fi
 
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing btBulletMathProbe" >&5
+$as_echo_n "checking for library containing btBulletMathProbe... " >&6; }
+if ${ac_cv_search_btBulletMathProbe+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char btBulletMathProbe ();
+int
+main ()
+{
+return btBulletMathProbe ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' LinearMath; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_btBulletMathProbe=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_btBulletMathProbe+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_btBulletMathProbe+:} false; then :
+
+else
+  ac_cv_search_btBulletMathProbe=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_btBulletMathProbe" >&5
+$as_echo "$ac_cv_search_btBulletMathProbe" >&6; }
+ac_res=$ac_cv_search_btBulletMathProbe
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "Unable to find bullet LinearMath" "$LINENO" 5
+fi
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing plNewCylinderShape" >&5
+$as_echo_n "checking for library containing plNewCylinderShape... " >&6; }
+if ${ac_cv_search_plNewCylinderShape+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char plNewCylinderShape ();
+int
+main ()
+{
+return plNewCylinderShape ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' BulletDynamics; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_plNewCylinderShape=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_plNewCylinderShape+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_plNewCylinderShape+:} false; then :
+
+else
+  ac_cv_search_plNewCylinderShape=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_plNewCylinderShape" >&5
+$as_echo "$ac_cv_search_plNewCylinderShape" >&6; }
+ac_res=$ac_cv_search_plNewCylinderShape
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "Unable to find bullet BulletDynamics" "$LINENO" 5
+fi
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gNumDeepPenetrationChecks" >&5
+$as_echo_n "checking for library containing gNumDeepPenetrationChecks... " >&6; }
+if ${ac_cv_search_gNumDeepPenetrationChecks+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char gNumDeepPenetrationChecks ();
+int
+main ()
+{
+return gNumDeepPenetrationChecks ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' BulletCollision; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_gNumDeepPenetrationChecks=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_gNumDeepPenetrationChecks+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_gNumDeepPenetrationChecks+:} false; then :
+
+else
+  ac_cv_search_gNumDeepPenetrationChecks=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_gNumDeepPenetrationChecks" >&5
+$as_echo "$ac_cv_search_gNumDeepPenetrationChecks" >&6; }
+ac_res=$ac_cv_search_gNumDeepPenetrationChecks
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "Unable to find bullet BulletCollision" "$LINENO" 5
+fi
+
+	#AC_SEARCH_LIBS([_ITM_registerTMCloneTable], [BulletSoftBody],
+	#	       [], [AC_MSG_ERROR([Unable to find bullet BulletSoftBody])])
 fi
 
 # Checks for header files.

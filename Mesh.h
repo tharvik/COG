@@ -7,7 +7,6 @@
 #include <fstream>
 
 #include "config.h"
-#include "Vvector.h"
 
 /**
  * A mesh referes to a set of faces, UV vertices and normals to draw.  A mesh

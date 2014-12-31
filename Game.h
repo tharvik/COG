@@ -2,40 +2,34 @@
 
 #include "opengl.h"
 
-#include "config.h"
+#include "Universe.h"
+#include "Renderer.h"
+#include "Camera.h"
+#include "GUI.h"
+#include <memory>
+#include "Event.h"
+#include "RefreshEvent.h"
 #include "eventHandler.h"
-#include "Logger.h"
-#include "Simulator.h"
-#include "Univers.h"
 
-/**
- * Represent the whole Game
- */
+/// The whole Game
 class Game {
-	private:
-		/**
-		 * The generated Univers
-		 */
-		Univers univers;
-
-		/**
-		 * The Simulator for the Univers
-		 */
-		Simulator simulator;
-
-	public:
-		/**
-		 * Setup the Univers, the Simulator and some GLUT function
-		 */
-		Game();
-
-		/**
-		 * Enter the main menu
-		 */
-                void enterMainMenu();
-
-		/**
-		 * Enter the pause menu
-		 */
-		void enterPauseMenu();
+private:
+        void configureGLUT();
+        
+public:
+        /// The game environement
+        static Universe universe;
+        
+        /// The user interface
+        static GUI interface;
+        
+        /// The renderer
+        static Renderer renderer;
+        
+        /// The cameras
+        static std::set<Camera> cameras;
+        
+        Game();
+        
+        void event(const std::unique_ptr<Event>& event);
 };

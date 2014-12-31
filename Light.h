@@ -3,12 +3,13 @@
 #include "opengl.h"
 
 #include "Logger.h"
-#include "Vvector.h"
+
+#include <LinearMath/btVector3.h>
 
 class Light {
 private:
-	Vvector p;
-	Vvector d;
+	btVector3 p;
+	btVector3 d;
 	
 	int width, height;
 	float intensity;
@@ -21,11 +22,9 @@ private:
 public:
 	// Constructors
 	Light();
-	Light(const Vvector& position, const Vvector& direction);
-	Light(const float px, const float py, const float pz, const float dx,
-			const float dy, const float dz);
+	Light(const btVector3& position, const btVector3& direction);
 
-	Vvector position() const;
+	btVector3 position() const;
         
         // Destructor
         ~Light();

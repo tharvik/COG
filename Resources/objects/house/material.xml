@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<material>
+	<Ka>0.0 0.0 0.0</Ka>
+	<Kd>1.0 1.0 1.0</Kd>
+	<Ks>0.4 0.4 1.0</Ks>
+	<Ns>40</Ns>
+	<d>1.0</d>
+	<map_Ka path="AO.jpg"/>
+	<map_Kd path="diff.jpg"/>
+</material>

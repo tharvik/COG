@@ -1,32 +1,20 @@
 #include "eventHandler.h"
-
-static Game* game = nullptr;
-static Simulator* simulator = nullptr;
-static Univers* univers = nullptr;
+#include <memory>
 
 static std::set<int> keysPressed;
+static Game* game;
 
+using namespace std;
 
-// Initialisation
-/*void setGame(Game* theGame)
- {
- game = theGame;
- }*/
-
-void setSimulator(Simulator* theSimulator)
+void setGame(Game* _game)
 {
-        simulator = theSimulator;
-}
-
-void setUnivers(Univers* theUnivers)
-{
-        univers = theUnivers;
+        game = _game;
 }
 
 // Window and display handling
 void displayHandler()
 {
-        //univers->refresh(SWAP);
+        //universe->refresh(SWAP);
 }
 
 void windowResizingHandler(const int width, const int height)
@@ -97,7 +85,6 @@ void keyboard(const int value)
                 keysPressed.erase('f');
         }
         if (keysPressed.count('p')) {
-                simulator->printInfo();
                 keysPressed.erase('p');
         }
         if (keysPressed.count(27)) {
@@ -105,9 +92,10 @@ void keyboard(const int value)
                 exit(0);
         }
 
-        univers->keyboard(keysPressed);
+        for (const int key : keysPressed)
+                game->event(unique_ptr<Event>(new KeyboardEvent(key)));
 
-        for (int i = 1; i <= 20; i ++)
+        for (int i = 1; i <= 20; i ++) // haha!
                 keysPressed.erase(255 + i);
 
         glutTimerFunc(KEY_REPEAT_PERIOD, keyboard, 0);
@@ -122,4 +110,11 @@ void mouseHandler(const int button, const int state, const int x, const int y)
 void motionHandler(const int width, const int height)
 {
         // drag...
+}
+
+void tick()
+{
+        game->event(unique_ptr<Event>(new RefreshEvent(RefreshEvent::IMAGE |
+                                                       RefreshEvent::LEVEL |
+                                                       RefreshEvent::PHYSICS)));
 }
