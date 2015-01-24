@@ -1,6 +1,6 @@
 #include "MouseEvent.h"
 
-MouseEvent::MouseEvent(const Point<int>& _position) : position(_position)
+MouseEvent::MouseEvent(const Vector2D<int>& _position) : position(_position)
 {}
 
 Event::EventType_t MouseEvent::getType() const
@@ -8,7 +8,7 @@ Event::EventType_t MouseEvent::getType() const
         return Event::MOUSE;
 }
 
-const Point<int>& MouseEvent::getPosition()
+const Vector2D<int>& MouseEvent::getPosition()
 {
         return position;
 }

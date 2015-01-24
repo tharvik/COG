@@ -5,11 +5,11 @@
 
 class MouseEvent : public Event {
 private:
-        const Point<int> position;
+        const Vector2D<int> position;
         
 public:
-        MouseEvent(const Point<int>& _position);
+        MouseEvent(const Vector2D<int>& _position);
         
         virtual Event::EventType_t getType() const;
-        const Point<int>& getPosition();
+        const Vector2D<int>& getPosition();
 };

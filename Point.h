@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename T>
-class Point {
+class Vector2D {
         T x;
         T y;
         
